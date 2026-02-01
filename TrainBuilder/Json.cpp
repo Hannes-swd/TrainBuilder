@@ -21,3 +21,15 @@ void LadeJson() {
 	//WERT LADEN
 	Spielerposition = { NutzerDaten["SpielerpositionX"], NutzerDaten["SpielerpositionY"] };
 }
+void SpeicherJson() {
+	//Daten speichern
+	nlohmann::json NutzerDaten;
+
+	NutzerDaten["SpielerpositionX"] = (int)Spielerposition.x;
+	NutzerDaten["SpielerpositionY"] = (int)Spielerposition.y;
+
+
+	//Datei speichern
+	std::ofstream datei("resurses/json/User.json");
+	datei << NutzerDaten.dump(4);
+}

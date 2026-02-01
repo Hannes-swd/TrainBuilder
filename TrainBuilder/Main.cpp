@@ -53,6 +53,8 @@ int main(void)
 
         //Spielerbewegen
         Spielermoovment();
+
+        
         
         /*-------------------------------------------------
             ZEICHNEN
