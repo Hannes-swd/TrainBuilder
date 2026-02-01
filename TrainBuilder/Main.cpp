@@ -7,6 +7,7 @@
 #include "globals.h"
 #include "moofment.h"
 #include "Json.h"
+#include "grid.h"
 
 int main(void)
 {
@@ -64,10 +65,10 @@ int main(void)
 
         
         BeginMode2D(Playercam);
-
-        
+        DrawInfiniteGrid();
+        /*
         DrawRectangle(100, 100, 200, 200, BLUE);
-        DrawRectangle(-300, -200, 100, 100, GREEN);
+        DrawRectangle(-300, -200, 100, 100, GREEN);*/
 
         
         EndMode2D();
