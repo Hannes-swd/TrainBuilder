@@ -17,3 +17,9 @@ float DeltaTime = 0.0f;
 Camera2D Playercam = { 0 };
 
 float playerSpeed = 300.0f;
+
+/*-------------------------------------------------
+	Mausposition
+-------------------------------------------------*/
+Vector2 mousePosition = { 0, 0 };
+Vector2 gridPosition = { 0, 0 };

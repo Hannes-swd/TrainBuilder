@@ -28,7 +28,8 @@ int main(void)
     -------------------------------------------------*/
     LadeJson();
 
-    
+
+
     SetTargetFPS(60);
 
     while (!WindowShouldClose())
@@ -43,6 +44,10 @@ int main(void)
             VARIABLEN UPDATEN
         -------------------------------------------------*/
         DeltaTime = GetFrameTime();
+
+        mousePosition = GetScreenToWorld2D(GetMousePosition(), Playercam);
+
+
         //Höhe/Breite
         GenaueHöehe = GetScreenHeight();
         GenaueBreite = GetScreenWidth();
@@ -55,25 +60,34 @@ int main(void)
         //Spielerbewegen
         Spielermoovment();
 
-        
-        
+        //koordinaten im grid
+        gridPosition.x = (int)(mousePosition.x / 50.0f);
+        gridPosition.y = (int)(mousePosition.y / 50.0f);
+
         /*-------------------------------------------------
             ZEICHNEN
         -------------------------------------------------*/
         BeginDrawing();
         ClearBackground(RAYWHITE);
 
-        
+        /*-------------------------------------------------
+            ALLES IM GRID MOOVMENT
+        -------------------------------------------------*/
         BeginMode2D(Playercam);
         DrawInfiniteGrid();
-        /*
-        DrawRectangle(100, 100, 200, 200, BLUE);
-        DrawRectangle(-300, -200, 100, 100, GREEN);*/
 
-        
+
+
+
+
+
         EndMode2D();
+        /*-------------------------------------------------
+            ALLES AUSERHALB VOM GRID MOOVMENT
+        -------------------------------------------------*/
 
-        
+        DrawText(TextFormat("Grid: [%d, %d]", (int)gridPosition.x, (int)gridPosition.y),
+            10, 10, 20, BLACK);
 
         EndDrawing();
     }
@@ -81,6 +95,7 @@ int main(void)
     /*-------------------------------------------------
             BEENDEN
     -------------------------------------------------*/
+    SpeicherJson();
     CloseWindow();
 
     return 0;

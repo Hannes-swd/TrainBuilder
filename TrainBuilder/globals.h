@@ -15,3 +15,8 @@ extern Vector2 Spielerposition;
 extern float DeltaTime;
 extern Camera2D Playercam;
 extern float playerSpeed;
+
+
+extern Vector2 mousePosition;
+extern Vector2 gridPosition;
+
