@@ -24,12 +24,18 @@
     <ClCompile Include="moofment.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
+    <ClCompile Include="Json.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="globals.h">
       <Filter>Headerdateien</Filter>
     </ClInclude>
     <ClInclude Include="moofment.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="Json.h">
       <Filter>Headerdateien</Filter>
     </ClInclude>
   </ItemGroup>
