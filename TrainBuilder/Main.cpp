@@ -4,12 +4,16 @@ int main(void)
 {
     const int screenWidth = 800;
     const int screenHeight = 450;
-
-    InitWindow(screenWidth, screenHeight, "raylib [core] example - basic window");
-
+    SetConfigFlags(FLAG_WINDOW_RESIZABLE);
+    InitWindow(screenWidth, screenHeight, "TrainBuilder");
+    
     SetTargetFPS(60);
     while (!WindowShouldClose())
     {
+        /*-------------------------------------------------
+            GRUNDEINSTELLUNGEN
+        -------------------------------------------------*/
+        SetExitKey(KEY_NULL);
         
         /*-------------------------------------------------
             VARIABLEN UPDATEN
