@@ -8,6 +8,7 @@
 #include "moofment.h"
 #include "Json.h"
 #include "grid.h"
+#include "Mouse.h"
 
 int main(void)
 {
@@ -39,6 +40,12 @@ int main(void)
         -------------------------------------------------*/
         SetExitKey(KEY_NULL);
 
+        /*-------------------------------------------------
+            EINGABEN
+        -------------------------------------------------*/
+        if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
+            MausGecklicktL(mousePosition);
+        }
 
         /*-------------------------------------------------
             VARIABLEN UPDATEN
@@ -76,9 +83,10 @@ int main(void)
         BeginMode2D(Playercam);
         DrawInfiniteGrid();
 
+        //zeichne block
+        //DrawRectangle(4 * 50.0f, 4 * 50.0f, 50, 50, RED);
 
-
-
+        ZeichneGleise();
 
 
         EndMode2D();
