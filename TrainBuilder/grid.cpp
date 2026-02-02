@@ -3,7 +3,7 @@
 
 void DrawInfiniteGrid() {
     Color gridColor = Fade(LIGHTGRAY, 0.3f);
-    const float GRID_SIZE = 50.0f;
+    
     const int MAX_LINES = 200;
 
     Vector2 camPos = Playercam.target;
@@ -37,3 +37,5 @@ void DrawInfiniteGrid() {
         lineCount++;
     }
 }
+
+

@@ -43,13 +43,8 @@ int main(void)
         -------------------------------------------------*/
         SetExitKey(KEY_NULL);
 
-        /*-------------------------------------------------
-            EINGABEN
-        -------------------------------------------------*/
-        if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
-            MausGecklicktL(mousePosition);
-        }
-
+        
+        
         /*-------------------------------------------------
             VARIABLEN UPDATEN
         -------------------------------------------------*/
@@ -71,8 +66,8 @@ int main(void)
         Spielermoovment();
 
         //koordinaten im grid
-        gridPosition.x = (int)(mousePosition.x / 50.0f);
-        gridPosition.y = (int)(mousePosition.y / 50.0f);
+        gridPosition.x = (int)floor(mousePosition.x / GRID_SIZE);
+        gridPosition.y = (int)floor(mousePosition.y / GRID_SIZE);
 
         /*-------------------------------------------------
             ZEICHNEN
@@ -86,10 +81,13 @@ int main(void)
         BeginMode2D(Playercam);
         DrawInfiniteGrid();
 
-        //zeichne block
-        //DrawRectangle(4 * 50.0f, 4 * 50.0f, 50, 50, RED);
-
+        
         ZeichneGleise();
+
+        /*-------------------------------------------------
+            EINGABEN IM GRID
+        -------------------------------------------------*/
+        ProcesMaus(mousePosition);
 
 
         EndMode2D();
@@ -107,6 +105,7 @@ int main(void)
             BEENDEN
     -------------------------------------------------*/
     SpeicherJson();
+    GleiseSpeichern();
     unloadTextures();
     CloseWindow();
     

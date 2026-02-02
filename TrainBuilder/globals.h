@@ -7,6 +7,7 @@
 -------------------------------------------------*/
 extern int GenaueHöehe;
 extern int GenaueBreite;
+extern const float GRID_SIZE;
 
 /*-------------------------------------------------
 	KARAKTER
@@ -32,3 +33,12 @@ struct GleisObjeckt {
 };
 
 extern std::vector<GleisObjeckt> gleisListe;
+
+/*-------------------------------------------------
+	MOUSEKLICK/SCHIENEN PLAZIEREN
+-------------------------------------------------*/
+
+extern Vector2 ErsteKlickPosition;
+extern Vector2 ZweiteKlickPosition;
+
+extern bool haterstenKlick;

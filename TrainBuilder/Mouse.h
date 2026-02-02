@@ -1,3 +1,4 @@
 #pragma once
 #include "raylib.h"
-void MausGecklicktL(Vector2 mausposition);
+void ProcesMaus(Vector2 mausposition);
+void LinksGeklickt(Vector2 mausposition);

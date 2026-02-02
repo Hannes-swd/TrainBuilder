@@ -53,3 +53,29 @@ void ZeichneGleise() {
 		}
 	}
 }
+void GleiseSpeichern() {
+	nlohmann::json jsonDaten;
+
+	nlohmann::json gleisArray = nlohmann::json::array();
+
+	for (const auto& gleis : gleisListe) {
+		nlohmann::json gleisJson;
+		gleisJson["ObjecktId"] = gleis.ObjecktId;
+		gleisJson["gridX"] = gleis.GridX;
+		gleisJson["gridY"] = gleis.GridY;
+		gleisJson["rotation"] = gleis.Rotation;
+
+		gleisArray.push_back(gleisJson);
+	}
+
+	jsonDaten["Objeckte"] = gleisArray;
+
+	std::ofstream datei("resurses/json/Gleise.json");
+	if (datei.is_open()) {
+		datei << jsonDaten.dump(4);
+		datei.close();
+	}
+	else {
+		//feler
+	}
+}
