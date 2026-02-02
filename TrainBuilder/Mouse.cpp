@@ -1,6 +1,8 @@
 #include <cstdlib>
 #include <iostream>
 #include <ctime>
+#include <algorithm>
+#include <cmath>
 #include "raylib.h"
 #include "globals.h"
 #include "Json.h"
@@ -9,42 +11,28 @@
 
 
 void ProcesMaus(Vector2 mausposition) {
-    //ORT HERAUSFINDEN MAUSPOSITION
-    int MouseGridX = (int)(mausposition.x / 50.0f);
-    int MouseGridY = (int)(mausposition.y / 50.0f);
+    int MouseGridX = (int)floor(mausposition.x / GRID_SIZE);
+    int MouseGridY = (int)floor(mausposition.y / GRID_SIZE);
 
-    
+
 
     //BEI LINKSKLICK
     if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {
         LinksGeklickt(mausposition);
     }
-    
-    
+
+
 
     if (haterstenKlick) {
-        // Aktuelle Mausposition mit ErsterKlickPosition vergleichen
-        bool horizontal = (MouseGridY == ErsteKlickPosition.y && MouseGridX != ErsteKlickPosition.x);
-        bool vertical = (MouseGridX == ErsteKlickPosition.x && MouseGridY != ErsteKlickPosition.y);
 
-        // Wenn horizontal oder vertikal, zeige Vorschau an
-        if (horizontal || vertical) {
-            // Hier die Vorschau zeichnen (z.B. Linie oder "X")
-            DrawText("X", 50, 50, 50, RED);
-        }
+
+        ZeichnePriviou(mausposition);
     }
-    /*GleisObjeckt neuesGleis;
-    neuesGleis.ObjecktId = 1;
-    neuesGleis.GridX = gridX;
-    neuesGleis.GridY = gridY;
-    neuesGleis.Rotation = 0;
-
-    gleisListe.push_back(neuesGleis);
-    GleiseSpeichern();*/
 }
+
 void LinksGeklickt(Vector2 mausposition) {
-    int KlickGridX = (int)(mausposition.x / 50.0f);
-    int KlickGridY = (int)(mausposition.y / 50.0f);
+    int KlickGridX = (int)floor(mausposition.x / GRID_SIZE);
+    int KlickGridY = (int)floor(mausposition.y / GRID_SIZE);
 
     if (!haterstenKlick) {
         ErsteKlickPosition = { (float)KlickGridX ,(float)KlickGridY };
@@ -52,7 +40,47 @@ void LinksGeklickt(Vector2 mausposition) {
     }
     else if (haterstenKlick) {
         ZweiteKlickPosition = { (float)KlickGridX ,(float)KlickGridY };
-        //zurücksetzen
         haterstenKlick = false;
+    }
+}
+
+void ZeichnePriviou(Vector2 mausposition) {
+    int MouseGridX = (int)floor(mausposition.x / GRID_SIZE);
+    int MouseGridY = (int)floor(mausposition.y / GRID_SIZE);
+
+    int ersteGridX = (int)ErsteKlickPosition.x;
+    int ersteGridY = (int)ErsteKlickPosition.y;
+
+
+    int diffX = MouseGridX - ersteGridX;
+    int diffY = MouseGridY - ersteGridY;
+
+
+    bool isHorizontal = (diffY == 0 && diffX != 0);
+    bool isVertical = (diffX == 0 && diffY != 0);
+
+    if (isHorizontal || isVertical) {
+        // Horizontal
+        if (isHorizontal) {
+            int startX = std::min(MouseGridX, ersteGridX);
+            int endX = std::max(MouseGridX, ersteGridX);
+
+            for (int x = startX; x <= endX; x++) {
+                float pixelX = x * GRID_SIZE;
+                float pixelY = ersteGridY * GRID_SIZE;
+                DrawRectangle(pixelX, pixelY, GRID_SIZE, GRID_SIZE, Color{ 255, 0, 0, 150 });
+            }
+        }
+        // Vertikal
+        else if (isVertical) {
+            int startY = std::min(MouseGridY, ersteGridY);
+            int endY = std::max(MouseGridY, ersteGridY);
+
+            for (int y = startY; y <= endY; y++) {
+                float pixelX = ersteGridX * GRID_SIZE;
+                float pixelY = y * GRID_SIZE;
+                DrawRectangle(pixelX, pixelY, GRID_SIZE, GRID_SIZE, Color{ 255, 0, 0, 150 });
+            }
+        }
     }
 }
