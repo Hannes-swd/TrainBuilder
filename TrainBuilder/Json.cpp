@@ -6,6 +6,7 @@
 
 #include <fstream>
 #include "json.hpp"
+#include "LoadTexture.h"
 
 using json = nlohmann::json;
 
@@ -38,6 +39,6 @@ void SpeicherJson() {
 	datei << NutzerDaten.dump(4);
 }
 void ZeichneGleise() {
-	DrawTextPro(GetFontDefault(), "Gleise Zeichnen Noch Nicht Implementiert", { 10,10 }, { 0,0 }, 0.0f, 20.0f, 1.0f, BLACK);
+	DrawTexture("GleisGerade", 50.0f, 50.0f, 50.0f, 50.0f, WHITE);
 }
 

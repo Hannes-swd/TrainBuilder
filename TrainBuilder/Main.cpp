@@ -9,6 +9,7 @@
 #include "Json.h"
 #include "grid.h"
 #include "Mouse.h"
+#include "LoadTexture.h"
 
 int main(void)
 {
@@ -28,6 +29,7 @@ int main(void)
         ALLES LADEN
     -------------------------------------------------*/
     LadeJson();
+    loadTextures();
 
 
 
@@ -104,7 +106,9 @@ int main(void)
             BEENDEN
     -------------------------------------------------*/
     SpeicherJson();
+    unloadTextures();
     CloseWindow();
+    
 
     return 0;
 }
