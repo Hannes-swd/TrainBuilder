@@ -22,6 +22,19 @@ void LadeJson() {
 	nlohmann::json GleiseDaten;
 	Gleise >> GleiseDaten;
 
+	//ALLE LISTEN LÖSCHEN
+	gleisListe.clear();
+	for (const auto& obj : GleiseDaten["Objeckte"]) {
+		GleisObjeckt gleis;
+		gleis.ObjecktId = obj["ObjecktId"];
+		gleis.GridX = obj["gridX"];
+		gleis.GridY = obj["gridY"];
+		gleis.Rotation = obj["rotation"];
+		gleisListe.push_back(gleis);
+	}
+
+	Gleise.close();
+
 
 	//WERT LADEN
 	Spielerposition = { NutzerDaten["SpielerpositionX"], NutzerDaten["SpielerpositionY"] };
@@ -38,7 +51,5 @@ void SpeicherJson() {
 	std::ofstream datei("resurses/json/User.json");
 	datei << NutzerDaten.dump(4);
 }
-void ZeichneGleise() {
-	DrawTexture("GleisGerade", 50.0f, 50.0f, 50.0f, 50.0f, WHITE);
-}
+
 

@@ -20,3 +20,15 @@ extern float playerSpeed;
 extern Vector2 mousePosition;
 extern Vector2 gridPosition;
 
+/*-------------------------------------------------
+	GLEISE
+-------------------------------------------------*/
+
+struct GleisObjeckt {
+	int ObjecktId;
+	int GridX;
+	int GridY;
+	int Rotation;
+};
+
+extern std::vector<GleisObjeckt> gleisListe;

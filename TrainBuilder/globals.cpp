@@ -1,7 +1,11 @@
 #include <cstdlib>
 #include <iostream>
 #include <ctime>
+#include <cmath>
+#include <vector>
 #include "raylib.h"
+#include "globals.h"
+
 
 /*-------------------------------------------------
 	GRUNDLAGEN
@@ -23,3 +27,8 @@ float playerSpeed = 300.0f;
 -------------------------------------------------*/
 Vector2 mousePosition = { 0, 0 };
 Vector2 gridPosition = { 0, 0 };
+
+/*-------------------------------------------------
+	GLEISE
+-------------------------------------------------*/
+std::vector<GleisObjeckt> gleisListe;

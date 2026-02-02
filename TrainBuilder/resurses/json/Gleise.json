@@ -2,9 +2,16 @@
     "Objeckte": [
         {
             "ObjecktId": 1,
-            "gridX": 0,
-            "gridY": 0,
+            "gridX": 5,
+            "gridY": 1,
+            "rotation": 0
+        },
+        {
+            "ObjecktId": 1,
+            "gridX": 7,
+            "gridY": 5,
             "rotation": 0
         }
     ]
+    
 }
