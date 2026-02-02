@@ -4,13 +4,44 @@
             "ObjecktId": 1,
             "gridX": 5,
             "gridY": 1,
-            "rotation": 0
+            "rotation": 90
         },
         {
             "ObjecktId": 1,
             "gridX": 7,
             "gridY": 5,
             "rotation": 0
+        },
+        {
+            "ObjecktId": 1,
+            "gridX": 9,
+            "gridY": 5,
+            "rotation": 0
+        },
+        
+        {
+            "ObjecktId": 2,
+            "gridX": 5,
+            "gridY": 5,
+            "rotation": 0
+        },
+        {
+            "ObjecktId": 2,
+            "gridX": 5,
+            "gridY": 6,
+            "rotation": 90
+        },
+        {
+            "ObjecktId": 2,
+            "gridX": 6,
+            "gridY": 5,
+            "rotation": 180
+        },
+        {
+            "ObjecktId": 2,
+            "gridX": 6,
+            "gridY": 6,
+            "rotation": 270
         }
     ]
     

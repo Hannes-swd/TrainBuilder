@@ -9,12 +9,47 @@
 #include "LoadTexture.h"
 
 void ZeichneGleise() {
-	/*DrawTexture("GleisGerade", 1 * 50.0f, 3 * 50.0f, 50.0f, 50.0f, WHITE);*/
 
 	for (const auto& gleis : gleisListe) {
+		//ladet alle werte
+		int ObjecktId = gleis.ObjecktId;
 		float x = gleis.GridX * 50.0f;
 		float y = gleis.GridY * 50.0f;
+		int rotation = gleis.Rotation;
 
-		DrawTexture("GleisGerade", x, y, 50.0f, 50.0f);
+
+		//zeichnet geraden
+		if (ObjecktId == 1) {
+			switch (rotation) {
+				case 0:
+					DrawTexture("GleisVertikal", x, y, 50.0f, 50.0f);
+					break;
+				case 180:
+					DrawTexture("GleisVertikal", x, y, 50.0f, 50.0f);
+					break;
+				case 90:
+					DrawTexture("GleisHorizontal", x, y, 50.0f, 50.0f);
+					break;
+				case 270:
+					DrawTexture("GleisHorizontal", x, y, 50.0f, 50.0f);
+					break;
+			}
+		}
+		else if (ObjecktId == 2) {
+			switch (rotation) {
+			case 0:
+				DrawTexture("GleisKurve1", x, y, 50.0f, 50.0f);
+				break;
+			case 180:
+				DrawTexture("GleisKurve3", x, y, 50.0f, 50.0f);
+				break;
+			case 90:
+				DrawTexture("GleisKurve2", x, y, 50.0f, 50.0f);
+				break;
+			case 270:
+				DrawTexture("GleisKurve4", x, y, 50.0f, 50.0f);
+				break;
+			}
+		}
 	}
 }

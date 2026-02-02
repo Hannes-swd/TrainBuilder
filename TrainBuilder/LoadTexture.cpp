@@ -6,8 +6,13 @@
 std::unordered_map<std::string, Texture2D> textures;
 
 void loadTextures() {
-
-    textures["GleisGerade"] = LoadTexture("resurses/Texturen/schienen/gleis.png");
+    
+    textures["GleisVertikal"] = LoadTexture("resurses/Texturen/schienen/GleisVertikal.png");
+    textures["GleisHorizontal"] = LoadTexture("resurses/Texturen/schienen/GleisHorizontal.png");
+    textures["GleisKurve1"] = LoadTexture("resurses/Texturen/schienen/GleisKurve1.png");
+    textures["GleisKurve2"] = LoadTexture("resurses/Texturen/schienen/GleisKurve2.png");
+    textures["GleisKurve3"] = LoadTexture("resurses/Texturen/schienen/GleisKurve3.png");
+    textures["GleisKurve4"] = LoadTexture("resurses/Texturen/schienen/GleisKurve4.png");
 }
 
 void unloadTextures() {
