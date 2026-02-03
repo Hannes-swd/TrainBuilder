@@ -43,6 +43,15 @@ void LinksGeklickt(Vector2 mausposition) {
     }
 }
 
+bool IstGleisBereitsVorhanden(int gridX, int gridY) {
+    for (const auto& gleis : gleisListe) {
+        if (gleis.GridX == gridX && gleis.GridY == gridY) {
+            return true;
+        }
+    }
+    return false;
+}
+
 void ZeichnePriviou(Vector2 mausposition) {
     int MouseGridX = (int)floor(mausposition.x / GRID_SIZE);
     int MouseGridY = (int)floor(mausposition.y / GRID_SIZE);
@@ -65,7 +74,14 @@ void ZeichnePriviou(Vector2 mausposition) {
             for (int x = startX; x <= endX; x++) {
                 float pixelX = (float)(x * GRID_SIZE);
                 float pixelY = (float)(ersteGridY * GRID_SIZE);
-                DrawRectangle(pixelX, pixelY, (float)GRID_SIZE, (float)GRID_SIZE, Color{ 0 , 255, 0, 150 });
+
+                // schaut ob schon gleis
+                if (IstGleisBereitsVorhanden(x, ersteGridY)) {
+                    DrawRectangle(pixelX, pixelY, (float)GRID_SIZE, (float)GRID_SIZE, Color{ 255, 0, 0, 150 }); // Rot
+                }
+                else {
+                    DrawRectangle(pixelX, pixelY, (float)GRID_SIZE, (float)GRID_SIZE, Color{ 0, 255, 0, 150 }); // Grün
+                }
             }
         }
         // Vertikal
@@ -76,7 +92,14 @@ void ZeichnePriviou(Vector2 mausposition) {
             for (int y = startY; y <= endY; y++) {
                 float pixelX = (float)(ersteGridX * GRID_SIZE);
                 float pixelY = (float)(y * GRID_SIZE);
-                DrawRectangle(pixelX, pixelY, (float)GRID_SIZE, (float)GRID_SIZE, Color{ 0 , 255, 0, 150 });
+
+                // Prüfe ob an dieser Position bereits ein Gleis existiert
+                if (IstGleisBereitsVorhanden(ersteGridX, y)) {
+                    DrawRectangle(pixelX, pixelY, (float)GRID_SIZE, (float)GRID_SIZE, Color{ 255, 0, 0, 150 }); // Rot
+                }
+                else {
+                    DrawRectangle(pixelX, pixelY, (float)GRID_SIZE, (float)GRID_SIZE, Color{ 0, 255, 0, 150 }); // Grün
+                }
             }
         }
     }
@@ -92,53 +115,58 @@ void PlatziereSchienenZwischenPunkten(Vector2 start, Vector2 end) {
     bool isVertical = (startX == endX && startY != endY);
 
     if (!isHorizontal && !isVertical) {
-        return; 
+        return;
+    }
+
+    // Prüfe ob alle Positionen frei sind
+    bool allePositionenFrei = true;
+
+    if (isHorizontal) {
+        int step = (startX < endX) ? 1 : -1;
+        for (int x = startX; x != endX + step; x += step) {
+            if (IstGleisBereitsVorhanden(x, startY)) {
+                allePositionenFrei = false;
+                break;
+            }
+        }
+    }
+    else if (isVertical) {
+        int step = (startY < endY) ? 1 : -1;
+        for (int y = startY; y != endY + step; y += step) {
+            if (IstGleisBereitsVorhanden(startX, y)) {
+                allePositionenFrei = false;
+                break;
+            }
+        }
+    }
+
+    // keine gleise lazieren wen schon belegt
+    if (!allePositionenFrei) {
+        return;
     }
 
     if (isHorizontal) {
         int step = (startX < endX) ? 1 : -1;
 
         for (int x = startX; x != endX + step; x += step) {
-            //scht ob schon ist
-            bool exists = false;
-            for (const auto& gleis : gleisListe) {
-                if (gleis.GridX == x && gleis.GridY == startY) {
-                    exists = true;
-                    break;
-                }
-            }
-
-            if (!exists) {
-                GleisObjeckt neuesGleis;
-                neuesGleis.ObjecktId = 1;
-                neuesGleis.GridX = x;
-                neuesGleis.GridY = startY;
-                neuesGleis.Rotation = 90;
-                gleisListe.push_back(neuesGleis);
-            }
+            GleisObjeckt neuesGleis;
+            neuesGleis.ObjecktId = 1;
+            neuesGleis.GridX = x;
+            neuesGleis.GridY = startY;
+            neuesGleis.Rotation = 90;
+            gleisListe.push_back(neuesGleis);
         }
     }
     else if (isVertical) {
         int step = (startY < endY) ? 1 : -1;
 
         for (int y = startY; y != endY + step; y += step) {
-            //wen schon schiene
-            bool exists = false;
-            for (const auto& gleis : gleisListe) {
-                if (gleis.GridX == startX && gleis.GridY == y) {
-                    exists = true;
-                    break;
-                }
-            }
-
-            if (!exists) {
-                GleisObjeckt neuesGleis;
-                neuesGleis.ObjecktId = 1;
-                neuesGleis.GridX = startX;
-                neuesGleis.GridY = y;
-                neuesGleis.Rotation = 0;
-                gleisListe.push_back(neuesGleis);
-            }
+            GleisObjeckt neuesGleis;
+            neuesGleis.ObjecktId = 1;
+            neuesGleis.GridX = startX;
+            neuesGleis.GridY = y;
+            neuesGleis.Rotation = 0;
+            gleisListe.push_back(neuesGleis);
         }
     }
 
