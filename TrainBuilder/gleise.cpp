@@ -9,65 +9,65 @@
 #include "LoadTexture.h"
 
 void ZeichneGleise() {
+    for (const auto& gleis : gleisListe) {
+        int ObjecktId = gleis.ObjecktId;
+        float x = gleis.GridX * 50.0f;
+        float y = gleis.GridY * 50.0f;
+        int rotation = gleis.Rotation;
 
-	for (const auto& gleis : gleisListe) {
-		//ladet alle werte
-		int ObjecktId = gleis.ObjecktId;
-		float x = gleis.GridX * 50.0f;
-		float y = gleis.GridY * 50.0f;
-		int rotation = gleis.Rotation;
-
-
-		//zeichnet geraden
-		if (ObjecktId == 1) {
-			switch (rotation) {
-				case 0:
-					DrawTexture("GleisVertikal", x, y, 50.0f, 50.0f);
-					break;
-				case 180:
-					DrawTexture("GleisVertikal", x, y, 50.0f, 50.0f);
-					break;
-				case 90:
-					DrawTexture("GleisHorizontal", x, y, 50.0f, 50.0f);
-					break;
-				case 270:
-					DrawTexture("GleisHorizontal", x, y, 50.0f, 50.0f);
-					break;
-			}
-		}
-		else if (ObjecktId == 2) {
-			switch (rotation) {
-			case 0:
-				DrawTexture("GleisKurve1", x, y, 50.0f, 50.0f);
-				break;
-			case 180:
-				DrawTexture("GleisKurve3", x, y, 50.0f, 50.0f);
-				break;
-			case 90:
-				DrawTexture("GleisKurve2", x, y, 50.0f, 50.0f);
-				break;
-			case 270:
-				DrawTexture("GleisKurve4", x, y, 50.0f, 50.0f);
-				break;
-			}
-		}
-		else if (ObjecktId == 3) {
-			switch (rotation) {
-			case 0:
-				DrawTexture("GleisKreuzung1", x, y, 50.0f, 50.0f);
-				break;
-			case 180:
-				DrawTexture("GleisKreuzung3", x, y, 50.0f, 50.0f);
-				break;
-			case 90:
-				DrawTexture("GleisKreuzung2", x, y, 50.0f, 50.0f);
-				break;
-			case 270:
-				DrawTexture("GleisKreuzung4", x, y, 50.0f, 50.0f);
-				break;
-			}
-		}
-	}
+        //zeichnet geraden
+        if (ObjecktId == 1) {
+            switch (rotation) {
+            case 0:
+            case 180:
+                DrawTexture("GleisVertikal", x, y, 50.0f, 50.0f);
+                break;
+            case 90:
+            case 270:
+                DrawTexture("GleisHorizontal", x, y, 50.0f, 50.0f);
+                break;
+            }
+        }
+        //kurve
+        else if (ObjecktId == 2) {
+            switch (rotation) {
+            case 0:
+                DrawTexture("GleisKurve1", x, y, 50.0f, 50.0f);
+                break;
+            case 90:
+                DrawTexture("GleisKurve2", x, y, 50.0f, 50.0f);
+                break;
+            case 180:
+                DrawTexture("GleisKurve3", x, y, 50.0f, 50.0f);
+                break;
+            case 270:
+                DrawTexture("GleisKurve4", x, y, 50.0f, 50.0f);
+                break;
+            }
+        }
+        //kreuzung
+        else if (ObjecktId == 3) {
+            switch (rotation) {
+            case 0:
+                DrawTexture("GleisKreuzung1", x, y, 50.0f, 50.0f);
+                break;
+            case 90:
+                DrawTexture("GleisKreuzung2", x, y, 50.0f, 50.0f);
+                break;
+            case 180:
+                DrawTexture("GleisKreuzung3", x, y, 50.0f, 50.0f);
+                break;
+            case 270:
+                DrawTexture("GleisKreuzung4", x, y, 50.0f, 50.0f);
+                break;
+            }
+        }
+        //kreuz
+        else if (ObjecktId == 4) {
+            DrawTexture("GleisKreuz", x, y, 50.0f, 50.0f);
+            
+        }
+    }
 }
 void GleiseSpeichern() {
 	nlohmann::json jsonDaten;
@@ -94,4 +94,122 @@ void GleiseSpeichern() {
 	else {
 		//feler
 	}
+}
+
+void verbindeSchienen() {
+    if (gleisListe.empty()) {
+        return;
+    }
+
+    for (auto& gleis : gleisListe) {
+        int x = gleis.GridX;
+        int y = gleis.GridY;
+
+        // Nachbarrichtungen
+        bool hatNachbarLinks = false;
+        bool hatNachbarRechts = false;
+        bool hatNachbarOben = false;
+        bool hatNachbarUnten = false;
+
+        
+        for (const auto& andererGleis : gleisListe) {
+            if (&gleis == &andererGleis) continue;
+
+            int dx = andererGleis.GridX - x;
+            int dy = andererGleis.GridY - y;
+
+            
+            if (dx == -1 && dy == 0) hatNachbarLinks = true;
+            if (dx == 1 && dy == 0) hatNachbarRechts = true;
+            if (dx == 0 && dy == -1) hatNachbarOben = true;
+            if (dx == 0 && dy == 1) hatNachbarUnten = true;
+        }
+
+        // Nachbar zäler
+        int anzahlNachbarn = 0;
+        if (hatNachbarLinks) anzahlNachbarn++;
+        if (hatNachbarRechts) anzahlNachbarn++;
+        if (hatNachbarOben) anzahlNachbarn++;
+        if (hatNachbarUnten) anzahlNachbarn++;
+
+        
+        if (anzahlNachbarn == 4) {
+            // Plus-Kreuzung
+            gleis.ObjecktId = 4;
+            gleis.Rotation = 0; 
+        }
+        else if (anzahlNachbarn == 3) {
+            // T-Kreuzungen (3-Wege)
+            gleis.ObjecktId = 3;
+
+            if (hatNachbarOben && hatNachbarUnten && hatNachbarRechts) {
+                // 1: oben, unten, rechts
+                gleis.Rotation = 0;
+            }
+            else if (hatNachbarLinks && hatNachbarOben && hatNachbarRechts) {
+                // 2: links, oben, rechts
+                gleis.Rotation = 90;
+            }
+            else if (hatNachbarOben && hatNachbarLinks && hatNachbarUnten) {
+                // 3: oben, links, unten
+                gleis.Rotation = 180;
+            }
+            else if (hatNachbarLinks && hatNachbarUnten && hatNachbarRechts) {
+                // 4: links, unten, rechts
+                gleis.Rotation = 270;
+            }
+        }
+        else if (anzahlNachbarn == 2) {
+            bool istGeradeLinie = (hatNachbarLinks && hatNachbarRechts) || (hatNachbarOben && hatNachbarUnten);
+
+            if (!istGeradeLinie) {
+                // Es ist eine Kurve (ObjecktId = 2)
+                gleis.ObjecktId = 2;
+
+                // Bestimme die richtige Rotation für die Kurve
+                if (hatNachbarUnten && hatNachbarRechts) {
+                    // 1: unten, rechts
+                    gleis.Rotation = 0; // GleisKurve1
+                }
+                else if (hatNachbarOben && hatNachbarRechts) {
+                    // 2: oben, rechts
+                    gleis.Rotation = 90; // GleisKurve2
+                }
+                else if (hatNachbarLinks && hatNachbarUnten) {
+                    // 3: links, unten
+                    gleis.Rotation = 180; // GleisKurve3
+                }
+                else if (hatNachbarOben && hatNachbarLinks) {
+                    // 4: oben, links
+                    gleis.Rotation = 270; // GleisKurve4
+                }
+            }
+            else {
+                // Gerade Schiene
+                gleis.ObjecktId = 1;
+
+                if (hatNachbarLinks && hatNachbarRechts) {
+                    // Horizontal
+                    gleis.Rotation = 90;
+                }
+                else if (hatNachbarOben && hatNachbarUnten) {
+                    // Vertikal
+                    gleis.Rotation = 0;
+                }
+            }
+        }
+        else if (anzahlNachbarn == 1) {
+
+            gleis.ObjecktId = 1;
+
+            if (hatNachbarLinks || hatNachbarRechts) {
+                // Horizontal
+                gleis.Rotation = 90;
+            }
+            else if (hatNachbarOben || hatNachbarUnten) {
+                // Vertikal
+                gleis.Rotation = 0;
+            }
+        }
+    }
 }

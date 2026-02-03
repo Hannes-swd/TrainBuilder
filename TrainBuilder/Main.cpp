@@ -84,6 +84,9 @@ int main(void)
         
         ZeichneGleise();
 
+        //gleise verbinden
+        verbindeSchienen();
+
         /*-------------------------------------------------
             EINGABEN IM GRID
         -------------------------------------------------*/

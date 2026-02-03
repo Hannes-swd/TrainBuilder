@@ -21,6 +21,10 @@ void loadTextures() {
     textures["GleisKreuzung3"] = LoadTexture("resurses/Texturen/schienen/GleisKreuzung3.png");
     textures["GleisKreuzung2"] = LoadTexture("resurses/Texturen/schienen/GleisKreuzung2.png");
     textures["GleisKreuzung4"] = LoadTexture("resurses/Texturen/schienen/GleisKreuzung4.png");
+    //Kreuz
+    textures["GleisKreuz"] = LoadTexture("resurses/Texturen/schienen/GleisKreuz.png");
+
+    
 }
 
 void unloadTextures() {
