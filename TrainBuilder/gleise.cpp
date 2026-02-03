@@ -51,6 +51,22 @@ void ZeichneGleise() {
 				break;
 			}
 		}
+		else if (ObjecktId == 3) {
+			switch (rotation) {
+			case 0:
+				DrawTexture("GleisKreuzung1", x, y, 50.0f, 50.0f);
+				break;
+			case 180:
+				DrawTexture("GleisKreuzung3", x, y, 50.0f, 50.0f);
+				break;
+			case 90:
+				DrawTexture("GleisKreuzung2", x, y, 50.0f, 50.0f);
+				break;
+			case 270:
+				DrawTexture("GleisKreuzung4", x, y, 50.0f, 50.0f);
+				break;
+			}
+		}
 	}
 }
 void GleiseSpeichern() {
