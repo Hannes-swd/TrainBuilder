@@ -18,6 +18,10 @@ void ProcesMaus(Vector2 mausposition) {
     }
 
     if (haterstenKlick) {
+        if (IsKeyPressed(KEY_ESCAPE)) {
+            haterstenKlick = false;
+            return;
+        }
         ZeichnePriviou(mausposition);
     }
 }
