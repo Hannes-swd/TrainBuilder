@@ -28,6 +28,8 @@ void loadTextures() {
     -------------------------------------------------*/
     textures["zeichnen"] = LoadTexture("resurses/Texturen/Ui/zeichnen.png");
     textures["Löschen"] = LoadTexture("resurses/Texturen/Ui/Löschen.png");
+    textures["Auswahl"] = LoadTexture("resurses/Texturen/Ui/Auswahl.png");
+    
     
 }
 

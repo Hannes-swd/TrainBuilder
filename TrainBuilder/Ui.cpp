@@ -17,8 +17,12 @@ void zeichneUI() {
     else if (aktuellesTool == 2) {
         DrawRectangle(80.0f, 10.0f, 60.0f, 60.0f, DARKGRAY);
     }
+    else if (aktuellesTool == 3) {
+        DrawRectangle(150.0f, 10.0f, 60.0f, 60.0f, DARKGRAY);
+    }
 
 	//zeichnet tools nebeneinander
 	DrawTexture("zeichnen", 10.0f, 10.0f, 60.0f, 60.0f);
     DrawTexture("Löschen", 80.0f, 10.0f, 60.0f, 60.0f);
+    DrawTexture("Auswahl", 150.0f, 10.0f, 60.0f, 60.0f);
 }

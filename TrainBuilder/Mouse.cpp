@@ -31,6 +31,14 @@ void ProcesMaus(Vector2 mausposition) {
                 ZeichnePriviou(mausposition);
             }
         }
+        if (aktuellesTool == 2) {
+            if (IsMouseButtonDown(MOUSE_BUTTON_LEFT)) {
+                Löschentool(mausposition);
+            }
+		}
+        if (aktuellesTool == 3) {
+            //Auswahl tool noch nicht implementiert
+		}
     }
 
 }
@@ -230,7 +238,17 @@ void PlatziereSchienenZwischenPunkten(Vector2 start, Vector2 end) {
 -------------------------------------------------*/
 
 void Löschentool(Vector2 mausposition) {
-
+	Vector2 screenMousePos = GetMousePosition();
+    int MouseGridX = (int)floor(mausposition.x / GRID_SIZE);
+    int MouseGridY = (int)floor(mausposition.y / GRID_SIZE);
+    auto it = std::remove_if(gleisListe.begin(), gleisListe.end(),
+        [MouseGridX, MouseGridY](const GleisObjeckt& gleis) {
+            return gleis.GridX == MouseGridX && gleis.GridY == MouseGridY;
+        });
+    if (it != gleisListe.end()) {
+        gleisListe.erase(it, gleisListe.end());
+        GleiseSpeichern();
+	}
 }
 
 /*-------------------------------------------------
@@ -252,4 +270,11 @@ void Menuebuttons() {
             aktuellesTool = 2;
         }
     }
+	//Auswahl tool
+    Rectangle auswahlButton = { 150.0f, 10.0f, 60.0f, 60.0f };
+    if (CheckCollisionPointRec(mousePos, auswahlButton)) {
+        if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {
+            aktuellesTool = 3;
+        }
+	}
 }

@@ -26,6 +26,7 @@ float playerSpeed = 700.0f;
 int aktuellesTool = 1; 
 //1 = zeichnen
 //2 = löschen
+//3 = auswahl
 
 /*-------------------------------------------------
 	Mausposition
