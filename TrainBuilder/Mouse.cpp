@@ -38,7 +38,7 @@ void ProcesMaus(Vector2 mausposition) {
             }
 		}
         if (aktuellesTool == 3) {
-            //Auswahl tool noch nicht implementiert
+			Auswahltool(MouseGridX, MouseGridY);
 		}
         if (aktuellesTool == 4) {
 			if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT))
@@ -46,6 +46,21 @@ void ProcesMaus(Vector2 mausposition) {
 		}
 
         
+    }
+
+}
+/*-------------------------------------------------
+    AUSWAHLTOOL NOCH
+-------------------------------------------------*/
+
+void Auswahltool(int gridX, int gridY) {
+    
+	
+    
+    for (const auto& ban : banhofListe) {
+        if (ban.GridX == gridX && ban.GridY == gridY) {
+            DrawRectangle(gridX * GRID_SIZE, gridY * GRID_SIZE, (float)GRID_SIZE, (float)GRID_SIZE, Color{ 0, 255, 0, 150 });
+        }
     }
 
 }

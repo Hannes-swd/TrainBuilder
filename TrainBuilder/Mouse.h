@@ -9,3 +9,4 @@ bool IstGleisBereitsVorhanden(int gridX, int gridY);
 void Menuebuttons();
 
 void Loeschentool(Vector2 mausposition);
+void Auswahltool(int gridX, int gridY);
