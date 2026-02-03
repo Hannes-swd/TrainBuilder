@@ -8,6 +8,7 @@
 #include "Json.h"
 #include "gleise.h"
 #include "Mouse.h"
+#include "Banhof.h"
 
 void ProcesMaus(Vector2 mausposition) {
     Vector2 screenMousePos = GetMousePosition();
@@ -39,6 +40,11 @@ void ProcesMaus(Vector2 mausposition) {
         if (aktuellesTool == 3) {
             //Auswahl tool noch nicht implementiert
 		}
+        if (aktuellesTool == 4) {
+            plaziereBanhof(mausposition);
+		}
+
+        
     }
 
 }
@@ -275,6 +281,13 @@ void Menuebuttons() {
     if (CheckCollisionPointRec(mousePos, auswahlButton)) {
         if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {
             aktuellesTool = 3;
+        }
+	}
+    //Banhof tool
+    Rectangle banhofButton = { 220.0f, 10.0f, 60.0f, 60.0f };
+    if (CheckCollisionPointRec(mousePos, banhofButton)) {
+        if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {
+            aktuellesTool = 4;
         }
 	}
 }

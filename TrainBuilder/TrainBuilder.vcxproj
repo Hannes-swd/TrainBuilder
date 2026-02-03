@@ -129,6 +129,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Banhof.cpp" />
     <ClCompile Include="gleise.cpp" />
     <ClCompile Include="globals.cpp" />
     <ClCompile Include="grid.cpp" />
@@ -140,6 +141,7 @@
     <ClCompile Include="Ui.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Banhof.h" />
     <ClInclude Include="gleise.h" />
     <ClInclude Include="globals.h" />
     <ClInclude Include="grid.h" />
