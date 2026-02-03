@@ -23,6 +23,9 @@ Camera2D Playercam = { 0 };
 
 float playerSpeed = 700.0f;
 
+//ausgewähltes objeckt
+int ausgewahlterBanhof = 0; //0 = keins
+
 int aktuellesTool = 1; 
 //1 = zeichnen
 //2 = löschen

@@ -60,6 +60,9 @@ void Auswahltool(int gridX, int gridY) {
     for (const auto& ban : banhofListe) {
         if (ban.GridX == gridX && ban.GridY == gridY) {
             DrawRectangle(gridX * GRID_SIZE, gridY * GRID_SIZE, (float)GRID_SIZE, (float)GRID_SIZE, Color{ 0, 255, 0, 150 });
+            if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {
+				ausgewahlterBanhof = ban.BanhofId;
+            }
         }
     }
 
