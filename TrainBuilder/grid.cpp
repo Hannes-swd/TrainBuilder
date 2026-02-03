@@ -10,7 +10,7 @@ void DrawInfiniteGrid() {
     float zoom = Playercam.zoom;
 
     float screenWidth = (float)GenaueBreite / zoom;
-    float screenHeight = (float)GenaueHöehe / zoom;
+    float screenHeight = (float)GenaueHoehe / zoom;
 
     float left = camPos.x - screenWidth / 2;
     float right = camPos.x + screenWidth / 2;

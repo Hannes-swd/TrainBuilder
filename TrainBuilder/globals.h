@@ -1,11 +1,12 @@
 #pragma once
 #include "raylib.h"
+#include <string>
 #include <vector>
 
 /*-------------------------------------------------
 	GRUNDLAGEN
 -------------------------------------------------*/
-extern int GenaueHöehe;
+extern int GenaueHoehe;
 extern int GenaueBreite;
 extern const float GRID_SIZE;
 
@@ -24,6 +25,16 @@ extern Vector2 gridPosition;
 extern int aktuellesTool;
 
 /*-------------------------------------------------
+	MOUSEKLICK/SCHIENEN PLAZIEREN
+-------------------------------------------------*/
+
+extern Vector2 ErsteKlickPosition;
+extern Vector2 ZweiteKlickPosition;
+
+extern bool haterstenKlick;
+
+
+/*-------------------------------------------------
 	GLEISE
 -------------------------------------------------*/
 
@@ -37,10 +48,15 @@ struct GleisObjeckt {
 extern std::vector<GleisObjeckt> gleisListe;
 
 /*-------------------------------------------------
-	MOUSEKLICK/SCHIENEN PLAZIEREN
+	Banhöfe
 -------------------------------------------------*/
+struct BanhofObjeckt {
+	std::string Name;
+	int BanhofId;
+	int GridX;
+	int GridY;
+	int Rotation;
+	BanhofObjeckt() : Name(""), BanhofId(0), GridX(0), GridY(0), Rotation(0) {}
+};
 
-extern Vector2 ErsteKlickPosition;
-extern Vector2 ZweiteKlickPosition;
-
-extern bool haterstenKlick;
+extern std::vector<BanhofObjeckt> banhofListe;

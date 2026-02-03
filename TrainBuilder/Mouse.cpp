@@ -34,14 +34,15 @@ void ProcesMaus(Vector2 mausposition) {
         }
         if (aktuellesTool == 2) {
             if (IsMouseButtonDown(MOUSE_BUTTON_LEFT)) {
-                Löschentool(mausposition);
+                Loeschentool(mausposition);
             }
 		}
         if (aktuellesTool == 3) {
             //Auswahl tool noch nicht implementiert
 		}
         if (aktuellesTool == 4) {
-            plaziereBanhof(mausposition);
+			if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT))
+                plaziereBanhof(mausposition);
 		}
 
         
@@ -243,18 +244,45 @@ void PlatziereSchienenZwischenPunkten(Vector2 start, Vector2 end) {
     LÖSCHTOOL
 -------------------------------------------------*/
 
-void Löschentool(Vector2 mausposition) {
-	Vector2 screenMousePos = GetMousePosition();
-    int MouseGridX = (int)floor(mausposition.x / GRID_SIZE);
-    int MouseGridY = (int)floor(mausposition.y / GRID_SIZE);
-    auto it = std::remove_if(gleisListe.begin(), gleisListe.end(),
-        [MouseGridX, MouseGridY](const GleisObjeckt& gleis) {
-            return gleis.GridX == MouseGridX && gleis.GridY == MouseGridY;
-        });
-    if (it != gleisListe.end()) {
-        gleisListe.erase(it, gleisListe.end());
-        GleiseSpeichern();
+void Loeschentool(Vector2 mausposition) {
+	//lösct als erstes banhof und wen nicht dan gleis
+
+    if (IstBanhofBereitsVorhanden(
+        (int)floor(mausposition.x / GRID_SIZE),
+        (int)floor(mausposition.y / GRID_SIZE))){
+        if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {
+            //löscht banhof
+            int MouseGridX = (int)floor(mausposition.x / GRID_SIZE);
+            int MouseGridY = (int)floor(mausposition.y / GRID_SIZE);
+            auto it = std::remove_if(banhofListe.begin(), banhofListe.end(),
+                [MouseGridX, MouseGridY](const BanhofObjeckt& banhof) {
+                    return banhof.GridX == MouseGridX && banhof.GridY == MouseGridY;
+                });
+            if (it != banhofListe.end()) {
+                banhofListe.erase(it, banhofListe.end());
+                BanhofSpeichern();
+            }
+            return;
+		}
+        
 	}
+    else {
+        if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {
+            Vector2 screenMousePos = GetMousePosition();
+            int MouseGridX = (int)floor(mausposition.x / GRID_SIZE);
+            int MouseGridY = (int)floor(mausposition.y / GRID_SIZE);
+            auto it = std::remove_if(gleisListe.begin(), gleisListe.end(),
+                [MouseGridX, MouseGridY](const GleisObjeckt& gleis) {
+                    return gleis.GridX == MouseGridX && gleis.GridY == MouseGridY;
+                });
+            if (it != gleisListe.end()) {
+                gleisListe.erase(it, gleisListe.end());
+                GleiseSpeichern();
+            }
+        }
+	}
+
+	
 }
 
 /*-------------------------------------------------
@@ -270,8 +298,8 @@ void Menuebuttons() {
         }
 	}
     //Löschen tool
-    Rectangle löschenButton = { 80.0f, 10.0f, 60.0f, 60.0f };
-    if (CheckCollisionPointRec(mousePos, löschenButton)) {
+    Rectangle loeschenButton = { 80.0f, 10.0f, 60.0f, 60.0f };
+    if (CheckCollisionPointRec(mousePos, loeschenButton)) {
         if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {
             aktuellesTool = 2;
         }

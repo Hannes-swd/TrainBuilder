@@ -8,4 +8,4 @@ void PlatziereEinzelneSchiene(int gridX, int gridY);
 bool IstGleisBereitsVorhanden(int gridX, int gridY);
 void Menuebuttons();
 
-void Löschentool(Vector2 mausposition);
+void Loeschentool(Vector2 mausposition);

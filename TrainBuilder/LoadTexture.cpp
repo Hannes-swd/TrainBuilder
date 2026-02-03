@@ -30,6 +30,10 @@ void loadTextures() {
     textures["Löschen"] = LoadTexture("resurses/Texturen/Ui/Löschen.png");
     textures["Auswahl"] = LoadTexture("resurses/Texturen/Ui/Auswahl.png");
     textures["Banhof"] = LoadTexture("resurses/Texturen/Ui/Banhof.png");
+
+    /*-------------------------------------------------
+        BANHOF
+    -------------------------------------------------*/
     
 }
 

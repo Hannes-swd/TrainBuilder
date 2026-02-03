@@ -5,7 +5,7 @@
 #include "globals.h"
 #include "Json.h"
 void Spielermoovment() {
-    Playercam.offset = Vector2{ (float)GenaueBreite / 2, (float)GenaueHöehe / 2 };
+    Playercam.offset = Vector2{ (float)GenaueBreite / 2, (float)GenaueHoehe / 2 };
 
     Vector2 movement = { 0, 0 };
     if (IsKeyDown(KEY_W)) {

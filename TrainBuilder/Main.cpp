@@ -12,6 +12,7 @@
 #include "LoadTexture.h"
 #include "gleise.h"
 #include "UI.h"
+#include "Banhof.h"
 
 int main(void)
 {
@@ -55,11 +56,11 @@ int main(void)
 
 
         //Höhe/Breite
-        GenaueHöehe = GetScreenHeight();
+        GenaueHoehe = GetScreenHeight();
         GenaueBreite = GetScreenWidth();
 
-        if (GenaueHöehe != screenHeight)
-            screenHeight = GenaueHöehe;
+        if (GenaueHoehe != screenHeight)
+            screenHeight = GenaueHoehe;
         if (GenaueBreite != screenWidth)
             screenWidth = GenaueBreite;
 
@@ -84,6 +85,7 @@ int main(void)
 
         
         ZeichneGleise();
+        ZeichneBanhof();
 
         //gleise verbinden
         verbindeSchienen();
@@ -113,6 +115,7 @@ int main(void)
     -------------------------------------------------*/
     SpeicherJson();
     GleiseSpeichern();
+    BanhofSpeichern();
     unloadTextures();
     CloseWindow();
     

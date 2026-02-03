@@ -10,7 +10,7 @@
 /*-------------------------------------------------
 	GRUNDLAGEN
 -------------------------------------------------*/
-int GenaueHöehe = 0;
+int GenaueHoehe = 0;
 int GenaueBreite = 0;
 const float GRID_SIZE = 50.0f;
 
@@ -35,14 +35,20 @@ Vector2 mousePosition = { 0, 0 };
 Vector2 gridPosition = { 0, 0 };
 
 /*-------------------------------------------------
-	GLEISE
--------------------------------------------------*/
-std::vector<GleisObjeckt> gleisListe;
-
-/*-------------------------------------------------
 	MOUSEKLICK/SCHIENEN PLAZIEREN
 -------------------------------------------------*/
 
 Vector2 ErsteKlickPosition = { 0, 0 };
 Vector2 ZweiteKlickPosition = { 0, 0 };
 bool haterstenKlick = false;
+
+
+/*-------------------------------------------------
+	GLEISE
+-------------------------------------------------*/
+std::vector<GleisObjeckt> gleisListe;
+
+/*-------------------------------------------------
+	Banhöfe
+-------------------------------------------------*/
+std::vector<BanhofObjeckt> banhofListe;
