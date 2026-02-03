@@ -21,7 +21,11 @@ Vector2 Spielerposition = { 0, 0 };
 float DeltaTime = 0.0f;
 Camera2D Playercam = { 0 };
 
-float playerSpeed = 300.0f;
+float playerSpeed = 700.0f;
+
+int aktuellesTool = 1; 
+//1 = zeichnen
+//2 = löschen
 
 /*-------------------------------------------------
 	Mausposition

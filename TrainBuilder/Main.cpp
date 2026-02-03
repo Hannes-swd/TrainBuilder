@@ -11,6 +11,7 @@
 #include "Mouse.h"
 #include "LoadTexture.h"
 #include "gleise.h"
+#include "UI.h"
 
 int main(void)
 {
@@ -100,6 +101,9 @@ int main(void)
 
         DrawText(TextFormat("Grid: [%d, %d]", (int)gridPosition.x, (int)gridPosition.y),
             10, 10, 20, BLACK);
+
+        //ZEICHNET UI
+        zeichneUI();
 
         EndDrawing();
     }

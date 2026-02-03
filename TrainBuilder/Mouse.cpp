@@ -10,46 +10,65 @@
 #include "Mouse.h"
 
 void ProcesMaus(Vector2 mausposition) {
+    Vector2 screenMousePos = GetMousePosition();
     int MouseGridX = (int)floor(mausposition.x / GRID_SIZE);
     int MouseGridY = (int)floor(mausposition.y / GRID_SIZE);
 
-    if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {
-        LinksGeklickt(mausposition);
+    //Im menü
+    if (screenMousePos.y < 80.0f) {
+        Menuebuttons();
+    }
+    else {
+        if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {
+            LinksGeklickt(mausposition);
+        }
+        if (aktuellesTool == 1) {
+            if (haterstenKlick) {
+                if (IsKeyPressed(KEY_ESCAPE)) {
+                    haterstenKlick = false;
+                    return;
+                }
+                ZeichnePriviou(mausposition);
+            }
+        }
     }
 
-    if (haterstenKlick) {
-        if (IsKeyPressed(KEY_ESCAPE)) {
-            haterstenKlick = false;
-            return;
-        }
-        ZeichnePriviou(mausposition);
-    }
 }
 
+/*-------------------------------------------------
+    GLEISE SETZEN
+-------------------------------------------------*/
 void LinksGeklickt(Vector2 mausposition) {
+    Vector2 screenMousePos = GetMousePosition();
     int KlickGridX = (int)floor(mausposition.x / GRID_SIZE);
     int KlickGridY = (int)floor(mausposition.y / GRID_SIZE);
 
-    if (!haterstenKlick) {
-        ErsteKlickPosition = { (float)KlickGridX ,(float)KlickGridY };
-        haterstenKlick = true;
-    }
-    else if (haterstenKlick) {
-        ZweiteKlickPosition = { (float)KlickGridX ,(float)KlickGridY };
 
-        if ((int)ErsteKlickPosition.x == (int)ZweiteKlickPosition.x &&
-            (int)ErsteKlickPosition.y == (int)ZweiteKlickPosition.y) {
-
-            PlatziereEinzelneSchiene(KlickGridX, KlickGridY);
+    if (aktuellesTool == 1) {
+        if (screenMousePos.y < 80.0f) {
+            return;
         }
-        else {
-            PlatziereSchienenZwischenPunkten(
-                { (float)(int)ErsteKlickPosition.x, (float)(int)ErsteKlickPosition.y },
-                { (float)(int)ZweiteKlickPosition.x, (float)(int)ZweiteKlickPosition.y }
-            );
+        if (!haterstenKlick) {
+            ErsteKlickPosition = { (float)KlickGridX ,(float)KlickGridY };
+            haterstenKlick = true;
         }
+        else if (haterstenKlick) {
+            ZweiteKlickPosition = { (float)KlickGridX ,(float)KlickGridY };
 
-        haterstenKlick = false;
+            if ((int)ErsteKlickPosition.x == (int)ZweiteKlickPosition.x &&
+                (int)ErsteKlickPosition.y == (int)ZweiteKlickPosition.y) {
+
+                PlatziereEinzelneSchiene(KlickGridX, KlickGridY);
+            }
+            else {
+                PlatziereSchienenZwischenPunkten(
+                    { (float)(int)ErsteKlickPosition.x, (float)(int)ErsteKlickPosition.y },
+                    { (float)(int)ZweiteKlickPosition.x, (float)(int)ZweiteKlickPosition.y }
+                );
+            }
+
+            haterstenKlick = false;
+        }
     }
 }
 
@@ -204,4 +223,33 @@ void PlatziereSchienenZwischenPunkten(Vector2 start, Vector2 end) {
     }
 
     GleiseSpeichern();
+}
+
+/*-------------------------------------------------
+    LÖSCHTOOL
+-------------------------------------------------*/
+
+void Löschentool(Vector2 mausposition) {
+
+}
+
+/*-------------------------------------------------
+	TOOLSWITCHEN
+-------------------------------------------------*/
+void Menuebuttons() {
+    Vector2 mousePos = GetMousePosition();
+    //Zeichen tool
+    Rectangle zeichenButton = { 10.0f, 10.0f, 60.0f, 60.0f };
+    if (CheckCollisionPointRec(mousePos, zeichenButton)) {
+        if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {
+            aktuellesTool = 1;
+        }
+	}
+    //Löschen tool
+    Rectangle löschenButton = { 80.0f, 10.0f, 60.0f, 60.0f };
+    if (CheckCollisionPointRec(mousePos, löschenButton)) {
+        if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {
+            aktuellesTool = 2;
+        }
+    }
 }

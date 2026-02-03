@@ -21,6 +21,8 @@ extern float playerSpeed;
 extern Vector2 mousePosition;
 extern Vector2 gridPosition;
 
+extern int aktuellesTool;
+
 /*-------------------------------------------------
 	GLEISE
 -------------------------------------------------*/
