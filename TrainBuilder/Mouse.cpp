@@ -33,11 +33,17 @@ void LinksGeklickt(Vector2 mausposition) {
     else if (haterstenKlick) {
         ZweiteKlickPosition = { (float)KlickGridX ,(float)KlickGridY };
 
-        // Schienen platzieren
-        PlatziereSchienenZwischenPunkten(
-            { (float)(int)ErsteKlickPosition.x, (float)(int)ErsteKlickPosition.y },
-            { (float)(int)ZweiteKlickPosition.x, (float)(int)ZweiteKlickPosition.y }
-        );
+        if ((int)ErsteKlickPosition.x == (int)ZweiteKlickPosition.x &&
+            (int)ErsteKlickPosition.y == (int)ZweiteKlickPosition.y) {
+
+            PlatziereEinzelneSchiene(KlickGridX, KlickGridY);
+        }
+        else {
+            PlatziereSchienenZwischenPunkten(
+                { (float)(int)ErsteKlickPosition.x, (float)(int)ErsteKlickPosition.y },
+                { (float)(int)ZweiteKlickPosition.x, (float)(int)ZweiteKlickPosition.y }
+            );
+        }
 
         haterstenKlick = false;
     }
@@ -59,6 +65,19 @@ void ZeichnePriviou(Vector2 mausposition) {
     int ersteGridX = (int)ErsteKlickPosition.x;
     int ersteGridY = (int)ErsteKlickPosition.y;
 
+    if (MouseGridX == ersteGridX && MouseGridY == ersteGridY) {
+        float pixelX = (float)(ersteGridX * GRID_SIZE);
+        float pixelY = (float)(ersteGridY * GRID_SIZE);
+
+        if (IstGleisBereitsVorhanden(ersteGridX, ersteGridY)) {
+            DrawRectangle(pixelX, pixelY, (float)GRID_SIZE, (float)GRID_SIZE, Color{ 255, 0, 0, 150 });
+        }
+        else {
+            DrawRectangle(pixelX, pixelY, (float)GRID_SIZE, (float)GRID_SIZE, Color{ 0, 255, 0, 150 });
+        }
+        return;
+    }
+
     int diffX = MouseGridX - ersteGridX;
     int diffY = MouseGridY - ersteGridY;
 
@@ -66,7 +85,6 @@ void ZeichnePriviou(Vector2 mausposition) {
     bool isVertical = (diffX == 0 && diffY != 0);
 
     if (isHorizontal || isVertical) {
-        // Horizontal
         if (isHorizontal) {
             int startX = std::min(MouseGridX, ersteGridX);
             int endX = std::max(MouseGridX, ersteGridX);
@@ -75,16 +93,14 @@ void ZeichnePriviou(Vector2 mausposition) {
                 float pixelX = (float)(x * GRID_SIZE);
                 float pixelY = (float)(ersteGridY * GRID_SIZE);
 
-                // schaut ob schon gleis
                 if (IstGleisBereitsVorhanden(x, ersteGridY)) {
-                    DrawRectangle(pixelX, pixelY, (float)GRID_SIZE, (float)GRID_SIZE, Color{ 255, 0, 0, 150 }); // Rot
+                    DrawRectangle(pixelX, pixelY, (float)GRID_SIZE, (float)GRID_SIZE, Color{ 255, 0, 0, 150 });
                 }
                 else {
-                    DrawRectangle(pixelX, pixelY, (float)GRID_SIZE, (float)GRID_SIZE, Color{ 0, 255, 0, 150 }); // Grün
+                    DrawRectangle(pixelX, pixelY, (float)GRID_SIZE, (float)GRID_SIZE, Color{ 0, 255, 0, 150 });
                 }
             }
         }
-        // Vertikal
         else if (isVertical) {
             int startY = std::min(MouseGridY, ersteGridY);
             int endY = std::max(MouseGridY, ersteGridY);
@@ -93,16 +109,31 @@ void ZeichnePriviou(Vector2 mausposition) {
                 float pixelX = (float)(ersteGridX * GRID_SIZE);
                 float pixelY = (float)(y * GRID_SIZE);
 
-                // Prüfe ob an dieser Position bereits ein Gleis existiert
                 if (IstGleisBereitsVorhanden(ersteGridX, y)) {
-                    DrawRectangle(pixelX, pixelY, (float)GRID_SIZE, (float)GRID_SIZE, Color{ 255, 0, 0, 150 }); // Rot
+                    DrawRectangle(pixelX, pixelY, (float)GRID_SIZE, (float)GRID_SIZE, Color{ 255, 0, 0, 150 });
                 }
                 else {
-                    DrawRectangle(pixelX, pixelY, (float)GRID_SIZE, (float)GRID_SIZE, Color{ 0, 255, 0, 150 }); // Grün
+                    DrawRectangle(pixelX, pixelY, (float)GRID_SIZE, (float)GRID_SIZE, Color{ 0, 255, 0, 150 });
                 }
             }
         }
     }
+}
+
+void PlatziereEinzelneSchiene(int gridX, int gridY) {
+    if (IstGleisBereitsVorhanden(gridX, gridY)) {
+        return;
+    }
+
+    GleisObjeckt neuesGleis;
+    neuesGleis.ObjecktId = 1;
+    neuesGleis.GridX = gridX;
+    neuesGleis.GridY = gridY;
+    neuesGleis.Rotation = 90;
+
+    gleisListe.push_back(neuesGleis);
+
+    GleiseSpeichern();
 }
 
 void PlatziereSchienenZwischenPunkten(Vector2 start, Vector2 end) {
@@ -118,7 +149,6 @@ void PlatziereSchienenZwischenPunkten(Vector2 start, Vector2 end) {
         return;
     }
 
-    // Prüfe ob alle Positionen frei sind
     bool allePositionenFrei = true;
 
     if (isHorizontal) {
@@ -140,7 +170,6 @@ void PlatziereSchienenZwischenPunkten(Vector2 start, Vector2 end) {
         }
     }
 
-    // keine gleise lazieren wen schon belegt
     if (!allePositionenFrei) {
         return;
     }
