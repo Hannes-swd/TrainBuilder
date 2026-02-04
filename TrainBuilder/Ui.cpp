@@ -13,6 +13,9 @@ static TextBox nahmeEingabe(0, 0, 200.0f, 30.0f, 32);
 static int letzterAusgewahlterBanhof = 0;
 
 void zeichneUI() {
+
+	
+
 	DrawRectangle(0, 0, (float)GenaueBreite, 80.0f, LIGHTGRAY);
 
 	if (aktuellesTool == 1) {

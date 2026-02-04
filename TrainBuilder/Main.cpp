@@ -64,12 +64,18 @@ int main(void)
         if (GenaueBreite != screenWidth)
             screenWidth = GenaueBreite;
 
+        bool eingabefeldAktiv = false;
         //Spielerbewegen
-        Spielermoovment();
+        if(!eingabefeldAktiv) {
+            Spielermoovment();
+        }
 
         //koordinaten im grid
         gridPosition.x = (int)floor(mousePosition.x / GRID_SIZE);
         gridPosition.y = (int)floor(mousePosition.y / GRID_SIZE);
+
+        
+
 
         /*-------------------------------------------------
             ZEICHNEN
@@ -105,6 +111,8 @@ int main(void)
             10, 10, 20, BLACK);
 
         //ZEICHNET UI
+
+
         zeichneUI();
 
         EndDrawing();
