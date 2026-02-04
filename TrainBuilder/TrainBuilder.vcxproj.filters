@@ -45,6 +45,9 @@
     <ClCompile Include="Banhof.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
+    <ClCompile Include="textbox.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="globals.h">
@@ -72,6 +75,9 @@
       <Filter>Headerdateien</Filter>
     </ClInclude>
     <ClInclude Include="Banhof.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="textbox.h">
       <Filter>Headerdateien</Filter>
     </ClInclude>
   </ItemGroup>

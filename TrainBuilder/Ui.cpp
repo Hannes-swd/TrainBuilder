@@ -6,39 +6,37 @@
 #include "raylib.h"
 #include "globals.h"
 #include "Json.h"
+#include "textbox.h"
+#include "Banhof.h"
+
+static TextBox nahmeEingabe(0, 0, 200.0f, 30.0f, 32);
+static int letzterAusgewahlterBanhof = 0;
 
 void zeichneUI() {
 	DrawRectangle(0, 0, (float)GenaueBreite, 80.0f, LIGHTGRAY);
-	
-	//hervorheben des aktiven tools
+
 	if (aktuellesTool == 1) {
 		DrawRectangle(10.0f, 10.0f, 60.0f, 60.0f, DARKGRAY);
 	}
-    else if (aktuellesTool == 2) {
-        DrawRectangle(80.0f, 10.0f, 60.0f, 60.0f, DARKGRAY);
-    }
-    else if (aktuellesTool == 3) {
-        DrawRectangle(150.0f, 10.0f, 60.0f, 60.0f, DARKGRAY);
-    }
+	else if (aktuellesTool == 2) {
+		DrawRectangle(80.0f, 10.0f, 60.0f, 60.0f, DARKGRAY);
+	}
+	else if (aktuellesTool == 3) {
+		DrawRectangle(150.0f, 10.0f, 60.0f, 60.0f, DARKGRAY);
+	}
 	else if (aktuellesTool == 4) {
 		DrawRectangle(220.0f, 10.0f, 60.0f, 60.0f, DARKGRAY);
 	}
 
-	//zeichnet tools nebeneinander
 	DrawTexture("zeichnen", 10.0f, 10.0f, 60.0f, 60.0f);
-    DrawTexture("Löschen", 80.0f, 10.0f, 60.0f, 60.0f);
-    DrawTexture("Auswahl", 150.0f, 10.0f, 60.0f, 60.0f);
-    DrawTexture("Banhof", 220.0f, 10.0f, 60.0f, 60.0f);
+	DrawTexture("Löschen", 80.0f, 10.0f, 60.0f, 60.0f);
+	DrawTexture("Auswahl", 150.0f, 10.0f, 60.0f, 60.0f);
+	DrawTexture("Banhof", 220.0f, 10.0f, 60.0f, 60.0f);
 
-
-	//seitenmenü
 	if (ausgewahlterBanhof != 0) {
-
-		//zeichnet breite seitenleiste
 		DrawRectangle((float)GenaueBreite - 250.0f, 80.0f, 250.0f, (float)GenaueHoehe - 80.0f, LIGHTGRAY);
 		DrawRectangleLines((GenaueBreite - 250), 80, 250, GenaueHoehe - 80, DARKGRAY);
 
-		//banhof informationen
 		for (const auto& banhof : banhofListe) {
 			if (banhof.BanhofId == ausgewahlterBanhof) {
 				DrawText("Banhof Info:", GenaueBreite - 240, 90, 20, BLACK);
@@ -49,6 +47,28 @@ void zeichneUI() {
 				break;
 			}
 		}
-	}
 
+		nahmeEingabe.SetPosition((float)GenaueBreite - 240.0f, 250.0f);
+
+		if (letzterAusgewahlterBanhof != ausgewahlterBanhof) {
+			for (const auto& banhof : banhofListe) {
+				if (banhof.BanhofId == ausgewahlterBanhof) {
+					nahmeEingabe.SetText(banhof.Name);
+					break;
+				}
+			}
+			letzterAusgewahlterBanhof = ausgewahlterBanhof;
+		}
+
+		nahmeEingabe.Update();
+		nahmeEingabe.Draw();
+
+		if (ausgewahlterBanhof > 0 && ausgewahlterBanhof <= banhofListe.size()) {
+			banhofListe[ausgewahlterBanhof - 1].Name = nahmeEingabe.GetText();
+		}
+
+		if (!nahmeEingabe.IsActive() && IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
+			BanhofSpeichern();
+		}
+	}
 }

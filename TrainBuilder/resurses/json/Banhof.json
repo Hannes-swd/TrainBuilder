@@ -2,16 +2,9 @@
     "BanhofObjeckte": [
         {
             "BanhofId": 1,
-            "Name": "Banhof_1",
-            "gridX": -21,
-            "gridY": 11,
-            "rotation": 0
-        },
-        {
-            "BanhofId": 2,
-            "Name": "Banhof_2",
-            "gridX": -18,
-            "gridY": 11,
+            "Name": "test",
+            "gridX": -11,
+            "gridY": 4,
             "rotation": 0
         }
     ]

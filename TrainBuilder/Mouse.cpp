@@ -15,14 +15,23 @@ void ProcesMaus(Vector2 mausposition) {
     int MouseGridX = (int)floor(mausposition.x / GRID_SIZE);
     int MouseGridY = (int)floor(mausposition.y / GRID_SIZE);
 
-    //Im menü
+    // Im menü
     if (screenMousePos.y < 80.0f) {
         Menuebuttons();
     }
+
+    // Wenn man im seitenmenü klickt nicht abbrechen
+    if(aktuellesTool != 0)
+        if (screenMousePos.x > GenaueBreite - 250.0f && screenMousePos.y > 80.0f) {
+            if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {
+                return;
+            }
+        }
     else {
         if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {
             LinksGeklickt(mausposition);
         }
+
         if (aktuellesTool == 1) {
             if (haterstenKlick) {
                 if (IsKeyPressed(KEY_ESCAPE)) {
@@ -32,31 +41,29 @@ void ProcesMaus(Vector2 mausposition) {
                 ZeichnePriviou(mausposition);
             }
         }
+
         if (aktuellesTool == 2) {
             if (IsMouseButtonDown(MOUSE_BUTTON_LEFT)) {
                 Loeschentool(mausposition);
             }
-		}
+        }
+
         if (aktuellesTool == 3) {
-			Auswahltool(MouseGridX, MouseGridY);
-		}
+            Auswahltool(MouseGridX, MouseGridY);
+        }
+
         if (aktuellesTool == 4) {
-			if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT))
+            if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT))
                 plaziereBanhof(mausposition);
-		}
-
-        
+        }
     }
-
 }
-/*-------------------------------------------------
-    AUSWAHLTOOL NOCH
--------------------------------------------------*/
 
-void Auswahltool(int gridX, int gridY) {
-    
-	
-    
+/*-------------------------------------------------
+    AUSWAHLTOOL 
+-------------------------------------------------*/
+void Auswahltool(int gridX, int gridY)
+{
     bool bahnhofGeklickt = false;
 
     for (const auto& ban : banhofListe) {
@@ -69,11 +76,11 @@ void Auswahltool(int gridX, int gridY) {
             }
         }
     }
-    //Fenster schliesen
+
+    // Fenster schliesen
     if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT) && !bahnhofGeklickt) {
         ausgewahlterBanhof = 0;
     }
-
 }
 
 /*-------------------------------------------------
@@ -84,11 +91,11 @@ void LinksGeklickt(Vector2 mausposition) {
     int KlickGridX = (int)floor(mausposition.x / GRID_SIZE);
     int KlickGridY = (int)floor(mausposition.y / GRID_SIZE);
 
-
     if (aktuellesTool == 1) {
         if (screenMousePos.y < 80.0f) {
             return;
         }
+
         if (!haterstenKlick) {
             ErsteKlickPosition = { (float)KlickGridX ,(float)KlickGridY };
             haterstenKlick = true;
@@ -98,7 +105,6 @@ void LinksGeklickt(Vector2 mausposition) {
 
             if ((int)ErsteKlickPosition.x == (int)ZweiteKlickPosition.x &&
                 (int)ErsteKlickPosition.y == (int)ZweiteKlickPosition.y) {
-
                 PlatziereEinzelneSchiene(KlickGridX, KlickGridY);
             }
             else {
@@ -269,79 +275,83 @@ void PlatziereSchienenZwischenPunkten(Vector2 start, Vector2 end) {
 /*-------------------------------------------------
     LÖSCHTOOL
 -------------------------------------------------*/
-
 void Loeschentool(Vector2 mausposition) {
-	//lösct als erstes banhof und wen nicht dan gleis
-
+    // Lösct als erstes banhof und wen nicht dan gleis
     if (IstBanhofBereitsVorhanden(
         (int)floor(mausposition.x / GRID_SIZE),
-        (int)floor(mausposition.y / GRID_SIZE))){
+        (int)floor(mausposition.y / GRID_SIZE))) {
+
         if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {
-            //löscht banhof
+            // Löscht banhof
             int MouseGridX = (int)floor(mausposition.x / GRID_SIZE);
             int MouseGridY = (int)floor(mausposition.y / GRID_SIZE);
+
             auto it = std::remove_if(banhofListe.begin(), banhofListe.end(),
                 [MouseGridX, MouseGridY](const BanhofObjeckt& banhof) {
                     return banhof.GridX == MouseGridX && banhof.GridY == MouseGridY;
                 });
+
             if (it != banhofListe.end()) {
                 banhofListe.erase(it, banhofListe.end());
                 BanhofSpeichern();
             }
             return;
-		}
-        
-	}
+        }
+    }
     else {
         if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {
             Vector2 screenMousePos = GetMousePosition();
             int MouseGridX = (int)floor(mausposition.x / GRID_SIZE);
             int MouseGridY = (int)floor(mausposition.y / GRID_SIZE);
+
             auto it = std::remove_if(gleisListe.begin(), gleisListe.end(),
                 [MouseGridX, MouseGridY](const GleisObjeckt& gleis) {
                     return gleis.GridX == MouseGridX && gleis.GridY == MouseGridY;
                 });
+
             if (it != gleisListe.end()) {
                 gleisListe.erase(it, gleisListe.end());
                 GleiseSpeichern();
             }
         }
-	}
-
-	
+    }
 }
 
 /*-------------------------------------------------
-	TOOLSWITCHEN
+    TOOLSWITCHEN
 -------------------------------------------------*/
 void Menuebuttons() {
     Vector2 mousePos = GetMousePosition();
-    //Zeichen tool
+
+    // Zeichen tool
     Rectangle zeichenButton = { 10.0f, 10.0f, 60.0f, 60.0f };
     if (CheckCollisionPointRec(mousePos, zeichenButton)) {
         if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {
             aktuellesTool = 1;
         }
-	}
-    //Löschen tool
+    }
+
+    // Löschen tool
     Rectangle loeschenButton = { 80.0f, 10.0f, 60.0f, 60.0f };
     if (CheckCollisionPointRec(mousePos, loeschenButton)) {
         if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {
             aktuellesTool = 2;
         }
     }
-	//Auswahl tool
+
+    // Auswahl tool
     Rectangle auswahlButton = { 150.0f, 10.0f, 60.0f, 60.0f };
     if (CheckCollisionPointRec(mousePos, auswahlButton)) {
         if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {
             aktuellesTool = 3;
         }
-	}
-    //Banhof tool
+    }
+
+    // Banhof tool
     Rectangle banhofButton = { 220.0f, 10.0f, 60.0f, 60.0f };
     if (CheckCollisionPointRec(mousePos, banhofButton)) {
         if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {
             aktuellesTool = 4;
         }
-	}
+    }
 }
