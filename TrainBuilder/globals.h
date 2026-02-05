@@ -10,6 +10,8 @@ extern int GenaueHoehe;
 extern int GenaueBreite;
 extern const float GRID_SIZE;
 
+extern bool kannBewegen;
+
 /*-------------------------------------------------
 	KARAKTER
 -------------------------------------------------*/

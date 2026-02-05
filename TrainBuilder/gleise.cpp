@@ -212,3 +212,162 @@ void verbindeSchienen() {
         }
     }
 }
+
+/*-------------------------------------------------
+    GLEISE SETZEN
+-------------------------------------------------*/
+
+
+bool IstGleisBereitsVorhanden(int gridX, int gridY) {
+    for (const auto& gleis : gleisListe) {
+        if (gleis.GridX == gridX && gleis.GridY == gridY) {
+            return true;
+        }
+    }
+    return false;
+}
+
+void ZeichnePriviou(Vector2 mausposition) {
+    int MouseGridX = (int)floor(mausposition.x / GRID_SIZE);
+    int MouseGridY = (int)floor(mausposition.y / GRID_SIZE);
+
+    int ersteGridX = (int)ErsteKlickPosition.x;
+    int ersteGridY = (int)ErsteKlickPosition.y;
+
+    if (MouseGridX == ersteGridX && MouseGridY == ersteGridY) {
+        float pixelX = (float)(ersteGridX * GRID_SIZE);
+        float pixelY = (float)(ersteGridY * GRID_SIZE);
+
+        if (IstGleisBereitsVorhanden(ersteGridX, ersteGridY)) {
+            DrawRectangle(pixelX, pixelY, (float)GRID_SIZE, (float)GRID_SIZE, Color{ 255, 0, 0, 150 });
+        }
+        else {
+            DrawRectangle(pixelX, pixelY, (float)GRID_SIZE, (float)GRID_SIZE, Color{ 0, 255, 0, 150 });
+        }
+        return;
+    }
+
+    int diffX = MouseGridX - ersteGridX;
+    int diffY = MouseGridY - ersteGridY;
+
+    bool isHorizontal = (diffY == 0 && diffX != 0);
+    bool isVertical = (diffX == 0 && diffY != 0);
+
+    if (isHorizontal || isVertical) {
+        if (isHorizontal) {
+            int startX = std::min(MouseGridX, ersteGridX);
+            int endX = std::max(MouseGridX, ersteGridX);
+
+            for (int x = startX; x <= endX; x++) {
+                float pixelX = (float)(x * GRID_SIZE);
+                float pixelY = (float)(ersteGridY * GRID_SIZE);
+
+                if (IstGleisBereitsVorhanden(x, ersteGridY)) {
+                    DrawRectangle(pixelX, pixelY, (float)GRID_SIZE, (float)GRID_SIZE, Color{ 255, 0, 0, 150 });
+                }
+                else {
+                    DrawRectangle(pixelX, pixelY, (float)GRID_SIZE, (float)GRID_SIZE, Color{ 0, 255, 0, 150 });
+                }
+            }
+        }
+        else if (isVertical) {
+            int startY = std::min(MouseGridY, ersteGridY);
+            int endY = std::max(MouseGridY, ersteGridY);
+
+            for (int y = startY; y <= endY; y++) {
+                float pixelX = (float)(ersteGridX * GRID_SIZE);
+                float pixelY = (float)(y * GRID_SIZE);
+
+                if (IstGleisBereitsVorhanden(ersteGridX, y)) {
+                    DrawRectangle(pixelX, pixelY, (float)GRID_SIZE, (float)GRID_SIZE, Color{ 255, 0, 0, 150 });
+                }
+                else {
+                    DrawRectangle(pixelX, pixelY, (float)GRID_SIZE, (float)GRID_SIZE, Color{ 0, 255, 0, 150 });
+                }
+            }
+        }
+    }
+}
+
+void PlatziereEinzelneSchiene(int gridX, int gridY) {
+    if (IstGleisBereitsVorhanden(gridX, gridY)) {
+        return;
+    }
+
+    GleisObjeckt neuesGleis;
+    neuesGleis.ObjecktId = 1;
+    neuesGleis.GridX = gridX;
+    neuesGleis.GridY = gridY;
+    neuesGleis.Rotation = 90;
+
+    gleisListe.push_back(neuesGleis);
+
+    GleiseSpeichern();
+}
+
+void PlatziereSchienenZwischenPunkten(Vector2 start, Vector2 end) {
+    int startX = (int)start.x;
+    int startY = (int)start.y;
+    int endX = (int)end.x;
+    int endY = (int)end.y;
+
+    bool isHorizontal = (startY == endY && startX != endX);
+    bool isVertical = (startX == endX && startY != endY);
+
+    if (!isHorizontal && !isVertical) {
+        return;
+    }
+
+    bool allePositionenFrei = true;
+
+    if (isHorizontal) {
+        int step = (startX < endX) ? 1 : -1;
+        for (int x = startX; x != endX + step; x += step) {
+            if (IstGleisBereitsVorhanden(x, startY)) {
+                allePositionenFrei = false;
+                break;
+            }
+        }
+    }
+    else if (isVertical) {
+        int step = (startY < endY) ? 1 : -1;
+        for (int y = startY; y != endY + step; y += step) {
+            if (IstGleisBereitsVorhanden(startX, y)) {
+                allePositionenFrei = false;
+                break;
+            }
+        }
+    }
+
+    if (!allePositionenFrei) {
+        return;
+    }
+
+    if (isHorizontal) {
+        int step = (startX < endX) ? 1 : -1;
+
+        for (int x = startX; x != endX + step; x += step) {
+            GleisObjeckt neuesGleis;
+            neuesGleis.ObjecktId = 1;
+            neuesGleis.GridX = x;
+            neuesGleis.GridY = startY;
+            neuesGleis.Rotation = 90;
+            gleisListe.push_back(neuesGleis);
+        }
+    }
+    else if (isVertical) {
+        int step = (startY < endY) ? 1 : -1;
+
+        for (int y = startY; y != endY + step; y += step) {
+            GleisObjeckt neuesGleis;
+            neuesGleis.ObjecktId = 1;
+            neuesGleis.GridX = startX;
+            neuesGleis.GridY = y;
+            neuesGleis.Rotation = 0;
+            gleisListe.push_back(neuesGleis);
+        }
+    }
+
+    GleiseSpeichern();
+}
+

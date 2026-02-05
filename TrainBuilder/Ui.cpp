@@ -14,6 +14,8 @@ static int letzterAusgewahlterBanhof = 0;
 
 void zeichneUI() {
 
+    kannBewegen = true;
+
     DrawRectangle(0, 0, (float)GenaueBreite, 80.0f, LIGHTGRAY);
 
     if (aktuellesTool == 1) {
@@ -53,6 +55,13 @@ void zeichneUI() {
 
         nahmeEingabe.Update();
         nahmeEingabe.Draw();
+
+        if (nahmeEingabe.IsActive()) {
+            kannBewegen = false;
+        }
+        else {
+            kannBewegen = true;
+        }
 
         // DANN die Informationen DARUNTER
         for (const auto& banhof : banhofListe) {

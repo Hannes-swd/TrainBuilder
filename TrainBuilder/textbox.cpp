@@ -1,4 +1,5 @@
 #include "raylib.h"
+#include "globals.h"
 #include <string>
 #include "textbox.h"
 #include <cstdio>

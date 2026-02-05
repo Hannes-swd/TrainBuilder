@@ -64,9 +64,8 @@ int main(void)
         if (GenaueBreite != screenWidth)
             screenWidth = GenaueBreite;
 
-        bool eingabefeldAktiv = false;
         //Spielerbewegen
-        if(!eingabefeldAktiv) {
+        if(kannBewegen) {
             Spielermoovment();
         }
 

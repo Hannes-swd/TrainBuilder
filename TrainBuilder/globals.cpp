@@ -14,6 +14,8 @@ int GenaueHoehe = 0;
 int GenaueBreite = 0;
 const float GRID_SIZE = 50.0f;
 
+bool kannBewegen = true;
+
 /*-------------------------------------------------
 	KARAKTER
 -------------------------------------------------*/
