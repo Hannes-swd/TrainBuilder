@@ -14,64 +14,64 @@ static int letzterAusgewahlterBanhof = 0;
 
 void zeichneUI() {
 
-	
+    DrawRectangle(0, 0, (float)GenaueBreite, 80.0f, LIGHTGRAY);
 
-	DrawRectangle(0, 0, (float)GenaueBreite, 80.0f, LIGHTGRAY);
+    if (aktuellesTool == 1) {
+        DrawRectangle(10.0f, 10.0f, 60.0f, 60.0f, DARKGRAY);
+    }
+    else if (aktuellesTool == 2) {
+        DrawRectangle(80.0f, 10.0f, 60.0f, 60.0f, DARKGRAY);
+    }
+    else if (aktuellesTool == 3) {
+        DrawRectangle(150.0f, 10.0f, 60.0f, 60.0f, DARKGRAY);
+    }
+    else if (aktuellesTool == 4) {
+        DrawRectangle(220.0f, 10.0f, 60.0f, 60.0f, DARKGRAY);
+    }
 
-	if (aktuellesTool == 1) {
-		DrawRectangle(10.0f, 10.0f, 60.0f, 60.0f, DARKGRAY);
-	}
-	else if (aktuellesTool == 2) {
-		DrawRectangle(80.0f, 10.0f, 60.0f, 60.0f, DARKGRAY);
-	}
-	else if (aktuellesTool == 3) {
-		DrawRectangle(150.0f, 10.0f, 60.0f, 60.0f, DARKGRAY);
-	}
-	else if (aktuellesTool == 4) {
-		DrawRectangle(220.0f, 10.0f, 60.0f, 60.0f, DARKGRAY);
-	}
+    DrawTexture("zeichnen", 10.0f, 10.0f, 60.0f, 60.0f);
+    DrawTexture("Löschen", 80.0f, 10.0f, 60.0f, 60.0f);
+    DrawTexture("Auswahl", 150.0f, 10.0f, 60.0f, 60.0f);
+    DrawTexture("Banhof", 220.0f, 10.0f, 60.0f, 60.0f);
 
-	DrawTexture("zeichnen", 10.0f, 10.0f, 60.0f, 60.0f);
-	DrawTexture("Löschen", 80.0f, 10.0f, 60.0f, 60.0f);
-	DrawTexture("Auswahl", 150.0f, 10.0f, 60.0f, 60.0f);
-	DrawTexture("Banhof", 220.0f, 10.0f, 60.0f, 60.0f);
+    if (ausgewahlterBanhof != 0) {
+        DrawRectangle((float)GenaueBreite - 250.0f, 80.0f, 250.0f, (float)GenaueHoehe - 80.0f, LIGHTGRAY);
+        DrawRectangleLines((GenaueBreite - 250), 80, 250, GenaueHoehe - 80, DARKGRAY);
 
-	if (ausgewahlterBanhof != 0) {
-		DrawRectangle((float)GenaueBreite - 250.0f, 80.0f, 250.0f, (float)GenaueHoehe - 80.0f, LIGHTGRAY);
-		DrawRectangleLines((GenaueBreite - 250), 80, 250, GenaueHoehe - 80, DARKGRAY);
+        // ZUERST das Eingabefeld
+        nahmeEingabe.SetPosition((float)GenaueBreite - 240.0f, 100.0f);
 
-		for (const auto& banhof : banhofListe) {
-			if (banhof.BanhofId == ausgewahlterBanhof) {
-				DrawText("Banhof Info:", GenaueBreite - 240, 90, 20, BLACK);
-				DrawText(TextFormat("Name: %s", banhof.Name.c_str()), GenaueBreite - 240, 120, 20, BLACK);
-				DrawText(TextFormat("ID: %d", banhof.BanhofId), GenaueBreite - 240, 150, 20, BLACK);
-				DrawText(TextFormat("Position: [%d, %d]", banhof.GridX, banhof.GridY), GenaueBreite - 240, 180, 20, BLACK);
-				DrawText(TextFormat("Rotation: %d", banhof.Rotation), GenaueBreite - 240, 210, 20, BLACK);
-				break;
-			}
-		}
+        if (letzterAusgewahlterBanhof != ausgewahlterBanhof) {
+            for (const auto& banhof : banhofListe) {
+                if (banhof.BanhofId == ausgewahlterBanhof) {
+                    nahmeEingabe.SetText(banhof.Name);
+                    break;
+                }
+            }
+            letzterAusgewahlterBanhof = ausgewahlterBanhof;
+        }
 
-		nahmeEingabe.SetPosition((float)GenaueBreite - 240.0f, 250.0f);
+        nahmeEingabe.Update();
+        nahmeEingabe.Draw();
 
-		if (letzterAusgewahlterBanhof != ausgewahlterBanhof) {
-			for (const auto& banhof : banhofListe) {
-				if (banhof.BanhofId == ausgewahlterBanhof) {
-					nahmeEingabe.SetText(banhof.Name);
-					break;
-				}
-			}
-			letzterAusgewahlterBanhof = ausgewahlterBanhof;
-		}
+        // DANN die Informationen DARUNTER
+        for (const auto& banhof : banhofListe) {
+            if (banhof.BanhofId == ausgewahlterBanhof) {
+                // DrawText("Banhof Info:", GenaueBreite - 240, 90, 20, BLACK); // Entfernt da jetzt darüber
+                DrawText(TextFormat("Name: %s", banhof.Name.c_str()), GenaueBreite - 240, 150, 20, BLACK);
+                DrawText(TextFormat("ID: %d", banhof.BanhofId), GenaueBreite - 240, 180, 20, BLACK);
+                DrawText(TextFormat("Position: [%d, %d]", banhof.GridX, banhof.GridY), GenaueBreite - 240, 210, 20, BLACK);
+                DrawText(TextFormat("Rotation: %d", banhof.Rotation), GenaueBreite - 240, 240, 20, BLACK);
+                break;
+            }
+        }
 
-		nahmeEingabe.Update();
-		nahmeEingabe.Draw();
+        if (ausgewahlterBanhof > 0 && ausgewahlterBanhof <= banhofListe.size()) {
+            banhofListe[ausgewahlterBanhof - 1].Name = nahmeEingabe.GetText();
+        }
 
-		if (ausgewahlterBanhof > 0 && ausgewahlterBanhof <= banhofListe.size()) {
-			banhofListe[ausgewahlterBanhof - 1].Name = nahmeEingabe.GetText();
-		}
-
-		if (!nahmeEingabe.IsActive() && IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
-			BanhofSpeichern();
-		}
-	}
+        if (!nahmeEingabe.IsActive() && IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
+            BanhofSpeichern();
+        }
+    }
 }

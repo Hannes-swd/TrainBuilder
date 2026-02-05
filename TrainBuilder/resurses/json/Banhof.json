@@ -2,9 +2,23 @@
     "BanhofObjeckte": [
         {
             "BanhofId": 1,
-            "Name": "endern",
-            "gridX": -11,
-            "gridY": 4,
+            "Name": "hallo",
+            "gridX": -8,
+            "gridY": 3,
+            "rotation": 0
+        },
+        {
+            "BanhofId": 2,
+            "Name": "can",
+            "gridX": -6,
+            "gridY": 10,
+            "rotation": 0
+        },
+        {
+            "BanhofId": 3,
+            "Name": "Banhof_3",
+            "gridX": 7,
+            "gridY": 2,
             "rotation": 0
         }
     ]
