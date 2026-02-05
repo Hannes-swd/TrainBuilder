@@ -15,47 +15,45 @@ void ProcesMaus(Vector2 mausposition) {
     int MouseGridX = (int)floor(mausposition.x / GRID_SIZE);
     int MouseGridY = (int)floor(mausposition.y / GRID_SIZE);
 
-    // Im menü
     if (screenMousePos.y < 80.0f) {
         Menuebuttons();
     }
 
-    // Wenn man im seitenmenü klickt nicht abbrechen
-    if(aktuellesTool != 0)
+    if (ausgewahlterBanhof != 0) {
         if (screenMousePos.x > GenaueBreite - 250.0f && screenMousePos.y > 80.0f) {
             if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {
                 return;
             }
         }
-    else {
-        if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {
-            LinksGeklickt(mausposition);
-        }
+    }
 
-        if (aktuellesTool == 1) {
-            if (haterstenKlick) {
-                if (IsKeyPressed(KEY_ESCAPE)) {
-                    haterstenKlick = false;
-                    return;
-                }
-                ZeichnePriviou(mausposition);
+    if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {
+        LinksGeklickt(mausposition);
+    }
+
+    if (aktuellesTool == 1) {
+        if (haterstenKlick) {
+            if (IsKeyPressed(KEY_ESCAPE)) {
+                haterstenKlick = false;
+                return;
             }
+            ZeichnePriviou(mausposition);
         }
+    }
 
-        if (aktuellesTool == 2) {
-            if (IsMouseButtonDown(MOUSE_BUTTON_LEFT)) {
-                Loeschentool(mausposition);
-            }
+    if (aktuellesTool == 2) {
+        if (IsMouseButtonDown(MOUSE_BUTTON_LEFT)) {
+            Loeschentool(mausposition);
         }
+    }
 
-        if (aktuellesTool == 3) {
-            Auswahltool(MouseGridX, MouseGridY);
-        }
+    if (aktuellesTool == 3) {
+        Auswahltool(MouseGridX, MouseGridY);
+    }
 
-        if (aktuellesTool == 4) {
-            if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT))
-                plaziereBanhof(mausposition);
-        }
+    if (aktuellesTool == 4) {
+        if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT))
+            plaziereBanhof(mausposition);
     }
 }
 
