@@ -9,3 +9,5 @@ void DrawTexture(const std::string& name,
     float x, float y,
     float width, float height,
     Color tint = WHITE);
+
+Texture2D LoadTextureFromPath(const std::string& path);

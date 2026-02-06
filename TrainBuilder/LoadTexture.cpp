@@ -1,9 +1,11 @@
 #include "raylib.h"
 #include "LoadTexture.h"
 #include <unordered_map>
+#include <iostream>
 #include <string>
 
 std::unordered_map<std::string, Texture2D> textures;
+std::unordered_map<std::string, Texture2D> dynamicTextures;
 
 void loadTextures() {
     /*-------------------------------------------------
@@ -53,4 +55,24 @@ void DrawTexture(const std::string& name, float x, float y, float width, float h
         Vector2 origin = { 0, 0 };
         DrawTexturePro(tex, source, dest, origin, 0.0f, tint);
     }
+}
+
+//bilder durch pfad laden
+Texture2D LoadTextureFromPath(const std::string& path) {
+    if (dynamicTextures.find(path) != dynamicTextures.end()) {
+        return dynamicTextures[path];
+    }
+
+    Texture2D texture = LoadTexture(path.c_str());
+
+    if (texture.id == 0) {
+        std::cerr << "Fehler beim Laden der Textur: " << path << std::endl;
+        
+        Texture2D emptyTexture = { 0 };
+        return emptyTexture;
+    }
+
+    dynamicTextures[path] = texture;
+
+    return texture;
 }
