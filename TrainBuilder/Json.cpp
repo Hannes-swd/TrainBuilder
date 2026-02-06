@@ -14,7 +14,7 @@ void LadeJson() {
     std::ifstream Nutzer("resurses/json/User.json");
     std::ifstream Gleise("resurses/json/Gleise.json");
     std::ifstream Banhoefe("resurses/json/Banhof.json");
-	std::ifstream ZugArten("resurses/json/zugarten.json");
+    std::ifstream ZugArten("resurses/json/zugarten.json");
 
     //OBECKTE UND LADEN
     nlohmann::json NutzerDaten;
@@ -32,15 +32,15 @@ void LadeJson() {
         Banhoefe >> BanhofDaten;
     }
 
-	nlohmann::json ZugArtenDaten;
-	if (ZugArten.is_open()) {
-		ZugArten >> ZugArtenDaten;
-	}
+    nlohmann::json ZugArtenDaten;
+    if (ZugArten.is_open()) {
+        ZugArten >> ZugArtenDaten;
+    }
 
     //ALLE LISTEN LÖSCHEN
     gleisListe.clear();
     banhofListe.clear();
-	zugArtenListe.clear();
+    zugArtenListe.clear();
     /*-------------------------------------------------
         Gleise
     -------------------------------------------------*/
@@ -57,7 +57,7 @@ void LadeJson() {
 
     if (Gleise.is_open()) Gleise.close();
     /*-------------------------------------------------
-		Banhofe
+        Banhofe
     -------------------------------------------------*/
     if (BanhofDaten.contains("BanhofObjeckte")) {
         for (const auto& obj : BanhofDaten["BanhofObjeckte"]) {
@@ -73,8 +73,9 @@ void LadeJson() {
     /*-------------------------------------------------
         Zugarten
     -------------------------------------------------*/
-    if (ZugArtenDaten.contains("zuege")) {
-        for (const auto& obj : ZugArtenDaten["zuege"]) {
+    if (ZugArtenDaten.contains("zuege") || ZugArtenDaten.contains(u8"züge")) {
+        const auto& zuegeArray = ZugArtenDaten.contains("zuege") ? ZugArtenDaten["zuege"] : ZugArtenDaten[u8"züge"];
+        for (const auto& obj : zuegeArray) {
             ZugArt zugart;
             zugart.name = obj["name"];
             zugart.geschwindichkeit = obj["geschwindichkeit"];
@@ -92,9 +93,9 @@ void LadeJson() {
     }
 
 
-    
+
     if (Banhoefe.is_open()) Banhoefe.close();
-	if (ZugArten.is_open()) ZugArten.close();
+    if (ZugArten.is_open()) ZugArten.close();
 
     //WERT LADEN
     if (NutzerDaten.contains("SpielerpositionX") && NutzerDaten.contains("SpielerpositionY")) {
