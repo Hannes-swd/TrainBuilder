@@ -9,6 +9,7 @@
 #include "gleise.h"
 #include "Mouse.h"
 #include "Banhof.h"
+#include "untermenü.h"
 
 void ProcesMaus(Vector2 mausposition) {
     Vector2 screenMousePos = GetMousePosition();
@@ -26,6 +27,26 @@ void ProcesMaus(Vector2 mausposition) {
             }
         }
     }
+
+	//Untermenü für Zug tool
+    if (aktuellesTool == 5) {
+		untermenueOffen = true;
+	}
+    else {
+        if (untermenueOffen) {
+            untermenueOffen = false;
+		}
+    }
+
+    if (untermenueOffen) {
+        if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {
+			//bricht ab wen es im untermenü geklickt wird
+            if (screenMousePos.x > GenaueBreite - 250.0f && screenMousePos.y > 80.0f) {
+                UntermenueKlick(mausposition);
+                return;
+			}
+		}
+	}
 
     if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {
         LinksGeklickt(mausposition);
@@ -54,6 +75,12 @@ void ProcesMaus(Vector2 mausposition) {
     if (aktuellesTool == 4) {
         if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT))
             plaziereBanhof(mausposition);
+    }
+    if (aktuellesTool == 5) {
+		aktuellesUntermenue = "zugtool";
+	}
+    else {
+        aktuellesUntermenue = "";
     }
 }
 
@@ -197,4 +224,12 @@ void Menuebuttons() {
             aktuellesTool = 4;
         }
     }
+
+	// Zug tool
+    Rectangle zugButton = { 290.0f, 10.0f, 60.0f, 60.0f };
+    if (CheckCollisionPointRec(mousePos, zugButton)) {
+        if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {
+            aktuellesTool = 5;
+        }
+	}
 }

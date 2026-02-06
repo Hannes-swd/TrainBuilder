@@ -30,11 +30,15 @@ void zeichneUI() {
     else if (aktuellesTool == 4) {
         DrawRectangle(220.0f, 10.0f, 60.0f, 60.0f, DARKGRAY);
     }
+    else if (aktuellesTool == 5) {
+        DrawRectangle(290.0f, 10.0f, 60.0f, 60.0f, DARKGRAY);
+	}
 
     DrawTexture("zeichnen", 10.0f, 10.0f, 60.0f, 60.0f);
     DrawTexture("Löschen", 80.0f, 10.0f, 60.0f, 60.0f);
     DrawTexture("Auswahl", 150.0f, 10.0f, 60.0f, 60.0f);
     DrawTexture("Banhof", 220.0f, 10.0f, 60.0f, 60.0f);
+    DrawTexture("zugicon", 290.0f, 10.0f, 60.0f, 60.0f);
 
     if (ausgewahlterBanhof != 0) {
         DrawRectangle((float)GenaueBreite - 250.0f, 80.0f, 250.0f, (float)GenaueHoehe - 80.0f, LIGHTGRAY);

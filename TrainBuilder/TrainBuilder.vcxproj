@@ -140,6 +140,7 @@
     <ClCompile Include="Mouse.cpp" />
     <ClCompile Include="textbox.cpp" />
     <ClCompile Include="Ui.cpp" />
+    <ClCompile Include="untermenü.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Banhof.h" />
@@ -152,6 +153,7 @@
     <ClInclude Include="Mouse.h" />
     <ClInclude Include="textbox.h" />
     <ClInclude Include="Ui.h" />
+    <ClInclude Include="untermenü.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

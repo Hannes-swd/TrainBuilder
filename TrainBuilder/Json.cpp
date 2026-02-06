@@ -14,6 +14,7 @@ void LadeJson() {
     std::ifstream Nutzer("resurses/json/User.json");
     std::ifstream Gleise("resurses/json/Gleise.json");
     std::ifstream Banhoefe("resurses/json/Banhof.json");
+	std::ifstream ZugArten("resurses/json/zugarten.json");
 
     //OBECKTE UND LADEN
     nlohmann::json NutzerDaten;
@@ -31,10 +32,18 @@ void LadeJson() {
         Banhoefe >> BanhofDaten;
     }
 
+	nlohmann::json ZugArtenDaten;
+	if (ZugArten.is_open()) {
+		ZugArten >> ZugArtenDaten;
+	}
+
     //ALLE LISTEN LÖSCHEN
     gleisListe.clear();
     banhofListe.clear();
-
+	zugArtenListe.clear();
+    /*-------------------------------------------------
+        Gleise
+    -------------------------------------------------*/
     if (GleiseDaten.contains("Objeckte")) {
         for (const auto& obj : GleiseDaten["Objeckte"]) {
             GleisObjeckt gleis;
@@ -47,7 +56,9 @@ void LadeJson() {
     }
 
     if (Gleise.is_open()) Gleise.close();
-
+    /*-------------------------------------------------
+		Banhofe
+    -------------------------------------------------*/
     if (BanhofDaten.contains("BanhofObjeckte")) {
         for (const auto& obj : BanhofDaten["BanhofObjeckte"]) {
             BanhofObjeckt banhof;
@@ -59,8 +70,31 @@ void LadeJson() {
             banhofListe.push_back(banhof);
         }
     }
+    /*-------------------------------------------------
+        Zugarten
+    -------------------------------------------------*/
+    if (ZugArtenDaten.contains("zuege")) {
+        for (const auto& obj : ZugArtenDaten["zuege"]) {
+            ZugArt zugart;
+            zugart.name = obj["name"];
+            zugart.geschwindichkeit = obj["geschwindichkeit"];
 
+            if (obj.contains("kapazität")) {
+                zugart.passagiere = obj["kapazität"]["passagiere"];
+                zugart.güter = obj["kapazität"]["güter"];
+            }
+
+            zugart.biildpfad = obj["biildpfad"];
+            zugart.farbe = obj["farbe"];
+            zugart.zugtyp = obj["zugtyp"];
+            zugArtenListe.push_back(zugart);
+        }
+    }
+
+
+    
     if (Banhoefe.is_open()) Banhoefe.close();
+	if (ZugArten.is_open()) ZugArten.close();
 
     //WERT LADEN
     if (NutzerDaten.contains("SpielerpositionX") && NutzerDaten.contains("SpielerpositionY")) {

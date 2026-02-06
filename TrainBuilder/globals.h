@@ -11,6 +11,7 @@ extern int GenaueBreite;
 extern const float GRID_SIZE;
 
 extern bool kannBewegen;
+extern std::string aktuellesUntermenue;
 
 /*-------------------------------------------------
 	KARAKTER
@@ -27,6 +28,8 @@ extern Vector2 gridPosition;
 extern int ausgewahlterBanhof;
 
 extern int aktuellesTool;
+
+extern bool untermenueOffen;
 
 /*-------------------------------------------------
 	MOUSEKLICK/SCHIENEN PLAZIEREN
@@ -64,3 +67,18 @@ struct BanhofObjeckt {
 };
 
 extern std::vector<BanhofObjeckt> banhofListe;
+
+/*-------------------------------------------------
+	Züge und Zugarten
+-------------------------------------------------*/
+//zugarten
+struct ZugArt {
+	std::string name;
+	int geschwindichkeit;
+	int passagiere;
+	int güter;
+	std::string biildpfad;
+	std::string farbe;
+	std::string zugtyp;
+};
+extern std::vector<ZugArt> zugArtenListe;

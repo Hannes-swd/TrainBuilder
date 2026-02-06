@@ -15,6 +15,7 @@ int GenaueBreite = 0;
 const float GRID_SIZE = 50.0f;
 
 bool kannBewegen = true;
+std::string aktuellesUntermenue = "";
 
 /*-------------------------------------------------
 	KARAKTER
@@ -32,6 +33,11 @@ int aktuellesTool = 1;
 //1 = zeichnen
 //2 = löschen
 //3 = auswahl
+//4 = banhof
+//5 = zug
+
+//untermenü
+bool untermenueOffen = false;
 
 /*-------------------------------------------------
 	Mausposition
@@ -57,3 +63,10 @@ std::vector<GleisObjeckt> gleisListe;
 	Banhöfe
 -------------------------------------------------*/
 std::vector<BanhofObjeckt> banhofListe;
+
+/*-------------------------------------------------
+	Züge und Zugarten
+-------------------------------------------------*/
+//zugarten
+
+std::vector<ZugArt> zugArtenListe;
