@@ -77,6 +77,7 @@ void LadeJson() {
         const auto& zuegeArray = ZugArtenDaten.contains("zuege") ? ZugArtenDaten["zuege"] : ZugArtenDaten[u8"züge"];
         for (const auto& obj : zuegeArray) {
             ZugArt zugart;
+			zugart.id = obj["id"];
             zugart.name = obj["name"];
             zugart.geschwindichkeit = obj["geschwindichkeit"];
 

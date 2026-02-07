@@ -2,7 +2,7 @@
     "BanhofObjeckte": [
         {
             "BanhofId": 1,
-            "Name": "sigma",
+            "Name": "nordbanhof",
             "gridX": -5,
             "gridY": -29,
             "rotation": 0
@@ -12,6 +12,13 @@
             "Name": "sdbanhof",
             "gridX": -3,
             "gridY": -26,
+            "rotation": 0
+        },
+        {
+            "BanhofId": 3,
+            "Name": "ostbanhof",
+            "gridX": 11,
+            "gridY": -25,
             "rotation": 0
         }
     ]

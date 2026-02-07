@@ -73,6 +73,7 @@ extern std::vector<BanhofObjeckt> banhofListe;
 -------------------------------------------------*/
 //zugarten
 struct ZugArt {
+	int id;
 	std::string name;
 	int geschwindichkeit;
 	int passagiere;
@@ -82,3 +83,6 @@ struct ZugArt {
 	std::string zugtyp;
 };
 extern std::vector<ZugArt> zugArtenListe;
+/*-------------------------------------------------
+	Züge
+-------------------------------------------------*/

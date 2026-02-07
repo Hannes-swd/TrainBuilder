@@ -1,6 +1,7 @@
 {
     "züge": [
         {
+            "id": 1,
             "name": "StandartZug",
             "geschwindichkeit": 10,
             "passagiere": 400,
@@ -10,6 +11,7 @@
             "zugtyp": "personen"
         },
         {
+            "id": 2,
             "name": "Nebenzug",
             "geschwindichkeit": 80,
             "passagiere": 350,

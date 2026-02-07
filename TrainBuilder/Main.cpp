@@ -115,7 +115,8 @@ int main(void)
 
         if (untermenueOffen) {
             UntermenueZeichnen();
-            ZeichneUnterpunkte();}
+            ZeichneUnterpunkte();
+        }
 
         EndDrawing();
     }
