@@ -20,6 +20,20 @@
             "gridX": 11,
             "gridY": -25,
             "rotation": 0
+        },
+        {
+            "BanhofId": 4,
+            "Name": "unten banhf",
+            "gridX": 1,
+            "gridY": -19,
+            "rotation": 0
+        },
+        {
+            "BanhofId": 5,
+            "Name": "westbanhof",
+            "gridX": -10,
+            "gridY": -23,
+            "rotation": 0
         }
     ]
 }

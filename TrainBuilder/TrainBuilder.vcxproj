@@ -141,6 +141,7 @@
     <ClCompile Include="textbox.cpp" />
     <ClCompile Include="Ui.cpp" />
     <ClCompile Include="untermenü.cpp" />
+    <ClCompile Include="zug.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Banhof.h" />
@@ -154,6 +155,7 @@
     <ClInclude Include="textbox.h" />
     <ClInclude Include="Ui.h" />
     <ClInclude Include="untermenü.h" />
+    <ClInclude Include="zug.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

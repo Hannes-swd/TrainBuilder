@@ -15,6 +15,7 @@ void LadeJson() {
     std::ifstream Gleise("resurses/json/Gleise.json");
     std::ifstream Banhoefe("resurses/json/Banhof.json");
     std::ifstream ZugArten("resurses/json/zugarten.json");
+	std::ifstream AktiveZuege("resurses/json/AktiveZuege.json");
 
     //OBECKTE UND LADEN
     nlohmann::json NutzerDaten;
@@ -36,6 +37,11 @@ void LadeJson() {
     if (ZugArten.is_open()) {
         ZugArten >> ZugArtenDaten;
     }
+
+	nlohmann::json AktiveZuegeDaten;
+	if (AktiveZuege.is_open()) {
+		AktiveZuege >> AktiveZuegeDaten;
+	}
 
     //ALLE LISTEN LÖSCHEN
     gleisListe.clear();
@@ -89,9 +95,29 @@ void LadeJson() {
             zugArtenListe.push_back(zugart);
         }
     }
+    /*-------------------------------------------------
+		Aktive Züge
+    -------------------------------------------------*/
+    if (AktiveZuegeDaten.contains("AktiveZuege")) {
+        for (const auto& obj : AktiveZuegeDaten["AktiveZuege"]) {
+            Zug zug;
+            zug.zugId = obj["zugId"];
+            zug.GridX = obj["gridX"];
+            zug.GridY = obj["gridY"];
+            zug.rotation = obj["rotation"];
+            zug.name = obj["name"];
+            zug.passagiere = obj["passagiere"];
+            zug.güter = obj["gueter"];
+            zug.Fahrplan = obj["Fahrplan"].get<std::vector<std::string>>();
+            zug.zugtyp = obj["zugtyp"];
+            zug.farbe = obj["farbe"];
+            zug.biildpfad = obj["biildpfad"];
+            zug.geschwindichkeit = obj["geschwindichkeit"];
+            aktiveZuege.push_back(zug);
+        }
+    }
 
-
-
+	if (AktiveZuege.is_open()) AktiveZuege.close();
     if (Banhoefe.is_open()) Banhoefe.close();
     if (ZugArten.is_open()) ZugArten.close();
 

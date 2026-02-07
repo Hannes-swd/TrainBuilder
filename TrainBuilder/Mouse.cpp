@@ -10,6 +10,7 @@
 #include "Mouse.h"
 #include "Banhof.h"
 #include "untermenü.h"
+#include "Zug.h"
 
 void ProcesMaus(Vector2 mausposition) {
     Vector2 screenMousePos = GetMousePosition();
@@ -80,6 +81,10 @@ void ProcesMaus(Vector2 mausposition) {
     else {
         aktuellesUntermenue = "";
     }
+
+    if (aktuellesTool != 5) {
+		zugPlazieren(MouseGridX, MouseGridY, ausgewahlterZug);
+	}
 }
 
 /*-------------------------------------------------

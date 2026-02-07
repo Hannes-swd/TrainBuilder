@@ -12,6 +12,16 @@
         },
         {
             "id": 2,
+            "name": "andere",
+            "geschwindichkeit": 67,
+            "passagiere": 6767,
+            "gueter": 10,
+            "biildpfad": "resurses/Texturen/Zuege/StandartZug.png",
+            "farbe": "Orange",
+            "zugtyp": "Zug"
+        },
+        {
+            "id": 3,
             "name": "Nebenzug",
             "geschwindichkeit": 80,
             "passagiere": 350,

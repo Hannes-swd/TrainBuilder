@@ -90,7 +90,8 @@ extern std::vector<ZugArt> zugArtenListe;
 -------------------------------------------------*/
 struct Zug {
 	int zugId;
-	Vector2 position;
+	int GridX;
+	int GridY;
 	int rotation;
 
 	//zug infos
@@ -99,5 +100,10 @@ struct Zug {
 	int güter;
 	std::vector<std::string> Fahrplan;
 
+	//andere
+	std::string zugtyp;
+	std::string farbe;
+	std::string biildpfad;
+	int geschwindichkeit;
 };
 extern std::vector<Zug> aktiveZuege;
