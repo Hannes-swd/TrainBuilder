@@ -115,12 +115,7 @@ int main(void)
 
         if (untermenueOffen) {
             UntermenueZeichnen();
-            ZeichneUnterpunkte();
-            DrawText(TextFormat("Untermenue: %s", aktuellesUntermenue.c_str()),
-                10, GenaueHoehe - 100, 20, RED);
-            DrawText(TextFormat("ZugArten: %d", zugArtenListe.size()),
-                10, GenaueHoehe - 70, 20, RED);
-		}
+            ZeichneUnterpunkte();}
 
         EndDrawing();
     }

@@ -80,11 +80,8 @@ void LadeJson() {
             zugart.name = obj["name"];
             zugart.geschwindichkeit = obj["geschwindichkeit"];
 
-            if (obj.contains("kapazität")) {
-                zugart.passagiere = obj["kapazität"]["passagiere"];
-                zugart.güter = obj["kapazität"]["güter"];
-            }
-
+			zugart.passagiere = obj["passagiere"];
+			zugart.güter = obj["gueter"];
             zugart.biildpfad = obj["biildpfad"];
             zugart.farbe = obj["farbe"];
             zugart.zugtyp = obj["zugtyp"];

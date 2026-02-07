@@ -3,10 +3,8 @@
         {
             "name": "StandartZug",
             "geschwindichkeit": 10,
-            "kapazität": {
-                "passagiere": 400,
-                "güter": 10
-            },
+            "passagiere": 400,
+            "gueter": 10,
             "biildpfad": "resurses/Texturen/Zuege/StandartZug.png",
             "farbe": "rot",
             "zugtyp": "personen"
@@ -14,11 +12,9 @@
         {
             "name": "Nebenzug",
             "geschwindichkeit": 80,
-            "kapazität": {
-                "passagiere": 350,
-                "güter": 10
-            },
-            "biildpfad": "resurses/Texturen/Zuege/StandartZug.png",
+            "passagiere": 350,
+            "gueter": 10,
+            "biildpfad": "resurses/Texturen/Zuege/andererzug.png",
             "farbe": "grün",
             "zugtyp": "personen"
         }

@@ -1,3 +1,18 @@
 {
-    "BanhofObjeckte": []
+    "BanhofObjeckte": [
+        {
+            "BanhofId": 1,
+            "Name": "sigma",
+            "gridX": -5,
+            "gridY": -29,
+            "rotation": 0
+        },
+        {
+            "BanhofId": 2,
+            "Name": "sdbanhof",
+            "gridX": -3,
+            "gridY": -26,
+            "rotation": 0
+        }
+    ]
 }

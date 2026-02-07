@@ -140,7 +140,7 @@ void ZeichneUnterpunkte() {
             DrawText(passValue.c_str(), col2X, textY, 12, BLUE);
             textY += 18;
 
-            std::string gueterText = "Güter:";
+            std::string gueterText = "Gueter:";
             DrawText(gueterText.c_str(), col1X, textY, 12, DARKGRAY);
 
             std::string gueterValue = std::to_string(zug.güter);
