@@ -37,16 +37,23 @@
         },
         {
             "BanhofId": 6,
-            "Name": "Banhof_6",
+            "Name": "nord nord",
             "gridX": -3,
             "gridY": -32,
             "rotation": 0
         },
         {
             "BanhofId": 7,
-            "Name": "Banhof_7",
+            "Name": "mitte",
             "gridX": -6,
             "gridY": -25,
+            "rotation": 0
+        },
+        {
+            "BanhofId": 8,
+            "Name": "rechte",
+            "gridX": 1,
+            "gridY": -27,
             "rotation": 0
         }
     ]

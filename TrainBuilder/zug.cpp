@@ -103,3 +103,14 @@ void AktiveZuegeSpeichern() {
         std::cerr << "Fehler: AktiveZuege.json konnte nicht geöffnet werden!" << std::endl;
     }
 }
+void ZeichneZuege() {
+    for (const auto& zug : aktiveZuege) {
+        DrawRectangle(
+            zug.GridX * GRID_SIZE,
+            zug.GridY * GRID_SIZE,
+            (float)GRID_SIZE,
+            (float)GRID_SIZE,
+            Color{ 0, 0, 255, 150 }
+		);
+    }
+}

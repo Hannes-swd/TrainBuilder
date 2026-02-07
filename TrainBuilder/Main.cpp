@@ -91,7 +91,10 @@ int main(void)
 
         
         ZeichneGleise();
+        ZeichneZuege();
+
         ZeichneBanhof();
+
 
         //gleise verbinden
         verbindeSchienen();
