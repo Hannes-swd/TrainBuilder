@@ -33,6 +33,8 @@ void UntermenueKlick(Vector2 mausposition) {
 
             ausgewählterUntermenuePunkt = (int)i + 1;
 
+			ausgewahlterZug = zugArtenListe[i].id;
+
             return;
         }
     }
@@ -168,7 +170,7 @@ void ZeichneUnterpunkte() {
             std::string gueterText = "Gueter:";
             DrawText(gueterText.c_str(), col1X, textY, 12, DARKGRAY);
 
-            std::string gueterValue = std::to_string(zug.güter);
+            std::string gueterValue = std::to_string(zug.gueter);
             DrawText(gueterValue.c_str(), col2X, textY, 12, BLUE);
             textY += 18;
 

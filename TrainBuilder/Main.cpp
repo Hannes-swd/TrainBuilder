@@ -1,6 +1,6 @@
 ﻿#include "raylib.h"
 #include <string>
-
+#include "zug.h"
 #include <cmath>
 #include <fstream>
 #include "json.hpp"
@@ -125,6 +125,7 @@ int main(void)
             BEENDEN
     -------------------------------------------------*/
     SpeicherJson();
+    AktiveZuegeSpeichern();
     GleiseSpeichern();
     BanhofSpeichern();
     unloadTextures();

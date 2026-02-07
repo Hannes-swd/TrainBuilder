@@ -34,6 +34,20 @@
             "gridX": -10,
             "gridY": -23,
             "rotation": 0
+        },
+        {
+            "BanhofId": 6,
+            "Name": "Banhof_6",
+            "gridX": -3,
+            "gridY": -32,
+            "rotation": 0
+        },
+        {
+            "BanhofId": 7,
+            "Name": "Banhof_7",
+            "gridX": -6,
+            "gridY": -25,
+            "rotation": 0
         }
     ]
 }

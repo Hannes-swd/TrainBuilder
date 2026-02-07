@@ -17,6 +17,12 @@ void ProcesMaus(Vector2 mausposition) {
     int MouseGridX = (int)floor(mausposition.x / GRID_SIZE);
     int MouseGridY = (int)floor(mausposition.y / GRID_SIZE);
 
+    static int lastTool = -1;
+    if (lastTool != aktuellesTool) {
+        std::cout << "DEBUG: Tool gewechselt zu: " << aktuellesTool << std::endl;
+        lastTool = aktuellesTool;
+    }
+
     if (screenMousePos.y < 80.0f) {
         Menuebuttons();
     }
@@ -24,25 +30,36 @@ void ProcesMaus(Vector2 mausposition) {
     if (ausgewahlterBanhof != 0) {
         if (screenMousePos.x > GenaueBreite - 250.0f && screenMousePos.y > 80.0f) {
             if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {
-                return;
+                //return;
             }
         }
     }
 
-	//Untermenü für Zug tool
+    //Untermenü für Zug tool
     if (aktuellesTool == 5) {
-		untermenueOffen = true;
-	}
+        untermenueOffen = true;
+    }
     else {
         if (untermenueOffen) {
             untermenueOffen = false;
-		}
+        }
     }
 
     if (untermenueOffen) {
         if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {
             Vector2 screenMousePos = GetMousePosition();
-            UntermenueKlick(screenMousePos);
+
+            if (screenMousePos.y >= 80.0f && screenMousePos.y <= 180.0f) {
+                UntermenueKlick(screenMousePos);
+                return;
+            }
+        }
+    }
+
+    if (aktuellesTool == 5) {
+        if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {
+            std::cout << "DEBUG: CLICK ERKANNT! ausgewahlterZug = " << ausgewahlterZug << std::endl;
+            zugPlazieren(MouseGridX, MouseGridY, ausgewahlterZug);
             return;
         }
     }
@@ -75,20 +92,18 @@ void ProcesMaus(Vector2 mausposition) {
         if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT))
             plaziereBanhof(mausposition);
     }
+
     if (aktuellesTool == 5) {
-		aktuellesUntermenue = "zugtool";
-	}
+        aktuellesUntermenue = "zugtool";
+    }
     else {
         aktuellesUntermenue = "";
     }
 
-    if (aktuellesTool != 5) {
-		zugPlazieren(MouseGridX, MouseGridY, ausgewahlterZug);
-	}
 }
 
 /*-------------------------------------------------
-    AUSWAHLTOOL 
+    AUSWAHLTOOL
 -------------------------------------------------*/
 void Auswahltool(int gridX, int gridY)
 {
@@ -111,7 +126,7 @@ void Auswahltool(int gridX, int gridY)
     }
 }
 /*-------------------------------------------------
-	Gleise setzen tool
+    Gleise setzen tool
 -------------------------------------------------*/
 void LinksGeklickt(Vector2 mausposition) {
     Vector2 screenMousePos = GetMousePosition();
@@ -228,11 +243,11 @@ void Menuebuttons() {
         }
     }
 
-	// Zug tool
+    // Zug tool
     Rectangle zugButton = { 290.0f, 10.0f, 60.0f, 60.0f };
     if (CheckCollisionPointRec(mousePos, zugButton)) {
         if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {
             aktuellesTool = 5;
         }
-	}
+    }
 }

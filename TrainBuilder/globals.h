@@ -79,7 +79,7 @@ struct ZugArt {
 	std::string name;
 	int geschwindichkeit;
 	int passagiere;
-	int güter;
+	int gueter;
 	std::string biildpfad;
 	std::string farbe;
 	std::string zugtyp;
@@ -97,7 +97,7 @@ struct Zug {
 	//zug infos
 	std::string name;
 	int passagiere;
-	int güter;
+	int gueter;
 	std::vector<std::string> Fahrplan;
 
 	//andere

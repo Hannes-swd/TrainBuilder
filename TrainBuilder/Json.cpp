@@ -88,7 +88,7 @@ void LadeJson() {
             zugart.geschwindichkeit = obj["geschwindichkeit"];
 
 			zugart.passagiere = obj["passagiere"];
-			zugart.güter = obj["gueter"];
+			zugart.gueter = obj["gueter"];
             zugart.biildpfad = obj["biildpfad"];
             zugart.farbe = obj["farbe"];
             zugart.zugtyp = obj["zugtyp"];
@@ -107,7 +107,7 @@ void LadeJson() {
             zug.rotation = obj["rotation"];
             zug.name = obj["name"];
             zug.passagiere = obj["passagiere"];
-            zug.güter = obj["gueter"];
+            zug.gueter = obj["gueter"];
             zug.Fahrplan = obj["Fahrplan"].get<std::vector<std::string>>();
             zug.zugtyp = obj["zugtyp"];
             zug.farbe = obj["farbe"];

@@ -1,5 +1,18 @@
 {
     "AktiveZuege": [
-        
+        {
+            "Fahrplan": [],
+            "biildpfad": "resurses/Texturen/Zuege/andererzug.png",
+            "farbe": "grün",
+            "geschwindichkeit": 80,
+            "gridX": -5,
+            "gridY": -21,
+            "gueter": 10,
+            "name": "Nebenzug",
+            "passagiere": 350,
+            "rotation": 0,
+            "zugId": 1,
+            "zugtyp": "personen"
+        }
     ]
 }
