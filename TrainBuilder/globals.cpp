@@ -70,3 +70,7 @@ std::vector<BanhofObjeckt> banhofListe;
 //zugarten
 
 std::vector<ZugArt> zugArtenListe;
+/*-------------------------------------------------
+	Züge
+-------------------------------------------------*/
+std::vector<Zug> aktiveZuege;

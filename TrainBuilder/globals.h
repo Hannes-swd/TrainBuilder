@@ -86,3 +86,16 @@ extern std::vector<ZugArt> zugArtenListe;
 /*-------------------------------------------------
 	Züge
 -------------------------------------------------*/
+struct Zug {
+	int zugId;
+	Vector2 position;
+	int rotation;
+
+	//zug infos
+	std::string name;
+	int passagiere;
+	int güter;
+	std::vector<std::string> Fahrplan;
+
+};
+extern std::vector<Zug> aktiveZuege;
