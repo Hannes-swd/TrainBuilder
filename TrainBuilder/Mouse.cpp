@@ -40,13 +40,11 @@ void ProcesMaus(Vector2 mausposition) {
 
     if (untermenueOffen) {
         if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {
-			//bricht ab wen es im untermenü geklickt wird
-            if (screenMousePos.x > GenaueBreite - 250.0f && screenMousePos.y > 80.0f) {
-                UntermenueKlick(mausposition);
-                return;
-			}
-		}
-	}
+            Vector2 screenMousePos = GetMousePosition();
+            UntermenueKlick(screenMousePos);
+            return;
+        }
+    }
 
     if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {
         LinksGeklickt(mausposition);

@@ -12,6 +12,7 @@ extern const float GRID_SIZE;
 
 extern bool kannBewegen;
 extern std::string aktuellesUntermenue;
+extern int ausgewählterUntermenuePunkt;
 
 /*-------------------------------------------------
 	KARAKTER
@@ -26,6 +27,7 @@ extern Vector2 mousePosition;
 extern Vector2 gridPosition;
 
 extern int ausgewahlterBanhof;
+extern int ausgewahlterZug;
 
 extern int aktuellesTool;
 

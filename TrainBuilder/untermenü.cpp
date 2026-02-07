@@ -17,7 +17,26 @@ void UntermenueZeichnen() {
 }
 
 void UntermenueKlick(Vector2 mausposition) {
-    // Wird später implementiert
+    
+    float boxWidth = 80.0f;
+    float boxHeight = 80.0f;
+    float padding = 10.0f;
+    float startX = padding;
+    float startY = 90.0f;
+
+    for (size_t i = 0; i < zugArtenListe.size(); i++) {
+        float x = startX + i * (boxWidth + padding);
+        float y = startY;
+
+        if (mausposition.x >= x && mausposition.x <= x + boxWidth &&
+            mausposition.y >= y && mausposition.y <= y + boxHeight) {
+
+            ausgewählterUntermenuePunkt = (int)i + 1;
+
+            return;
+        }
+    }
+
 }
 
 void ZeichneUnterpunkte() {
@@ -48,6 +67,12 @@ void ZeichneUnterpunkte() {
 
         DrawRectangle(x, y, boxWidth, boxHeight, bgColor);
         DrawRectangleLines(x, y, boxWidth, boxHeight, DARKGRAY);
+
+
+        if (ausgewählterUntermenuePunkt == (int)i + 1) {
+            DrawRectangle(x, y, boxWidth, boxHeight, GRAY);
+        }
+
 
         if (!zug.biildpfad.empty()) {
             Texture2D zugTexture = LoadTextureFromPath(zug.biildpfad);
@@ -97,7 +122,7 @@ void ZeichneUnterpunkte() {
                 (int)(y + boxHeight - 20),
                 12, BLACK);
         }
-
+        
         if (isHovered) {
             float tooltipX = 10.0f;
             float tooltipY = untermenueEndeY + 10.0f;
