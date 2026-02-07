@@ -89,9 +89,12 @@ extern std::vector<ZugArt> zugArtenListe;
 	Züge
 -------------------------------------------------*/
 struct Zug {
+	
 	int zugId;
-	int GridX;
-	int GridY;
+	//int GridX;
+	//int GridY;
+	float posX;
+	float posY;
 	int rotation;
 
 	//zug infos

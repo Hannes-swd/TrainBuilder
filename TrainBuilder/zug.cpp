@@ -39,8 +39,8 @@ void zugPlazieren(int gridX, int gridY, int zugArtId) {
 
     Zug neuerZug;
     neuerZug.zugId = (int)aktiveZuege.size() + 1;
-    neuerZug.GridX = gridX;
-    neuerZug.GridY = gridY;
+    neuerZug.posX = gridX;
+    neuerZug.posY = gridY;
     neuerZug.rotation = 0;
 
     neuerZug.name = gefundeneZugArt->name;
@@ -56,7 +56,6 @@ void zugPlazieren(int gridX, int gridY, int zugArtId) {
     aktiveZuege.push_back(neuerZug);
     AktiveZuegeSpeichern();
 
-    // Debug-Ausgabe
     std::cout << "Zug platziert: " << neuerZug.name
         << " an Position [" << gridX << ", " << gridY << "]"
         << " mit ID: " << neuerZug.zugId << std::endl;
@@ -64,7 +63,7 @@ void zugPlazieren(int gridX, int gridY, int zugArtId) {
 
 bool IstZugBereitsVorhanden(int gridX, int gridY) {
     for (const auto& zug : aktiveZuege) {
-        if (zug.GridX == gridX && zug.GridY == gridY) {
+        if (zug.posX == gridX && zug.posY == gridY) {
             return true;
         }
     }
@@ -78,8 +77,8 @@ void AktiveZuegeSpeichern() {
     for (const auto& zug : aktiveZuege) {
         json zugJson;
         zugJson["zugId"] = zug.zugId;
-        zugJson["gridX"] = zug.GridX;
-        zugJson["gridY"] = zug.GridY;
+        zugJson["gridX"] = zug.posX;
+        zugJson["gridY"] = zug.posY;
         zugJson["rotation"] = zug.rotation;
         zugJson["name"] = zug.name;
         zugJson["passagiere"] = zug.passagiere;
@@ -106,8 +105,8 @@ void AktiveZuegeSpeichern() {
 void ZeichneZuege() {
     for (const auto& zug : aktiveZuege) {
         DrawRectangle(
-            zug.GridX * GRID_SIZE,
-            zug.GridY * GRID_SIZE,
+            zug.posX * GRID_SIZE,
+            zug.posY * GRID_SIZE,
             (float)GRID_SIZE,
             (float)GRID_SIZE,
             Color{ 0, 0, 255, 150 }
