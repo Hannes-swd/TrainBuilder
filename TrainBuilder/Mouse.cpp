@@ -34,6 +34,13 @@ void ProcesMaus(Vector2 mausposition) {
             }
         }
     }
+    if (ausgewahlterZug != 0) {
+        if (screenMousePos.x > GenaueBreite - 250.0f && screenMousePos.y > 80.0f) {
+            if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {
+                //return;
+            }
+        }
+	}
 
     //Untermenü für Zug tool
     if (aktuellesTool == 5) {
@@ -108,6 +115,7 @@ void ProcesMaus(Vector2 mausposition) {
 void Auswahltool(int gridX, int gridY)
 {
     bool bahnhofGeklickt = false;
+	bool zugGeklickt = false;
 
     for (const auto& ban : banhofListe) {
         if (ban.GridX == gridX && ban.GridY == gridY) {
@@ -119,11 +127,23 @@ void Auswahltool(int gridX, int gridY)
             }
         }
     }
+    for (const Zug z : aktiveZuege) {
+        if (z.posX == gridX && z.posY == gridY) {
+            DrawRectangle(gridX * GRID_SIZE, gridY * GRID_SIZE, (float)GRID_SIZE, (float)GRID_SIZE, Color{ 255, 0, 0, 150 });
+            if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {
+                ausgewahlterZug = z.zugId;
+                zugGeklickt = true;
+            }
+        }
+	}
 
     // Fenster schliesen
     if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT) && !bahnhofGeklickt) {
         ausgewahlterBanhof = 0;
     }
+    if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT) && !zugGeklickt) {
+        ausgewahlterZug = 0;
+	}
 }
 /*-------------------------------------------------
     Gleise setzen tool

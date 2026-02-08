@@ -102,8 +102,8 @@ void LadeJson() {
         for (const auto& obj : AktiveZuegeDaten["AktiveZuege"]) {
             Zug zug;
             zug.zugId = obj["zugId"];
-            zug.posX = obj["gridX"];
-            zug.posY = obj["gridY"];
+            zug.posX = obj["posX"];
+            zug.posY = obj["posY"];
             zug.rotation = obj["rotation"];
             zug.name = obj["name"];
             zug.passagiere = obj["passagiere"];

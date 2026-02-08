@@ -11,6 +11,7 @@
 
 static TextBox nahmeEingabe(0, 0, 200.0f, 30.0f, 32);
 static int letzterAusgewahlterBanhof = 0;
+static int letzterAusgewahlterZug = 0;
 
 void zeichneUI() {
 
@@ -87,4 +88,19 @@ void zeichneUI() {
             BanhofSpeichern();
         }
     }
+    if (ausgewahlterZug != 0) {
+        DrawRectangle((float)GenaueBreite - 250.0f, 80.0f, 250.0f, (float)GenaueHoehe - 80.0f, LIGHTGRAY);
+        DrawRectangleLines((GenaueBreite - 250), 80, 250, GenaueHoehe - 80, DARKGRAY);
+        // Hier können Informationen über den Zug angezeigt werden
+        for (const auto& zug : aktiveZuege) {
+            if (zug.zugId == ausgewahlterZug) {
+                DrawText(TextFormat("Zug Info:"), GenaueBreite - 240, 90, 20, BLACK);
+                DrawText(TextFormat("Name: %s", zug.name.c_str()), GenaueBreite - 240, 150, 20, BLACK);
+                DrawText(TextFormat("ID: %d", zug.zugId), GenaueBreite - 240, 180, 20, BLACK);
+                DrawText(TextFormat("Position: [%d, %d]", zug.posX, zug.posY), GenaueBreite - 240, 210, 20, BLACK);
+                DrawText(TextFormat("Rotation: %d", zug.rotation), GenaueBreite - 240, 240, 20, BLACK);
+                break;
+            }
+        }
+	}
 }

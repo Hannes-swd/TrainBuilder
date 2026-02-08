@@ -77,8 +77,8 @@ void AktiveZuegeSpeichern() {
     for (const auto& zug : aktiveZuege) {
         json zugJson;
         zugJson["zugId"] = zug.zugId;
-        zugJson["gridX"] = zug.posX;
-        zugJson["gridY"] = zug.posY;
+        zugJson["posX"] = zug.posX;
+        zugJson["posY"] = zug.posY;
         zugJson["rotation"] = zug.rotation;
         zugJson["name"] = zug.name;
         zugJson["passagiere"] = zug.passagiere;
@@ -105,11 +105,11 @@ void AktiveZuegeSpeichern() {
 void ZeichneZuege() {
     for (const auto& zug : aktiveZuege) {
         DrawRectangle(
-            zug.posX * GRID_SIZE,
-            zug.posY * GRID_SIZE,
-            (float)GRID_SIZE,
-            (float)GRID_SIZE,
+            zug.posX * GRID_SIZE + GRID_SIZE / 4,
+            zug.posY * GRID_SIZE + GRID_SIZE / 4,
+            GRID_SIZE / 2,
+            GRID_SIZE / 2,
             Color{ 0, 0, 255, 150 }
 		);
-    }
+	}
 }
