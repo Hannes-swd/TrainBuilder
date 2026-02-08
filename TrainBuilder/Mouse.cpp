@@ -116,6 +116,7 @@ void Auswahltool(int gridX, int gridY)
 {
     bool bahnhofGeklickt = false;
 	bool zugGeklickt = false;
+    Vector2 mouseWorldPos = GetScreenToWorld2D(GetMousePosition(), Playercam);
 
     for (const auto& ban : banhofListe) {
         if (ban.GridX == gridX && ban.GridY == gridY) {
@@ -127,15 +128,29 @@ void Auswahltool(int gridX, int gridY)
             }
         }
     }
-    for (const Zug z : aktiveZuege) {
-        if (z.posX == gridX && z.posY == gridY) {
-            DrawRectangle(gridX * GRID_SIZE, gridY * GRID_SIZE, (float)GRID_SIZE, (float)GRID_SIZE, Color{ 255, 0, 0, 150 });
+    for (auto& z : aktiveZuege) {  // auto& verwenden, nicht const
+        // Bounding Box für den Zug berechnen
+        Rectangle zugBox = {
+            z.posX * GRID_SIZE,
+            z.posY * GRID_SIZE,
+            GRID_SIZE,
+            GRID_SIZE
+        };
+
+        // Kollision mit Mausposition prüfen
+        if (CheckCollisionPointRec(mouseWorldPos, zugBox)) {
+            // Visualisierung des ausgewählten Zuges
+            DrawRectangleRec(zugBox, Color{ 255, 0, 0, 150 });
+
             if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {
                 ausgewahlterZug = z.zugId;
                 zugGeklickt = true;
+                std::cout << "Zug ausgewählt: ID " << z.zugId
+                    << " an Position (" << z.posX << ", " << z.posY << ")" << std::endl;
             }
         }
-	}
+    }
+
 
     // Fenster schliesen
     if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT) && !bahnhofGeklickt) {

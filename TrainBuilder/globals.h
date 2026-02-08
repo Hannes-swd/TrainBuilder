@@ -108,5 +108,14 @@ struct Zug {
 	std::string farbe;
 	std::string biildpfad;
 	int geschwindichkeit;
+	//kolisionsbox
+	Rectangle GetBoundingBox() const {
+		return Rectangle{
+			posX * GRID_SIZE,
+			posY * GRID_SIZE,
+			GRID_SIZE,
+			GRID_SIZE
+		};
+	}
 };
 extern std::vector<Zug> aktiveZuege;

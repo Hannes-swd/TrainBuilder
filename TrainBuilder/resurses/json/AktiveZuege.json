@@ -41,6 +41,48 @@
             "rotation": 0,
             "zugId": 3,
             "zugtyp": "Zug"
+        },
+        {
+            "Fahrplan": [],
+            "biildpfad": "resurses/Texturen/Zuege/andererzug.png",
+            "farbe": "grün",
+            "geschwindichkeit": 80,
+            "gueter": 10,
+            "name": "Nebenzug",
+            "passagiere": 350,
+            "posX": -5.0,
+            "posY": -21.0,
+            "rotation": 0,
+            "zugId": 4,
+            "zugtyp": "personen"
+        },
+        {
+            "Fahrplan": [],
+            "biildpfad": "resurses/Texturen/Zuege/StandartZug.png",
+            "farbe": "Orange",
+            "geschwindichkeit": 67,
+            "gueter": 10,
+            "name": "andere",
+            "passagiere": 6767,
+            "posX": -4.0,
+            "posY": -21.0,
+            "rotation": 0,
+            "zugId": 5,
+            "zugtyp": "Zug"
+        },
+        {
+            "Fahrplan": [],
+            "biildpfad": "resurses/Texturen/Zuege/StandartZug.png",
+            "farbe": "rot",
+            "geschwindichkeit": 10,
+            "gueter": 10,
+            "name": "StandartZug",
+            "passagiere": 400,
+            "posX": -6.0,
+            "posY": -22.0,
+            "rotation": 0,
+            "zugId": 6,
+            "zugtyp": "personen"
         }
     ]
 }
