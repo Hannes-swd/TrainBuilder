@@ -114,17 +114,17 @@ void zeichneUI() {
         for (const auto& zug : aktiveZuege) {
             if (zug.zugId == ausgewahlterZug) {
                 const_cast<Zug&>(zug).name = zugnameEingabe.GetText();
-
+				
                 DrawText(TextFormat("Name: %s", zug.name.c_str()), GenaueBreite - 240, yPos, 20, BLACK);
                 yPos += lineHeight;
 
                 DrawText(TextFormat("ID: %d", zug.zugId), GenaueBreite - 240, yPos, 20, BLACK);
                 yPos += lineHeight;
 
-                DrawText(TextFormat("Position: [%d, %d]", zug.posX, zug.posY), GenaueBreite - 240, yPos, 20, BLACK);
+                DrawText(TextFormat("Position: [%.2f, %.2f]", zug.posX, zug.posY), GenaueBreite - 240, yPos, 20, BLACK);
                 yPos += lineHeight;
 
-                DrawText(TextFormat("Rotation: %d°", zug.rotation), GenaueBreite - 240, yPos, 20, BLACK);
+                DrawText(TextFormat("Rotation: %d", zug.rotation), GenaueBreite - 240, yPos, 20, BLACK);
                 yPos += lineHeight;
 
                 DrawText(TextFormat("Geschwindigkeit: %d km/h", zug.geschwindichkeit), GenaueBreite - 240, yPos, 20, BLACK);
@@ -133,7 +133,7 @@ void zeichneUI() {
                 DrawText(TextFormat("Passagiere: %d", zug.passagiere), GenaueBreite - 240, yPos, 20, BLACK);
                 yPos += lineHeight;
 
-                DrawText(TextFormat("Güter: %d", zug.gueter), GenaueBreite - 240, yPos, 20, BLACK);
+                DrawText(TextFormat("Gueter: %d", zug.gueter), GenaueBreite - 240, yPos, 20, BLACK);
                 yPos += lineHeight;
 
                 DrawText(TextFormat("Zugtyp: %s", zug.zugtyp.c_str()), GenaueBreite - 240, yPos, 20, BLACK);

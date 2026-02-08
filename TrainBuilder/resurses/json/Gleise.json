@@ -339,12 +339,6 @@
         {
             "ObjecktId": 1,
             "gridX": -6,
-            "gridY": -23,
-            "rotation": 0
-        },
-        {
-            "ObjecktId": 1,
-            "gridX": -6,
             "gridY": -24,
             "rotation": 0
         },
@@ -905,6 +899,12 @@
             "gridX": -9,
             "gridY": -26,
             "rotation": 90
+        },
+        {
+            "ObjecktId": 1,
+            "gridX": -6,
+            "gridY": -23,
+            "rotation": 0
         }
     ]
 }

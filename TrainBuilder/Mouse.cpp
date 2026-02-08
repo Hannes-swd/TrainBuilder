@@ -19,25 +19,25 @@ void ProcesMaus(Vector2 mausposition) {
 
     static int lastTool = -1;
     if (lastTool != aktuellesTool) {
-        std::cout << "DEBUG: Tool gewechselt zu: " << aktuellesTool << std::endl;
         lastTool = aktuellesTool;
     }
 
     if (screenMousePos.y < 80.0f) {
         Menuebuttons();
+		return;
     }
 
     if (ausgewahlterBanhof != 0) {
         if (screenMousePos.x > GenaueBreite - 250.0f && screenMousePos.y > 80.0f) {
             if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {
-                //return;
+                return;
             }
         }
     }
     if (ausgewahlterZug != 0) {
         if (screenMousePos.x > GenaueBreite - 250.0f && screenMousePos.y > 80.0f) {
             if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {
-                //return;
+                return;
             }
         }
 	}
@@ -128,19 +128,18 @@ void Auswahltool(int gridX, int gridY)
             }
         }
     }
-    for (auto& z : aktiveZuege) {  // auto& verwenden, nicht const
-        // Bounding Box für den Zug berechnen
+    for (auto& z : aktiveZuege) {
         Rectangle zugBox = {
             z.posX * GRID_SIZE,
             z.posY * GRID_SIZE,
             GRID_SIZE,
-            GRID_SIZE
+            GRID_SIZE  
         };
 
         // Kollision mit Mausposition prüfen
         if (CheckCollisionPointRec(mouseWorldPos, zugBox)) {
             // Visualisierung des ausgewählten Zuges
-            DrawRectangleRec(zugBox, Color{ 255, 0, 0, 150 });
+            DrawRectangleRec(zugBox, Color{ 0, 255, 0, 150 });
 
             if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {
                 ausgewahlterZug = z.zugId;
