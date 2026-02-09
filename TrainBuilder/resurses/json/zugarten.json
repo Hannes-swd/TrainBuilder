@@ -4,31 +4,37 @@
             "id": 1,
             "name": "StandartZug",
             "geschwindichkeit": 10,
-            "passagiere": 400,
-            "gueter": 10,
+            "maxPassagiere": 400,
+            "maxGueter": 10,
+            "passagiere": 0,
+            "gueter": 0,
             "biildpfad": "resurses/Texturen/Zuege/StandartZug.png",
             "farbe": "rot",
-            "zugtyp": "personen"
+            "zugtyp": "Erster"
         },
         {
             "id": 2,
             "name": "andere",
             "geschwindichkeit": 67,
-            "passagiere": 6767,
-            "gueter": 10,
+            "maxPassagiere": 500,
+            "maxGueter": 30,
+            "passagiere": 0,
+            "gueter": 0,
             "biildpfad": "resurses/Texturen/Zuege/StandartZug.png",
             "farbe": "Orange",
-            "zugtyp": "Zug"
+            "zugtyp": "zweiter"
         },
         {
             "id": 3,
             "name": "Nebenzug",
             "geschwindichkeit": 80,
-            "passagiere": 350,
-            "gueter": 10,
+            "maxPassagiere": 800,
+            "maxGueter": 67,
+            "passagiere": 0,
+            "gueter": 0,
             "biildpfad": "resurses/Texturen/Zuege/andererzug.png",
             "farbe": "grün",
-            "zugtyp": "personen"
+            "zugtyp": "dreier"
         }
     ]
 }

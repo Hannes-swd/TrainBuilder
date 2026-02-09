@@ -81,6 +81,8 @@ void AktiveZuegeSpeichern() {
         zugJson["posY"] = zug.posY;
         zugJson["rotation"] = zug.rotation;
         zugJson["name"] = zug.name;
+		zugJson["maxPassagiere"] = zug.maxPassagiere;
+		zugJson["maxGueter"] = zug.maxGueter;
         zugJson["passagiere"] = zug.passagiere;
         zugJson["gueter"] = zug.gueter;
         zugJson["Fahrplan"] = zug.Fahrplan;

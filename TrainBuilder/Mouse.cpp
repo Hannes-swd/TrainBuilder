@@ -198,6 +198,7 @@ void LinksGeklickt(Vector2 mausposition) {
     LÖSCHTOOL
 -------------------------------------------------*/
 void Loeschentool(Vector2 mausposition) {
+	
     // Lösct als erstes banhof und wen nicht dan gleis
     if (IstBanhofBereitsVorhanden(
         (int)floor(mausposition.x / GRID_SIZE),
@@ -220,6 +221,7 @@ void Loeschentool(Vector2 mausposition) {
             return;
         }
     }
+    
     else {
         if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {
             Vector2 screenMousePos = GetMousePosition();

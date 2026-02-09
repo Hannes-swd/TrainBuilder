@@ -2,31 +2,19 @@
     "AktiveZuege": [
         {
             "Fahrplan": [],
-            "biildpfad": "resurses/Texturen/Zuege/StandartZug.png",
-            "farbe": "rot",
-            "geschwindichkeit": 10,
-            "gueter": 10,
-            "name": "gigachad",
-            "passagiere": 400,
-            "posX": -6.0,
-            "posY": -19.0,
-            "rotation": 0,
-            "zugId": 1,
-            "zugtyp": "personen"
-        },
-        {
-            "Fahrplan": [],
             "biildpfad": "resurses/Texturen/Zuege/andererzug.png",
             "farbe": "grün",
             "geschwindichkeit": 80,
-            "gueter": 10,
-            "name": "komisch",
-            "passagiere": 350,
-            "posX": 5.0,
-            "posY": -19.0,
+            "gueter": 0,
+            "maxGueter": -858993460,
+            "maxPassagiere": -858993460,
+            "name": "Nebenzug",
+            "passagiere": 0,
+            "posX": -2.0,
+            "posY": -21.0,
             "rotation": 0,
-            "zugId": 2,
-            "zugtyp": "personen"
+            "zugId": 1,
+            "zugtyp": "dreier"
         }
     ]
 }

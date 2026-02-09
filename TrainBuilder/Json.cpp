@@ -107,6 +107,8 @@ void LadeJson() {
             zug.rotation = obj["rotation"];
             zug.name = obj["name"];
             zug.passagiere = obj["passagiere"];
+            zug.maxPassagiere = obj["maxPassagiere"];
+            zug.maxGueter = obj["maxGueter"];
             zug.gueter = obj["gueter"];
             zug.Fahrplan = obj["Fahrplan"].get<std::vector<std::string>>();
             zug.zugtyp = obj["zugtyp"];

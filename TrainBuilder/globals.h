@@ -99,6 +99,8 @@ struct Zug {
 
 	//zug infos
 	std::string name;
+	int maxPassagiere;
+	int maxGueter;
 	int passagiere;
 	int gueter;
 	std::vector<std::string> Fahrplan;

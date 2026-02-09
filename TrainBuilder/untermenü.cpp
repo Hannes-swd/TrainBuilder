@@ -179,6 +179,6 @@ void ZeichneUnterpunkte() {
                 DrawText(typText.c_str(), col1X, textY, 12, DARKGRAY);
                 DrawText(zug.zugtyp.c_str(), col2X, textY, 12, DARKBLUE);
             }
-        }
+        }  
     }
 }
