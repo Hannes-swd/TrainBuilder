@@ -2,22 +2,6 @@
     "AktiveZuege": [
         {
             "Fahrplan": [],
-            "biildpfad": "resurses/Texturen/Zuege/andererzug.png",
-            "farbe": "grün",
-            "geschwindichkeit": 80,
-            "gueter": 0,
-            "maxGueter": -858993460,
-            "maxPassagiere": -858993460,
-            "name": "Zug 1",
-            "passagiere": 0,
-            "posX": -1.0,
-            "posY": -21.0,
-            "rotation": 0,
-            "zugId": 1,
-            "zugtyp": "dreier"
-        },
-        {
-            "Fahrplan": [],
             "biildpfad": "resurses/Texturen/Zuege/StandartZug.png",
             "farbe": "Orange",
             "geschwindichkeit": 67,
