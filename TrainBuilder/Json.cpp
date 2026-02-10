@@ -86,7 +86,6 @@ void LadeJson() {
 			zugart.id = obj["id"];
             zugart.name = obj["name"];
             zugart.geschwindichkeit = obj["geschwindichkeit"];
-
 			zugart.passagiere = obj["passagiere"];
 			zugart.gueter = obj["gueter"];
             zugart.biildpfad = obj["biildpfad"];
