@@ -120,3 +120,10 @@ void BewegeZuege() {
         //später alle züge
 	}
 }
+void ZugPlahn(int id) {
+    for (const auto& zug : aktiveZuege) {
+        if (zug.zugId == id) {
+			DrawRectangle(GenaueBreite - 240, GenaueHoehe - 200, 220, 150, Color{ 255, 255, 255, 230 });
+        }
+    }
+}

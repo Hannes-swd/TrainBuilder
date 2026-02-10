@@ -138,8 +138,10 @@ void zeichneUI() {
 
                 DrawText(TextFormat("Zugtyp: %s", zug.zugtyp.c_str()), GenaueBreite - 240, yPos, 20, BLACK);
                 yPos += lineHeight;
-
-
+                /*
+					FAHRPLAN
+                */
+				ZugPlahn(ausgewahlterZug); //ist in der zug.cpp
 				/*
 					LÖSCHEN BUTTON
                 */
