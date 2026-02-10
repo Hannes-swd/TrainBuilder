@@ -62,6 +62,13 @@
             "gridX": -5,
             "gridY": -34,
             "rotation": 0
+        },
+        {
+            "BanhofId": 10,
+            "Name": "cool",
+            "gridX": -1,
+            "gridY": -28,
+            "rotation": 0
         }
     ]
 }

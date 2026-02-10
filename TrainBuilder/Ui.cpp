@@ -139,6 +139,29 @@ void zeichneUI() {
                 DrawText(TextFormat("Zugtyp: %s", zug.zugtyp.c_str()), GenaueBreite - 240, yPos, 20, BLACK);
                 yPos += lineHeight;
 
+
+				/*
+					LÖSCHEN BUTTON
+                */
+				DrawRectangle(GenaueBreite - 240, GenaueHoehe - 50, 220, 30, RED);
+				DrawRectangleLines(GenaueBreite - 240, GenaueHoehe - 50, 220, 30, WHITE);
+				DrawText("Zug loeschen", GenaueBreite - 230, GenaueHoehe - 45, 20, WHITE);
+                if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON) &&
+                    GetMouseX() >= GenaueBreite - 240 && GetMouseX() <= GenaueBreite - 20 &&
+                    GetMouseY() >= GenaueHoehe - 50 && GetMouseY() <= GenaueHoehe - 20) {
+                    // Zug löschen
+                    for (auto it = aktiveZuege.begin(); it != aktiveZuege.end(); ++it) {
+                        if (it->zugId == ausgewahlterZug) {
+                            aktiveZuege.erase(it);
+                            ausgewahlterZug = 0;
+                            AktiveZuegeSpeichern();
+                            break;
+                        }
+                    }
+				}
+                /*
+                    --LÖSCHEN BUTTON
+                */
                 if (!zug.Fahrplan.empty()) {
                     yPos += 5;
                     DrawText("Fahrplan:", GenaueBreite - 240, yPos, 18, DARKBLUE);

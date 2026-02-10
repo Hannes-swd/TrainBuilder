@@ -74,7 +74,8 @@ int main(void)
         gridPosition.x = (int)floor(mousePosition.x / GRID_SIZE);
         gridPosition.y = (int)floor(mousePosition.y / GRID_SIZE);
 
-        
+        //zug updaten
+        BewegeZuege();
 
 
         /*-------------------------------------------------

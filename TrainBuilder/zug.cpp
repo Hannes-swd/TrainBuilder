@@ -43,7 +43,7 @@ void zugPlazieren(int gridX, int gridY, int zugArtId) {
     neuerZug.posY = gridY;
     neuerZug.rotation = 0;
 
-    neuerZug.name = gefundeneZugArt->name;
+    neuerZug.name = "Zug " + std::to_string(neuerZug.zugId);
     neuerZug.passagiere = gefundeneZugArt->passagiere;
     neuerZug.gueter = gefundeneZugArt->gueter;
     neuerZug.zugtyp = gefundeneZugArt->zugtyp;
@@ -113,5 +113,10 @@ void ZeichneZuege() {
             GRID_SIZE / 2,
             Color{ 0, 0, 255, 150 }
 		);
+	}
+}
+void BewegeZuege() {
+    for (auto& zug : aktiveZuege) {
+        //später alle züge
 	}
 }
