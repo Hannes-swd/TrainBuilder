@@ -17,7 +17,7 @@
             "passagiere": 0,
             "gueter": 0,
             "biildpfad": "resurses/Texturen/Zuege/StandartZug.png",
-            "farbe": "Orange",
+            "farbe": "gruen",
             "zugtyp": "zweiter"
         },
         {
@@ -27,7 +27,7 @@
             "passagiere": 0,
             "gueter": 0,
             "biildpfad": "resurses/Texturen/Zuege/andererzug.png",
-            "farbe": "grün",
+            "farbe": "blau",
             "zugtyp": "dreier"
         }
     ]

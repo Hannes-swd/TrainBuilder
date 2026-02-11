@@ -55,6 +55,9 @@ void ZeichneUnterpunkte() {
 
     Vector2 mousePos = GetMousePosition();
 
+    // ==========================================
+    // ERSTE SCHLEIFE: Alle Boxen und Inhalte zeichnen (IMMER sichtbar)
+    // ==========================================
     for (size_t i = 0; i < zugArtenListe.size(); i++) {
         const ZugArt& zug = zugArtenListe[i];
 
@@ -69,12 +72,12 @@ void ZeichneUnterpunkte() {
         DrawRectangle(x, y, boxWidth, boxHeight, bgColor);
         DrawRectangleLines(x, y, boxWidth, boxHeight, DARKGRAY);
 
-
+        // Highlight wenn ausgewählt
         if (ausgewählterUntermenuePunkt == (int)i + 1) {
-            DrawRectangle(x, y, boxWidth, boxHeight, GRAY);
+            DrawRectangle(x, y, boxWidth, boxHeight, DARKGRAY);
         }
 
-
+        // Bild zeichnen
         if (!zug.biildpfad.empty()) {
             Texture2D zugTexture = LoadTextureFromPath(zug.biildpfad);
 
@@ -111,6 +114,7 @@ void ZeichneUnterpunkte() {
                 10, GRAY);
         }
 
+        // Name zeichnen
         if (!zug.name.empty()) {
             std::string displayName = zug.name;
             if (displayName.length() > 10) {
@@ -123,6 +127,19 @@ void ZeichneUnterpunkte() {
                 (int)(y + boxHeight - 20),
                 12, BLACK);
         }
+    }
+
+    // ==========================================
+    // ZWEITE SCHLEIFE: Tooltips nur bei Hover
+    // ==========================================
+    for (size_t i = 0; i < zugArtenListe.size(); i++) {
+        const ZugArt& zug = zugArtenListe[i];
+
+        float x = startX + i * (boxWidth + padding);
+        float y = startY;
+
+        bool isHovered = (mousePos.x >= x && mousePos.x <= x + boxWidth &&
+            mousePos.y >= y && mousePos.y <= y + boxHeight);
         
         if (isHovered) {
             float tooltipX = 10.0f;

@@ -106,12 +106,20 @@ void AktiveZuegeSpeichern() {
 }
 void ZeichneZuege() {
     for (const auto& zug : aktiveZuege) {
+
+        
         DrawRectangle(
             zug.posX * GRID_SIZE + GRID_SIZE / 4,
             zug.posY * GRID_SIZE + GRID_SIZE / 4,
             GRID_SIZE / 2,
             GRID_SIZE / 2,
-            Color{ 0, 0, 255, 150 }
+            //verschiedene farben
+            
+            zug.farbe == "rot" ? RED :
+            zug.farbe == "blau" ? BLUE :
+            zug.farbe == "gruen" ? GREEN : 
+			GRAY
+            
 		);
 	}
 }
@@ -123,6 +131,9 @@ void BewegeZuege() {
 void ZugPlahn(int id) {
     for (const auto& zug : aktiveZuege) {
         if (zug.zugId == id) {
+
+
+
 			DrawRectangle(GenaueBreite - 240, GenaueHoehe - 200, 220, 150, Color{ 255, 255, 255, 230 });
         }
     }
