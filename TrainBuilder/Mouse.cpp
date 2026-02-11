@@ -65,8 +65,8 @@ void ProcesMaus(Vector2 mausposition) {
 
     if (aktuellesTool == 5) {
         if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {
-            std::cout << "DEBUG: CLICK ERKANNT! ausgewahlterZug = " << ausgewahlterZug << std::endl;
-            zugPlazieren(MouseGridX, MouseGridY, ausgewahlterZug);
+            std::cout << "DEBUG: CLICK ERKANNT! ausgewahlterZugArt = " << ausgewahlterZugArt << std::endl;
+            zugPlazieren(MouseGridX, MouseGridY, ausgewahlterZugArt);
             return;
         }
     }

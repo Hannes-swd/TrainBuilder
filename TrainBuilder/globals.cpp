@@ -29,6 +29,7 @@ float playerSpeed = 700.0f;
 
 //ausgewähltes objeckt
 int ausgewahlterBanhof = 0; //0 = keins
+int ausgewahlterZugArt = 0; //0 = keins
 int ausgewahlterZug = 0; //0 = keins
 
 int aktuellesTool = 1; 

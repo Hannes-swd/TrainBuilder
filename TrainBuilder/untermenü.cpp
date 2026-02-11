@@ -32,8 +32,7 @@ void UntermenueKlick(Vector2 mausposition) {
             mausposition.y >= y && mausposition.y <= y + boxHeight) {
 
             ausgewählterUntermenuePunkt = (int)i + 1;
-
-			ausgewahlterZug = zugArtenListe[i].id;
+            ausgewahlterZugArt = zugArtenListe[i].id;
 
             return;
         }

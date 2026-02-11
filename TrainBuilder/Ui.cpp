@@ -265,16 +265,7 @@ void zeichneUI() {
 				/*
 					FAHRPLAN
 				*/
-				if (!zug.Fahrplan.empty()) {
-					yPos += 5;
-					DrawText("Fahrplan:", contentX, yPos, 18, DARKBLUE);
-					yPos += lineHeight - 5;
-
-					for (const auto& halt : zug.Fahrplan) {
-						DrawText(TextFormat("- %s", halt.c_str()), contentX + 10, yPos, 16, DARKGRAY);
-						yPos += lineHeight - 5;
-					}
-				}
+				ZugPlahn(ausgewahlterZug); //in der zug.cpp
 
 				/*
 					LÖSCHEN BUTTON
