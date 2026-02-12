@@ -40,12 +40,12 @@
             "gueter": 0,
             "maxGueter": -858993460,
             "maxPassagiere": -858993460,
-            "name": "Zug 4",
+            "name": "Zug 3",
             "passagiere": 0,
-            "posX": -5.0,
+            "posX": -8.0,
             "posY": -19.0,
             "rotation": 0,
-            "zugId": 4,
+            "zugId": 3,
             "zugtyp": "dreier"
         }
     ]

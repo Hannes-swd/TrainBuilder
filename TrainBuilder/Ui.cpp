@@ -1,4 +1,4 @@
-#include <cstdlib>
+ï»¿
 #include <iostream>
 #include <ctime>
 #include <cmath>
@@ -17,7 +17,7 @@ static int letzterAusgewahlterBanhof = 0;
 static int letzterAusgewahlterZug = 0;
 
 /*-------------------------------------------------
-	SCROLLBAR VARIABLEN
+    SCROLLBAR VARIABLEN
 -------------------------------------------------*/
 static float bahnhofScrollOffset = 0.0f;
 static float zugScrollOffset = 0.0f;
@@ -27,360 +27,383 @@ static bool zugScrolling = false;
 static float zugplanScrollOffset = 0.0f;
 static bool zugplanScrolling = false;
 
-const float SEITENMENÜ_BREITE = 250.0f;
-const float SEITENMENÜ_Y_START = 80.0f;
+const float SEITENMENÃœ_BREITE = 250.0f;
+const float SEITENMENÃœ_Y_START = 80.0f;
 const float SCROLLBAR_BREITE = 12.0f;
 
+float zugplanContainerY = 0.0f;
+int zugplanContainerHeight = 220;
+
+float scrollbarX = 0.0f;
+float scrollbarY = 0.0f;
+float scrollbarHoehe = 0.0f;
+
 /*-------------------------------------------------
-	HILFSFUNKTIONEN SCROLLBAR
+    HILFSFUNKTIONEN SCROLLBAR
 -------------------------------------------------*/
 float MeineClamp(float value, float min, float max) {
-	if (value < min) return min;
-	if (value > max) return max;
-	return value;
+    if (value < min) return min;
+    if (value > max) return max;
+    return value;
 }
 
 float BerechneMaxScrollHoehe(float contentHoehe) {
-	float viewportHoehe = GenaueHoehe - SEITENMENÜ_Y_START - 50.0f;
-	if (contentHoehe <= viewportHoehe) return 0.0f;
-	return contentHoehe - viewportHoehe;
+    float viewportHoehe = GenaueHoehe - SEITENMENÃœ_Y_START - 50.0f;
+    if (contentHoehe <= viewportHoehe) return 0.0f;
+    return contentHoehe - viewportHoehe;
 }
 
-void ZeichneScrollbar(float scrollOffset, float maxScroll, bool isActive) {
-	float seitenmenüX = GenaueBreite - SEITENMENÜ_BREITE;
-	float scrollbarX = seitenmenüX + SEITENMENÜ_BREITE - SCROLLBAR_BREITE;
-	float scrollbarY = SEITENMENÜ_Y_START;
-	float scrollbarHoehe = GenaueHoehe - SEITENMENÜ_Y_START - 50.0f;
+void ZeichneScrollbar(float scrollOffset, float maxScroll, bool isActive, float x, float y, float hoehe) {
+    
 
-	if (maxScroll <= 0) return;
+    if (maxScroll <= 0) return;
 
-	DrawRectangle(scrollbarX, scrollbarY, SCROLLBAR_BREITE, scrollbarHoehe, Color{ 200, 200, 200, 255 });
+    DrawRectangle(scrollbarX, scrollbarY, SCROLLBAR_BREITE, scrollbarHoehe, Color{ 200, 200, 200, 255 });
 
-	float thumbHoehe = scrollbarHoehe * (scrollbarHoehe / (scrollbarHoehe + maxScroll));
-	float thumbY = scrollbarY + (scrollOffset / maxScroll) * (scrollbarHoehe - thumbHoehe);
+    float thumbHoehe = scrollbarHoehe * (scrollbarHoehe / (scrollbarHoehe + maxScroll));
+    float thumbY = scrollbarY + (scrollOffset / maxScroll) * (scrollbarHoehe - thumbHoehe);
 
-	Color thumbColor = isActive ? DARKGRAY : GRAY;
-	DrawRectangle(scrollbarX, thumbY, SCROLLBAR_BREITE, thumbHoehe, thumbColor);
-	DrawRectangleLines(scrollbarX, thumbY, SCROLLBAR_BREITE, thumbHoehe, BLACK);
+    Color thumbColor = isActive ? DARKGRAY : GRAY;
+    DrawRectangle(scrollbarX, thumbY, SCROLLBAR_BREITE, thumbHoehe, thumbColor);
+    DrawRectangleLines(scrollbarX, thumbY, SCROLLBAR_BREITE, thumbHoehe, BLACK);
 }
 
 float ProccessScrollInput(float currentOffset, float maxScroll, float scrollbarX, float scrollbarY,
-	float scrollbarHoehe, bool& isScrolling) {
-	Vector2 mousePos = GetMousePosition();
-	float scrollbarThumbHoehe = scrollbarHoehe * (scrollbarHoehe / (scrollbarHoehe + maxScroll));
+    float scrollbarHoehe, bool& isScrolling, float contentAreaX, float contentAreaWidth) {
+    Vector2 mousePos = GetMousePosition();
 
-	/*-------------------------------------------------
-		MAUSRAD SCROLLING
-	-------------------------------------------------*/
-	if (CheckCollisionPointRec(mousePos, Rectangle{ scrollbarX - 250 + SCROLLBAR_BREITE,
-		scrollbarY, 250.0f - SCROLLBAR_BREITE, scrollbarHoehe })) {
-		float wheelInput = GetMouseWheelMove();
-		if (wheelInput != 0) {
-			float newOffset = currentOffset - wheelInput * 30.0f;
-			return MeineClamp(newOffset, 0.0f, maxScroll);
-		}
-	}
+    /*-------------------------------------------------
+        MAUSRAD SCROLLING
+    -------------------------------------------------*/
+    if (CheckCollisionPointRec(mousePos, Rectangle{ contentAreaX,
+        scrollbarY, contentAreaWidth, scrollbarHoehe })) {
+        float wheelInput = GetMouseWheelMove();
+        if (wheelInput != 0) {
+            float newOffset = currentOffset - wheelInput * 30.0f;
+            return MeineClamp(newOffset, 0.0f, maxScroll);
+        }
+    }
 
-	/*-------------------------------------------------
-		SCROLLBAR DRAG
-	-------------------------------------------------*/
-	float thumbY = scrollbarY + (currentOffset / maxScroll) * (scrollbarHoehe - scrollbarThumbHoehe);
-	Rectangle thumbRect = { scrollbarX, thumbY, SCROLLBAR_BREITE, scrollbarThumbHoehe };
+    /*-------------------------------------------------
+        SCROLLBAR DRAG
+    -------------------------------------------------*/
+    if (maxScroll > 0) {
+        float thumbHoehe = scrollbarHoehe * (scrollbarHoehe / (scrollbarHoehe + maxScroll));
+        float thumbY = scrollbarY + (currentOffset / maxScroll) * (scrollbarHoehe - thumbHoehe);
+        Rectangle thumbRect = { scrollbarX, thumbY, SCROLLBAR_BREITE, thumbHoehe };
 
-	if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT) && CheckCollisionPointRec(mousePos, thumbRect)) {
-		isScrolling = true;
-	}
-	if (IsMouseButtonReleased(MOUSE_BUTTON_LEFT)) {
-		isScrolling = false;
-	}
+        if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT) && CheckCollisionPointRec(mousePos, thumbRect)) {
+            isScrolling = true;
+        }
+        if (IsMouseButtonReleased(MOUSE_BUTTON_LEFT)) {
+            isScrolling = false;
+        }
 
-	if (isScrolling) {
-		float mouseDelta = GetMouseDelta().y;
-		float scrollRatio = maxScroll / (scrollbarHoehe - scrollbarThumbHoehe);
-		float newOffset = currentOffset + mouseDelta * scrollRatio;
-		return MeineClamp(newOffset, 0.0f, maxScroll);
-	}
+        if (isScrolling) {
+            float mouseDelta = GetMouseDelta().y;
+            float scrollRatio = maxScroll / (scrollbarHoehe - thumbHoehe);
+            float newOffset = currentOffset + mouseDelta * scrollRatio;
+            return MeineClamp(newOffset, 0.0f, maxScroll);
+        }
+    }
 
-	return currentOffset;
+    return currentOffset;
+}
+
+void ZeichneZugplan(int id, float& scrollOffset, bool& isScrolling, float containerY) {
+    for (auto& zug : aktiveZuege) {
+        if (zug.zugId == id) {
+            float containerX = GenaueBreite - 240.0f;
+            float containerWidth = 220.0f;
+            float containerHeight = 120.0f;
+
+            DrawRectangle(containerX, containerY, containerWidth, zugplanContainerHeight, Color{ 255, 255, 255, 230 });
+            DrawRectangleLines(containerX, containerY, containerWidth, zugplanContainerHeight, BLACK);
+
+            DrawText("Fahrplan:", containerX + 10, containerY + 5, 14, BLACK);
+
+            float contentHeight = 25.0f + (zug.Fahrplan.size() * 20.0f);
+            float maxScroll = contentHeight - (containerHeight - 25.0f);
+            if (maxScroll < 0) maxScroll = 0;
+
+            BeginScissorMode(containerX + 5, containerY + 25, containerWidth - 20, containerHeight - 30);
+
+            float contentY = containerY + 25 - scrollOffset;
+
+            if (zug.Fahrplan.empty()) {
+                DrawText("Keine Fahrplaene", containerX + 15, containerY + 30, 12, GRAY);
+            }
+            else {
+                for (size_t i = 0; i < zug.Fahrplan.size(); i++) {
+                    DrawText(TextFormat("â€¢ Eintrag %d", (int)i + 1), containerX + 15, contentY, 12, DARKGRAY);
+                    contentY += 20;
+                }
+            }
+
+            EndScissorMode();
+
+            if (maxScroll > 0) {
+                float scrollbarX = containerX + containerWidth - SCROLLBAR_BREITE;
+                float scrollbarY = containerY + 25;
+                float scrollbarHeight = containerHeight - 30;
+
+                scrollOffset = ProccessScrollInput(scrollOffset, maxScroll,
+                    scrollbarX, scrollbarY, scrollbarHeight, isScrolling,
+                    containerX, containerWidth - SCROLLBAR_BREITE);
+
+                ZeichneScrollbar(scrollOffset, maxScroll, isScrolling, scrollbarX, scrollbarY, scrollbarHeight);
+            }
+            else {
+                scrollOffset = 0.0f;
+            }
+            break;
+        }
+    }
 }
 
 void zeichneUI() {
-	kannBewegen = true;
+    kannBewegen = true;
 
-	DrawRectangle(0, 0, (float)GenaueBreite, 80.0f, LIGHTGRAY);
+    DrawRectangle(0, 0, (float)GenaueBreite, 80.0f, LIGHTGRAY);
 
-	if (aktuellesTool == 1) {
-		DrawRectangle(10.0f, 10.0f, 60.0f, 60.0f, DARKGRAY);
-	}
-	else if (aktuellesTool == 2) {
-		DrawRectangle(80.0f, 10.0f, 60.0f, 60.0f, DARKGRAY);
-	}
-	else if (aktuellesTool == 3) {
-		DrawRectangle(150.0f, 10.0f, 60.0f, 60.0f, DARKGRAY);
-	}
-	else if (aktuellesTool == 4) {
-		DrawRectangle(220.0f, 10.0f, 60.0f, 60.0f, DARKGRAY);
-	}
-	else if (aktuellesTool == 5) {
-		DrawRectangle(290.0f, 10.0f, 60.0f, 60.0f, DARKGRAY);
-	}
+    if (aktuellesTool == 1) {
+        DrawRectangle(10.0f, 10.0f, 60.0f, 60.0f, DARKGRAY);
+    }
+    else if (aktuellesTool == 2) {
+        DrawRectangle(80.0f, 10.0f, 60.0f, 60.0f, DARKGRAY);
+    }
+    else if (aktuellesTool == 3) {
+        DrawRectangle(150.0f, 10.0f, 60.0f, 60.0f, DARKGRAY);
+    }
+    else if (aktuellesTool == 4) {
+        DrawRectangle(220.0f, 10.0f, 60.0f, 60.0f, DARKGRAY);
+    }
+    else if (aktuellesTool == 5) {
+        DrawRectangle(290.0f, 10.0f, 60.0f, 60.0f, DARKGRAY);
+    }
 
-	DrawTexture("zeichnen", 10.0f, 10.0f, 60.0f, 60.0f);
-	DrawTexture("Löschen", 80.0f, 10.0f, 60.0f, 60.0f);
-	DrawTexture("Auswahl", 150.0f, 10.0f, 60.0f, 60.0f);
-	DrawTexture("Banhof", 220.0f, 10.0f, 60.0f, 60.0f);
-	DrawTexture("zugicon", 290.0f, 10.0f, 60.0f, 60.0f);
+    DrawTexture("zeichnen", 10.0f, 10.0f, 60.0f, 60.0f);
+    DrawTexture("LÃ¶schen", 80.0f, 10.0f, 60.0f, 60.0f);
+    DrawTexture("Auswahl", 150.0f, 10.0f, 60.0f, 60.0f);
+    DrawTexture("Banhof", 220.0f, 10.0f, 60.0f, 60.0f);
+    DrawTexture("zugicon", 290.0f, 10.0f, 60.0f, 60.0f);
 
-	/*-------------------------------------------------
-		BAHNHOF MENÜ
-	-------------------------------------------------*/
-	if (ausgewahlterBanhof != 0) {
-		DrawRectangle((float)GenaueBreite - 250.0f, 80.0f, 250.0f, (float)GenaueHoehe - 80.0f, LIGHTGRAY);
-		DrawRectangleLines((GenaueBreite - 250), 80, 250, GenaueHoehe - 80, DARKGRAY);
+    /*-------------------------------------------------
+        BAHNHOF MENÃœ
+    -------------------------------------------------*/
+    if (ausgewahlterBanhof != 0) {
+        DrawRectangle((float)GenaueBreite - 250.0f, 80.0f, 250.0f, (float)GenaueHoehe - 80.0f, LIGHTGRAY);
+        DrawRectangleLines((GenaueBreite - 250), 80, 250, GenaueHoehe - 80, DARKGRAY);
 
-		nahmeEingabe.SetPosition((float)GenaueBreite - 240.0f, 100.0f - bahnhofScrollOffset);
+        BeginScissorMode(GenaueBreite - 250, 80, 250, GenaueHoehe - 80);
 
-		if (letzterAusgewahlterBanhof != ausgewahlterBanhof) {
-			for (const auto& banhof : banhofListe) {
-				if (banhof.BanhofId == ausgewahlterBanhof) {
-					nahmeEingabe.SetText(banhof.Name);
-					break;
-				}
-			}
-			letzterAusgewahlterBanhof = ausgewahlterBanhof;
-			bahnhofScrollOffset = 0.0f;
-		}
+        nahmeEingabe.SetPosition((float)GenaueBreite - 240.0f, 100.0f - bahnhofScrollOffset);
 
-		nahmeEingabe.Update();
-		nahmeEingabe.Draw();
+        if (letzterAusgewahlterBanhof != ausgewahlterBanhof) {
+            for (const auto& banhof : banhofListe) {
+                if (banhof.BanhofId == ausgewahlterBanhof) {
+                    nahmeEingabe.SetText(banhof.Name);
+                    break;
+                }
+            }
+            letzterAusgewahlterBanhof = ausgewahlterBanhof;
+            bahnhofScrollOffset = 0.0f;
+        }
 
-		if (nahmeEingabe.IsActive()) {
-			kannBewegen = false;
-		}
+        nahmeEingabe.Update();
+        nahmeEingabe.Draw();
 
-		/*-------------------------------------------------
-			BAHNHOF CONTENT MIT SCROLLING
-		-------------------------------------------------*/
-		float contentX = GenaueBreite - 240.0f;
-		float contentY = 150.0f - bahnhofScrollOffset;
+        if (nahmeEingabe.IsActive()) {
+            kannBewegen = false;
+        }
 
-		for (const auto& banhof : banhofListe) {
-			if (banhof.BanhofId == ausgewahlterBanhof) {
-				DrawText(TextFormat("Name: %s", banhof.Name.c_str()), contentX, contentY, 20, BLACK);
-				contentY += 30;
+        /*-------------------------------------------------
+            BAHNHOF CONTENT MIT SCROLLING
+        -------------------------------------------------*/
+        float contentX = GenaueBreite - 240.0f;
+        float contentY = 150.0f - bahnhofScrollOffset;
 
-				DrawText(TextFormat("ID: %d", banhof.BanhofId), contentX, contentY, 20, BLACK);
-				contentY += 30;
+        for (const auto& banhof : banhofListe) {
+            if (banhof.BanhofId == ausgewahlterBanhof) {
+                DrawText(TextFormat("Name: %s", banhof.Name.c_str()), contentX, contentY, 20, BLACK);
+                contentY += 30;
 
-				DrawText(TextFormat("Position: [%d, %d]", banhof.GridX, banhof.GridY), contentX, contentY, 20, BLACK);
-				contentY += 30;
+                DrawText(TextFormat("ID: %d", banhof.BanhofId), contentX, contentY, 20, BLACK);
+                contentY += 30;
 
-				DrawText(TextFormat("Rotation: %d", banhof.Rotation), contentX, contentY, 20, BLACK);
-				contentY += 30;
+                DrawText(TextFormat("Position: [%d, %d]", banhof.GridX, banhof.GridY), contentX, contentY, 20, BLACK);
+                contentY += 30;
 
-				break;
-			}
-		}
+                DrawText(TextFormat("Rotation: %d", banhof.Rotation), contentX, contentY, 20, BLACK);
+                contentY += 30;
 
-		float bahnhofContentHoehe = 4 * 30;
-		float maxBahnhofScroll = BerechneMaxScrollHoehe(bahnhofContentHoehe);
+                break;
+            }
+        }
 
-		float scrollbarX = GenaueBreite - SCROLLBAR_BREITE;
-		float scrollbarY = SEITENMENÜ_Y_START;
-		float scrollbarHoehe = GenaueHoehe - SEITENMENÜ_Y_START - 50.0f;
+        EndScissorMode();
 
-		bahnhofScrollOffset = ProccessScrollInput(bahnhofScrollOffset, maxBahnhofScroll,
-			scrollbarX, scrollbarY, scrollbarHoehe, bahnhofScrolling);
+        float bahnhofContentHoehe = 4 * 30 + 100;
+        float maxBahnhofScroll = BerechneMaxScrollHoehe(bahnhofContentHoehe);
 
-		if (maxBahnhofScroll > 0) {
-			ZeichneScrollbar(bahnhofScrollOffset, maxBahnhofScroll, bahnhofScrolling);
-		}
+        float scrollbarX = GenaueBreite - SCROLLBAR_BREITE;
+        float scrollbarY = SEITENMENÃœ_Y_START;
+        float scrollbarHoehe = GenaueHoehe - SEITENMENÃœ_Y_START - 50.0f;
 
-		if (ausgewahlterBanhof > 0 && ausgewahlterBanhof <= banhofListe.size()) {
-			banhofListe[ausgewahlterBanhof - 1].Name = nahmeEingabe.GetText();
-		}
+        bahnhofScrollOffset = ProccessScrollInput(bahnhofScrollOffset, maxBahnhofScroll,
+            scrollbarX, scrollbarY, scrollbarHoehe, bahnhofScrolling,
+            GenaueBreite - 250, 250.0f - SCROLLBAR_BREITE);
 
-		if (!nahmeEingabe.IsActive() && IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
-			BanhofSpeichern();
-		}
-	}
+        if (maxBahnhofScroll > 0) {
+            ZeichneScrollbar(bahnhofScrollOffset, maxBahnhofScroll, bahnhofScrolling,
+                scrollbarX, scrollbarY, scrollbarHoehe);
+        }
 
-	/*-------------------------------------------------
-		ZUG MENÜ
-	-------------------------------------------------*/
-	if (ausgewahlterZug != 0) {
-		DrawRectangle((float)GenaueBreite - 250.0f, 80.0f, 250.0f, (float)GenaueHoehe - 80.0f, LIGHTGRAY);
-		DrawRectangleLines((GenaueBreite - 250), 80, 250, GenaueHoehe - 80, DARKGRAY);
+        if (ausgewahlterBanhof > 0 && ausgewahlterBanhof <= banhofListe.size()) {
+            banhofListe[ausgewahlterBanhof - 1].Name = nahmeEingabe.GetText();
+        }
 
+        if (!nahmeEingabe.IsActive() && IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
+            BanhofSpeichern();
+        }
+    }
 
-		BeginScissorMode(GenaueBreite - 250, 80, 250, GenaueHoehe - 80);
+    /*-------------------------------------------------
+        ZUG MENÃœ
+    -------------------------------------------------*/
+    if (ausgewahlterZug != 0) {
+        DrawRectangle((float)GenaueBreite - 250.0f, 80.0f, 250.0f, (float)GenaueHoehe - 80.0f, LIGHTGRAY);
+        DrawRectangleLines((GenaueBreite - 250), 80, 250, GenaueHoehe - 80, DARKGRAY);
 
+        BeginScissorMode(GenaueBreite - 250, 80, 250, GenaueHoehe - 80);
 
-		zugnameEingabe.SetPosition((float)GenaueBreite - 240.0f, 100.0f - zugScrollOffset);
+        zugnameEingabe.SetPosition((float)GenaueBreite - 240.0f, 100.0f - zugScrollOffset);
 
-		if (letzterAusgewahlterZug != ausgewahlterZug) {
-			for (const auto& zug : aktiveZuege) {
-				if (zug.zugId == ausgewahlterZug) {
-					zugnameEingabe.SetText(zug.name);
-					break;
-				}
-			}
-			letzterAusgewahlterZug = ausgewahlterZug;
-			zugScrollOffset = 0.0f;
-		}
+        if (letzterAusgewahlterZug != ausgewahlterZug) {
+            for (const auto& zug : aktiveZuege) {
+                if (zug.zugId == ausgewahlterZug) {
+                    zugnameEingabe.SetText(zug.name);
+                    break;
+                }
+            }
+            letzterAusgewahlterZug = ausgewahlterZug;
+            zugScrollOffset = 0.0f;
+        }
 
-		zugnameEingabe.Update();
-		zugnameEingabe.Draw();
+        zugnameEingabe.Update();
+        zugnameEingabe.Draw();
 
-		if (zugnameEingabe.IsActive()) {
-			kannBewegen = false;
-		}
+        if (zugnameEingabe.IsActive()) {
+            kannBewegen = false;
+        }
 
-		/*-------------------------------------------------
-			ZUG CONTENT MIT SCROLLING
-		-------------------------------------------------*/
-		int yPos = 150 - (int)zugScrollOffset;
-		const int lineHeight = 25;
-		float contentX = GenaueBreite - 240.0f;
+        /*-------------------------------------------------
+            ZUG CONTENT MIT SCROLLING
+        -------------------------------------------------*/
+        float contentX = GenaueBreite - 240.0f;
+        float yPos = 150.0f - zugScrollOffset;
+        const int lineHeight = 25;
 
-		for (const auto& zug : aktiveZuege) {
-			if (zug.zugId == ausgewahlterZug) {
-				const_cast<Zug&>(zug).name = zugnameEingabe.GetText();
+        for (auto& zug : aktiveZuege) {
+            if (zug.zugId == ausgewahlterZug) {
+                zug.name = zugnameEingabe.GetText();
 
-				DrawText(TextFormat("Name: %s", zug.name.c_str()), contentX, yPos, 20, BLACK);
-				yPos += lineHeight;
+                DrawText(TextFormat("Name: %s", zug.name.c_str()), contentX, yPos, 20, BLACK);
+                yPos += lineHeight;
 
-				DrawText(TextFormat("ID: %d", zug.zugId), contentX, yPos, 20, BLACK);
-				yPos += lineHeight;
+                DrawText(TextFormat("ID: %d", zug.zugId), contentX, yPos, 20, BLACK);
+                yPos += lineHeight;
 
-				DrawText(TextFormat("Position: [%.2f, %.2f]", zug.posX, zug.posY), contentX, yPos, 20, BLACK);
-				yPos += lineHeight;
+                DrawText(TextFormat("Position: [%.2f, %.2f]", zug.posX, zug.posY), contentX, yPos, 20, BLACK);
+                yPos += lineHeight;
 
-				DrawText(TextFormat("Rotation: %d", zug.rotation), contentX, yPos, 20, BLACK);
-				yPos += lineHeight;
+                DrawText(TextFormat("Rotation: %d", zug.rotation), contentX, yPos, 20, BLACK);
+                yPos += lineHeight;
 
-				DrawText(TextFormat("Geschwindigkeit: %d km/h", zug.geschwindichkeit), contentX, yPos, 20, BLACK);
-				yPos += lineHeight;
+                DrawText(TextFormat("Geschwindigkeit: %d km/h", zug.geschwindichkeit), contentX, yPos, 20, BLACK);
+                yPos += lineHeight;
 
-				DrawText(TextFormat("Passagiere: %d", zug.passagiere), contentX, yPos, 20, BLACK);
-				yPos += lineHeight;
+                DrawText(TextFormat("Passagiere: %d", zug.passagiere), contentX, yPos, 20, BLACK);
+                yPos += lineHeight;
 
-				DrawText(TextFormat("Gueter: %d", zug.gueter), contentX, yPos, 20, BLACK);
-				yPos += lineHeight;
+                DrawText(TextFormat("Gueter: %d", zug.gueter), contentX, yPos, 20, BLACK);
+                yPos += lineHeight;
 
-				DrawText(TextFormat("Zugtyp: %s", zug.zugtyp.c_str()), contentX, yPos, 20, BLACK);
-				yPos += lineHeight;
-				/*
-					FAHRPLAN
-				*/
-				int zugplanContentHeight = 0;
-				float zugplanContainerY = yPos + 10;
-				float zugplanContainerHeight = 120;
-				ZugPlahn(ausgewahlterZug, zugplanScrollOffset, zugplanScrolling, zugplanContentHeight, zugplanContainerY);
+                DrawText(TextFormat("Zugtyp: %s", zug.zugtyp.c_str()), contentX, yPos, 20, BLACK);
+                yPos += lineHeight;
 
-				/*
-					LÖSCHEN BUTTON
-				*/
-				float deleteButtonY = zugplanContainerY + zugplanContainerHeight + 10;
+                break;
+            }
+        }
 
-				DrawRectangle(GenaueBreite - 240, deleteButtonY, 220, 30, RED);
-				DrawRectangleLines(GenaueBreite - 240, deleteButtonY, 220, 30, WHITE);
-				DrawText("Zug loeschen", GenaueBreite - 230, deleteButtonY + 5, 20, WHITE);
+        EndScissorMode();
 
-				if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON) &&
-					GetMouseX() >= GenaueBreite - 240 && GetMouseX() <= GenaueBreite - 20 &&
-					GetMouseY() >= deleteButtonY && GetMouseY() <= deleteButtonY + 30) {
-					// Zug loeschen
-					for (auto it = aktiveZuege.begin(); it != aktiveZuege.end(); ++it) {
-						if (it->zugId == ausgewahlterZug) {
-							aktiveZuege.erase(it);
-							ausgewahlterZug = 0;
-							AktiveZuegeSpeichern();
-							break;
-						}
-					}
-				}
+        zugplanContainerY = 150.0f + (8 * lineHeight) - zugScrollOffset + 20;
 
-				break;
-				/*
-					--LÖSCHEN BUTTON
-				*/
+        ZeichneZugplan(ausgewahlterZug, zugplanScrollOffset, zugplanScrolling, zugplanContainerY);
 
-				break;
-			}
-		}
+        /*-------------------------------------------------
+            LÃ–SCHEN BUTTON
+        -------------------------------------------------*/
+        float deleteButtonY = zugplanContainerY + zugplanContainerHeight + 20;
+        float deleteButtonX = GenaueBreite - 240.0f;
+        float deleteButtonWidth = 220.0f;
+        float deleteButtonHeight = 35.0f;
 
-		/*-------------------------------------------------
-			ZUG SCROLLBAR BERECHNUNG
-		-------------------------------------------------*/
-		int zugContentHoehe = 30 + (8 * lineHeight);
-		for (const auto& zug : aktiveZuege) {
-			if (zug.zugId == ausgewahlterZug) {
-				if (!zug.Fahrplan.empty()) {
-					zugContentHoehe += (int)(5 + (zug.Fahrplan.size() * (lineHeight - 5)));
-				}
-				zugContentHoehe += 50;
-				break;
-			}
-		}
+        if (deleteButtonY > 80.0f && deleteButtonY + deleteButtonHeight < GenaueHoehe - 20.0f) {
+            DrawRectangle(deleteButtonX, deleteButtonY, deleteButtonWidth, deleteButtonHeight, RED);
+            DrawRectangleLines(deleteButtonX, deleteButtonY, deleteButtonWidth, deleteButtonHeight, WHITE);
 
-		float maxZugScroll = BerechneMaxScrollHoehe(zugContentHoehe);
+            float textWidth = MeasureText("Zug loeschen", 20);
+            DrawText("Zug loeschen",
+                deleteButtonX + (deleteButtonWidth - textWidth) / 2,
+                deleteButtonY + (deleteButtonHeight - 20) / 2,
+                20, WHITE);
 
-		float scrollbarX = GenaueBreite - SCROLLBAR_BREITE;
-		float scrollbarY = SEITENMENÜ_Y_START;
-		float scrollbarHoehe = GenaueHoehe - SEITENMENÜ_Y_START - 50.0f;
+            if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON) &&
+                GetMouseX() >= deleteButtonX && GetMouseX() <= deleteButtonX + deleteButtonWidth &&
+                GetMouseY() >= deleteButtonY && GetMouseY() <= deleteButtonY + deleteButtonHeight) {
+                for (auto it = aktiveZuege.begin(); it != aktiveZuege.end(); ++it) {
+                    if (it->zugId == ausgewahlterZug) {
+                        aktiveZuege.erase(it);
+                        ausgewahlterZug = 0;
+                        AktiveZuegeSpeichern();
+                        break;
+                    }
+                }
+            }
+        }
 
-		zugScrollOffset = ProccessScrollInput(zugScrollOffset, maxZugScroll,
-			scrollbarX, scrollbarY, scrollbarHoehe, zugScrolling);
+        /*-------------------------------------------------
+            ZUG SCROLLBAR BERECHNUNG
+        -------------------------------------------------*/
+        float zugContentHoehe = 200.0f;
 
-		if (maxZugScroll > 0) {
-			ZeichneScrollbar(zugScrollOffset, maxZugScroll, zugScrolling);
-		}
+        for (const auto& zug : aktiveZuege) {
+            if (zug.zugId == ausgewahlterZug) {
+                zugContentHoehe += (8 * lineHeight);
+                zugContentHoehe += 150.0f;
+                break;
+            }
+        }
 
-		if (!zugnameEingabe.IsActive() && IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
-			AktiveZuegeSpeichern();
-		}
-		EndScissorMode();
+        float maxZugScroll = BerechneMaxScrollHoehe(zugContentHoehe);
 
-	}
-}
-void ZugPlahn(int id, float& scrollOffset, bool& isScrolling, int& contentHeight, float containerY) {
-	for (const auto& zug : aktiveZuege) {
-		if (zug.zugId == id) {
-			float containerX = GenaueBreite - 240;
-			float containerWidth = 220;
-			float containerHeight = 120;
+        scrollbarX = GenaueBreite - SCROLLBAR_BREITE;
+        scrollbarY = SEITENMENÃœ_Y_START;
+        scrollbarHoehe = GenaueHoehe - SEITENMENÃœ_Y_START - 50.0f;
 
-			DrawRectangle(containerX, containerY, containerWidth, containerHeight, Color{ 255, 255, 255, 230 });
-			DrawRectangleLines(containerX, containerY, containerWidth, containerHeight, BLACK);
+        zugScrollOffset = ProccessScrollInput(zugScrollOffset, maxZugScroll,
+            scrollbarX, scrollbarY, scrollbarHoehe, zugScrolling,
+            GenaueBreite - 250, 250.0f - SCROLLBAR_BREITE);
 
-			BeginScissorMode(containerX, containerY, containerWidth, containerHeight);
+        if (maxZugScroll > 0) {
+            ZeichneScrollbar(zugScrollOffset, maxZugScroll, zugScrolling,
+                scrollbarX, scrollbarY, scrollbarHoehe);
+        }
 
-			float contentY = containerY - scrollOffset;
-			
-
-			for (size_t i = 0; i < zug.Fahrplan.size(); i++) {
-				DrawText(TextFormat("Eintrag %d", (int)i + 1), containerX + 10, contentY, 12, DARKGRAY);
-				contentY += 18;
-			}
-
-			contentHeight = 20 + (zug.Fahrplan.size() * 18);
-
-			EndScissorMode();
-
-			float maxScroll = contentHeight - containerHeight;
-			if (maxScroll > 0) {
-				float scrollbarX = containerX + containerWidth - 8;
-				float scrollbarY = containerY;
-				float scrollbarHeight = containerHeight;
-
-				scrollOffset = ProccessScrollInput(scrollOffset, maxScroll,
-					scrollbarX, scrollbarY, scrollbarHeight, isScrolling);
-
-				ZeichneScrollbar(scrollOffset, maxScroll, isScrolling);
-			}
-
-			break;
-		}
-	}
+        if (!zugnameEingabe.IsActive() && IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
+            AktiveZuegeSpeichern();
+        }
+    }
 }
