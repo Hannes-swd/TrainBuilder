@@ -8,12 +8,12 @@
             "gueter": 0,
             "maxGueter": -858993460,
             "maxPassagiere": -858993460,
-            "name": "Zug 1",
+            "name": "Zug 3",
             "passagiere": 0,
-            "posX": -8.0,
+            "posX": -7.0,
             "posY": -19.0,
             "rotation": 0,
-            "zugId": 1,
+            "zugId": 3,
             "zugtyp": "Erster"
         },
         {
@@ -24,29 +24,13 @@
             "gueter": 0,
             "maxGueter": -858993460,
             "maxPassagiere": -858993460,
-            "name": "Zug 2",
+            "name": "Zug 3",
             "passagiere": 0,
             "posX": -6.0,
             "posY": -19.0,
             "rotation": 0,
-            "zugId": 2,
-            "zugtyp": "zweiter"
-        },
-        {
-            "Fahrplan": [],
-            "biildpfad": "resurses/Texturen/Zuege/andererzug.png",
-            "farbe": "blau",
-            "geschwindichkeit": 80,
-            "gueter": 0,
-            "maxGueter": -858993460,
-            "maxPassagiere": -858993460,
-            "name": "Zug 3",
-            "passagiere": 0,
-            "posX": -4.0,
-            "posY": -19.0,
-            "rotation": 0,
             "zugId": 3,
-            "zugtyp": "dreier"
+            "zugtyp": "zweiter"
         },
         {
             "Fahrplan": [],
@@ -58,43 +42,11 @@
             "maxPassagiere": -858993460,
             "name": "Zug 4",
             "passagiere": 0,
-            "posX": -10.0,
-            "posY": -21.0,
+            "posX": -5.0,
+            "posY": -19.0,
             "rotation": 0,
             "zugId": 4,
             "zugtyp": "dreier"
-        },
-        {
-            "Fahrplan": [],
-            "biildpfad": "resurses/Texturen/Zuege/StandartZug.png",
-            "farbe": "gruen",
-            "geschwindichkeit": 67,
-            "gueter": 0,
-            "maxGueter": -858993460,
-            "maxPassagiere": -858993460,
-            "name": "Zug 5",
-            "passagiere": 0,
-            "posX": -10.0,
-            "posY": -20.0,
-            "rotation": 0,
-            "zugId": 5,
-            "zugtyp": "zweiter"
-        },
-        {
-            "Fahrplan": [],
-            "biildpfad": "resurses/Texturen/Zuege/StandartZug.png",
-            "farbe": "rot",
-            "geschwindichkeit": 10,
-            "gueter": 0,
-            "maxGueter": -858993460,
-            "maxPassagiere": -858993460,
-            "name": "Zug 6",
-            "passagiere": 0,
-            "posX": -2.0,
-            "posY": -19.0,
-            "rotation": 0,
-            "zugId": 6,
-            "zugtyp": "Erster"
         }
     ]
 }

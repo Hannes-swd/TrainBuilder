@@ -9,6 +9,7 @@
 #include "textbox.h"
 #include "Banhof.h"
 #include "zug.h"
+#include "Ui.h"
 
 static TextBox nahmeEingabe(0, 0, 200.0f, 30.0f, 32);
 static TextBox zugnameEingabe(0, 0, 200.0f, 30.0f, 32);
@@ -22,6 +23,9 @@ static float bahnhofScrollOffset = 0.0f;
 static float zugScrollOffset = 0.0f;
 static bool bahnhofScrolling = false;
 static bool zugScrolling = false;
+
+static float zugplanScrollOffset = 0.0f;
+static bool zugplanScrolling = false;
 
 const float SEITENMENÜ_BREITE = 250.0f;
 const float SEITENMENÜ_Y_START = 80.0f;
@@ -208,6 +212,10 @@ void zeichneUI() {
 		DrawRectangle((float)GenaueBreite - 250.0f, 80.0f, 250.0f, (float)GenaueHoehe - 80.0f, LIGHTGRAY);
 		DrawRectangleLines((GenaueBreite - 250), 80, 250, GenaueHoehe - 80, DARKGRAY);
 
+
+		BeginScissorMode(GenaueBreite - 250, 80, 250, GenaueHoehe - 80);
+
+
 		zugnameEingabe.SetPosition((float)GenaueBreite - 240.0f, 100.0f - zugScrollOffset);
 
 		if (letzterAusgewahlterZug != ausgewahlterZug) {
@@ -265,19 +273,24 @@ void zeichneUI() {
 				/*
 					FAHRPLAN
 				*/
-				ZugPlahn(ausgewahlterZug); //in der zug.cpp
+				int zugplanContentHeight = 0;
+				float zugplanContainerY = yPos + 10;
+				float zugplanContainerHeight = 120;
+				ZugPlahn(ausgewahlterZug, zugplanScrollOffset, zugplanScrolling, zugplanContentHeight, zugplanContainerY);
 
 				/*
 					LÖSCHEN BUTTON
 				*/
-				DrawRectangle(GenaueBreite - 240, yPos + 10, 220, 30, RED);
-				DrawRectangleLines(GenaueBreite - 240, yPos + 10, 220, 30, WHITE);
-				DrawText("Zug loeschen", GenaueBreite - 230, yPos + 15, 20, WHITE);
+				float deleteButtonY = zugplanContainerY + zugplanContainerHeight + 10;
+
+				DrawRectangle(GenaueBreite - 240, deleteButtonY, 220, 30, RED);
+				DrawRectangleLines(GenaueBreite - 240, deleteButtonY, 220, 30, WHITE);
+				DrawText("Zug loeschen", GenaueBreite - 230, deleteButtonY + 5, 20, WHITE);
 
 				if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON) &&
 					GetMouseX() >= GenaueBreite - 240 && GetMouseX() <= GenaueBreite - 20 &&
-					GetMouseY() >= yPos + 10 && GetMouseY() <= yPos + 40) {
-					// Zug löschen
+					GetMouseY() >= deleteButtonY && GetMouseY() <= deleteButtonY + 30) {
+					// Zug loeschen
 					for (auto it = aktiveZuege.begin(); it != aktiveZuege.end(); ++it) {
 						if (it->zugId == ausgewahlterZug) {
 							aktiveZuege.erase(it);
@@ -287,6 +300,8 @@ void zeichneUI() {
 						}
 					}
 				}
+
+				break;
 				/*
 					--LÖSCHEN BUTTON
 				*/
@@ -324,6 +339,48 @@ void zeichneUI() {
 
 		if (!zugnameEingabe.IsActive() && IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
 			AktiveZuegeSpeichern();
+		}
+		EndScissorMode();
+
+	}
+}
+void ZugPlahn(int id, float& scrollOffset, bool& isScrolling, int& contentHeight, float containerY) {
+	for (const auto& zug : aktiveZuege) {
+		if (zug.zugId == id) {
+			float containerX = GenaueBreite - 240;
+			float containerWidth = 220;
+			float containerHeight = 120;
+
+			DrawRectangle(containerX, containerY, containerWidth, containerHeight, Color{ 255, 255, 255, 230 });
+			DrawRectangleLines(containerX, containerY, containerWidth, containerHeight, BLACK);
+
+			BeginScissorMode(containerX, containerY, containerWidth, containerHeight);
+
+			float contentY = containerY - scrollOffset;
+			
+
+			for (size_t i = 0; i < zug.Fahrplan.size(); i++) {
+				DrawText(TextFormat("Eintrag %d", (int)i + 1), containerX + 10, contentY, 12, DARKGRAY);
+				contentY += 18;
+			}
+
+			contentHeight = 20 + (zug.Fahrplan.size() * 18);
+
+			EndScissorMode();
+
+			float maxScroll = contentHeight - containerHeight;
+			if (maxScroll > 0) {
+				float scrollbarX = containerX + containerWidth - 8;
+				float scrollbarY = containerY;
+				float scrollbarHeight = containerHeight;
+
+				scrollOffset = ProccessScrollInput(scrollOffset, maxScroll,
+					scrollbarX, scrollbarY, scrollbarHeight, isScrolling);
+
+				ZeichneScrollbar(scrollOffset, maxScroll, isScrolling);
+			}
+
+			break;
 		}
 	}
 }

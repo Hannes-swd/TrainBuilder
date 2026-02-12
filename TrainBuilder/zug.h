@@ -6,4 +6,4 @@ bool IstZugBereitsVorhanden(int gridX, int gridY);
 void AktiveZuegeSpeichern();
 void ZeichneZuege();
 void BewegeZuege();
-void ZugPlahn(int id);
+//void ZugPlahn(int id);
