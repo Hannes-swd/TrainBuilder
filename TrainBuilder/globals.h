@@ -33,7 +33,10 @@ extern int ausgewahlterZug;
 extern int aktuellesTool;
 
 extern bool untermenueOffen;
-
+/*-------------------------------------------------
+	Scrolen
+-------------------------------------------------*/
+extern const float SCROLLBAR_BREITE;
 /*-------------------------------------------------
 	MOUSEKLICK/SCHIENEN PLAZIEREN
 -------------------------------------------------*/
@@ -122,3 +125,4 @@ struct Zug {
 	}
 };
 extern std::vector<Zug> aktiveZuege;
+extern int zugplanContainerHeight;

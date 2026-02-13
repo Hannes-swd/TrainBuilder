@@ -5,6 +5,8 @@
 #include <vector>
 #include "raylib.h"
 #include "globals.h"
+#include "Ui.h"
+
 
 
 /*-------------------------------------------------
@@ -43,6 +45,11 @@ int aktuellesTool = 1;
 bool untermenueOffen = false;
 
 /*-------------------------------------------------
+	Scrolen
+-------------------------------------------------*/
+const float SCROLLBAR_BREITE = 12.0f;
+
+/*-------------------------------------------------
 	Mausposition
 -------------------------------------------------*/
 Vector2 mousePosition = { 0, 0 };
@@ -77,3 +84,4 @@ std::vector<ZugArt> zugArtenListe;
 	Züge
 -------------------------------------------------*/
 std::vector<Zug> aktiveZuege;
+int zugplanContainerHeight = 220;
