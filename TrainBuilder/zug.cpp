@@ -15,6 +15,23 @@
 
 using json = nlohmann::json;
 
+bool ZugIdExistiert(int id) {
+    for (const auto& zug : aktiveZuege) {
+        if (zug.zugId == id) {
+            return true;
+        }
+    }
+    return false;
+}
+
+int GenerateUniqueZugId() {
+    int id = 1;
+    while (ZugIdExistiert(id)) {
+        id++;
+    }
+    return id;
+}
+
 void zugPlazieren(int gridX, int gridY, int zugArtId) {
     if (zugArtId == 0)
         return;
@@ -38,12 +55,21 @@ void zugPlazieren(int gridX, int gridY, int zugArtId) {
     }
 
     Zug neuerZug;
-    neuerZug.zugId = (int)aktiveZuege.size() + 1;
+    neuerZug.zugId = GenerateUniqueZugId();
+
+    // Schaut ob neie id
+    if (ZugIdExistiert(neuerZug.zugId)) {
+        std::cerr << "FEHLER: zugId " << neuerZug.zugId << " existiert bereits!" << std::endl;
+        return;
+    }
+
     neuerZug.posX = gridX;
     neuerZug.posY = gridY;
     neuerZug.rotation = 0;
 
     neuerZug.name = "Zug " + std::to_string(neuerZug.zugId);
+    neuerZug.maxPassagiere = gefundeneZugArt->passagiere;
+    neuerZug.maxGueter = gefundeneZugArt->gueter;
     neuerZug.passagiere = gefundeneZugArt->passagiere;
     neuerZug.gueter = gefundeneZugArt->gueter;
     neuerZug.zugtyp = gefundeneZugArt->zugtyp;
@@ -58,7 +84,7 @@ void zugPlazieren(int gridX, int gridY, int zugArtId) {
 
     std::cout << "Zug platziert: " << neuerZug.name
         << " an Position [" << gridX << ", " << gridY << "]"
-        << " mit ID: " << neuerZug.zugId << std::endl;
+        << " mit eindeutiger ID: " << neuerZug.zugId << std::endl;
 }
 
 bool IstZugBereitsVorhanden(int gridX, int gridY) {
@@ -81,8 +107,8 @@ void AktiveZuegeSpeichern() {
         zugJson["posY"] = zug.posY;
         zugJson["rotation"] = zug.rotation;
         zugJson["name"] = zug.name;
-		zugJson["maxPassagiere"] = zug.maxPassagiere;
-		zugJson["maxGueter"] = zug.maxGueter;
+        zugJson["maxPassagiere"] = zug.maxPassagiere;
+        zugJson["maxGueter"] = zug.maxGueter;
         zugJson["passagiere"] = zug.passagiere;
         zugJson["gueter"] = zug.gueter;
         zugJson["Fahrplan"] = zug.Fahrplan;
@@ -99,32 +125,35 @@ void AktiveZuegeSpeichern() {
     if (datei.is_open()) {
         datei << jsonDaten.dump(4);
         datei.close();
+        std::cout << "DEBUG: " << aktiveZuege.size() << " Zuege gespeichert" << std::endl;
     }
     else {
         std::cerr << "Fehler: AktiveZuege.json konnte nicht geöffnet werden!" << std::endl;
     }
 }
+
 void ZeichneZuege() {
     for (const auto& zug : aktiveZuege) {
 
-        
+
         DrawRectangle(
             zug.posX * GRID_SIZE + GRID_SIZE / 4,
             zug.posY * GRID_SIZE + GRID_SIZE / 4,
             GRID_SIZE / 2,
             GRID_SIZE / 2,
             //verschiedene farben
-            
+
             zug.farbe == "rot" ? RED :
             zug.farbe == "blau" ? BLUE :
-            zug.farbe == "gruen" ? GREEN : 
-			GRAY
-            
-		);
-	}
+            zug.farbe == "gruen" ? GREEN :
+            GRAY
+
+        );
+    }
 }
+
 void BewegeZuege() {
     for (auto& zug : aktiveZuege) {
         //später alle züge
-	}
+    }
 }

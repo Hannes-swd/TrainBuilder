@@ -1,5 +1,4 @@
-﻿
-#include <iostream>
+﻿#include <iostream>
 #include <ctime>
 #include <cmath>
 #include "LoadTexture.h"
@@ -55,7 +54,7 @@ float BerechneMaxScrollHoehe(float contentHoehe) {
 }
 
 void ZeichneScrollbar(float scrollOffset, float maxScroll, bool isActive, float x, float y, float hoehe) {
-    
+
 
     if (maxScroll <= 0) return;
 
