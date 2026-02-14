@@ -33,10 +33,7 @@
             "zugtyp": "zweiter"
         },
         {
-            "Fahrplan": [
-                "nord nord",
-                "test"
-            ],
+            "Fahrplan": [],
             "biildpfad": "resurses/Texturen/Zuege/andererzug.png",
             "farbe": "blau",
             "geschwindichkeit": 80,

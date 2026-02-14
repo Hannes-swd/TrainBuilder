@@ -298,14 +298,12 @@ void zeichneUI() {
             }
         }
 
-        ZeichneZugplan(ausgewahlterZug, zugplanScrollOffset, zugplanScrolling, zugplanContainerY);
-
-        float haltestelleButtonY = zugplanContainerY + actualZugplanHeight + 5;
-
         /*-------------------------------------------------
-            LÖSCHEN BUTTON - Jetzt UNTER dem Haltestelle-Button
+            LÖSCHEN BUTTON - VOR dem Zugplan zeichnen!
         -------------------------------------------------*/
-        float deleteButtonY = haltestelleButtonY + 30;
+        float haltestelleButtonY = zugplanContainerY + actualZugplanHeight + 5;
+        float haltestelleButtonHeight = 25.0f;
+        float deleteButtonY = haltestelleButtonY + haltestelleButtonHeight + 10;
         float deleteButtonX = GenaueBreite - 240.0f;
         float deleteButtonWidth = 220.0f;
         float deleteButtonHeight = 35.0f;
@@ -333,6 +331,8 @@ void zeichneUI() {
                 }
             }
         }
+
+        ZeichneZugplan(ausgewahlterZug, zugplanScrollOffset, zugplanScrolling, zugplanContainerY);
 
         /*-------------------------------------------------
             ZUG SCROLLBAR BERECHNUNG
