@@ -127,7 +127,7 @@ void zeichneUI() {
     }
 
     DrawTexture("zeichnen", 10.0f, 10.0f, 60.0f, 60.0f);
-    DrawTexture("Loeschen", 80.0f, 10.0f, 60.0f, 60.0f);
+    DrawTexture("Löschen", 80.0f, 10.0f, 60.0f, 60.0f);
     DrawTexture("Auswahl", 150.0f, 10.0f, 60.0f, 60.0f);
     DrawTexture("Banhof", 220.0f, 10.0f, 60.0f, 60.0f);
     DrawTexture("zugicon", 290.0f, 10.0f, 60.0f, 60.0f);
