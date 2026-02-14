@@ -126,3 +126,4 @@ struct Zug {
 };
 extern std::vector<Zug> aktiveZuege;
 extern int zugplanContainerHeight;
+extern bool haltestelleMenuOffen;

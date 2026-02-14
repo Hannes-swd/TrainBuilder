@@ -74,7 +74,6 @@ void ZeichneZugplan(int id, float& scrollOffset, bool& isScrolling, float contai
 }
 
 void NeueHaltestelleHinzufuegen(int zugId, float containerY, float containerHeight) {
-    static bool haltestelleMenuOffen = false;
     static int selectedZugId = 0;
     static float menuX = 0;
     static float menuY = 0;

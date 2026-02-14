@@ -319,6 +319,7 @@ void zeichneUI() {
                 20, WHITE);
 
             if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON) &&
+                !haltestelleMenuOffen && 
                 GetMouseX() >= deleteButtonX && GetMouseX() <= deleteButtonX + deleteButtonWidth &&
                 GetMouseY() >= deleteButtonY && GetMouseY() <= deleteButtonY + deleteButtonHeight) {
                 for (auto it = aktiveZuege.begin(); it != aktiveZuege.end(); ++it) {

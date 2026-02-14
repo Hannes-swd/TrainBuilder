@@ -85,3 +85,5 @@ std::vector<ZugArt> zugArtenListe;
 -------------------------------------------------*/
 std::vector<Zug> aktiveZuege;
 int zugplanContainerHeight = 60;
+
+bool haltestelleMenuOffen = false;
