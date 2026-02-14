@@ -198,16 +198,23 @@ void LinksGeklickt(Vector2 mausposition) {
     LÖSCHTOOL
 -------------------------------------------------*/
 void Loeschentool(Vector2 mausposition) {
-	
-    // Lösct als erstes banhof und wen nicht dan gleis
+    // Banhöfe
     if (IstBanhofBereitsVorhanden(
         (int)floor(mausposition.x / GRID_SIZE),
         (int)floor(mausposition.y / GRID_SIZE))) {
 
         if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {
-            // Löscht banhof
+            
             int MouseGridX = (int)floor(mausposition.x / GRID_SIZE);
             int MouseGridY = (int)floor(mausposition.y / GRID_SIZE);
+
+            std::string geloeschterBanhofName;
+            for (const auto& banhof : banhofListe) {
+                if (banhof.GridX == MouseGridX && banhof.GridY == MouseGridY) {
+                    geloeschterBanhofName = banhof.Name;
+                    break;
+                }
+            }
 
             auto it = std::remove_if(banhofListe.begin(), banhofListe.end(),
                 [MouseGridX, MouseGridY](const BanhofObjeckt& banhof) {
@@ -216,12 +223,25 @@ void Loeschentool(Vector2 mausposition) {
 
             if (it != banhofListe.end()) {
                 banhofListe.erase(it, banhofListe.end());
+
+                // löscht aus fahrplan
+                if (!geloeschterBanhofName.empty()) {
+                    for (auto& zug : aktiveZuege) {
+                        auto& fahrplan = zug.Fahrplan;
+                        fahrplan.erase(
+                            std::remove(fahrplan.begin(), fahrplan.end(), geloeschterBanhofName),
+                            fahrplan.end()
+                        );
+                    }
+                    AktiveZuegeSpeichern();
+                }
+
                 BanhofSpeichern();
             }
             return;
         }
     }
-    
+	// Gleise
     else {
         if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {
             Vector2 screenMousePos = GetMousePosition();

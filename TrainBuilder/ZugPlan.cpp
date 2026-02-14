@@ -42,7 +42,7 @@ void ZeichneZugplan(int id, float& scrollOffset, bool& isScrolling, float contai
             if (zug.Fahrplan.empty()) {
                 DrawText("Keine Fahrplaene", containerX + 15, containerY + 30, 12, GRAY);
             }
-            else {
+            else {  
                 for (size_t i = 0; i < zug.Fahrplan.size(); i++) {
                     DrawRectangle(containerX + 10, contentY + (i * 20), containerWidth - 30, 18, Color{ 200, 200, 255, 255 });
                     DrawRectangleLines(containerX + 10, contentY + (i * 20), containerWidth - 30, 18, DARKBLUE);
