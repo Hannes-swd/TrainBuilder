@@ -39,10 +39,9 @@
         {
             "Fahrplan": [
                 "nordbanhof",
-                "nord nord",
-                "westbanhof",
-                "unten banhf",
-                "ostbanhof"
+                "mittecool",
+                "test",
+                "cool"
             ],
             "biildpfad": "resurses/Texturen/Zuege/andererzug.png",
             "farbe": "blau",
@@ -56,22 +55,6 @@
             "posY": -19.0,
             "rotation": 0,
             "zugId": 2,
-            "zugtyp": "dreier"
-        },
-        {
-            "Fahrplan": [],
-            "biildpfad": "resurses/Texturen/Zuege/andererzug.png",
-            "farbe": "blau",
-            "geschwindichkeit": 80,
-            "gueter": 0,
-            "maxGueter": 0,
-            "maxPassagiere": 0,
-            "name": "Zug 3",
-            "passagiere": 0,
-            "posX": 4.0,
-            "posY": -19.0,
-            "rotation": 0,
-            "zugId": 3,
             "zugtyp": "dreier"
         }
     ]

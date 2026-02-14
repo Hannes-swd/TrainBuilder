@@ -127,7 +127,7 @@ void zeichneUI() {
     }
 
     DrawTexture("zeichnen", 10.0f, 10.0f, 60.0f, 60.0f);
-    DrawTexture("Löschen", 80.0f, 10.0f, 60.0f, 60.0f);
+    DrawTexture("Loeschen", 80.0f, 10.0f, 60.0f, 60.0f);
     DrawTexture("Auswahl", 150.0f, 10.0f, 60.0f, 60.0f);
     DrawTexture("Banhof", 220.0f, 10.0f, 60.0f, 60.0f);
     DrawTexture("zugicon", 290.0f, 10.0f, 60.0f, 60.0f);
@@ -299,7 +299,7 @@ void zeichneUI() {
         }
 
         /*-------------------------------------------------
-            LÖSCHEN BUTTON - VOR dem Zugplan zeichnen!
+            LÖSCHEN BUTTON
         -------------------------------------------------*/
         float haltestelleButtonY = zugplanContainerY + actualZugplanHeight + 5;
         float haltestelleButtonHeight = 25.0f;
@@ -319,7 +319,7 @@ void zeichneUI() {
                 20, WHITE);
 
             if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON) &&
-                !haltestelleMenuOffen && 
+                !haltestelleMenuOffen &&
                 GetMouseX() >= deleteButtonX && GetMouseX() <= deleteButtonX + deleteButtonWidth &&
                 GetMouseY() >= deleteButtonY && GetMouseY() <= deleteButtonY + deleteButtonHeight) {
                 for (auto it = aktiveZuege.begin(); it != aktiveZuege.end(); ++it) {
@@ -373,5 +373,9 @@ void zeichneUI() {
         if (!zugnameEingabe.IsActive() && IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
             AktiveZuegeSpeichern();
         }
+    }
+
+    if (ausgewahlterZug != 0) {
+        ZeichneDraggingItem(ausgewahlterZug, zugplanContainerY);
     }
 }

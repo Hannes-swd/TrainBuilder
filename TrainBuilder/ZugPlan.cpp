@@ -11,6 +11,10 @@
 #include "Ui.h"
 #include "ZugPlan.h"
 
+int draggedZugId = -1;
+int draggedHaltestelleIndex = -1;
+int dropLinePosition = -1;
+float dragOffsetY = 0.0f;
 
 void ZeichneZugplan(int id, float& scrollOffset, bool& isScrolling, float containerY) {
     for (auto& zug : aktiveZuege) {
@@ -42,21 +46,49 @@ void ZeichneZugplan(int id, float& scrollOffset, bool& isScrolling, float contai
             if (zug.Fahrplan.empty()) {
                 DrawText("Keine Fahrplaene", containerX + 15, containerY + 30, 12, GRAY);
             }
-            else {  
+            else {
+                Vector2 mousePos = GetMousePosition();
+
                 for (size_t i = 0; i < zug.Fahrplan.size(); i++) {
-                    DrawRectangle(containerX + 10, contentY + (i * 20), containerWidth - 30, 18, Color{ 200, 200, 255, 255 });
-                    DrawRectangleLines(containerX + 10, contentY + (i * 20), containerWidth - 30, 18, DARKBLUE);
-                    DrawText(zug.Fahrplan[i].c_str(), containerX + 15, contentY + (i * 20) + 2, 12, BLACK);
-					//Löschen Button
-					float deleteButtonX = containerX + containerWidth - 30;
-					float deleteButtonY = contentY + (i * 20);
-					float deleteButtonSize = 18.0f;
-					DrawRectangle(deleteButtonX, deleteButtonY, deleteButtonSize, deleteButtonSize, RED);
-					DrawLine(deleteButtonX, deleteButtonY, deleteButtonX + deleteButtonSize, deleteButtonY + deleteButtonSize, WHITE);
-					DrawLine(deleteButtonX + deleteButtonSize, deleteButtonY, deleteButtonX, deleteButtonY + deleteButtonSize, WHITE);
-					
+                    float itemY = contentY + (i * 20);
+                    float itemX = containerX + 10;
+                    float itemWidth = containerWidth - 40;
+                    float itemHeight = 18.0f;
+
+                    bool isHovered = (mousePos.x >= itemX && mousePos.x <= itemX + itemWidth &&
+                        mousePos.y >= itemY && mousePos.y <= itemY + itemHeight);
+
+                    Color itemColor;
+                    if (draggedZugId == zug.zugId && draggedHaltestelleIndex == (int)i) {
+                        itemColor = Color{ 200, 200, 255, 80 };
+                    }
+                    else if (isHovered && draggedZugId == -1) {
+                        itemColor = Color{ 220, 220, 255, 255 };
+                    }
+                    else {
+                        itemColor = Color{ 200, 200, 255, 255 };
+                    }
+
+                    DrawRectangle(itemX, itemY, itemWidth, itemHeight, itemColor);
+                    DrawRectangleLines(itemX, itemY, itemWidth, itemHeight, DARKBLUE);
+                    DrawText(zug.Fahrplan[i].c_str(), itemX + 5, itemY + 2, 12, BLACK);
+
+                    // Löschen Button
+                    float deleteButtonX = containerX + containerWidth - 30;
+                    float deleteButtonY = itemY;
+                    float deleteButtonSize = 18.0f;
+
+                    DrawRectangle(deleteButtonX, deleteButtonY, deleteButtonSize, deleteButtonSize, RED);
+                    DrawLine(deleteButtonX, deleteButtonY, deleteButtonX + deleteButtonSize, deleteButtonY + deleteButtonSize, WHITE);
+                    DrawLine(deleteButtonX + deleteButtonSize, deleteButtonY, deleteButtonX, deleteButtonY + deleteButtonSize, WHITE);
+
+                    if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON) && isHovered) {
+                        draggedZugId = zug.zugId;
+                        draggedHaltestelleIndex = i;
+                        dragOffsetY = mousePos.y - itemY;
+                    }
+
                     if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
-                        Vector2 mousePos = GetMousePosition();
                         if (mousePos.x >= deleteButtonX && mousePos.x <= deleteButtonX + deleteButtonSize &&
                             mousePos.y >= deleteButtonY && mousePos.y <= deleteButtonY + deleteButtonSize) {
                             zug.Fahrplan.erase(zug.Fahrplan.begin() + i);
@@ -64,7 +96,74 @@ void ZeichneZugplan(int id, float& scrollOffset, bool& isScrolling, float contai
                             break;
                         }
                     }
-                    //fertig löschen
+                }
+
+                // Drag-Handling
+                if (draggedZugId == zug.zugId && draggedHaltestelleIndex >= 0) {
+                    if (IsMouseButtonDown(MOUSE_LEFT_BUTTON)) {
+                        Vector2 mousePos = GetMousePosition();
+
+                        dropLinePosition = -1;
+                        for (size_t i = 0; i < zug.Fahrplan.size(); i++) {
+                            float targetItemY = contentY + (i * 20);
+                            if (mousePos.y >= targetItemY && mousePos.y < targetItemY + 20) {
+                                if (mousePos.y < targetItemY + 10) {
+                                    dropLinePosition = i; 
+                                }
+                                else {
+                                    dropLinePosition = i + 1;
+                                }
+                                break;
+                            }
+                        }
+
+                        if (dropLinePosition == -1 && mousePos.y > contentY + (zug.Fahrplan.size() * 20)) {
+                            dropLinePosition = zug.Fahrplan.size();
+                        }
+
+                        if (dropLinePosition >= 0) {
+                            float containerX = GenaueBreite - 240.0f;
+                            float containerWidth = 220.0f;
+                            float itemX = containerX + 10;
+                            float itemWidth = containerWidth - 40;
+
+                            if (dropLinePosition < (int)zug.Fahrplan.size()) {
+                                // Linie
+                                float lineY = contentY + (dropLinePosition * 20);
+                                DrawLine(itemX - 5, lineY - 2, itemX + itemWidth + 5, lineY - 2, GREEN);
+                                DrawLine(itemX - 5, lineY - 1, itemX + itemWidth + 5, lineY - 1, GREEN);
+                            }
+                            else {
+                                float lineY = contentY + (zug.Fahrplan.size() * 20);
+                                DrawLine(itemX - 5, lineY + 2, itemX + itemWidth + 5, lineY + 2, GREEN);
+                                DrawLine(itemX - 5, lineY + 1, itemX + itemWidth + 5, lineY + 1, GREEN);
+                            }
+                        }
+                    }
+                    else {
+                        if (draggedHaltestelleIndex >= 0 && dropLinePosition >= 0) {
+                            if (dropLinePosition != draggedHaltestelleIndex &&
+                                dropLinePosition != draggedHaltestelleIndex + 1) {
+
+                                std::string draggedElement = zug.Fahrplan[draggedHaltestelleIndex];
+
+                                zug.Fahrplan.erase(zug.Fahrplan.begin() + draggedHaltestelleIndex);
+
+                                int newInsertPos = dropLinePosition;
+                                if (dropLinePosition > draggedHaltestelleIndex) {
+                                    newInsertPos--;
+                                }
+
+                                zug.Fahrplan.insert(zug.Fahrplan.begin() + newInsertPos, draggedElement);
+
+                                AktiveZuegeSpeichern();
+                            }
+                        }
+
+                        draggedZugId = -1;
+                        draggedHaltestelleIndex = -1;
+                        dropLinePosition = -1;
+                    }
                 }
             }
 
@@ -86,6 +185,34 @@ void ZeichneZugplan(int id, float& scrollOffset, bool& isScrolling, float contai
             else {
                 scrollOffset = 0.0f;
             }
+            break;
+        }
+    }
+}
+
+void ZeichneDraggingItem(int zugId, float containerY) {
+    if (draggedZugId != zugId || draggedHaltestelleIndex < 0) return;
+
+    for (auto& zug : aktiveZuege) {
+        if (zug.zugId == zugId && draggedHaltestelleIndex < (int)zug.Fahrplan.size()) {
+            float containerX = GenaueBreite - 240.0f;
+            float containerWidth = 220.0f;
+
+            Vector2 mousePos = GetMousePosition();
+            float dragItemX = containerX + 10;
+            float dragItemWidth = containerWidth - 40;
+            float dragItemHeight = 18.0f;
+            float dragItemY = mousePos.y - 9;
+
+            DrawRectangle(dragItemX - 2, dragItemY - 2, dragItemWidth + 4, dragItemHeight + 4,
+                Color{ 0, 0, 0, 80 });
+
+            // Dragging
+            DrawRectangle(dragItemX, dragItemY, dragItemWidth, dragItemHeight,
+                Color{ 100, 150, 255, 255 });
+            DrawRectangleLines(dragItemX, dragItemY, dragItemWidth, dragItemHeight, DARKBLUE);
+            DrawText(zug.Fahrplan[draggedHaltestelleIndex].c_str(), dragItemX + 5, dragItemY + 2, 12, BLACK);
+
             break;
         }
     }
