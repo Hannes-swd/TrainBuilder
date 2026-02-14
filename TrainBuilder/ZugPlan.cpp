@@ -47,6 +47,24 @@ void ZeichneZugplan(int id, float& scrollOffset, bool& isScrolling, float contai
                     DrawRectangle(containerX + 10, contentY + (i * 20), containerWidth - 30, 18, Color{ 200, 200, 255, 255 });
                     DrawRectangleLines(containerX + 10, contentY + (i * 20), containerWidth - 30, 18, DARKBLUE);
                     DrawText(zug.Fahrplan[i].c_str(), containerX + 15, contentY + (i * 20) + 2, 12, BLACK);
+					//Löschen Button
+					float deleteButtonX = containerX + containerWidth - 30;
+					float deleteButtonY = contentY + (i * 20);
+					float deleteButtonSize = 18.0f;
+					DrawRectangle(deleteButtonX, deleteButtonY, deleteButtonSize, deleteButtonSize, RED);
+					DrawLine(deleteButtonX, deleteButtonY, deleteButtonX + deleteButtonSize, deleteButtonY + deleteButtonSize, WHITE);
+					DrawLine(deleteButtonX + deleteButtonSize, deleteButtonY, deleteButtonX, deleteButtonY + deleteButtonSize, WHITE);
+					
+                    if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
+                        Vector2 mousePos = GetMousePosition();
+                        if (mousePos.x >= deleteButtonX && mousePos.x <= deleteButtonX + deleteButtonSize &&
+                            mousePos.y >= deleteButtonY && mousePos.y <= deleteButtonY + deleteButtonSize) {
+                            zug.Fahrplan.erase(zug.Fahrplan.begin() + i);
+                            AktiveZuegeSpeichern();
+                            break;
+                        }
+                    }
+                    //fertig löschen
                 }
             }
 
