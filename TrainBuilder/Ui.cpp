@@ -1,5 +1,4 @@
-﻿#include <iostream>
-#include <ctime>
+﻿#include <ctime>
 #include <cmath>
 #include "LoadTexture.h"
 #include "raylib.h"
@@ -30,9 +29,7 @@ static bool zugplanScrolling = false;
 const float SEITENMENÜ_BREITE = 250.0f;
 const float SEITENMENÜ_Y_START = 80.0f;
 
-
 float zugplanContainerY = 0.0f;
-
 
 float scrollbarX = 0.0f;
 float scrollbarY = 0.0f;
@@ -54,18 +51,16 @@ float BerechneMaxScrollHoehe(float contentHoehe) {
 }
 
 void ZeichneScrollbar(float scrollOffset, float maxScroll, bool isActive, float x, float y, float hoehe) {
-
-
     if (maxScroll <= 0) return;
 
-    DrawRectangle(scrollbarX, scrollbarY, SCROLLBAR_BREITE, scrollbarHoehe, Color{ 200, 200, 200, 255 });
+    DrawRectangle(x, y, SCROLLBAR_BREITE, hoehe, Color{ 200, 200, 200, 255 });
 
-    float thumbHoehe = scrollbarHoehe * (scrollbarHoehe / (scrollbarHoehe + maxScroll));
-    float thumbY = scrollbarY + (scrollOffset / maxScroll) * (scrollbarHoehe - thumbHoehe);
+    float thumbHoehe = hoehe * (hoehe / (hoehe + maxScroll));
+    float thumbY = y + (scrollOffset / maxScroll) * (hoehe - thumbHoehe);
 
     Color thumbColor = isActive ? DARKGRAY : GRAY;
-    DrawRectangle(scrollbarX, thumbY, SCROLLBAR_BREITE, thumbHoehe, thumbColor);
-    DrawRectangleLines(scrollbarX, thumbY, SCROLLBAR_BREITE, thumbHoehe, BLACK);
+    DrawRectangle(x, thumbY, SCROLLBAR_BREITE, thumbHoehe, thumbColor);
+    DrawRectangleLines(x, thumbY, SCROLLBAR_BREITE, thumbHoehe, BLACK);
 }
 
 float ProccessScrollInput(float currentOffset, float maxScroll, float scrollbarX, float scrollbarY,
@@ -109,8 +104,6 @@ float ProccessScrollInput(float currentOffset, float maxScroll, float scrollbarX
 
     return currentOffset;
 }
-
-
 
 void zeichneUI() {
     kannBewegen = true;
@@ -291,12 +284,28 @@ void zeichneUI() {
 
         zugplanContainerY = 150.0f + (8 * lineHeight) - zugScrollOffset + 20;
 
+        float actualZugplanHeight = 0;
+
+        for (auto& zug : aktiveZuege) {
+            if (zug.zugId == ausgewahlterZug) {
+                if (zug.Fahrplan.empty()) {
+                    actualZugplanHeight = 60.0f;
+                }
+                else {
+                    actualZugplanHeight = 25.0f + (zug.Fahrplan.size() * 20.0f) + 30.0f;
+                }
+                break;
+            }
+        }
+
         ZeichneZugplan(ausgewahlterZug, zugplanScrollOffset, zugplanScrolling, zugplanContainerY);
 
+        float haltestelleButtonY = zugplanContainerY + actualZugplanHeight + 5;
+
         /*-------------------------------------------------
-            LÖSCHEN BUTTON
+            LÖSCHEN BUTTON - Jetzt UNTER dem Haltestelle-Button
         -------------------------------------------------*/
-        float deleteButtonY = zugplanContainerY + zugplanContainerHeight + 20;
+        float deleteButtonY = haltestelleButtonY + 30;
         float deleteButtonX = GenaueBreite - 240.0f;
         float deleteButtonWidth = 220.0f;
         float deleteButtonHeight = 35.0f;
@@ -333,7 +342,14 @@ void zeichneUI() {
         for (const auto& zug : aktiveZuege) {
             if (zug.zugId == ausgewahlterZug) {
                 zugContentHoehe += (8 * lineHeight);
-                zugContentHoehe += 150.0f;
+                if (zug.Fahrplan.empty()) {
+                    zugContentHoehe += 60.0f;
+                }
+                else {
+                    zugContentHoehe += 25.0f + (zug.Fahrplan.size() * 20.0f) + 30.0f;
+                }
+                zugContentHoehe += 40.0f;
+                zugContentHoehe += 45.0f;
                 break;
             }
         }

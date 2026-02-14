@@ -1,33 +1,6 @@
 {
     "AktiveZuege": [
         {
-            "Fahrplan": [
-                "test",
-                "andere",
-                "test",
-                "andere",
-                "test",
-                "andere",
-                "test",
-                "andere",
-                "test",
-                "andere"
-            ],
-            "biildpfad": "resurses/Texturen/Zuege/andererzug.png",
-            "farbe": "blau",
-            "geschwindichkeit": 80,
-            "gueter": 0,
-            "maxGueter": -858993460,
-            "maxPassagiere": -858993460,
-            "name": "Zug 4",
-            "passagiere": 0,
-            "posX": -6.0,
-            "posY": -19.0,
-            "rotation": 0,
-            "zugId": 4,
-            "zugtyp": "dreier"
-        },
-        {
             "Fahrplan": [],
             "biildpfad": "resurses/Texturen/Zuege/StandartZug.png",
             "farbe": "rot",
@@ -58,6 +31,25 @@
             "rotation": 0,
             "zugId": 5,
             "zugtyp": "zweiter"
+        },
+        {
+            "Fahrplan": [
+                "nord nord",
+                "test"
+            ],
+            "biildpfad": "resurses/Texturen/Zuege/andererzug.png",
+            "farbe": "blau",
+            "geschwindichkeit": 80,
+            "gueter": 0,
+            "maxGueter": 0,
+            "maxPassagiere": 0,
+            "name": "Zug 2",
+            "passagiere": 0,
+            "posX": -6.0,
+            "posY": -19.0,
+            "rotation": 0,
+            "zugId": 2,
+            "zugtyp": "dreier"
         }
     ]
 }
