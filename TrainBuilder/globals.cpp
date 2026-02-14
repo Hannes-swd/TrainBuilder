@@ -84,4 +84,4 @@ std::vector<ZugArt> zugArtenListe;
 	Züge
 -------------------------------------------------*/
 std::vector<Zug> aktiveZuege;
-int zugplanContainerHeight = 220;
+int zugplanContainerHeight = 60;

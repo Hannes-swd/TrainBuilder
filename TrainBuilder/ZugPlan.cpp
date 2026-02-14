@@ -10,6 +10,7 @@
 #include "Banhof.h"
 #include "zug.h"
 #include "Ui.h"
+#include "ZugPlan.h"
 
 
 void ZeichneZugplan(int id, float& scrollOffset, bool& isScrolling, float containerY) {
@@ -34,14 +35,20 @@ void ZeichneZugplan(int id, float& scrollOffset, bool& isScrolling, float contai
 
             if (zug.Fahrplan.empty()) {
                 DrawText("Keine Fahrplaene", containerX + 15, containerY + 30, 12, GRAY);
+				zugplanContainerHeight = 60;
             }
             else {
+                //macht den kasten gröser
+				zugplanContainerHeight = 25.0f + (zug.Fahrplan.size() * 20.0f) + 30.0f;
                 for (size_t i = 0; i < zug.Fahrplan.size(); i++) {
-                    DrawText(TextFormat("Eintrag %d", (int)i + 1), containerX + 15, contentY, 12, DARKGRAY);
-                    contentY += 20;
+                    DrawRectangle(containerX + 10, contentY + (i * 20), containerWidth - 30, 18, Color{ 200, 200, 255, 255 });
+                    DrawRectangleLines(containerX + 10, contentY + (i * 20), containerWidth - 30, 18, DARKBLUE);
+					DrawText(zug.Fahrplan[i].c_str(), containerX + 15, contentY + (i * 20) + 2, 12, BLACK);
                 }
             }
-
+			//neue haltestelle hinzufügen button
+            NeueHaltestelleHinzufuegen(zug.zugId, containerY);
+            
             EndScissorMode();
 
             if (maxScroll > 0) {
@@ -59,6 +66,30 @@ void ZeichneZugplan(int id, float& scrollOffset, bool& isScrolling, float contai
                 scrollOffset = 0.0f;
             }
             break;
+        }
+    }
+}
+void NeueHaltestelleHinzufuegen(int zugId, float containerY) {
+    for (auto& zug : aktiveZuege) {
+        if (zug.zugId == zugId) {
+   //         float buttonX = GenaueBreite - 240.0f + 10.0f;
+   //         float buttonY = containerY + zugplanContainerHeight - 30.0f;
+   //         float buttonWidth = 200.0f;
+   //         float buttonHeight = 25.0f;
+   //         DrawRectangle(buttonX, buttonY, buttonWidth, buttonHeight, Color{ 100, 200, 100, 255 });
+   //         DrawRectangleLines(buttonX, buttonY, buttonWidth, buttonHeight, DARKGREEN);
+   //         DrawText("Neue Haltestelle hinzufügen", buttonX + 10, buttonY + 5, 12, BLACK);
+   //         // Überprüfen auf Klick
+   //         if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
+   //             Vector2 mousePos = GetMousePosition();
+   //             if (mousePos.x >= buttonX && mousePos.x <= buttonX + buttonWidth &&
+   //                 mousePos.y >= buttonY && mousePos.y <= buttonY + buttonHeight) {
+   //                 zug.Fahrplan.push_back("Neue Haltestelle");
+   //                 zugplanContainerHeight += 20.0f; 
+   //             }
+   //         }
+			//break;
+
         }
     }
 }
