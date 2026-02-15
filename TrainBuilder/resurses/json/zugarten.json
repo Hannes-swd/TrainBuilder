@@ -3,7 +3,7 @@
         {
             "id": 1,
             "name": "StandartZug",
-            "geschwindichkeit": 10,
+            "geschwindichkeit": 4,
             "passagiere": 0,
             "gueter": 0,
             "biildpfad": "resurses/Texturen/Zuege/StandartZug.png",
@@ -13,7 +13,7 @@
         {
             "id": 2,
             "name": "andere",
-            "geschwindichkeit": 67,
+            "geschwindichkeit": 10,
             "passagiere": 0,
             "gueter": 0,
             "biildpfad": "resurses/Texturen/Zuege/StandartZug.png",
@@ -23,7 +23,7 @@
         {
             "id": 3,
             "name": "Nebenzug",
-            "geschwindichkeit": 80,
+            "geschwindichkeit": 7,
             "passagiere": 0,
             "gueter": 0,
             "biildpfad": "resurses/Texturen/Zuege/andererzug.png",

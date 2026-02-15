@@ -9,8 +9,9 @@
 #include "gleise.h"
 #include "Mouse.h"
 #include "Banhof.h"
-#include "untermenü.h"
 #include "Zug.h"
+#include "untermenü.h"
+
 
 void ProcesMaus(Vector2 mausposition) {
     Vector2 screenMousePos = GetMousePosition();
@@ -24,7 +25,7 @@ void ProcesMaus(Vector2 mausposition) {
 
     if (screenMousePos.y < 80.0f) {
         Menuebuttons();
-		return;
+        return;
     }
 
     if (ausgewahlterBanhof != 0) {
@@ -40,10 +41,13 @@ void ProcesMaus(Vector2 mausposition) {
                 return;
             }
         }
-	}
+    }
 
-    //Untermenü für Zug tool
+    //Untermen fr Zug tool
     if (aktuellesTool == 5) {
+        untermenueOffen = true;
+    }
+    else if (aktuellesTool == 1) {
         untermenueOffen = true;
     }
     else {
@@ -103,6 +107,9 @@ void ProcesMaus(Vector2 mausposition) {
     if (aktuellesTool == 5) {
         aktuellesUntermenue = "zugtool";
     }
+    else if (aktuellesTool == 1) {
+        aktuellesUntermenue = "gleistool";
+    }
     else {
         aktuellesUntermenue = "";
     }
@@ -115,7 +122,7 @@ void ProcesMaus(Vector2 mausposition) {
 void Auswahltool(int gridX, int gridY)
 {
     bool bahnhofGeklickt = false;
-	bool zugGeklickt = false;
+    bool zugGeklickt = false;
     Vector2 mouseWorldPos = GetScreenToWorld2D(GetMousePosition(), Playercam);
 
     for (const auto& ban : banhofListe) {
@@ -133,18 +140,18 @@ void Auswahltool(int gridX, int gridY)
             z.posX * GRID_SIZE,
             z.posY * GRID_SIZE,
             GRID_SIZE,
-            GRID_SIZE  
+            GRID_SIZE
         };
 
-        // Kollision mit Mausposition prüfen
+        // Kollision mit Mausposition prfen
         if (CheckCollisionPointRec(mouseWorldPos, zugBox)) {
-            // Visualisierung des ausgewählten Zuges
+            // Visualisierung des ausgewhlten Zuges
             DrawRectangleRec(zugBox, Color{ 0, 255, 0, 150 });
 
             if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {
                 ausgewahlterZug = z.zugId;
                 zugGeklickt = true;
-                std::cout << "Zug ausgewählt: ID " << z.zugId
+                std::cout << "Zug ausgewhlt: ID " << z.zugId
                     << " an Position (" << z.posX << ", " << z.posY << ")" << std::endl;
             }
         }
@@ -157,7 +164,7 @@ void Auswahltool(int gridX, int gridY)
     }
     if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT) && !zugGeklickt) {
         ausgewahlterZug = 0;
-	}
+    }
 }
 /*-------------------------------------------------
     Gleise setzen tool
@@ -167,7 +174,7 @@ void LinksGeklickt(Vector2 mausposition) {
     int KlickGridX = (int)floor(mausposition.x / GRID_SIZE);
     int KlickGridY = (int)floor(mausposition.y / GRID_SIZE);
 
-    if (aktuellesTool == 1) {
+    if (aktuellesTool == 1 && untermenueOffen && ausgewählterUntermenuePunkt == 1) {
         if (screenMousePos.y < 80.0f) {
             return;
         }
@@ -195,16 +202,16 @@ void LinksGeklickt(Vector2 mausposition) {
     }
 }
 /*-------------------------------------------------
-    LÖSCHTOOL
+    LSCHTOOL
 -------------------------------------------------*/
 void Loeschentool(Vector2 mausposition) {
-    // Banhöfe
+    // Banhfe
     if (IstBanhofBereitsVorhanden(
         (int)floor(mausposition.x / GRID_SIZE),
         (int)floor(mausposition.y / GRID_SIZE))) {
 
         if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {
-            
+
             int MouseGridX = (int)floor(mausposition.x / GRID_SIZE);
             int MouseGridY = (int)floor(mausposition.y / GRID_SIZE);
 
@@ -224,7 +231,7 @@ void Loeschentool(Vector2 mausposition) {
             if (it != banhofListe.end()) {
                 banhofListe.erase(it, banhofListe.end());
 
-                // löscht aus fahrplan
+                // lscht aus fahrplan
                 if (!geloeschterBanhofName.empty()) {
                     for (auto& zug : aktiveZuege) {
                         auto& fahrplan = zug.Fahrplan;
@@ -241,7 +248,7 @@ void Loeschentool(Vector2 mausposition) {
             return;
         }
     }
-	// Gleise
+    // Gleise
     else {
         if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {
             Vector2 screenMousePos = GetMousePosition();
@@ -275,7 +282,7 @@ void Menuebuttons() {
         }
     }
 
-    // Löschen tool
+    // Lschen tool
     Rectangle loeschenButton = { 80.0f, 10.0f, 60.0f, 60.0f };
     if (CheckCollisionPointRec(mousePos, loeschenButton)) {
         if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {

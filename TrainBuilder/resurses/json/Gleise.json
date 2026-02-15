@@ -763,7 +763,7 @@
             "rotation": 0
         },
         {
-            "ObjecktId": 3,
+            "ObjecktId": 4,
             "gridX": -10,
             "gridY": -26,
             "rotation": 0
@@ -775,7 +775,7 @@
             "rotation": 0
         },
         {
-            "ObjecktId": 2,
+            "ObjecktId": 3,
             "gridX": -10,
             "gridY": -28,
             "rotation": 0
@@ -905,6 +905,60 @@
             "gridX": -5,
             "gridY": -19,
             "rotation": 90
+        },
+        {
+            "ObjecktId": 1,
+            "gridX": -11,
+            "gridY": -26,
+            "rotation": 90
+        },
+        {
+            "ObjecktId": 1,
+            "gridX": -12,
+            "gridY": -26,
+            "rotation": 90
+        },
+        {
+            "ObjecktId": 2,
+            "gridX": -13,
+            "gridY": -26,
+            "rotation": 90
+        },
+        {
+            "ObjecktId": 1,
+            "gridX": -13,
+            "gridY": -27,
+            "rotation": 0
+        },
+        {
+            "ObjecktId": 1,
+            "gridX": -13,
+            "gridY": -28,
+            "rotation": 0
+        },
+        {
+            "ObjecktId": 2,
+            "gridX": -13,
+            "gridY": -29,
+            "rotation": 0
+        },
+        {
+            "ObjecktId": 1,
+            "gridX": -12,
+            "gridY": -29,
+            "rotation": 90
+        },
+        {
+            "ObjecktId": 1,
+            "gridX": -11,
+            "gridY": -29,
+            "rotation": 90
+        },
+        {
+            "ObjecktId": 2,
+            "gridX": -10,
+            "gridY": -29,
+            "rotation": 180
         }
     ]
 }

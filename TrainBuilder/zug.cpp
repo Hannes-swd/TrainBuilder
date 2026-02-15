@@ -158,6 +158,9 @@ void ZeichneZuege() {
             zug.farbe == "rot" ? RED :
             zug.farbe == "blau" ? BLUE :
             zug.farbe == "gruen" ? GREEN :
+            zug.farbe == "gelb" ? YELLOW :
+            zug.farbe == "violet" ? PURPLE :
+            zug.farbe == "orange" ? ORANGE :
             GRAY
         );
     }

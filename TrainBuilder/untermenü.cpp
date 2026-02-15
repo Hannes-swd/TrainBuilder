@@ -17,23 +17,48 @@ void UntermenueZeichnen() {
 }
 
 void UntermenueKlick(Vector2 mausposition) {
-    
-    float boxWidth = 80.0f;
-    float boxHeight = 80.0f;
-    float padding = 10.0f;
-    float startX = padding;
-    float startY = 90.0f;
 
-    for (size_t i = 0; i < zugArtenListe.size(); i++) {
-        float x = startX + i * (boxWidth + padding);
-        float y = startY;
+    if (aktuellesUntermenue == "zugtool") {
+        float boxWidth = 80.0f;
+        float boxHeight = 80.0f;
+        float padding = 10.0f;
+        float startX = padding;
+        float startY = 90.0f;
 
-        if (mausposition.x >= x && mausposition.x <= x + boxWidth &&
-            mausposition.y >= y && mausposition.y <= y + boxHeight) {
+        for (size_t i = 0; i < zugArtenListe.size(); i++) {
+            float x = startX + i * (boxWidth + padding);
+            float y = startY;
 
-            ausgewählterUntermenuePunkt = (int)i + 1;
-            ausgewahlterZugArt = zugArtenListe[i].id;
+            if (mausposition.x >= x && mausposition.x <= x + boxWidth &&
+                mausposition.y >= y && mausposition.y <= y + boxHeight) {
 
+                ausgewählterUntermenuePunkt = (int)i + 1;
+                ausgewahlterZugArt = zugArtenListe[i].id;
+
+                return;
+            }
+        }
+    }
+    else if (aktuellesUntermenue == "gleistool") {
+        float panelWidth = 80.0f;
+        float panelHeight = 80.0f;
+        float padding = 10.0f;
+        float startX = padding;
+        float startY = 90.0f;
+
+        float x1 = startX;
+        float y1 = startY;
+        if (mausposition.x >= x1 && mausposition.x <= x1 + panelWidth &&
+            mausposition.y >= y1 && mausposition.y <= y1 + panelHeight) {
+            ausgewählterUntermenuePunkt = 1;
+            return;
+        }
+
+        float x2 = startX + panelWidth + padding;
+        float y2 = startY;
+        if (mausposition.x >= x2 && mausposition.x <= x2 + panelWidth &&
+            mausposition.y >= y2 && mausposition.y <= y2 + panelHeight) {
+            ausgewählterUntermenuePunkt = 2;
             return;
         }
     }
@@ -41,7 +66,7 @@ void UntermenueKlick(Vector2 mausposition) {
 }
 
 void ZeichneUnterpunkte() {
-    if (!untermenueOffen || zugArtenListe.empty()) return;
+    if (!untermenueOffen) return;
 
     float boxWidth = 80.0f;
     float boxHeight = 80.0f;
@@ -55,46 +80,56 @@ void ZeichneUnterpunkte() {
 
     Vector2 mousePos = GetMousePosition();
 
-    // ==========================================
-    // ERSTE SCHLEIFE: Alle Boxen und Inhalte zeichnen (IMMER sichtbar)
-    // ==========================================
-    for (size_t i = 0; i < zugArtenListe.size(); i++) {
-        const ZugArt& zug = zugArtenListe[i];
+    /*-------------------------------------------------
+        ZUGTOOL
+    -------------------------------------------------*/
+    if (aktuellesUntermenue == "zugtool") {
+        if (zugArtenListe.empty()) return;
 
-        float x = startX + i * (boxWidth + padding);
-        float y = startY;
+        for (size_t i = 0; i < zugArtenListe.size(); i++) {
+            const ZugArt& zug = zugArtenListe[i];
 
-        bool isHovered = (mousePos.x >= x && mousePos.x <= x + boxWidth &&
-            mousePos.y >= y && mousePos.y <= y + boxHeight);
+            float x = startX + i * (boxWidth + padding);
+            float y = startY;
 
-        Color bgColor = isHovered ? GRAY : LIGHTGRAY;
+            bool isHovered = (mousePos.x >= x && mousePos.x <= x + boxWidth &&
+                mousePos.y >= y && mousePos.y <= y + boxHeight);
 
-        DrawRectangle(x, y, boxWidth, boxHeight, bgColor);
-        DrawRectangleLines(x, y, boxWidth, boxHeight, DARKGRAY);
+            Color bgColor = isHovered ? GRAY : LIGHTGRAY;
 
-        // Highlight wenn ausgewählt
-        if (ausgewählterUntermenuePunkt == (int)i + 1) {
-            DrawRectangle(x, y, boxWidth, boxHeight, DARKGRAY);
-        }
+            DrawRectangle(x, y, boxWidth, boxHeight, bgColor);
+            DrawRectangleLines(x, y, boxWidth, boxHeight, DARKGRAY);
 
-        // Bild zeichnen
-        if (!zug.biildpfad.empty()) {
-            Texture2D zugTexture = LoadTextureFromPath(zug.biildpfad);
+            if (ausgewählterUntermenuePunkt == (int)i + 1) {
+                DrawRectangle(x, y, boxWidth, boxHeight, DARKGRAY);
+            }
 
-            if (zugTexture.id != 0) {
-                float imageHeight = boxHeight * 0.6f;
-                float imageWidth = boxWidth * 0.8f;
-                float imageX = x + (boxWidth - imageWidth) / 2;
-                float imageY = y + 5;
+            if (!zug.biildpfad.empty()) {
+                Texture2D zugTexture = LoadTextureFromPath(zug.biildpfad);
 
-                DrawTexturePro(
-                    zugTexture,
-                    Rectangle{ 0, 0, (float)zugTexture.width, (float)zugTexture.height },
-                    Rectangle{ imageX, imageY, imageWidth, imageHeight },
-                    Vector2{ 0, 0 },
-                    0.0f,
-                    WHITE
-                );
+                if (zugTexture.id != 0) {
+                    float imageHeight = boxHeight * 0.6f;
+                    float imageWidth = boxWidth * 0.8f;
+                    float imageX = x + (boxWidth - imageWidth) / 2;
+                    float imageY = y + 5;
+
+                    DrawTexturePro(
+                        zugTexture,
+                        Rectangle{ 0, 0, (float)zugTexture.width, (float)zugTexture.height },
+                        Rectangle{ imageX, imageY, imageWidth, imageHeight },
+                        Vector2{ 0, 0 },
+                        0.0f,
+                        WHITE
+                    );
+                }
+                else {
+                    const char* keinBildText = "Kein Bild";
+                    int textWidth = MeasureText(keinBildText, 10);
+                    DrawText(keinBildText,
+                        (int)(x + boxWidth / 2 - textWidth / 2),
+                        (int)(y + boxHeight / 2 - 5),
+                        10, GRAY);
+                }
             }
             else {
                 const char* keinBildText = "Kein Bild";
@@ -104,97 +139,132 @@ void ZeichneUnterpunkte() {
                     (int)(y + boxHeight / 2 - 5),
                     10, GRAY);
             }
-        }
-        else {
-            const char* keinBildText = "Kein Bild";
-            int textWidth = MeasureText(keinBildText, 10);
-            DrawText(keinBildText,
-                (int)(x + boxWidth / 2 - textWidth / 2),
-                (int)(y + boxHeight / 2 - 5),
-                10, GRAY);
+
+            if (!zug.name.empty()) {
+                std::string displayName = zug.name;
+                if (displayName.length() > 10) {
+                    displayName = displayName.substr(0, 8) + "..";
+                }
+
+                int textWidth = MeasureText(displayName.c_str(), 12);
+                DrawText(displayName.c_str(),
+                    (int)(x + boxWidth / 2 - textWidth / 2),
+                    (int)(y + boxHeight - 20),
+                    12, BLACK);
+            }
         }
 
-        // Name zeichnen
-        if (!zug.name.empty()) {
-            std::string displayName = zug.name;
-            if (displayName.length() > 10) {
-                displayName = displayName.substr(0, 8) + "..";
+        for (size_t i = 0; i < zugArtenListe.size(); i++) {
+            const ZugArt& zug = zugArtenListe[i];
+
+            float x = startX + i * (boxWidth + padding);
+            float y = startY;
+
+            bool isHovered = (mousePos.x >= x && mousePos.x <= x + boxWidth &&
+                mousePos.y >= y && mousePos.y <= y + boxHeight);
+
+            if (isHovered) {
+                float tooltipX = 10.0f;
+                float tooltipY = untermenueEndeY + 10.0f;
+                float tooltipWidth = 250.0f;
+                float tooltipHeight = 130.0f;
+
+                if (tooltipX + tooltipWidth > GenaueBreite) {
+                    tooltipWidth = GenaueBreite - tooltipX - 10;
+                }
+
+                DrawRectangle(tooltipX, tooltipY, tooltipWidth, tooltipHeight, Color{ 240, 240, 240, 230 });
+                DrawRectangleLines(tooltipX, tooltipY, tooltipWidth, tooltipHeight, DARKGRAY);
+
+                float textY = tooltipY + 10;
+                float textX = tooltipX + 10;
+
+                int nameWidth = MeasureText(zug.name.c_str(), 16);
+                DrawText(zug.name.c_str(),
+                    textX + (tooltipWidth - 20 - nameWidth) / 2,
+                    textY, 16, BLACK);
+                textY += 25;
+
+                DrawLine(textX, textY - 5, textX + tooltipWidth - 20, textY - 5, DARKGRAY);
+
+                float col1X = textX;
+                float col2X = textX + 120;
+
+                std::string speedText = "Geschwindigkeit:";
+                DrawText(speedText.c_str(), col1X, textY, 12, DARKGRAY);
+
+                std::string speedValue = std::to_string(zug.geschwindichkeit) + " km/h";
+                DrawText(speedValue.c_str(), col2X, textY, 12, BLUE);
+                textY += 18;
+
+                std::string passText = "Max Passagiere:";
+                DrawText(passText.c_str(), col1X, textY, 12, DARKGRAY);
+
+                std::string passValue = std::to_string(zug.passagiere);
+                DrawText(passValue.c_str(), col2X, textY, 12, BLUE);
+                textY += 18;
+
+                std::string gueterText = "Max Gueter:";
+                DrawText(gueterText.c_str(), col1X, textY, 12, DARKGRAY);
+
+                std::string gueterValue = std::to_string(zug.gueter);
+                DrawText(gueterValue.c_str(), col2X, textY, 12, BLUE);
+                textY += 18;
+
+                if (!zug.zugtyp.empty()) {
+                    std::string typText = "Zugtyp:";
+                    DrawText(typText.c_str(), col1X, textY, 12, DARKGRAY);
+                    DrawText(zug.zugtyp.c_str(), col2X, textY, 12, DARKBLUE);
+                }
+            }
+        }
+    }
+    /*-------------------------------------------------
+        GLEISTOOL
+    -------------------------------------------------*/
+    else if (aktuellesUntermenue == "gleistool") {
+
+        float gleisPanelWidth = 80.0f;
+        float gleisPanelHeight = 80.0f;
+        float gleisPadding = 10.0f;
+        float gleisStartX = gleisPadding;
+        float gleisStartY = 90.0f;
+
+        // Option 1: Normale Gleise
+        {
+            float x = gleisStartX;
+            float y = gleisStartY;
+
+            bool isHovered = (mousePos.x >= x && mousePos.x <= x + gleisPanelWidth &&
+                mousePos.y >= y && mousePos.y <= y + gleisPanelHeight);
+
+            Color bgColor = isHovered ? GRAY : LIGHTGRAY;
+            DrawRectangle(x, y, gleisPanelWidth, gleisPanelHeight, bgColor);
+            DrawRectangleLines(x, y, gleisPanelWidth, gleisPanelHeight, DARKGRAY);
+
+            if (ausgewählterUntermenuePunkt == 1) {
+                DrawRectangle(x, y, gleisPanelWidth, gleisPanelHeight, DARKGRAY);
             }
 
-            int textWidth = MeasureText(displayName.c_str(), 12);
-            DrawText(displayName.c_str(),
-                (int)(x + boxWidth / 2 - textWidth / 2),
-                (int)(y + boxHeight - 20),
-                12, BLACK);
+            DrawTexture("zeichnen", x, y, gleisPanelWidth, gleisPanelHeight);
+        }
+
+        // Option 2: Leer
+        {
+            float x = gleisStartX + gleisPanelWidth + gleisPadding;
+            float y = gleisStartY;
+
+            bool isHovered = (mousePos.x >= x && mousePos.x <= x + gleisPanelWidth &&
+                mousePos.y >= y && mousePos.y <= y + gleisPanelHeight);
+
+            Color bgColor = isHovered ? GRAY : LIGHTGRAY;
+            DrawRectangle(x, y, gleisPanelWidth, gleisPanelHeight, bgColor);
+            DrawRectangleLines(x, y, gleisPanelWidth, gleisPanelHeight, DARKGRAY);
+
+            if (ausgewählterUntermenuePunkt == 2) {
+                DrawRectangle(x, y, gleisPanelWidth, gleisPanelHeight, DARKGRAY);
+            }
         }
     }
 
-    // ==========================================
-    // ZWEITE SCHLEIFE: Tooltips nur bei Hover
-    // ==========================================
-    for (size_t i = 0; i < zugArtenListe.size(); i++) {
-        const ZugArt& zug = zugArtenListe[i];
-
-        float x = startX + i * (boxWidth + padding);
-        float y = startY;
-
-        bool isHovered = (mousePos.x >= x && mousePos.x <= x + boxWidth &&
-            mousePos.y >= y && mousePos.y <= y + boxHeight);
-        
-        if (isHovered) {
-            float tooltipX = 10.0f;
-            float tooltipY = untermenueEndeY + 10.0f;
-            float tooltipWidth = 250.0f;
-            float tooltipHeight = 130.0f;
-
-            if (tooltipX + tooltipWidth > GenaueBreite) {
-                tooltipWidth = GenaueBreite - tooltipX - 10;
-            }
-
-            DrawRectangle(tooltipX, tooltipY, tooltipWidth, tooltipHeight, Color{ 240, 240, 240, 230 });
-            DrawRectangleLines(tooltipX, tooltipY, tooltipWidth, tooltipHeight, DARKGRAY);
-
-            float textY = tooltipY + 10;
-            float textX = tooltipX + 10;
-
-            int nameWidth = MeasureText(zug.name.c_str(), 16);
-            DrawText(zug.name.c_str(),
-                textX + (tooltipWidth - 20 - nameWidth) / 2,
-                textY, 16, BLACK);
-            textY += 25;
-
-            DrawLine(textX, textY - 5, textX + tooltipWidth - 20, textY - 5, DARKGRAY);
-
-            float col1X = textX;
-            float col2X = textX + 120;
-
-            std::string speedText = "Geschwindigkeit:";
-            DrawText(speedText.c_str(), col1X, textY, 12, DARKGRAY);
-
-            std::string speedValue = std::to_string(zug.geschwindichkeit) + " km/h";
-            DrawText(speedValue.c_str(), col2X, textY, 12, BLUE);
-            textY += 18;
-
-            
-            std::string passText = "Max Passagiere:";
-            DrawText(passText.c_str(), col1X, textY, 12, DARKGRAY);
-
-            std::string passValue = std::to_string(zug.passagiere);
-            DrawText(passValue.c_str(), col2X, textY, 12, BLUE);
-            textY += 18;
-
-            std::string gueterText = "Max Gueter:";
-            DrawText(gueterText.c_str(), col1X, textY, 12, DARKGRAY);
-
-            std::string gueterValue = std::to_string(zug.gueter);
-            DrawText(gueterValue.c_str(), col2X, textY, 12, BLUE);
-            textY += 18;
-
-            if (!zug.zugtyp.empty()) {
-                std::string typText = "Zugtyp:";
-                DrawText(typText.c_str(), col1X, textY, 12, DARKGRAY);
-                DrawText(zug.zugtyp.c_str(), col2X, textY, 12, DARKBLUE);
-            }
-        }  
-    }
 }

@@ -15,9 +15,9 @@
             "maxPassagiere": 0,
             "name": "Zug 1",
             "passagiere": 0,
-            "posX": 8.49993896484375,
-            "posY": -21.0,
-            "rotation": 180,
+            "posX": 9.25003719329834,
+            "posY": -29.0,
+            "rotation": 0,
             "zugId": 1,
             "zugtyp": "Erster"
         },
@@ -56,11 +56,70 @@
             "maxPassagiere": 0,
             "name": "test",
             "passagiere": 0,
-            "posX": 8.699942588806152,
-            "posY": -29.0,
-            "rotation": 180,
+            "posX": 3.125044584274292,
+            "posY": -21.0,
+            "rotation": 0,
             "zugId": 2,
             "zugtyp": "dreier"
+        },
+        {
+            "Fahrplan": [
+                "Banhof_9",
+                "mittecool"
+            ],
+            "biildpfad": "resurses/Texturen/Zuege/StandartZug.png",
+            "farbe": "rot",
+            "geschwindichkeit": 4,
+            "gueter": 0,
+            "maxGueter": 0,
+            "maxPassagiere": 0,
+            "name": "Zug 3",
+            "passagiere": 0,
+            "posX": -6.300012111663818,
+            "posY": -32.0,
+            "rotation": 180,
+            "zugId": 3,
+            "zugtyp": "Erster"
+        },
+        {
+            "Fahrplan": [
+                "nord nord",
+                "westbanhof",
+                "unten banhf"
+            ],
+            "biildpfad": "resurses/Texturen/Zuege/andererzug.png",
+            "farbe": "blau",
+            "geschwindichkeit": 7,
+            "gueter": 0,
+            "maxGueter": 0,
+            "maxPassagiere": 0,
+            "name": "Lul",
+            "passagiere": 0,
+            "posX": -5.941617012023926,
+            "posY": -26.0,
+            "rotation": 0,
+            "zugId": 4,
+            "zugtyp": "dreier"
+        },
+        {
+            "Fahrplan": [
+                "test",
+                "ostbanhof",
+                "nord nord"
+            ],
+            "biildpfad": "resurses/Texturen/Zuege/StandartZug.png",
+            "farbe": "rot",
+            "geschwindichkeit": 4,
+            "gueter": 0,
+            "maxGueter": 0,
+            "maxPassagiere": 0,
+            "name": "Zug 6",
+            "passagiere": 0,
+            "posX": 11.0,
+            "posY": -25.0,
+            "rotation": 90,
+            "zugId": 6,
+            "zugtyp": "Erster"
         }
     ]
 }

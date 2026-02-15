@@ -18,7 +18,10 @@ const float GRID_SIZE = 50.0f;
 
 bool kannBewegen = true;
 std::string aktuellesUntermenue = "";
+//1 = züge
+//2 = schienen
 int ausgewählterUntermenuePunkt = 1;
+
 
 /*-------------------------------------------------
 	KARAKTER
