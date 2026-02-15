@@ -15,7 +15,7 @@
             "maxPassagiere": 0,
             "name": "Zug 1",
             "passagiere": 0,
-            "posX": 7.74997091293335,
+            "posX": 8.49993896484375,
             "posY": -21.0,
             "rotation": 180,
             "zugId": 1,
@@ -25,7 +25,8 @@
             "Fahrplan": [
                 "test",
                 "nord nord",
-                "unten banhf"
+                "unten banhf",
+                "nordbanhof"
             ],
             "biildpfad": "resurses/Texturen/Zuege/StandartZug.png",
             "farbe": "gruen",
@@ -35,9 +36,9 @@
             "maxPassagiere": 0,
             "name": "Zug 5",
             "passagiere": 0,
-            "posX": -3.298766851425171,
-            "posY": -26.0,
-            "rotation": 0,
+            "posX": -3.0,
+            "posY": -32.0,
+            "rotation": 180,
             "zugId": 5,
             "zugtyp": "zweiter"
         },
@@ -55,9 +56,9 @@
             "maxPassagiere": 0,
             "name": "test",
             "passagiere": 0,
-            "posX": -1.0,
-            "posY": -26.19999122619629,
-            "rotation": 90,
+            "posX": 8.699942588806152,
+            "posY": -29.0,
+            "rotation": 180,
             "zugId": 2,
             "zugtyp": "dreier"
         }

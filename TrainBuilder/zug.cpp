@@ -21,6 +21,8 @@ static std::map<int, int> zugFahrplanIndex;
 static std::map<int, std::vector<Vector2>> zugWege;
 static std::map<int, int> zugWegIndex;
 static std::map<int, float> zugMoveProgress;
+static std::map<int, float> zugWaitTime;
+static std::map<int, float> zugWaitTimer;
 
 bool ZugIdExistiert(int id) {
     for (const auto& zug : aktiveZuege) {
@@ -91,6 +93,8 @@ void zugPlazieren(int gridX, int gridY, int zugArtId) {
     zugWege[neuerZug.zugId] = {};
     zugWegIndex[neuerZug.zugId] = 0;
     zugMoveProgress[neuerZug.zugId] = 0.0f;
+    zugWaitTime[neuerZug.zugId] = 0.0f;
+    zugWaitTimer[neuerZug.zugId] = 0.0f;
 
     AktiveZuegeSpeichern();
 
@@ -217,6 +221,8 @@ void BewegeZuege() {
             zugWege[zug.zugId] = {};
             zugWegIndex[zug.zugId] = 0;
             zugMoveProgress[zug.zugId] = 0.0f;
+            zugWaitTime[zug.zugId] = 0.0f;
+            zugWaitTimer[zug.zugId] = 0.0f;
         }
 
         int stationIndex = zugFahrplanIndex[zug.zugId];
@@ -294,10 +300,16 @@ void BewegeZuege() {
         else {
             zug.posX = targetStation->GridX;
             zug.posY = targetStation->GridY;
-            zugFahrplanIndex[zug.zugId]++;
-            zugWege[zug.zugId] = {};
-            zugWegIndex[zug.zugId] = 0;
-            zugMoveProgress[zug.zugId] = 0.0f;
+
+            zugWaitTimer[zug.zugId] += DeltaTime;
+
+			if (zugWaitTimer[zug.zugId] >= 3.0f) { // 3 Sekunden warten
+                zugFahrplanIndex[zug.zugId]++;
+                zugWege[zug.zugId] = {};
+                zugWegIndex[zug.zugId] = 0;
+                zugMoveProgress[zug.zugId] = 0.0f;
+                zugWaitTimer[zug.zugId] = 0.0f;
+            }
         }
     }
 }
