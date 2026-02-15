@@ -1,7 +1,12 @@
 {
     "AktiveZuege": [
         {
-            "Fahrplan": [],
+            "Fahrplan": [
+                "cool",
+                "ostbanhof",
+                "mittecool",
+                "test"
+            ],
             "biildpfad": "resurses/Texturen/Zuege/StandartZug.png",
             "farbe": "rot",
             "geschwindichkeit": 10,
@@ -10,50 +15,49 @@
             "maxPassagiere": 0,
             "name": "Zug 1",
             "passagiere": 0,
-            "posX": -8.0,
-            "posY": -19.0,
-            "rotation": 0,
+            "posX": 7.74997091293335,
+            "posY": -21.0,
+            "rotation": 180,
             "zugId": 1,
             "zugtyp": "Erster"
         },
         {
             "Fahrplan": [
-                "mittecool",
                 "test",
-                "nord nord"
+                "nord nord",
+                "unten banhf"
             ],
             "biildpfad": "resurses/Texturen/Zuege/StandartZug.png",
             "farbe": "gruen",
-            "geschwindichkeit": 67,
+            "geschwindichkeit": 5,
             "gueter": 0,
             "maxGueter": 0,
             "maxPassagiere": 0,
             "name": "Zug 5",
             "passagiere": 0,
-            "posX": -7.0,
-            "posY": -19.0,
+            "posX": -3.298766851425171,
+            "posY": -26.0,
             "rotation": 0,
             "zugId": 5,
             "zugtyp": "zweiter"
         },
         {
             "Fahrplan": [
-                "nordbanhof",
+                "cool",
                 "mittecool",
-                "test",
-                "cool"
+                "ostbanhof"
             ],
             "biildpfad": "resurses/Texturen/Zuege/andererzug.png",
             "farbe": "blau",
-            "geschwindichkeit": 80,
+            "geschwindichkeit": 9,
             "gueter": 0,
             "maxGueter": 0,
             "maxPassagiere": 0,
             "name": "test",
             "passagiere": 0,
-            "posX": -6.0,
-            "posY": -19.0,
-            "rotation": 0,
+            "posX": -1.0,
+            "posY": -26.19999122619629,
+            "rotation": 90,
             "zugId": 2,
             "zugtyp": "dreier"
         }
