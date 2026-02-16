@@ -43,18 +43,7 @@ void ProcesMaus(Vector2 mausposition) {
         }
     }
 
-    //Untermen fr Zug tool
-    if (aktuellesTool == 5) {
-        untermenueOffen = true;
-    }
-    else if (aktuellesTool == 1) {
-        untermenueOffen = true;
-    }
-    else {
-        if (untermenueOffen) {
-            untermenueOffen = false;
-        }
-    }
+
 
     if (untermenueOffen) {
         if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {
@@ -102,16 +91,6 @@ void ProcesMaus(Vector2 mausposition) {
     if (aktuellesTool == 4) {
         if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT))
             plaziereBanhof(mausposition);
-    }
-
-    if (aktuellesTool == 5) {
-        aktuellesUntermenue = "zugtool";
-    }
-    else if (aktuellesTool == 1) {
-        aktuellesUntermenue = "gleistool";
-    }
-    else {
-        aktuellesUntermenue = "";
     }
 
 }
@@ -279,6 +258,8 @@ void Menuebuttons() {
     if (CheckCollisionPointRec(mousePos, zeichenButton)) {
         if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {
             aktuellesTool = 1;
+            untermenueOffen = true;
+            aktuellesUntermenue = "gleistool";
         }
     }
 
@@ -287,6 +268,8 @@ void Menuebuttons() {
     if (CheckCollisionPointRec(mousePos, loeschenButton)) {
         if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {
             aktuellesTool = 2;
+            untermenueOffen = false;
+            aktuellesUntermenue = "";
         }
     }
 
@@ -295,6 +278,8 @@ void Menuebuttons() {
     if (CheckCollisionPointRec(mousePos, auswahlButton)) {
         if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {
             aktuellesTool = 3;
+            untermenueOffen = false;
+            aktuellesUntermenue = "";
         }
     }
 
@@ -303,6 +288,8 @@ void Menuebuttons() {
     if (CheckCollisionPointRec(mousePos, banhofButton)) {
         if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {
             aktuellesTool = 4;
+            untermenueOffen = false;
+            aktuellesUntermenue = "";
         }
     }
 
@@ -311,6 +298,8 @@ void Menuebuttons() {
     if (CheckCollisionPointRec(mousePos, zugButton)) {
         if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {
             aktuellesTool = 5;
+            untermenueOffen = true;
+            aktuellesUntermenue = "zugtool";
         }
     }
 }

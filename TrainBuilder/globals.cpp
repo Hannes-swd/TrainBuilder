@@ -17,7 +17,7 @@ int GenaueBreite = 0;
 const float GRID_SIZE = 50.0f;
 
 bool kannBewegen = true;
-std::string aktuellesUntermenue = "";
+std::string aktuellesUntermenue = "gleistool";
 //1 = züge
 //2 = schienen
 int ausgewählterUntermenuePunkt = 1;
@@ -45,7 +45,7 @@ int aktuellesTool = 1;
 //5 = zug
 
 //untermenü
-bool untermenueOffen = false;
+bool untermenueOffen = true;
 
 /*-------------------------------------------------
 	Scrolen
