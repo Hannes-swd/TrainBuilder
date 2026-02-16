@@ -14,6 +14,7 @@
 #include "UI.h"
 #include "Banhof.h"
 #include "untermenü.h"
+#include "ampel.h"
 
 int main(void)
 {
@@ -92,6 +93,7 @@ int main(void)
 
         
         ZeichneGleise();
+        AmpelZeichnen();
         ZeichneZuege();
 
         ZeichneBanhof();

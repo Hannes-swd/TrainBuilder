@@ -103,6 +103,7 @@ void Auswahltool(int gridX, int gridY)
 {
     bool bahnhofGeklickt = false;
     bool zugGeklickt = false;
+	bool ampelGeklickt = false;
     Vector2 mouseWorldPos = GetScreenToWorld2D(GetMousePosition(), Playercam);
 
     for (const auto& ban : banhofListe) {
@@ -136,7 +137,16 @@ void Auswahltool(int gridX, int gridY)
             }
         }
     }
+    for (const auto& ampel : ampelListe) {
+        if (ampel.GridX == gridX && ampel.GridY == gridY) {
+            DrawRectangle(gridX * GRID_SIZE, gridY * GRID_SIZE, (float)GRID_SIZE, (float)GRID_SIZE, Color{ 0, 255, 0, 150 });
 
+            if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {
+                ausgewahlterAmpel = ampel.AmpelId;
+                ampelGeklickt = true;
+            }
+        }
+    }
 
     // Fenster schliesen
     if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT) && !bahnhofGeklickt) {
@@ -145,6 +155,9 @@ void Auswahltool(int gridX, int gridY)
     if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT) && !zugGeklickt) {
         ausgewahlterZug = 0;
     }
+    if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT) && !ampelGeklickt) {
+        ausgewahlterAmpel = 0;
+	}
 }
 /*-------------------------------------------------
     Gleise setzen tool

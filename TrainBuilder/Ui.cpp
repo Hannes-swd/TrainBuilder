@@ -374,6 +374,25 @@ void zeichneUI() {
             AktiveZuegeSpeichern();
         }
     }
+    /*-------------------------------------------------
+        Ampel
+    -------------------------------------------------*/
+    if (ausgewahlterAmpel != 0) {
+        DrawRectangle((float)GenaueBreite - 250.0f, 80.0f, 250.0f, (float)GenaueHoehe - 80.0f, LIGHTGRAY);
+        DrawRectangleLines((GenaueBreite - 250), 80, 250, GenaueHoehe - 80, DARKGRAY);
+        BeginScissorMode(GenaueBreite - 250, 80, 250, GenaueHoehe - 80);
+        
+		//ampel infos
+        DrawText("Status: ", GenaueBreite - 240.0f, 100.0f, 20, BLACK);
+        if (ampelListe[ausgewahlterAmpel - 1].isGreen) {
+            DrawText("Gruen", GenaueBreite - 150.0f, 100.0f, 20, GREEN);
+        }
+        else {
+            DrawText("Rot", GenaueBreite - 150.0f, 100.0f, 20, RED);
+		}
+
+        EndScissorMode();
+	}
 
     if (ausgewahlterZug != 0) {
         ZeichneDraggingItem(ausgewahlterZug, zugplanContainerY);

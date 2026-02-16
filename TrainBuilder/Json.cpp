@@ -137,7 +137,7 @@ void LadeJson() {
             ampel.isGreen = obj["isGreen"];
             ampelListe.push_back(ampel);
         }
-	}
+    }
 
 	if (AktiveZuege.is_open()) AktiveZuege.close();
     if (Banhoefe.is_open()) Banhoefe.close();
