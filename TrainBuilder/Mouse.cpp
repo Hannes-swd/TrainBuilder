@@ -11,6 +11,7 @@
 #include "Banhof.h"
 #include "Zug.h"
 #include "untermenü.h"
+#include "Ampel.h"
 
 
 void ProcesMaus(Vector2 mausposition) {
@@ -152,7 +153,7 @@ void LinksGeklickt(Vector2 mausposition) {
     Vector2 screenMousePos = GetMousePosition();
     int KlickGridX = (int)floor(mausposition.x / GRID_SIZE);
     int KlickGridY = (int)floor(mausposition.y / GRID_SIZE);
-
+    //BEI GLEISE
     if (aktuellesTool == 1 && untermenueOffen && ausgewählterUntermenuePunkt == 1) {
         if (screenMousePos.y < 80.0f) {
             return;
@@ -178,6 +179,14 @@ void LinksGeklickt(Vector2 mausposition) {
 
             haterstenKlick = false;
         }
+    }
+    //AMPEL
+    else if (aktuellesTool == 1 && untermenueOffen && ausgewählterUntermenuePunkt == 2) {
+        if (screenMousePos.y < 80.0f) {
+            return;
+        }
+        AmpelPlazieren(KlickGridX, KlickGridY);
+		std::cout << "Ampel plaziert an [" << KlickGridX << ", " << KlickGridY << "]" << std::endl;
     }
 }
 /*-------------------------------------------------

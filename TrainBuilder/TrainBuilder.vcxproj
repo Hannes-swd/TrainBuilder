@@ -129,6 +129,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Ampel.cpp" />
     <ClCompile Include="Banhof.cpp" />
     <ClCompile Include="gleise.cpp" />
     <ClCompile Include="globals.cpp" />
@@ -145,6 +146,7 @@
     <ClCompile Include="ZugPlan.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Ampel.h" />
     <ClInclude Include="Banhof.h" />
     <ClInclude Include="gleise.h" />
     <ClInclude Include="globals.h" />

@@ -90,3 +90,8 @@ std::vector<Zug> aktiveZuege;
 int zugplanContainerHeight = 60;
 
 bool haltestelleMenuOffen = false;
+
+/*-------------------------------------------------
+	Ampeln
+-------------------------------------------------*/
+std::vector<ampel> ampelListe;

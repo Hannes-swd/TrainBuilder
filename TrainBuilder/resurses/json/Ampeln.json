@@ -1,0 +1,22 @@
+{
+    "Ampeln": [
+        {
+            "AmpelId": 1,
+            "gridX": -5,
+            "gridY": -19,
+            "isGreen": true
+        },
+        {
+            "AmpelId": 2,
+            "gridX": 3,
+            "gridY": -21,
+            "isGreen": true
+        },
+        {
+            "AmpelId": 3,
+            "gridX": -10,
+            "gridY": -21,
+            "isGreen": true
+        }
+    ]
+}

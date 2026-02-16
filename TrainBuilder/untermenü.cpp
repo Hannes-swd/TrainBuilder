@@ -264,6 +264,7 @@ void ZeichneUnterpunkte() {
             if (ausgewählterUntermenuePunkt == 2) {
                 DrawRectangle(x, y, gleisPanelWidth, gleisPanelHeight, DARKGRAY);
             }
+			DrawTexture("Ampel_Rot", x, y, gleisPanelWidth, gleisPanelHeight, WHITE);
         }
     }
 

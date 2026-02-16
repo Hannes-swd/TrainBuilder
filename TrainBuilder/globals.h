@@ -127,3 +127,15 @@ struct Zug {
 extern std::vector<Zug> aktiveZuege;
 extern int zugplanContainerHeight;
 extern bool haltestelleMenuOffen;
+
+/*-------------------------------------------------
+	Ampeln
+-------------------------------------------------*/
+
+struct ampel {
+	int AmpelId;
+	int GridX;
+	int GridY;
+	bool isGreen;
+};
+extern std::vector<ampel> ampelListe;

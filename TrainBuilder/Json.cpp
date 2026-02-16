@@ -16,6 +16,8 @@ void LadeJson() {
     std::ifstream Banhoefe("resurses/json/Banhof.json");
     std::ifstream ZugArten("resurses/json/zugarten.json");
 	std::ifstream AktiveZuege("resurses/json/AktiveZuege.json");
+    std::ifstream Ampeln("resurses/json/Ampeln.json");
+    
 
     //OBECKTE UND LADEN
     nlohmann::json NutzerDaten;
@@ -43,10 +45,16 @@ void LadeJson() {
 		AktiveZuege >> AktiveZuegeDaten;
 	}
 
+	nlohmann::json AmpelnDaten;
+	if (Ampeln.is_open()) {
+		Ampeln >> AmpelnDaten;
+	}
+
     //ALLE LISTEN LÖSCHEN
     gleisListe.clear();
     banhofListe.clear();
     zugArtenListe.clear();
+    ampelListe.clear();
     /*-------------------------------------------------
         Gleise
     -------------------------------------------------*/
@@ -117,10 +125,24 @@ void LadeJson() {
             aktiveZuege.push_back(zug);
         }
     }
+    /*-------------------------------------------------
+        Ampeln
+    -------------------------------------------------*/
+    if (AmpelnDaten.contains("Ampeln")) {
+        for (const auto& obj : AmpelnDaten["Ampeln"]) {
+            ampel ampel;
+            ampel.AmpelId = obj["AmpelId"];
+            ampel.GridX = obj["gridX"];
+            ampel.GridY = obj["gridY"];
+            ampel.isGreen = obj["isGreen"];
+            ampelListe.push_back(ampel);
+        }
+	}
 
 	if (AktiveZuege.is_open()) AktiveZuege.close();
     if (Banhoefe.is_open()) Banhoefe.close();
     if (ZugArten.is_open()) ZugArten.close();
+	if (Ampeln.is_open()) Ampeln.close();
 
     //WERT LADEN
     if (NutzerDaten.contains("SpielerpositionX") && NutzerDaten.contains("SpielerpositionY")) {

@@ -37,7 +37,12 @@ void loadTextures() {
     /*-------------------------------------------------
         BANHOF
     -------------------------------------------------*/
-    
+
+    /*-------------------------------------------------
+        Ampel
+    -------------------------------------------------*/
+    textures["Ampel_Gruen"] = LoadTexture("resurses/Texturen/schienen/Ampel/Ampel_Gruen.png");
+    textures["Ampel_Rot"] = LoadTexture("resurses/Texturen/schienen/Ampel/Ampel_Rot.png");
 }
 
 void unloadTextures() {
