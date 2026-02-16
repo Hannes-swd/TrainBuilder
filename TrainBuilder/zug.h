@@ -8,3 +8,4 @@ void AktiveZuegeSpeichern();
 void ZeichneZuege();
 void BewegeZuege();
 std::vector<Vector2> FindPathBFS(Vector2 start, Vector2 end);
+bool IstRoteAmpelAnPosition(int gridX, int gridY);

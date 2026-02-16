@@ -24,6 +24,15 @@ static std::map<int, float> zugMoveProgress;
 static std::map<int, float> zugWaitTime;
 static std::map<int, float> zugWaitTimer;
 
+bool IstRoteAmpelAnPosition(int gridX, int gridY) {
+    for (const auto& ampel : ampelListe) {
+        if (ampel.GridX == gridX && ampel.GridY == gridY && !ampel.isGreen) {
+            return true;
+        }
+    }
+    return false;
+}
+
 bool ZugIdExistiert(int id) {
     for (const auto& zug : aktiveZuege) {
         if (zug.zugId == id) {
@@ -276,6 +285,11 @@ void BewegeZuege() {
             Vector2 current = weg[wegIdx];
             Vector2 next = weg[wegIdx + 1];
 
+            if (IstRoteAmpelAnPosition((int)next.x, (int)next.y)) {
+                // Zug wartet an der roten Ampel
+                continue;
+            }
+
             float dist = std::sqrt(
                 (next.x - current.x) * (next.x - current.x) +
                 (next.y - current.y) * (next.y - current.y)
@@ -306,7 +320,7 @@ void BewegeZuege() {
 
             zugWaitTimer[zug.zugId] += DeltaTime;
 
-			if (zugWaitTimer[zug.zugId] >= 3.0f) { // 3 Sekunden warten
+            if (zugWaitTimer[zug.zugId] >= 3.0f) { // 3 Sekunden warten
                 zugFahrplanIndex[zug.zugId]++;
                 zugWege[zug.zugId] = {};
                 zugWegIndex[zug.zugId] = 0;
