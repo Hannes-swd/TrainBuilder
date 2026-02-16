@@ -1,12 +1,6 @@
 {
     "Ampeln": [
         {
-            "AmpelId": 1,
-            "gridX": -10,
-            "gridY": -21,
-            "isGreen": true
-        },
-        {
             "AmpelId": 2,
             "gridX": -5,
             "gridY": -19,

@@ -9,6 +9,7 @@
 #include "zug.h"
 #include "Ui.h"
 #include "ZugPlan.h"
+#include "Ampel.h"
 
 static TextBox nahmeEingabe(0, 0, 200.0f, 30.0f, 32);
 static TextBox zugnameEingabe(0, 0, 200.0f, 30.0f, 32);
@@ -375,24 +376,89 @@ void zeichneUI() {
         }
     }
     /*-------------------------------------------------
-        Ampel
-    -------------------------------------------------*/
+    Ampel
+-------------------------------------------------*/
     if (ausgewahlterAmpel != 0) {
-        DrawRectangle((float)GenaueBreite - 250.0f, 80.0f, 250.0f, (float)GenaueHoehe - 80.0f, LIGHTGRAY);
-        DrawRectangleLines((GenaueBreite - 250), 80, 250, GenaueHoehe - 80, DARKGRAY);
-        BeginScissorMode(GenaueBreite - 250, 80, 250, GenaueHoehe - 80);
-        
-		//ampel infos
-        DrawText("Status: ", GenaueBreite - 240.0f, 100.0f, 20, BLACK);
-        if (ampelListe[ausgewahlterAmpel - 1].isGreen) {
-            DrawText("Gruen", GenaueBreite - 150.0f, 100.0f, 20, GREEN);
+        bool ampelExistiert = false;
+        for (const auto& ampel : ampelListe) {
+            if (ampel.AmpelId == ausgewahlterAmpel) {
+                ampelExistiert = true;
+                break;
+            }
+        }
+
+        if (!ampelExistiert) {
+            ausgewahlterAmpel = 0;
         }
         else {
-            DrawText("Rot", GenaueBreite - 150.0f, 100.0f, 20, RED);
-		}
+            DrawRectangle((float)GenaueBreite - 250.0f, 80.0f, 250.0f, (float)GenaueHoehe - 80.0f, LIGHTGRAY);
+            DrawRectangleLines((GenaueBreite - 250), 80, 250, GenaueHoehe - 80, DARKGRAY);
+            BeginScissorMode(GenaueBreite - 250, 80, 250, GenaueHoehe - 80);
 
-        EndScissorMode();
-	}
+            DrawText("Status: ", GenaueBreite - 240.0f, 100.0f, 20, BLACK);
+
+            for (const auto& ampel : ampelListe) {
+                if (ampel.AmpelId == ausgewahlterAmpel) {
+                    if (ampel.isGreen) {
+                        DrawText("Gruen", GenaueBreite - 150.0f, 100.0f, 20, GREEN);
+                    }
+                    else {
+                        DrawText("Rot", GenaueBreite - 150.0f, 100.0f, 20, RED);
+                    }
+                    break;
+                }
+            }
+
+            float buttonX = GenaueBreite - 240.0f;
+            float buttonY = 150.0f;
+            float buttonWidth = 220.0f;
+            float buttonHeight = 35.0f;
+            //toggle button
+            DrawRectangle(buttonX, buttonY, buttonWidth, buttonHeight, BLUE);
+            DrawRectangleLines(buttonX, buttonY, buttonWidth, buttonHeight, WHITE);
+            DrawText("Ampel umschalten", buttonX + 10, buttonY + 10, 15, WHITE);
+
+            float deleteButtonY = buttonY + buttonHeight + 10;
+            DrawRectangle(buttonX, deleteButtonY, buttonWidth, buttonHeight, RED);
+            DrawRectangleLines(buttonX, deleteButtonY, buttonWidth, buttonHeight, WHITE);
+            DrawText("Ampel loeschen", buttonX + 10, deleteButtonY + 10, 15, WHITE);
+
+            if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
+                Vector2 mousePos = GetMousePosition();
+
+                if (mousePos.x >= GenaueBreite - 250.0f && mousePos.x <= GenaueBreite &&
+                    mousePos.y >= 80.0f && mousePos.y <= GenaueHoehe) {
+
+                    if (mousePos.x >= buttonX && mousePos.x <= buttonX + buttonWidth &&
+                        mousePos.y >= buttonY && mousePos.y <= buttonY + buttonHeight) {
+
+                        for (auto& ampel : ampelListe) {
+                            if (ampel.AmpelId == ausgewahlterAmpel) {
+                                ampel.isGreen = !ampel.isGreen;
+                                AmpelSpeichern();
+                                break;
+                            }
+                        }
+                    }
+                    // Delete Button
+                    else if (mousePos.x >= buttonX && mousePos.x <= buttonX + buttonWidth &&
+                        mousePos.y >= deleteButtonY && mousePos.y <= deleteButtonY + buttonHeight) {
+
+                        for (auto it = ampelListe.begin(); it != ampelListe.end(); ++it) {
+                            if (it->AmpelId == ausgewahlterAmpel) {
+                                ampelListe.erase(it);
+                                ausgewahlterAmpel = 0; 
+                                AmpelSpeichern();
+                                break;
+                            }
+                        }
+                    }
+                }
+            }
+
+            EndScissorMode();
+        }
+    }
 
     if (ausgewahlterZug != 0) {
         ZeichneDraggingItem(ausgewahlterZug, zugplanContainerY);

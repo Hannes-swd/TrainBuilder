@@ -43,7 +43,13 @@ void ProcesMaus(Vector2 mausposition) {
             }
         }
     }
-
+    if (ausgewahlterAmpel != 0) {
+        if (screenMousePos.x > GenaueBreite - 250.0f && screenMousePos.y > 80.0f) {
+            if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {
+                return;
+            }
+        }
+    }
 
 
     if (untermenueOffen) {
