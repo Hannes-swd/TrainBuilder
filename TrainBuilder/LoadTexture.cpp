@@ -34,6 +34,8 @@ void loadTextures() {
     textures["Banhof"] = LoadTexture("resurses/Texturen/Ui/Banhof.png");
     textures["zugicon"] = LoadTexture("resurses/Texturen/Ui/zugicon.png");
     textures["zahnrad"] = LoadTexture("resurses/Texturen/Ui/zahnrad.png");
+    textures["KnotenSymbol"] = LoadTexture("resurses/Texturen/Ui/KnotenSymbol.png");
+
     
     
     /*-------------------------------------------------
@@ -45,7 +47,16 @@ void loadTextures() {
     -------------------------------------------------*/
     textures["Ampel_Gruen"] = LoadTexture("resurses/Texturen/schienen/Ampel/Ampel_Gruen.png");
     textures["Ampel_Rot"] = LoadTexture("resurses/Texturen/schienen/Ampel/Ampel_Rot.png");
+
+    /*-------------------------------------------------
+        TECHNIK
+    -------------------------------------------------*/
+
+    textures["knoten"] = LoadTexture("resurses/Texturen/Technik/knoten.png");
+
 }
+
+
 
 void unloadTextures() {
     for (auto& pair : textures) {

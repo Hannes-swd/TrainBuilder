@@ -153,6 +153,7 @@ void LadeJson() {
             knoten Knoten;
             Knoten.GridX = obj["gridX"];
             Knoten.GridY = obj["gridY"];
+            Knoten.Status = obj["Status"];
             knotenliste.push_back(Knoten);
         }
     }

@@ -62,6 +62,30 @@ void UntermenueKlick(Vector2 mausposition) {
             return;
         }
     }
+    else if (aktuellesUntermenue == "technik") {
+        float boxWidth = 80.0f;
+        float boxHeight = 80.0f;
+        float padding = 10.0f;
+        float startX = padding;
+        float startY = 90.0f;
+
+        // Erstes Symbol (Knoten)
+        float x1 = startX;
+        float y1 = startY;
+        if (mausposition.x >= x1 && mausposition.x <= x1 + boxWidth &&
+            mausposition.y >= y1 && mausposition.y <= y1 + boxHeight) {
+            ausgewählterUntermenuePunkt = 1;
+            return;
+        }
+
+        float x2 = startX + boxWidth + padding;
+        float y2 = startY;
+        if (mausposition.x >= x2 && mausposition.x <= x2 + boxWidth &&
+            mausposition.y >= y2 && mausposition.y <= y2 + boxHeight) {
+            ausgewählterUntermenuePunkt = 2;
+            return;
+        }
+    }
 
 }
 
@@ -249,7 +273,7 @@ void ZeichneUnterpunkte() {
             DrawTexture("zeichnen", x, y, gleisPanelWidth, gleisPanelHeight);
         }
 
-        // Option 2: Leer
+        // ampel
         {
             float x = gleisStartX + gleisPanelWidth + gleisPadding;
             float y = gleisStartY;
@@ -268,8 +292,47 @@ void ZeichneUnterpunkte() {
         }
     }
     else if (aktuellesUntermenue == "technik") {
+        float boxWidth = 80.0f;
+        float boxHeight = 80.0f;
+        float padding = 10.0f;
+        float startX = padding;
+        float startY = 90.0f;
 
-        
+        {
+            float x = startX;
+            float y = startY;
+
+            bool isHovered = (mousePos.x >= x && mousePos.x <= x + boxWidth &&
+                mousePos.y >= y && mousePos.y <= y + boxHeight);
+
+            Color bgColor = isHovered ? GRAY : LIGHTGRAY;
+            DrawRectangle(x, y, boxWidth, boxHeight, bgColor);
+            DrawRectangleLines(x, y, boxWidth, boxHeight, DARKGRAY);
+
+            if (ausgewählterUntermenuePunkt == 1) {
+                DrawRectangle(x, y, boxWidth, boxHeight, DARKGRAY);
+            }
+
+            DrawTexture("KnotenSymbol", x, y, boxWidth, boxHeight, WHITE);
+            
+        }
+        {
+            float x = startX + boxWidth + padding;
+            float y = startY;
+
+            bool isHovered = (mousePos.x >= x && mousePos.x <= x + boxWidth &&
+                mousePos.y >= y && mousePos.y <= y + boxHeight);
+
+            Color bgColor = isHovered ? GRAY : LIGHTGRAY;
+            DrawRectangle(x, y, boxWidth, boxHeight, bgColor);
+            DrawRectangleLines(x, y, boxWidth, boxHeight, DARKGRAY);
+
+            if (ausgewählterUntermenuePunkt == 2) {
+                DrawRectangle(x, y, boxWidth, boxHeight, DARKGRAY);
+            }
+            //bild
+        }
+
     }
 
 }

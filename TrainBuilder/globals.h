@@ -152,5 +152,6 @@ struct knoten {
 	int GridY;
 	std::string Name;
 	int eindeutigeId;
+	bool Status;
 };
 extern std::vector<knoten> knotenliste;
