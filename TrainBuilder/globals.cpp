@@ -44,6 +44,7 @@ int aktuellesTool = 1;
 //3 = auswahl
 //4 = banhof
 //5 = zug
+//6 = technik
 
 //untermenü
 bool untermenueOffen = true;

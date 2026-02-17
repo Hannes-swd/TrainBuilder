@@ -126,12 +126,16 @@ void zeichneUI() {
     else if (aktuellesTool == 5) {
         DrawRectangle(290.0f, 10.0f, 60.0f, 60.0f, DARKGRAY);
     }
+    else if (aktuellesTool == 6) {
+        DrawRectangle(360.0f, 10.0f, 60.0f, 60.0f, DARKGRAY);
+    }
 
     DrawTexture("zeichnen", 10.0f, 10.0f, 60.0f, 60.0f);
     DrawTexture("Löschen", 80.0f, 10.0f, 60.0f, 60.0f);
     DrawTexture("Auswahl", 150.0f, 10.0f, 60.0f, 60.0f);
     DrawTexture("Banhof", 220.0f, 10.0f, 60.0f, 60.0f);
     DrawTexture("zugicon", 290.0f, 10.0f, 60.0f, 60.0f);
+    DrawTexture("zahnrad", 360.0f, 10.0f, 60.0f, 60.0f);
 
     /*-------------------------------------------------
         BAHNHOF MENÜ
@@ -376,8 +380,8 @@ void zeichneUI() {
         }
     }
     /*-------------------------------------------------
-    Ampel
--------------------------------------------------*/
+        Ampel
+    -------------------------------------------------*/
     if (ausgewahlterAmpel != 0) {
         bool ampelExistiert = false;
         for (const auto& ampel : ampelListe) {

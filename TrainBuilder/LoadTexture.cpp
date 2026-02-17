@@ -33,6 +33,8 @@ void loadTextures() {
     textures["Auswahl"] = LoadTexture("resurses/Texturen/Ui/Auswahl.png");
     textures["Banhof"] = LoadTexture("resurses/Texturen/Ui/Banhof.png");
     textures["zugicon"] = LoadTexture("resurses/Texturen/Ui/zugicon.png");
+    textures["zahnrad"] = LoadTexture("resurses/Texturen/Ui/zahnrad.png");
+    
     
     /*-------------------------------------------------
         BANHOF

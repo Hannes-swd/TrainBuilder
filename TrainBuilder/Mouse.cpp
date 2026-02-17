@@ -330,4 +330,14 @@ void Menuebuttons() {
             aktuellesUntermenue = "zugtool";
         }
     }
+
+    //technik
+    Rectangle technikButton = { 360.0f, 10.0f, 60.0f, 60.0f };
+    if (CheckCollisionPointRec(mousePos, technikButton)) { 
+        if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {
+            aktuellesTool = 6;
+            untermenueOffen = true;
+            aktuellesUntermenue = "technik";
+        }
+    }
 }

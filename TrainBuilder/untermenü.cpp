@@ -267,5 +267,9 @@ void ZeichneUnterpunkte() {
 			DrawTexture("Ampel_Rot", x, y, gleisPanelWidth, gleisPanelHeight, WHITE);
         }
     }
+    else if (aktuellesUntermenue == "technik") {
+
+        
+    }
 
 }
