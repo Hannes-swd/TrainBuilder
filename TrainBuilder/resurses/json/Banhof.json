@@ -69,6 +69,13 @@
             "gridX": -1,
             "gridY": -28,
             "rotation": 0
+        },
+        {
+            "BanhofId": 11,
+            "Name": "lolsigma",
+            "gridX": 14,
+            "gridY": -32,
+            "rotation": 0
         }
     ]
 }

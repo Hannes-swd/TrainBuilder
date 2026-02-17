@@ -17,6 +17,8 @@ void LadeJson() {
     std::ifstream ZugArten("resurses/json/zugarten.json");
 	std::ifstream AktiveZuege("resurses/json/AktiveZuege.json");
     std::ifstream Ampeln("resurses/json/Ampeln.json");
+    std::ifstream Knoten("resurses/json/Knoten.json");
+    
     
 
     //OBECKTE UND LADEN
@@ -49,6 +51,11 @@ void LadeJson() {
 	if (Ampeln.is_open()) {
 		Ampeln >> AmpelnDaten;
 	}
+
+    nlohmann::json KnotenDaten;
+    if (Knoten.is_open()) {
+        Knoten >> KnotenDaten;
+    }
 
     //ALLE LISTEN LÖSCHEN
     gleisListe.clear();
@@ -138,11 +145,24 @@ void LadeJson() {
             ampelListe.push_back(ampel);
         }
     }
+    /*-------------------------------------------------
+        Knoten
+    -------------------------------------------------*/
+    if (KnotenDaten.contains("knoten")) {
+        for (const auto& obj : AmpelnDaten["Knoten"]) {
+            knoten Knoten;
+            Knoten.GridX = obj["gridX"];
+            Knoten.GridY = obj["gridY"];
+            knotenliste.push_back(Knoten);
+        }
+    }
+
 
 	if (AktiveZuege.is_open()) AktiveZuege.close();
     if (Banhoefe.is_open()) Banhoefe.close();
     if (ZugArten.is_open()) ZugArten.close();
 	if (Ampeln.is_open()) Ampeln.close();
+    if (Knoten.is_open()) Knoten.close();
 
     //WERT LADEN
     if (NutzerDaten.contains("SpielerpositionX") && NutzerDaten.contains("SpielerpositionY")) {

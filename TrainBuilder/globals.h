@@ -140,3 +140,17 @@ struct ampel {
 	bool isGreen;
 };
 extern std::vector<ampel> ampelListe;
+
+/*-------------------------------------------------
+	***SCHALTUNGEN***
+-------------------------------------------------*/
+/*-------------------------------------------------
+	Knoten
+-------------------------------------------------*/
+struct knoten {
+	int GridX;
+	int GridY;
+	std::string Name;
+	int eindeutigeId;
+};
+extern std::vector<knoten> knotenliste;
