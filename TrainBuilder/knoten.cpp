@@ -69,3 +69,11 @@ void KnotenSpeichern() {
 		std::cerr << "Fehler: Knoten.json konnte nicht geöffnet werden!" << std::endl;
 	}
 }
+void KnotenZeichnen() {
+	for (const auto& knoten : knotenliste) {
+		DrawTexture("knoten", knoten.GridX * GRID_SIZE, knoten.GridY * GRID_SIZE, GRID_SIZE, GRID_SIZE, WHITE);
+	}
+}
+void knotenlöschen(int gridX, int gridY) {
+
+}

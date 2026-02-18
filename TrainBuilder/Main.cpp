@@ -15,6 +15,7 @@
 #include "Banhof.h"
 #include "untermenü.h"
 #include "ampel.h"
+#include "knoten.h"
 
 int main(void)
 {
@@ -98,6 +99,8 @@ int main(void)
 
         ZeichneBanhof();
 
+        KnotenZeichnen();
+
 
         //gleise verbinden
         verbindeSchienen();
@@ -135,6 +138,7 @@ int main(void)
     AktiveZuegeSpeichern();
     GleiseSpeichern();
     BanhofSpeichern();
+    KnotenSpeichern();
     unloadTextures();
     CloseWindow();
     

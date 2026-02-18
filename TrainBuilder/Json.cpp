@@ -148,12 +148,14 @@ void LadeJson() {
     /*-------------------------------------------------
         Knoten
     -------------------------------------------------*/
-    if (KnotenDaten.contains("knoten")) {
-        for (const auto& obj : AmpelnDaten["Knoten"]) {
+    if (KnotenDaten.contains("Knoten")) {
+        for (const auto& obj : KnotenDaten["Knoten"]) {
             knoten Knoten;
-            Knoten.GridX = obj["gridX"];
-            Knoten.GridY = obj["gridY"];
+            Knoten.GridX = obj["GridX"];
+            Knoten.GridY = obj["GridY"];
+            Knoten.eindeutigeId = obj["eindeutigeId"];
             Knoten.Status = obj["Status"];
+            Knoten.Name = obj["Name"];
             knotenliste.push_back(Knoten);
         }
     }

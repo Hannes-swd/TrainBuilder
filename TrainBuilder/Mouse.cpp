@@ -260,6 +260,7 @@ void Loeschentool(Vector2 mausposition) {
             }
             return;
         }
+        
     }
     // Gleise
     else {
