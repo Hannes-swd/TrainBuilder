@@ -6,6 +6,13 @@
 #include "Json.h"
 void Spielermoovment() {
     Playercam.offset = Vector2{ (float)GenaueBreite / 2, (float)GenaueHoehe / 2 };
+    //zoom
+    float wheel = GetMouseWheelMove();
+    if (wheel != 0) {
+        Playercam.zoom += wheel * 0.1f;
+        if (Playercam.zoom < 0.4f) Playercam.zoom = 0.4f;
+        if (Playercam.zoom > 3.0f) Playercam.zoom = 3.0f;
+    }
 
     Vector2 movement = { 0, 0 };
     if (IsKeyDown(KEY_W)) {
