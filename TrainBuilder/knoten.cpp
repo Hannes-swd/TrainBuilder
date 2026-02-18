@@ -70,8 +70,35 @@ void KnotenSpeichern() {
 	}
 }
 void KnotenZeichnen() {
+	int fontSize = 15;
+	int maxWidth = GRID_SIZE - 4;
+
 	for (const auto& knoten : knotenliste) {
-		DrawTexture("knoten", knoten.GridX * GRID_SIZE, knoten.GridY * GRID_SIZE, GRID_SIZE, GRID_SIZE, WHITE);
+		DrawTexture("knoten",
+			knoten.GridX * GRID_SIZE,
+			knoten.GridY * GRID_SIZE,
+			GRID_SIZE, GRID_SIZE, WHITE);
+
+		std::string text = knoten.Name;
+		int textWidth = MeasureText(text.c_str(), fontSize);
+
+		if (textWidth > maxWidth) {
+			std::string gekuerzt = text;
+			while (MeasureText(gekuerzt.c_str(), fontSize) > maxWidth && gekuerzt.length() > 1) {
+				gekuerzt.pop_back();
+			}
+			if (gekuerzt.length() < text.length()) {
+				gekuerzt += "...";
+			}
+			text = gekuerzt;
+
+			textWidth = MeasureText(text.c_str(), fontSize);
+		}
+
+		int xPos = knoten.GridX * GRID_SIZE + (GRID_SIZE - textWidth) / 2;
+		int yPos = knoten.GridY * GRID_SIZE + (GRID_SIZE - fontSize) / 2;
+
+		DrawText(text.c_str(), xPos, yPos, fontSize, BLACK);
 	}
 }
 void knotenlöschen(int gridX, int gridY) {
