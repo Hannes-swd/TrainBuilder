@@ -5,6 +5,7 @@
 #include <fstream>
 #include <map>
 #include <queue>
+#include <algorithm>
 #include "LoadTexture.h"
 #include "raylib.h"
 #include "globals.h"
@@ -15,6 +16,7 @@
 #include "json.hpp"
 #include "zug.h"
 #include "knoten.h"
+
 
 using json = nlohmann::json;
 
@@ -101,6 +103,25 @@ void KnotenZeichnen() {
 		DrawText(text.c_str(), xPos, yPos, fontSize, BLACK);
 	}
 }
-void knotenlöschen(int gridX, int gridY) {
 
+bool istKnotenVorhanden(int gridX, int gridY) {
+	for (const auto& knoten : knotenliste) {
+		if (knoten.GridX == gridX && knoten.GridY == gridY) {
+			return true;
+		}
+	}
+	return false;
+}
+
+void knotenlöschen(int gridX, int gridY) {
+	auto it = std::remove_if(knotenliste.begin(), knotenliste.end(),
+		[gridX, gridY](const knoten& k) {
+			return k.GridX == gridX && k.GridY == gridY;
+		});
+
+	if (it != knotenliste.end()) {
+		knotenliste.erase(it, knotenliste.end());
+		KnotenSpeichern();
+		std::cout << "Knoten an Position (" << gridX << ", " << gridY << ") gelöscht" << std::endl;
+	}
 }

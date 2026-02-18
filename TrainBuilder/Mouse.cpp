@@ -15,6 +15,7 @@
 #include "knoten.h"
 
 
+
 void ProcesMaus(Vector2 mausposition) {
     Vector2 screenMousePos = GetMousePosition();
     int MouseGridX = (int)floor(mausposition.x / GRID_SIZE);
@@ -237,18 +238,15 @@ void LinksGeklickt(Vector2 mausposition) {
     }
 }
 /*-------------------------------------------------
-    LSCHTOOL
+    LÖSCHTOOL
 -------------------------------------------------*/
 void Loeschentool(Vector2 mausposition) {
-    // Banhfe
-    if (IstBanhofBereitsVorhanden(
-        (int)floor(mausposition.x / GRID_SIZE),
-        (int)floor(mausposition.y / GRID_SIZE))) {
+    int MouseGridX = (int)floor(mausposition.x / GRID_SIZE);
+    int MouseGridY = (int)floor(mausposition.y / GRID_SIZE);
 
+    // Bahnhöfe
+    if (IstBanhofBereitsVorhanden(MouseGridX, MouseGridY)) {
         if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {
-
-            int MouseGridX = (int)floor(mausposition.x / GRID_SIZE);
-            int MouseGridY = (int)floor(mausposition.y / GRID_SIZE);
 
             std::string geloeschterBanhofName;
             for (const auto& banhof : banhofListe) {
@@ -266,7 +264,6 @@ void Loeschentool(Vector2 mausposition) {
             if (it != banhofListe.end()) {
                 banhofListe.erase(it, banhofListe.end());
 
-                // lscht aus fahrplan
                 if (!geloeschterBanhofName.empty()) {
                     for (auto& zug : aktiveZuege) {
                         auto& fahrplan = zug.Fahrplan;
@@ -282,7 +279,13 @@ void Loeschentool(Vector2 mausposition) {
             }
             return;
         }
-        
+    }
+    // Knoten
+    else if (istKnotenVorhanden(MouseGridX, MouseGridY)) {
+        if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {
+            knotenlöschen(MouseGridX, MouseGridY);
+            return;
+        }
     }
     // Gleise
     else {
@@ -303,7 +306,6 @@ void Loeschentool(Vector2 mausposition) {
         }
     }
 }
-
 /*-------------------------------------------------
     TOOLSWITCHEN
 -------------------------------------------------*/

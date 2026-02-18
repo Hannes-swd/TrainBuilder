@@ -1,13 +1,6 @@
 {
     "Knoten": [
         {
-            "GridX": 18,
-            "GridY": -26,
-            "Name": "sigma",
-            "Status": false,
-            "eindeutigeId": 1
-        },
-        {
             "GridX": 19,
             "GridY": -24,
             "Name": "test",
