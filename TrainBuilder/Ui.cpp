@@ -463,6 +463,10 @@ void zeichneUI() {
             EndScissorMode();
         }
     }
+    if (ausgewahlterKnoten != 0) {
+        DrawRectangle((float)GenaueBreite - 250.0f, 80.0f, 250.0f, (float)GenaueHoehe - 80.0f, LIGHTGRAY);
+        DrawRectangleLines((GenaueBreite - 250), 80, 250, GenaueHoehe - 80, DARKGRAY);
+    }
 
     if (ausgewahlterZug != 0) {
         ZeichneDraggingItem(ausgewahlterZug, zugplanContainerY);

@@ -37,6 +37,8 @@ int ausgewahlterBanhof = 0; //0 = keins
 int ausgewahlterZugArt = 0; //0 = keins
 int ausgewahlterZug = 0; //0 = keins
 int ausgewahlterAmpel = 0; //0 = keins
+int ausgewahlterKnoten = 0; //0 = keins
+
 
 int aktuellesTool = 1; 
 //1 = zeichnen

@@ -30,6 +30,7 @@ extern int ausgewahlterBanhof;
 extern int ausgewahlterZugArt;
 extern int ausgewahlterZug;
 extern int ausgewahlterAmpel;
+extern int ausgewahlterKnoten;
 
 extern int aktuellesTool;
 

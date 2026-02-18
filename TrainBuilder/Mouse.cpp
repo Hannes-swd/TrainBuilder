@@ -51,6 +51,14 @@ void ProcesMaus(Vector2 mausposition) {
             }
         }
     }
+    
+    if (ausgewahlterKnoten != 0) {
+        if (screenMousePos.x > GenaueBreite - 250.0f && screenMousePos.y > 80.0f) {
+            if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {
+                return;
+            }
+        }
+    }
 
 
     if (untermenueOffen) {
@@ -116,6 +124,7 @@ void Auswahltool(int gridX, int gridY)
     bool bahnhofGeklickt = false;
     bool zugGeklickt = false;
 	bool ampelGeklickt = false;
+    bool knotenGeklickt = false;
     Vector2 mouseWorldPos = GetScreenToWorld2D(GetMousePosition(), Playercam);
 
     for (const auto& ban : banhofListe) {
@@ -159,6 +168,16 @@ void Auswahltool(int gridX, int gridY)
             }
         }
     }
+    for (const auto& knoten : knotenliste) {
+        if (knoten.GridX == gridX && knoten.GridY == gridY) {
+            DrawRectangle(gridX * GRID_SIZE, gridY * GRID_SIZE, (float)GRID_SIZE, (float)GRID_SIZE, Color{ 0, 255, 0, 150 });
+
+            if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {
+                ausgewahlterKnoten = knoten.eindeutigeId;
+                knotenGeklickt = true;
+            }
+        }
+    }
 
     // Fenster schliesen
     if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT) && !bahnhofGeklickt) {
@@ -170,6 +189,9 @@ void Auswahltool(int gridX, int gridY)
     if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT) && !ampelGeklickt) {
         ausgewahlterAmpel = 0;
 	}
+    if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT) && !knotenGeklickt) {
+        ausgewahlterKnoten = 0;
+    }
 }
 /*-------------------------------------------------
     Gleise setzen tool

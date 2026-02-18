@@ -6,20 +6,6 @@
             "Name": "",
             "Status": false,
             "eindeutigeId": 1
-        },
-        {
-            "GridX": 20,
-            "GridY": -26,
-            "Name": "",
-            "Status": false,
-            "eindeutigeId": 2
-        },
-        {
-            "GridX": 19,
-            "GridY": -24,
-            "Name": "",
-            "Status": false,
-            "eindeutigeId": 3
         }
     ]
 }
