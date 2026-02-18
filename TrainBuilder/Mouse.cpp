@@ -12,6 +12,7 @@
 #include "Zug.h"
 #include "untermenü.h"
 #include "Ampel.h"
+#include "knoten.h"
 
 
 void ProcesMaus(Vector2 mausposition) {
@@ -100,7 +101,8 @@ void ProcesMaus(Vector2 mausposition) {
             plaziereBanhof(mausposition);
     }
     if (aktuellesTool == 6 && ausgewählterUntermenuePunkt == 1) {
-        AmpelPlazieren(MouseGridX, MouseGridY);
+        if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT))
+            KnotenPlazieren(MouseGridX, MouseGridY);
     }
         
 

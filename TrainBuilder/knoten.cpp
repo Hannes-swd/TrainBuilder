@@ -14,6 +14,7 @@
 #include "untermenü.h"
 #include "json.hpp"
 #include "zug.h"
+#include "knoten.h"
 
 using json = nlohmann::json;
 
@@ -39,5 +40,32 @@ void KnotenPlazieren(int gridX, int gridY) {
 	}
 	newKnoten.eindeutigeId = neieId;
 	knotenliste.push_back(newKnoten);
-	std::cout << "test" ;
+	KnotenSpeichern();
+	std::cerr << "knoiten hinzugefügt";
+}
+
+void KnotenSpeichern() {
+	json jsonDaten;
+	json knotenlArray = json::array();
+	for (const auto& knoten : knotenliste) {
+		json knotenJson;
+		knotenJson["GridX"] = knoten.GridX;
+		knotenJson["GridY"] = knoten.GridY;
+		knotenJson["eindeutigeId"] = knoten.eindeutigeId;
+		knotenJson["Name"] = knoten.Name;
+		knotenJson["Status"] = knoten.Status;
+
+		knotenlArray.push_back(knotenJson);
+	}
+	jsonDaten["Knoten"] = knotenlArray;
+	std::cerr << "knoiten gespeichert";
+	std::ofstream Knotendatei("resurses/json/Knoten.json");
+	if (Knotendatei.is_open()) {
+		Knotendatei << jsonDaten.dump(4);
+		Knotendatei.close();
+
+	}
+	else {
+		std::cerr << "Fehler: Knoten.json konnte nicht geöffnet werden!" << std::endl;
+	}
 }

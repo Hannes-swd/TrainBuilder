@@ -1,3 +1,25 @@
 {
-    "Knoten": []
+    "Knoten": [
+        {
+            "GridX": 2,
+            "GridY": -25,
+            "Name": "",
+            "Status": false,
+            "eindeutigeId": 1
+        },
+        {
+            "GridX": 4,
+            "GridY": -24,
+            "Name": "",
+            "Status": false,
+            "eindeutigeId": 2
+        },
+        {
+            "GridX": 7,
+            "GridY": -24,
+            "Name": "",
+            "Status": false,
+            "eindeutigeId": 3
+        }
+    ]
 }
