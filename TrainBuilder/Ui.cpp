@@ -13,14 +13,17 @@
 
 static TextBox nahmeEingabe(0, 0, 200.0f, 30.0f, 32);
 static TextBox zugnameEingabe(0, 0, 200.0f, 30.0f, 32);
+static TextBox knotenEingabe(0, 0, 200.0f, 30.0f, 32);
 static int letzterAusgewahlterBanhof = 0;
 static int letzterAusgewahlterZug = 0;
+static int letzterAusgewahlterKnoten = 0;
 
 /*-------------------------------------------------
     SCROLLBAR VARIABLEN
 -------------------------------------------------*/
 static float bahnhofScrollOffset = 0.0f;
 static float zugScrollOffset = 0.0f;
+static float knotenOffset = 0.0f;
 static bool bahnhofScrolling = false;
 static bool zugScrolling = false;
 
@@ -466,6 +469,31 @@ void zeichneUI() {
     if (ausgewahlterKnoten != 0) {
         DrawRectangle((float)GenaueBreite - 250.0f, 80.0f, 250.0f, (float)GenaueHoehe - 80.0f, LIGHTGRAY);
         DrawRectangleLines((GenaueBreite - 250), 80, 250, GenaueHoehe - 80, DARKGRAY);
+        BeginScissorMode(GenaueBreite - 250, 80, 250, GenaueHoehe - 80);
+        //seitenmenü
+        //informationen
+        DrawText("ID", (float)GenaueBreite - 240.0f, 100, 20, BLACK);
+        knotenEingabe.SetPosition((float)GenaueBreite - 240.0f, 130.0f - knotenOffset);
+
+        if (letzterAusgewahlterKnoten != ausgewahlterKnoten) {
+            for (const auto& knoten : knotenliste) {
+                if (knoten.eindeutigeId == ausgewahlterKnoten) {
+                    knotenEingabe.SetText(knoten.Name);
+                    break;
+                }
+            }
+            letzterAusgewahlterKnoten = ausgewahlterKnoten;
+            knotenOffset = 0.0f;
+        }
+
+        knotenEingabe.Update();
+        knotenEingabe.Draw();
+
+        if (knotenEingabe.IsActive()) {
+            kannBewegen = false;
+        }
+
+        EndScissorMode();
     }
 
     if (ausgewahlterZug != 0) {
