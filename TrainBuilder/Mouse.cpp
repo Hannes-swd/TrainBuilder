@@ -99,6 +99,10 @@ void ProcesMaus(Vector2 mausposition) {
         if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT))
             plaziereBanhof(mausposition);
     }
+    if (aktuellesTool == 6 && ausgewählterUntermenuePunkt == 1) {
+        AmpelPlazieren(MouseGridX, MouseGridY);
+    }
+        
 
 }
 

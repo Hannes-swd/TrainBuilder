@@ -23,6 +23,72 @@
             "gridX": 0,
             "gridY": -31,
             "isGreen": true
+        },
+        {
+            "AmpelId": 6,
+            "gridX": 0,
+            "gridY": -30,
+            "isGreen": true
+        },
+        {
+            "AmpelId": 7,
+            "gridX": -3,
+            "gridY": -29,
+            "isGreen": true
+        },
+        {
+            "AmpelId": 8,
+            "gridX": -2,
+            "gridY": -26,
+            "isGreen": true
+        },
+        {
+            "AmpelId": 9,
+            "gridX": -1,
+            "gridY": -26,
+            "isGreen": true
+        },
+        {
+            "AmpelId": 10,
+            "gridX": -1,
+            "gridY": -27,
+            "isGreen": true
+        },
+        {
+            "AmpelId": 11,
+            "gridX": 0,
+            "gridY": -27,
+            "isGreen": true
+        },
+        {
+            "AmpelId": 12,
+            "gridX": 5,
+            "gridY": -29,
+            "isGreen": true
+        },
+        {
+            "AmpelId": 13,
+            "gridX": 6,
+            "gridY": -30,
+            "isGreen": true
+        },
+        {
+            "AmpelId": 14,
+            "gridX": 2,
+            "gridY": -28,
+            "isGreen": true
+        },
+        {
+            "AmpelId": 15,
+            "gridX": 2,
+            "gridY": -27,
+            "isGreen": true
+        },
+        {
+            "AmpelId": 16,
+            "gridX": 9,
+            "gridY": -29,
+            "isGreen": true
         }
     ]
 }
