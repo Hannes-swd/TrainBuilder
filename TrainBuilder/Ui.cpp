@@ -10,6 +10,7 @@
 #include "Ui.h"
 #include "ZugPlan.h"
 #include "Ampel.h"
+#include "knoten.h"
 
 static TextBox nahmeEingabe(0, 0, 200.0f, 30.0f, 32);
 static TextBox zugnameEingabe(0, 0, 200.0f, 30.0f, 32);
@@ -470,9 +471,10 @@ void zeichneUI() {
         DrawRectangle((float)GenaueBreite - 250.0f, 80.0f, 250.0f, (float)GenaueHoehe - 80.0f, LIGHTGRAY);
         DrawRectangleLines((GenaueBreite - 250), 80, 250, GenaueHoehe - 80, DARKGRAY);
         BeginScissorMode(GenaueBreite - 250, 80, 250, GenaueHoehe - 80);
-        //seitenmenü
-        //informationen
-        DrawText("ID", (float)GenaueBreite - 240.0f, 100, 20, BLACK);
+
+        // Seitenmenü
+        // Informationen
+        DrawText("ID:", (float)GenaueBreite - 240.0f, 100, 20, BLACK);
         knotenEingabe.SetPosition((float)GenaueBreite - 240.0f, 130.0f - knotenOffset);
 
         if (letzterAusgewahlterKnoten != ausgewahlterKnoten) {
@@ -493,7 +495,47 @@ void zeichneUI() {
             kannBewegen = false;
         }
 
+        for (auto& knoten : knotenliste) {
+            if (knoten.eindeutigeId == ausgewahlterKnoten) {
+                knoten.Name = knotenEingabe.GetText();
+                break;
+            }
+        }
+
+        for (const auto& knoten : knotenliste) {
+            if (knoten.eindeutigeId == ausgewahlterKnoten) {
+                DrawText(TextFormat("ID: %d", knoten.eindeutigeId),
+                    (float)GenaueBreite - 240.0f, 170.0f - knotenOffset, 20, DARKGRAY);
+
+                DrawText(TextFormat("Position: [%d, %d]", knoten.GridX, knoten.GridY),
+                    (float)GenaueBreite - 240.0f, 200.0f - knotenOffset, 20, DARKGRAY);
+
+                break;
+            }
+        }
+
         EndScissorMode();
+
+        if (!knotenEingabe.IsActive() && IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
+            KnotenSpeichern();
+        }
+
+        float knotenContentHoehe = 300.0f;
+        float maxKnotenScroll = BerechneMaxScrollHoehe(knotenContentHoehe);
+
+        float scrollbarX = GenaueBreite - SCROLLBAR_BREITE;
+        float scrollbarY = SEITENMENÜ_Y_START;
+        float scrollbarHoehe = GenaueHoehe - SEITENMENÜ_Y_START - 50.0f;
+
+        static bool knotenScrolling = false;
+        knotenOffset = ProccessScrollInput(knotenOffset, maxKnotenScroll,
+            scrollbarX, scrollbarY, scrollbarHoehe, knotenScrolling,
+            GenaueBreite - 250, 250.0f - SCROLLBAR_BREITE);
+
+        if (maxKnotenScroll > 0) {
+            ZeichneScrollbar(knotenOffset, maxKnotenScroll, knotenScrolling,
+                scrollbarX, scrollbarY, scrollbarHoehe);
+        }
     }
 
     if (ausgewahlterZug != 0) {
