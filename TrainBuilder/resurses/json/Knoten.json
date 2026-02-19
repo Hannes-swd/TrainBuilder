@@ -14,7 +14,7 @@
             "Name": "lol",
             "Status": false,
             "eindeutigeId": 2,
-            "modus": true
+            "modus": false
         }
     ]
 }

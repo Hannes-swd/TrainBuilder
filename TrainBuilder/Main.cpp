@@ -16,6 +16,7 @@
 #include "untermenü.h"
 #include "ampel.h"
 #include "knoten.h"
+#include "Signal.h"
 
 int main(void)
 {
@@ -36,7 +37,7 @@ int main(void)
     -------------------------------------------------*/
     LadeJson();
     loadTextures();
-
+    SignalTeileLaden();
 
 
     SetTargetFPS(60);
@@ -56,7 +57,7 @@ int main(void)
         DeltaTime = GetFrameTime();
 
         mousePosition = GetScreenToWorld2D(GetMousePosition(), Playercam);
-
+        UpdateSignale();
 
         //Höhe/Breite
         GenaueHoehe = GetScreenHeight();
@@ -139,6 +140,7 @@ int main(void)
     GleiseSpeichern();
     BanhofSpeichern();
     KnotenSpeichern();
+    SignalTeilSpeichern();
     unloadTextures();
     CloseWindow();
     

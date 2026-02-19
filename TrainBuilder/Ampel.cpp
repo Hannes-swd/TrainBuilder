@@ -15,6 +15,7 @@
 #include "json.hpp"
 #include "zug.h"
 #include "Ampel.h"
+#include "Signal.h"
 
 using json = nlohmann::json;
 
@@ -46,6 +47,13 @@ void AmpelPlazieren(int gridX, int gridY) {
 	newAmpel.Name = "Ampel_" + std::to_string(newId);
 
 	ampelListe.push_back(newAmpel);
+
+	SignalTeilHinzufuegen(
+		newAmpel.AmpelId,
+		newAmpel.Name,
+		newAmpel.isGreen,
+		Ampel
+	);
 
 	AmpelSpeichern();
 
@@ -97,6 +105,7 @@ void AmpelUmschalten(int gridX, int gridY) {
 			return;
 		}
 	}
+	SignalTeilSpeichern();
 	std::cout << "Keine Ampel an Position [" << gridX << ", " << gridY << "] gefunden!" << std::endl;
 }
 

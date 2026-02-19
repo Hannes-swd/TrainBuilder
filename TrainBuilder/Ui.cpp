@@ -11,6 +11,7 @@
 #include "ZugPlan.h"
 #include "Ampel.h"
 #include "knoten.h"
+#include "Signal.h"
 
 static TextBox nahmeEingabe(0, 0, 200.0f, 30.0f, 32);
 static TextBox zugnameEingabe(0, 0, 200.0f, 30.0f, 32);
@@ -488,9 +489,11 @@ void zeichneUI() {
 
                         for (auto it = ampelListe.begin(); it != ampelListe.end(); ++it) {
                             if (it->AmpelId == ausgewahlterAmpel) {
+                                int geloeschteId = it->AmpelId;
                                 ampelListe.erase(it);
                                 ausgewahlterAmpel = 0;
                                 AmpelSpeichern();
+                                SignalTeilEntfernen(geloeschteId);
                                 break;
                             }
                         }

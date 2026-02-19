@@ -1,4 +1,5 @@
 #pragma once
+#include "Signal.h"
 
 void AmpelPlazieren(int gridX, int gridY);
 void AmpelZeichnen();
