@@ -6,7 +6,7 @@
             "Name": "test",
             "Status": false,
             "eindeutigeId": 1,
-            "modus": false
+            "modus": true
         }
     ]
 }

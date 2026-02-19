@@ -542,7 +542,7 @@ void zeichneUI() {
         bool aktuellermodus = true;
         for (const auto& knoten : knotenliste) {
             if (knoten.eindeutigeId == ausgewahlterKnoten) {
-                
+
                 DrawText(TextFormat("Position: [%d, %d]", knoten.GridX, knoten.GridY),
                     (float)GenaueBreite - 240.0f, 200.0f - knotenOffset, 20, DARKGRAY);
                 aktuellermodus = knoten.modus;
@@ -550,7 +550,6 @@ void zeichneUI() {
             }
         }
 
-        //modus Anzeigen und umschalten
 
         DrawText("Aktueller Modus:", (float)GenaueBreite - 240.0f, 230, 20, BLACK);
         if (aktuellermodus) {
@@ -558,6 +557,43 @@ void zeichneUI() {
         }
         else
             DrawText("Schreiben", (float)GenaueBreite - 240.0f, 250, 20, BLACK);
+
+        //modus switch
+        {
+            float buttonX = GenaueBreite - 240.0f;
+            float buttonY = 280.0f;
+            float buttonWidth = 220.0f;
+            float buttonHeight = 35.0f;
+
+            DrawRectangle(buttonX, buttonY, buttonWidth, buttonHeight, BLUE);
+            DrawRectangleLines(buttonX, buttonY, buttonWidth, buttonHeight, WHITE);
+
+            const char* label = "Modus wechseln";
+            float textWidth = (float)MeasureText(label, 18);
+            DrawText(label,
+                (int)(buttonX + (buttonWidth - textWidth) / 2),
+                (int)(buttonY + (buttonHeight - 18) / 2),
+                18, WHITE);
+
+            if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
+                Vector2 mousePos = GetMousePosition();
+                if (mousePos.x >= GenaueBreite - 250.0f && mousePos.x <= GenaueBreite &&
+                    mousePos.y >= 80.0f && mousePos.y <= GenaueHoehe) {
+
+                    if (mousePos.x >= buttonX && mousePos.x <= buttonX + buttonWidth &&
+                        mousePos.y >= buttonY && mousePos.y <= buttonY + buttonHeight) {
+
+                        for (auto& k : knotenliste) {
+                            if (k.eindeutigeId == ausgewahlterKnoten) {
+                                k.modus = !k.modus;
+                                KnotenSpeichern();
+                                break;
+                            }
+                        }
+                    }
+                }
+            }
+        }
 
         EndScissorMode();
 

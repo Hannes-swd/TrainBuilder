@@ -57,7 +57,7 @@ void KnotenSpeichern() {
 		knotenJson["eindeutigeId"] = knoten.eindeutigeId;
 		knotenJson["Name"] = knoten.Name;
 		knotenJson["Status"] = knoten.Status;
-		knotenJson["modus"] = knoten.Status;
+		knotenJson["modus"] = knoten.modus;
 
 		knotenlArray.push_back(knotenJson);
 	}
