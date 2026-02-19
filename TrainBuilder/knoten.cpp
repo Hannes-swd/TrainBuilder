@@ -78,10 +78,20 @@ void KnotenZeichnen() {
 	int maxWidth = GRID_SIZE - 4;
 
 	for (const auto& knoten : knotenliste) {
-		DrawTexture("knoten",
-			knoten.GridX * GRID_SIZE,
-			knoten.GridY * GRID_SIZE,
-			GRID_SIZE, GRID_SIZE, WHITE);
+		if (!knoten.Status) {
+			DrawTexture("knoten",
+				knoten.GridX * GRID_SIZE,
+				knoten.GridY * GRID_SIZE,
+				GRID_SIZE, GRID_SIZE, WHITE);
+		}
+		else {
+			DrawTexture("knoten_An",
+				knoten.GridX * GRID_SIZE,
+				knoten.GridY * GRID_SIZE,
+				GRID_SIZE, GRID_SIZE, WHITE);
+		}
+			
+			
 
 		std::string text = knoten.Name;
 		int textWidth = MeasureText(text.c_str(), fontSize);

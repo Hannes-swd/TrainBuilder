@@ -4,7 +4,7 @@
             "GridX": 17,
             "GridY": -28,
             "Name": "test",
-            "Status": false,
+            "Status": true,
             "eindeutigeId": 1,
             "modus": true
         },

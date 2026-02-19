@@ -53,7 +53,8 @@ void loadTextures() {
     -------------------------------------------------*/
 
     textures["knoten"] = LoadTexture("resurses/Texturen/Technik/knoten.png");
-
+    textures["knoten_An"] = LoadTexture("resurses/Texturen/Technik/knoten_An.png");
+    
 }
 
 
