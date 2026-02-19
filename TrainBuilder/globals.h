@@ -139,6 +139,7 @@ struct ampel {
 	int GridX;
 	int GridY;
 	bool isGreen;
+	std::string Name;
 };
 extern std::vector<ampel> ampelListe;
 

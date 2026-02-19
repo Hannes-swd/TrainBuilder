@@ -6,6 +6,20 @@
             "Name": "test",
             "Status": false,
             "eindeutigeId": 2
+        },
+        {
+            "GridX": 20,
+            "GridY": -26,
+            "Name": "gooner",
+            "Status": false,
+            "eindeutigeId": 3
+        },
+        {
+            "GridX": 21,
+            "GridY": -23,
+            "Name": "sus",
+            "Status": false,
+            "eindeutigeId": 4
         }
     ]
 }

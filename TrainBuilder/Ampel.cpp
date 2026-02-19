@@ -34,6 +34,7 @@ void AmpelPlazieren(int gridX, int gridY) {
 	newAmpel.GridX = gridX;
 	newAmpel.GridY = gridY;
 	newAmpel.isGreen = true;
+	
 
 	int newId = 1;
 	for (const auto& ampel : ampelListe) {
@@ -42,6 +43,7 @@ void AmpelPlazieren(int gridX, int gridY) {
 		}
 	}
 	newAmpel.AmpelId = newId;
+	newAmpel.Name = "Ampel_" + std::to_string(newId);
 
 	ampelListe.push_back(newAmpel);
 
@@ -70,6 +72,8 @@ void AmpelSpeichern() {
 		ampelJson["gridX"] = ampel.GridX;
 		ampelJson["gridY"] = ampel.GridY;
 		ampelJson["isGreen"] = ampel.isGreen;
+		ampelJson["Name"] = ampel.Name;
+
 		ampelArray.push_back(ampelJson);
 	}
 	jsonDaten["Ampeln"] = ampelArray;

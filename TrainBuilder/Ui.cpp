@@ -15,9 +15,12 @@
 static TextBox nahmeEingabe(0, 0, 200.0f, 30.0f, 32);
 static TextBox zugnameEingabe(0, 0, 200.0f, 30.0f, 32);
 static TextBox knotenEingabe(0, 0, 200.0f, 30.0f, 32);
+static TextBox AmpelEingabe(0, 0, 200.0f, 30.0f, 32);
 static int letzterAusgewahlterBanhof = 0;
 static int letzterAusgewahlterZug = 0;
 static int letzterAusgewahlterKnoten = 0;
+static int letzterAusgewahlteAmpel = 0;
+
 
 /*-------------------------------------------------
     SCROLLBAR VARIABLEN
@@ -25,6 +28,8 @@ static int letzterAusgewahlterKnoten = 0;
 static float bahnhofScrollOffset = 0.0f;
 static float zugScrollOffset = 0.0f;
 static float knotenOffset = 0.0f;
+static float ampelOffset = 0.0f;
+
 static bool bahnhofScrolling = false;
 static bool zugScrolling = false;
 
@@ -421,7 +426,7 @@ void zeichneUI() {
             float buttonY = 150.0f;
             float buttonWidth = 220.0f;
             float buttonHeight = 35.0f;
-            //toggle button
+
             DrawRectangle(buttonX, buttonY, buttonWidth, buttonHeight, BLUE);
             DrawRectangleLines(buttonX, buttonY, buttonWidth, buttonHeight, WHITE);
             DrawText("Ampel umschalten", buttonX + 10, buttonY + 10, 15, WHITE);
@@ -431,6 +436,35 @@ void zeichneUI() {
             DrawRectangleLines(buttonX, deleteButtonY, buttonWidth, buttonHeight, WHITE);
             DrawText("Ampel loeschen", buttonX + 10, deleteButtonY + 10, 15, WHITE);
 
+            // ID 
+            DrawText("ID:", (float)GenaueBreite - 240.0f, 250, 20, BLACK);
+            AmpelEingabe.SetPosition((float)GenaueBreite - 240.0f, 270.0f);
+
+            if (letzterAusgewahlteAmpel != ausgewahlterAmpel) {
+                for (const auto& ampel : ampelListe) {
+                    if (ampel.AmpelId == ausgewahlterAmpel) {
+                        AmpelEingabe.SetText(ampel.Name);
+                        break;
+                    }
+                }
+                letzterAusgewahlteAmpel = ausgewahlterAmpel;
+            }
+
+            AmpelEingabe.Update();
+            AmpelEingabe.Draw();
+
+            if (AmpelEingabe.IsActive()) {
+                kannBewegen = false;
+            }
+
+            for (auto& ampel : ampelListe) {
+                if (ampel.AmpelId == ausgewahlterAmpel) {
+                    ampel.Name = AmpelEingabe.GetText();
+                    break;
+                }
+            }
+
+            // Buttons
             if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
                 Vector2 mousePos = GetMousePosition();
 
@@ -448,14 +482,14 @@ void zeichneUI() {
                             }
                         }
                     }
-                    // Delete Button
+                    // Löschen
                     else if (mousePos.x >= buttonX && mousePos.x <= buttonX + buttonWidth &&
                         mousePos.y >= deleteButtonY && mousePos.y <= deleteButtonY + buttonHeight) {
 
                         for (auto it = ampelListe.begin(); it != ampelListe.end(); ++it) {
                             if (it->AmpelId == ausgewahlterAmpel) {
                                 ampelListe.erase(it);
-                                ausgewahlterAmpel = 0; 
+                                ausgewahlterAmpel = 0;
                                 AmpelSpeichern();
                                 break;
                             }
@@ -465,6 +499,10 @@ void zeichneUI() {
             }
 
             EndScissorMode();
+
+            if (!AmpelEingabe.IsActive() && IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
+                AmpelSpeichern();
+            }
         }
     }
     if (ausgewahlterKnoten != 0) {

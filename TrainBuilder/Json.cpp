@@ -142,6 +142,7 @@ void LadeJson() {
             ampel.GridX = obj["gridX"];
             ampel.GridY = obj["gridY"];
             ampel.isGreen = obj["isGreen"];
+            ampel.Name = obj["Name"];
             ampelListe.push_back(ampel);
         }
     }
