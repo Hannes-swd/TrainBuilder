@@ -33,6 +33,7 @@ void KnotenPlazieren(int gridX, int gridY) {
 	newKnoten.GridX = gridX;
 	newKnoten.GridY = gridY;
 	newKnoten.Status = false;
+	newKnoten.modus = true;
 	//eigene id erstellen
 	int neieId = 1;
 	for (const auto& knoten : knotenliste) {
@@ -56,6 +57,7 @@ void KnotenSpeichern() {
 		knotenJson["eindeutigeId"] = knoten.eindeutigeId;
 		knotenJson["Name"] = knoten.Name;
 		knotenJson["Status"] = knoten.Status;
+		knotenJson["modus"] = knoten.Status;
 
 		knotenlArray.push_back(knotenJson);
 	}

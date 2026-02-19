@@ -155,5 +155,6 @@ struct knoten {
 	std::string Name;
 	int eindeutigeId;
 	bool Status;
+	bool modus;
 };
 extern std::vector<knoten> knotenliste;

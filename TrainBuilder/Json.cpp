@@ -157,6 +157,8 @@ void LadeJson() {
             Knoten.eindeutigeId = obj["eindeutigeId"];
             Knoten.Status = obj["Status"];
             Knoten.Name = obj["Name"];
+            //modus: Lesen = true / schreiben = false
+            Knoten.modus = obj["modus"];
             knotenliste.push_back(Knoten);
         }
     }

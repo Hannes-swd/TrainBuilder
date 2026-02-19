@@ -1,31 +1,17 @@
 {
     "Ampeln": [
         {
-            "AmpelId": 2,
-            "Name": "test",
-            "gridX": -5,
-            "gridY": -19,
+            "AmpelId": 1,
+            "Name": "Ampel_1",
+            "gridX": 4,
+            "gridY": -29,
             "isGreen": true
         },
         {
-            "AmpelId": 4,
-            "Name": "nahmen eingabe",
-            "gridX": 10,
-            "gridY": -21,
-            "isGreen": true
-        },
-        {
-            "AmpelId": 6,
-            "Name": "test",
+            "AmpelId": 3,
+            "Name": "Ampel_3",
             "gridX": 0,
-            "gridY": -30,
-            "isGreen": true
-        },
-        {
-            "AmpelId": 13,
-            "Name": "test",
-            "gridX": 6,
-            "gridY": -30,
+            "gridY": -21,
             "isGreen": true
         }
     ]

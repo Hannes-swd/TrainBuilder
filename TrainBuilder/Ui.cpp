@@ -539,18 +539,25 @@ void zeichneUI() {
                 break;
             }
         }
-
+        bool aktuellermodus = true;
         for (const auto& knoten : knotenliste) {
             if (knoten.eindeutigeId == ausgewahlterKnoten) {
-                DrawText(TextFormat("ID: %d", knoten.eindeutigeId),
-                    (float)GenaueBreite - 240.0f, 170.0f - knotenOffset, 20, DARKGRAY);
-
+                
                 DrawText(TextFormat("Position: [%d, %d]", knoten.GridX, knoten.GridY),
                     (float)GenaueBreite - 240.0f, 200.0f - knotenOffset, 20, DARKGRAY);
-
+                aktuellermodus = knoten.modus;
                 break;
             }
         }
+
+        //modus Anzeigen und umschalten
+
+        DrawText("Aktueller Modus:", (float)GenaueBreite - 240.0f, 230, 20, BLACK);
+        if (aktuellermodus) {
+            DrawText("Lesen", (float)GenaueBreite - 240.0f, 250, 20, BLACK);
+        }
+        else
+            DrawText("Schreiben", (float)GenaueBreite - 240.0f, 250, 20, BLACK);
 
         EndScissorMode();
 
