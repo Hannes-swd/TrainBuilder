@@ -161,9 +161,14 @@ extern std::vector<knoten> knotenliste;
 /*-------------------------------------------------
 	Signale
 -------------------------------------------------*/
+enum Signaltyp{
+	Ampel,
+	Test
+};
 struct SignalTeil {
 	int eindeutigeId;
 	std::string nutzerId;
 	bool wert = true;
+	Signaltyp typ;
 };
 extern std::vector<SignalTeil> SignalTeilListe;

@@ -113,7 +113,7 @@ void ProcesMaus(Vector2 mausposition) {
         if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT))
             KnotenPlazieren(MouseGridX, MouseGridY);
     }
-        
+    
 
 }
 
