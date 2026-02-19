@@ -162,7 +162,8 @@ extern std::vector<knoten> knotenliste;
 	Signale
 -------------------------------------------------*/
 struct SignalTeil {
-	int id;
-	bool wert;;
+	int eindeutigeId;
+	std::string nutzerId;
+	bool wert = true;
 };
 extern std::vector<SignalTeil> SignalTeilListe;
