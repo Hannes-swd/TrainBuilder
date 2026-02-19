@@ -2,14 +2,14 @@
     "Ampeln": [
         {
             "AmpelId": 1,
-            "Name": "Ampel_1",
+            "Name": "Test",
             "gridX": 4,
             "gridY": -29,
             "isGreen": true
         },
         {
             "AmpelId": 3,
-            "Name": "Ampel_3",
+            "Name": "lol",
             "gridX": 0,
             "gridY": -21,
             "isGreen": true

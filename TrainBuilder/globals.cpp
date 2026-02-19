@@ -107,3 +107,7 @@ std::vector<ampel> ampelListe;
 	Knoten
 -------------------------------------------------*/
 std::vector<knoten> knotenliste;
+/*-------------------------------------------------
+	Signale
+-------------------------------------------------*/
+std::vector<SignalTeil> SignalTeilListe;

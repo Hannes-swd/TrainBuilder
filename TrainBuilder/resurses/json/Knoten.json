@@ -7,6 +7,14 @@
             "Status": false,
             "eindeutigeId": 1,
             "modus": true
+        },
+        {
+            "GridX": 17,
+            "GridY": -25,
+            "Name": "lol",
+            "Status": false,
+            "eindeutigeId": 2,
+            "modus": true
         }
     ]
 }

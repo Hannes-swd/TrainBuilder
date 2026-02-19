@@ -158,3 +158,11 @@ struct knoten {
 	bool modus;
 };
 extern std::vector<knoten> knotenliste;
+/*-------------------------------------------------
+	Signale
+-------------------------------------------------*/
+struct SignalTeil {
+	int id;
+	bool wert;;
+};
+extern std::vector<SignalTeil> SignalTeilListe;
