@@ -6,6 +6,7 @@
 #include <fstream>
 #include "json.hpp"
 #include "LoadTexture.h"
+#include "Signal.h"
 
 using json = nlohmann::json;
 
@@ -144,6 +145,10 @@ void LadeJson() {
             ampel.isGreen = obj["isGreen"];
             ampel.Name = obj["Name"];
             ampelListe.push_back(ampel);
+
+            if (!ampel.Name.empty()) {
+                SignalTeilHinzufuegen(ampel.AmpelId, ampel.Name, ampel.isGreen, Ampel);
+            }
         }
     }
     /*-------------------------------------------------

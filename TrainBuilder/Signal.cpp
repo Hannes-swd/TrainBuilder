@@ -7,10 +7,10 @@
 using json = nlohmann::json;
 
 
-void SignalTeileLaden() {  
+void SignalTeileLaden() {
     std::ifstream datei("resurses/json/Signale.json");
     if (!datei.is_open()) {
-        std::cout << "Keine Signale.json gefunden – starte mit leerer Liste" << std::endl;
+        std::cout << "Keine Signale.json gefunden  starte mit leerer Liste" << std::endl;
         return;
     }
 
@@ -67,7 +67,7 @@ void SignalTeilHinzufuegen(int eindeutigeId, std::string nutzerId, bool wert, Si
     neu.typ = typ;
 
     SignalTeilListe.push_back(neu);
-    SignalTeilSpeichern(); 
+    SignalTeilSpeichern();
 }
 
 void SignalTeilEntfernen(int eindeutigeId) {
@@ -100,23 +100,22 @@ std::vector<SignalTeil*> SucheAlleMitNutzerId(std::string nutzerId) {
 }
 void UpdateSignale() {
     for (auto& knoten : knotenliste) {
-        //knoten
         if (knoten.modus == true) {
+            bool mindestensEinsTrue = false;
             for (const auto& signal : SignalTeilListe) {
-                if (signal.nutzerId == knoten.Name) {
-                    knoten.eindeutigeId = signal.wert;
+                if (signal.nutzerId == knoten.Name && signal.wert == true) {
+                    mindestensEinsTrue = true;
                     break;
                 }
             }
+            knoten.Status = mindestensEinsTrue;
         }
         else {
-            
             for (auto& signal : SignalTeilListe) {
                 if (signal.nutzerId == knoten.Name) {
-                    signal.wert = knoten.eindeutigeId;
+                    signal.wert = knoten.Status;
                 }
             }
         }
     }
-
 }

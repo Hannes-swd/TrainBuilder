@@ -35,7 +35,7 @@ void AmpelPlazieren(int gridX, int gridY) {
 	newAmpel.GridX = gridX;
 	newAmpel.GridY = gridY;
 	newAmpel.isGreen = true;
-	
+
 
 	int newId = 1;
 	for (const auto& ampel : ampelListe) {
@@ -46,14 +46,15 @@ void AmpelPlazieren(int gridX, int gridY) {
 	newAmpel.AmpelId = newId;
 	newAmpel.Name = "Ampel_" + std::to_string(newId);
 
-	ampelListe.push_back(newAmpel);
-
+	
+	newAmpel.Name = "MeinKnoten";
 	SignalTeilHinzufuegen(
 		newAmpel.AmpelId,
 		newAmpel.Name,
 		newAmpel.isGreen,
 		Ampel
 	);
+	ampelListe.push_back(newAmpel);
 
 	AmpelSpeichern();
 
@@ -95,17 +96,26 @@ void AmpelSpeichern() {
 	}
 }
 
+void AmpelSignalSynchronisieren(const ampel& a) {
+	for (auto& signal : SignalTeilListe) {
+		if (signal.eindeutigeId == a.AmpelId && signal.typ == Ampel) {
+			signal.wert = a.isGreen;
+			break;
+		}
+	}
+}
+
 void AmpelUmschalten(int gridX, int gridY) {
 	for (auto& ampel : ampelListe) {
 		if (ampel.GridX == gridX && ampel.GridY == gridY) {
 			ampel.isGreen = !ampel.isGreen;
+			AmpelSignalSynchronisieren(ampel);
 			AmpelSpeichern();
 			std::cout << "Ampel an [" << gridX << ", " << gridY << "] ist jetzt "
 				<< (ampel.isGreen ? "GRUEN" : "ROT") << std::endl;
 			return;
 		}
 	}
-	SignalTeilSpeichern();
 	std::cout << "Keine Ampel an Position [" << gridX << ", " << gridY << "] gefunden!" << std::endl;
 }
 
@@ -113,6 +123,7 @@ void AmpelUmschaltenNachId(int ampelId) {
 	for (auto& ampel : ampelListe) {
 		if (ampel.AmpelId == ampelId) {
 			ampel.isGreen = !ampel.isGreen;
+			AmpelSignalSynchronisieren(ampel);
 			AmpelSpeichern();
 			std::cout << "Ampel " << ampelId << " ist jetzt "
 				<< (ampel.isGreen ? "GRUEN" : "ROT") << std::endl;
@@ -127,6 +138,7 @@ void AmpelAufGruen(int gridX, int gridY) {
 	for (auto& ampel : ampelListe) {
 		if (ampel.GridX == gridX && ampel.GridY == gridY) {
 			ampel.isGreen = true;
+			AmpelSignalSynchronisieren(ampel);
 			AmpelSpeichern();
 			return;
 		}
@@ -138,6 +150,7 @@ void AmpelAufRot(int gridX, int gridY) {
 	for (auto& ampel : ampelListe) {
 		if (ampel.GridX == gridX && ampel.GridY == gridY) {
 			ampel.isGreen = false;
+			AmpelSignalSynchronisieren(ampel);
 			AmpelSpeichern();
 			return;
 		}

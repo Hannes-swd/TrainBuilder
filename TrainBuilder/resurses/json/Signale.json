@@ -1,3 +1,16 @@
 {
-    "Signale": []
+    "Signale": [
+        {
+            "eindeutigeId": 1,
+            "nutzerId": "Test",
+            "typ": 0,
+            "wert": true
+        },
+        {
+            "eindeutigeId": 3,
+            "nutzerId": "lol",
+            "typ": 0,
+            "wert": true
+        }
+    ]
 }

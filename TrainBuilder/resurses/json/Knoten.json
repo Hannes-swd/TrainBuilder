@@ -3,7 +3,7 @@
         {
             "GridX": 17,
             "GridY": -28,
-            "Name": "test",
+            "Name": "Test",
             "Status": true,
             "eindeutigeId": 1,
             "modus": true
@@ -12,9 +12,17 @@
             "GridX": 17,
             "GridY": -25,
             "Name": "lol",
-            "Status": false,
+            "Status": true,
             "eindeutigeId": 2,
-            "modus": false
+            "modus": true
+        },
+        {
+            "GridX": 19,
+            "GridY": -26,
+            "Name": "test",
+            "Status": false,
+            "eindeutigeId": 3,
+            "modus": true
         }
     ]
 }
