@@ -22,13 +22,6 @@
             "eindeutigeId": 3
         },
         {
-            "GridX": 26,
-            "GridY": -30,
-            "Rotation": 3,
-            "Status": true,
-            "eindeutigeId": 4
-        },
-        {
             "GridX": 17,
             "GridY": -31,
             "Rotation": 0,
@@ -55,6 +48,13 @@
             "Rotation": 0,
             "Status": true,
             "eindeutigeId": 14
+        },
+        {
+            "GridX": 26,
+            "GridY": -30,
+            "Rotation": 0,
+            "Status": false,
+            "eindeutigeId": 15
         }
     ]
 }

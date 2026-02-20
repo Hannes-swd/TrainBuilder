@@ -1,4 +1,4 @@
-#include <cstdlib>
+Ôªø#include <cstdlib>
 #include <iostream>
 #include <ctime>
 #include <algorithm>
@@ -10,7 +10,7 @@
 #include "Mouse.h"
 #include "Banhof.h"
 #include "Zug.h"
-#include "untermen¸.h"
+#include "untermen√º.h"
 #include "Ampel.h"
 #include "knoten.h"
 #include "Leiter.h"
@@ -53,7 +53,7 @@ void ProcesMaus(Vector2 mausposition) {
             }
         }
     }
-    
+
     if (ausgewahlterKnoten != 0) {
         if (screenMousePos.x > GenaueBreite - 250.0f && screenMousePos.y > 80.0f) {
             if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {
@@ -110,15 +110,15 @@ void ProcesMaus(Vector2 mausposition) {
         if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT))
             plaziereBanhof(mausposition);
     }
-    if (aktuellesTool == 6 && ausgew‰hlterUntermenuePunkt == 1) {
+    if (aktuellesTool == 6 && ausgew√§hlterUntermenuePunkt == 1) {
         if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT))
             KnotenPlazieren(MouseGridX, MouseGridY);
     }
-    if (aktuellesTool == 6 && ausgew‰hlterUntermenuePunkt == 2) {
+    if (aktuellesTool == 6 && ausgew√§hlterUntermenuePunkt == 2) {
         if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT))
             LeiterPlazieren(MouseGridX, MouseGridY);
     }
-    
+
 
 }
 
@@ -129,7 +129,7 @@ void Auswahltool(int gridX, int gridY)
 {
     bool bahnhofGeklickt = false;
     bool zugGeklickt = false;
-	bool ampelGeklickt = false;
+    bool ampelGeklickt = false;
     bool knotenGeklickt = false;
     Vector2 mouseWorldPos = GetScreenToWorld2D(GetMousePosition(), Playercam);
 
@@ -194,7 +194,7 @@ void Auswahltool(int gridX, int gridY)
     }
     if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT) && !ampelGeklickt) {
         ausgewahlterAmpel = 0;
-	}
+    }
     if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT) && !knotenGeklickt) {
         ausgewahlterKnoten = 0;
     }
@@ -207,7 +207,7 @@ void LinksGeklickt(Vector2 mausposition) {
     int KlickGridX = (int)floor(mausposition.x / GRID_SIZE);
     int KlickGridY = (int)floor(mausposition.y / GRID_SIZE);
     //BEI GLEISE
-    if (aktuellesTool == 1 && untermenueOffen && ausgew‰hlterUntermenuePunkt == 1) {
+    if (aktuellesTool == 1 && untermenueOffen && ausgew√§hlterUntermenuePunkt == 1) {
         if (screenMousePos.y < 80.0f) {
             return;
         }
@@ -234,22 +234,22 @@ void LinksGeklickt(Vector2 mausposition) {
         }
     }
     //AMPEL
-    else if (aktuellesTool == 1 && untermenueOffen && ausgew‰hlterUntermenuePunkt == 2) {
+    else if (aktuellesTool == 1 && untermenueOffen && ausgew√§hlterUntermenuePunkt == 2) {
         if (screenMousePos.y < 80.0f) {
             return;
         }
         AmpelPlazieren(KlickGridX, KlickGridY);
-		std::cout << "Ampel plaziert an [" << KlickGridX << ", " << KlickGridY << "]" << std::endl;
+        std::cout << "Ampel plaziert an [" << KlickGridX << ", " << KlickGridY << "]" << std::endl;
     }
 }
 /*-------------------------------------------------
-    L÷SCHTOOL
+    L√ñSCHTOOL
 -------------------------------------------------*/
 void Loeschentool(Vector2 mausposition) {
     int MouseGridX = (int)floor(mausposition.x / GRID_SIZE);
     int MouseGridY = (int)floor(mausposition.y / GRID_SIZE);
 
-    // Bahnhˆfe
+    // Bahnh√∂fe
     if (IstBanhofBereitsVorhanden(MouseGridX, MouseGridY)) {
         if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {
 
@@ -288,14 +288,14 @@ void Loeschentool(Vector2 mausposition) {
     // Knoten
     else if (istKnotenVorhanden(MouseGridX, MouseGridY)) {
         if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {
-            knotenlˆschen(MouseGridX, MouseGridY);
+            knotenl√∂schen(MouseGridX, MouseGridY);
             return;
         }
     }
     // Leiter
     else if (IstLeiterVorhanden(MouseGridX, MouseGridY)) {
         if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {
-            LeiterLˆschen(MouseGridX, MouseGridY);
+            LeiterL√∂schen(MouseGridX, MouseGridY);
             return;
         }
     }
@@ -324,18 +324,9 @@ void Loeschentool(Vector2 mausposition) {
 void Menuebuttons() {
     Vector2 mousePos = GetMousePosition();
 
-    // Zeichen tool
-    Rectangle zeichenButton = { 10.0f, 10.0f, 60.0f, 60.0f };
-    if (CheckCollisionPointRec(mousePos, zeichenButton)) {
-        if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {
-            aktuellesTool = 1;
-            untermenueOffen = true;
-            aktuellesUntermenue = "gleistool";
-        }
-    }
 
-    // Lschen tool
-    Rectangle loeschenButton = { 80.0f, 10.0f, 60.0f, 60.0f };
+    // L√∂schen tool
+    Rectangle loeschenButton = { 10.0f, 10.0f, 60.0f, 60.0f };
     if (CheckCollisionPointRec(mousePos, loeschenButton)) {
         if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {
             aktuellesTool = 2;
@@ -345,7 +336,7 @@ void Menuebuttons() {
     }
 
     // Auswahl tool
-    Rectangle auswahlButton = { 150.0f, 10.0f, 60.0f, 60.0f };
+    Rectangle auswahlButton = { 80.0f, 10.0f, 60.0f, 60.0f };
     if (CheckCollisionPointRec(mousePos, auswahlButton)) {
         if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {
             aktuellesTool = 3;
@@ -354,8 +345,28 @@ void Menuebuttons() {
         }
     }
 
+    //Drehen
+    Rectangle DrehenButton = { 150.0f, 10.0f, 60.0f, 60.0f };
+    if (CheckCollisionPointRec(mousePos, DrehenButton)) {
+        if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {
+            aktuellesTool = 7;
+            untermenueOffen = false;
+            aktuellesUntermenue = "";
+        }
+    }
+
+    // Zeichen tool
+    Rectangle zeichenButton = { 220.0f, 10.0f, 60.0f, 60.0f };
+    if (CheckCollisionPointRec(mousePos, zeichenButton)) {
+        if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {
+            aktuellesTool = 1;
+            untermenueOffen = true;
+            aktuellesUntermenue = "gleistool";
+        }
+    }
+
     // Banhof tool
-    Rectangle banhofButton = { 220.0f, 10.0f, 60.0f, 60.0f };
+    Rectangle banhofButton = { 290.0f, 10.0f, 60.0f, 60.0f };
     if (CheckCollisionPointRec(mousePos, banhofButton)) {
         if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {
             aktuellesTool = 4;
@@ -365,7 +376,7 @@ void Menuebuttons() {
     }
 
     // Zug tool
-    Rectangle zugButton = { 290.0f, 10.0f, 60.0f, 60.0f };
+    Rectangle zugButton = { 360.0f, 10.0f, 60.0f, 60.0f };
     if (CheckCollisionPointRec(mousePos, zugButton)) {
         if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {
             aktuellesTool = 5;
@@ -375,21 +386,12 @@ void Menuebuttons() {
     }
 
     //technik
-    Rectangle technikButton = { 360.0f, 10.0f, 60.0f, 60.0f };
-    if (CheckCollisionPointRec(mousePos, technikButton)) { 
+    Rectangle technikButton = { 430.0f, 10.0f, 60.0f, 60.0f };
+    if (CheckCollisionPointRec(mousePos, technikButton)) {
         if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {
             aktuellesTool = 6;
             untermenueOffen = true;
             aktuellesUntermenue = "technik";
-        }
-    }
-    //Drehen
-    Rectangle DrehenButton = { 430.0f, 10.0f, 60.0f, 60.0f };
-    if (CheckCollisionPointRec(mousePos, DrehenButton)) {
-        if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {
-            aktuellesTool = 7;
-            untermenueOffen = false;
-            aktuellesUntermenue = "";
         }
     }
 }
