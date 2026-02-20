@@ -214,21 +214,21 @@ void ZeichneUnterpunkte() {
                 float col1X = textX;
                 float col2X = textX + 120;
 
-                std::string speedText = "Geschwindigkeit:";
+                std::string speedText = "speed:";
                 DrawText(speedText.c_str(), col1X, textY, 12, DARKGRAY);
 
                 std::string speedValue = std::to_string(zug.geschwindichkeit) + " km/h";
                 DrawText(speedValue.c_str(), col2X, textY, 12, BLUE);
                 textY += 18;
 
-                std::string passText = "Max Passagiere:";
+                std::string passText = "Max passengers:";
                 DrawText(passText.c_str(), col1X, textY, 12, DARKGRAY);
 
                 std::string passValue = std::to_string(zug.passagiere);
                 DrawText(passValue.c_str(), col2X, textY, 12, BLUE);
                 textY += 18;
 
-                std::string gueterText = "Max Gueter:";
+                std::string gueterText = "Max Goods:";
                 DrawText(gueterText.c_str(), col1X, textY, 12, DARKGRAY);
 
                 std::string gueterValue = std::to_string(zug.gueter);
@@ -236,7 +236,7 @@ void ZeichneUnterpunkte() {
                 textY += 18;
 
                 if (!zug.zugtyp.empty()) {
-                    std::string typText = "Zugtyp:";
+                    std::string typText = "train type:";
                     DrawText(typText.c_str(), col1X, textY, 12, DARKGRAY);
                     DrawText(zug.zugtyp.c_str(), col2X, textY, 12, DARKBLUE);
                 }

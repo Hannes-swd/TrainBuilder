@@ -279,16 +279,16 @@ void zeichneUI() {
                 DrawText(TextFormat("Rotation: %d", zug.rotation), contentX, yPos, 20, BLACK);
                 yPos += lineHeight;
 
-                DrawText(TextFormat("Geschwindigkeit: %d km/h", zug.geschwindichkeit), contentX, yPos, 20, BLACK);
+                DrawText(TextFormat("speed: %d km/h", zug.geschwindichkeit), contentX, yPos, 20, BLACK);
                 yPos += lineHeight;
 
-                DrawText(TextFormat("Passagiere: %d", zug.passagiere), contentX, yPos, 20, BLACK);
+                DrawText(TextFormat("passengers: %d", zug.passagiere), contentX, yPos, 20, BLACK);
                 yPos += lineHeight;
 
-                DrawText(TextFormat("Gueter: %d", zug.gueter), contentX, yPos, 20, BLACK);
+                DrawText(TextFormat("goods: %d", zug.gueter), contentX, yPos, 20, BLACK);
                 yPos += lineHeight;
 
-                DrawText(TextFormat("Zugtyp: %s", zug.zugtyp.c_str()), contentX, yPos, 20, BLACK);
+                DrawText(TextFormat("train type: %s", zug.zugtyp.c_str()), contentX, yPos, 20, BLACK);
                 yPos += lineHeight;
 
                 break;
@@ -327,8 +327,8 @@ void zeichneUI() {
             DrawRectangle(deleteButtonX, deleteButtonY, deleteButtonWidth, deleteButtonHeight, RED);
             DrawRectangleLines(deleteButtonX, deleteButtonY, deleteButtonWidth, deleteButtonHeight, WHITE);
 
-            float textWidth = MeasureText("Zug loeschen", 20);
-            DrawText("Zug loeschen",
+            float textWidth = MeasureText("Delete train", 20);
+            DrawText("Delete train",
                 deleteButtonX + (deleteButtonWidth - textWidth) / 2,
                 deleteButtonY + (deleteButtonHeight - 20) / 2,
                 20, WHITE);
@@ -414,10 +414,10 @@ void zeichneUI() {
             for (const auto& ampel : ampelListe) {
                 if (ampel.AmpelId == ausgewahlterAmpel) {
                     if (ampel.isGreen) {
-                        DrawText("Gruen", GenaueBreite - 150.0f, 100.0f, 20, GREEN);
+                        DrawText("Green", GenaueBreite - 150.0f, 100.0f, 20, GREEN);
                     }
                     else {
-                        DrawText("Rot", GenaueBreite - 150.0f, 100.0f, 20, RED);
+                        DrawText("Red", GenaueBreite - 150.0f, 100.0f, 20, RED);
                     }
                     break;
                 }
@@ -430,12 +430,12 @@ void zeichneUI() {
 
             DrawRectangle(buttonX, buttonY, buttonWidth, buttonHeight, BLUE);
             DrawRectangleLines(buttonX, buttonY, buttonWidth, buttonHeight, WHITE);
-            DrawText("Ampel umschalten", buttonX + 10, buttonY + 10, 15, WHITE);
+            DrawText("switch traffic lights", buttonX + 10, buttonY + 10, 15, WHITE);
 
             float deleteButtonY = buttonY + buttonHeight + 10;
             DrawRectangle(buttonX, deleteButtonY, buttonWidth, buttonHeight, RED);
             DrawRectangleLines(buttonX, deleteButtonY, buttonWidth, buttonHeight, WHITE);
-            DrawText("Ampel loeschen", buttonX + 10, deleteButtonY + 10, 15, WHITE);
+            DrawText("Delete traffic light", buttonX + 10, deleteButtonY + 10, 15, WHITE);
 
             // ID 
             DrawText("ID:", (float)GenaueBreite - 240.0f, 250, 20, BLACK);
@@ -554,12 +554,12 @@ void zeichneUI() {
         }
 
 
-        DrawText("Aktueller Modus:", (float)GenaueBreite - 240.0f, 230, 20, BLACK);
+        DrawText("Current mode:", (float)GenaueBreite - 240.0f, 230, 20, BLACK);
         if (aktuellermodus) {
-            DrawText("Lesen", (float)GenaueBreite - 240.0f, 250, 20, BLACK);
+            DrawText("Read", (float)GenaueBreite - 240.0f, 250, 20, BLACK);
         }
         else
-            DrawText("Schreiben", (float)GenaueBreite - 240.0f, 250, 20, BLACK);
+            DrawText("whrite", (float)GenaueBreite - 240.0f, 250, 20, BLACK);
 
         //modus switch
         {
@@ -571,7 +571,7 @@ void zeichneUI() {
             DrawRectangle(buttonX, buttonY, buttonWidth, buttonHeight, BLUE);
             DrawRectangleLines(buttonX, buttonY, buttonWidth, buttonHeight, WHITE);
 
-            const char* label = "Modus wechseln";
+            const char* label = "Switch mode";
             float textWidth = (float)MeasureText(label, 18);
             DrawText(label,
                 (int)(buttonX + (buttonWidth - textWidth) / 2),
