@@ -1,3 +1,18 @@
 {
-    "Leiter": []
+    "Leiter": [
+        {
+            "GridX": 21,
+            "GridY": -27,
+            "Rotation": 0,
+            "Status": false,
+            "eindeutigeId": 1
+        },
+        {
+            "GridX": 23,
+            "GridY": -25,
+            "Rotation": 0,
+            "Status": false,
+            "eindeutigeId": 2
+        }
+    ]
 }

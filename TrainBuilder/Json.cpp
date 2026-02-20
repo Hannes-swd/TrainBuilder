@@ -68,6 +68,7 @@ void LadeJson() {
     banhofListe.clear();
     zugArtenListe.clear();
     ampelListe.clear();
+    LeiterListe.clear();
     /*-------------------------------------------------
         Gleise
     -------------------------------------------------*/
@@ -172,6 +173,21 @@ void LadeJson() {
             knotenliste.push_back(Knoten);
         }
     }
+    /*-------------------------------------------------
+        Leiter
+    -------------------------------------------------*/
+    if (LeiterDaten.contains("Leiter")) {
+        for (const auto& obj : LeiterDaten["Leiter"]) {
+            Leiterobjeckt Leiter;
+            Leiter.GridX = obj["GridX"];
+            Leiter.GridY = obj["GridY"];
+            Leiter.Rotation = obj["Rotation"];
+            Leiter.eindeutigeId = obj["eindeutigeId"];
+            Leiter.Status = obj["Status"];
+
+            LeiterListe.push_back(Leiter);
+        }
+    }
 
 
 	if (AktiveZuege.is_open()) AktiveZuege.close();
@@ -179,6 +195,7 @@ void LadeJson() {
     if (ZugArten.is_open()) ZugArten.close();
 	if (Ampeln.is_open()) Ampeln.close();
     if (Knoten.is_open()) Knoten.close();
+    if (Leiter.is_open()) Leiter.close();
 
     //WERT LADEN
     if (NutzerDaten.contains("SpielerpositionX") && NutzerDaten.contains("SpielerpositionY")) {

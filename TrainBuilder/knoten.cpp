@@ -44,7 +44,7 @@ void KnotenPlazieren(int gridX, int gridY) {
 	newKnoten.eindeutigeId = neieId;
 	knotenliste.push_back(newKnoten);
 	KnotenSpeichern();
-	std::cerr << "knoiten hinzugefügt";
+	//std::cerr << "knoiten hinzugefügt";
 }
 
 void KnotenSpeichern() {

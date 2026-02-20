@@ -179,7 +179,8 @@ extern std::vector<SignalTeil> SignalTeilListe;
 struct Leiterobjeckt {
 	int GridX;
 	int GridY;
+	int Rotation;
 	int eindeutigeId;
 	bool Status;
 };
-std::vector<Leiterobjeckt> LeiterListe;
+extern std::vector<Leiterobjeckt> LeiterListe;

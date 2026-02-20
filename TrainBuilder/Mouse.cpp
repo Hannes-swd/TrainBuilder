@@ -13,6 +13,7 @@
 #include "untermenü.h"
 #include "Ampel.h"
 #include "knoten.h"
+#include "Leiter.h"
 
 
 
@@ -112,6 +113,10 @@ void ProcesMaus(Vector2 mausposition) {
     if (aktuellesTool == 6 && ausgewählterUntermenuePunkt == 1) {
         if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT))
             KnotenPlazieren(MouseGridX, MouseGridY);
+    }
+    if (aktuellesTool == 6 && ausgewählterUntermenuePunkt == 2) {
+        if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT))
+            LeiterPlazieren(MouseGridX, MouseGridY);
     }
     
 

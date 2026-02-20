@@ -17,6 +17,7 @@
 #include "ampel.h"
 #include "knoten.h"
 #include "Signal.h"
+#include "Leiter.h"
 
 int main(void)
 {
@@ -102,6 +103,7 @@ int main(void)
         ZeichneBanhof();
 
         KnotenZeichnen();
+        LeiterZeichnen();
 
 
         //gleise verbinden
@@ -141,6 +143,7 @@ int main(void)
     GleiseSpeichern();
     BanhofSpeichern();
     KnotenSpeichern();
+    LeiterSpeichern();
     SignalTeilSpeichern();
     unloadTextures();
     CloseWindow();

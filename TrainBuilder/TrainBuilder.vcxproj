@@ -136,6 +136,7 @@
     <ClCompile Include="grid.cpp" />
     <ClCompile Include="Json.cpp" />
     <ClCompile Include="knoten.cpp" />
+    <ClCompile Include="Leiter.cpp" />
     <ClCompile Include="LoadTexture.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="moofment.cpp" />
@@ -155,6 +156,7 @@
     <ClInclude Include="grid.h" />
     <ClInclude Include="Json.h" />
     <ClInclude Include="knoten.h" />
+    <ClInclude Include="Leiter.h" />
     <ClInclude Include="LoadTexture.h" />
     <ClInclude Include="moofment.h" />
     <ClInclude Include="Mouse.h" />
