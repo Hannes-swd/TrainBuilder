@@ -33,7 +33,7 @@ void ZeichneZugplan(int id, float& scrollOffset, bool& isScrolling, float contai
             DrawRectangle(containerX, containerY, containerWidth, calculatedHeight, Color{ 255, 255, 255, 230 });
             DrawRectangleLines(containerX, containerY, containerWidth, calculatedHeight, BLACK);
 
-            DrawText("Fahrplan:", containerX + 10, containerY + 5, 14, BLACK);
+            DrawText("timetable:", containerX + 10, containerY + 5, 14, BLACK);
 
             float contentHeight = 25.0f + (zug.Fahrplan.size() * 20.0f);
             float maxScroll = contentHeight - (calculatedHeight - 25.0f);
@@ -44,7 +44,7 @@ void ZeichneZugplan(int id, float& scrollOffset, bool& isScrolling, float contai
             float contentY = containerY + 25 - scrollOffset;
 
             if (zug.Fahrplan.empty()) {
-                DrawText("Keine Fahrplaene", containerX + 15, containerY + 30, 12, GRAY);
+                DrawText("No timetables", containerX + 15, containerY + 30, 12, GRAY);
             }
             else {
                 Vector2 mousePos = GetMousePosition();
@@ -241,7 +241,7 @@ void NeueHaltestelleHinzufuegen(int zugId, float containerY, float containerHeig
             DrawRectangle(buttonX, buttonY, buttonWidth, buttonHeight,
                 isHovered ? Color{ 150, 200, 150, 255 } : Color{ 100, 200, 100, 255 });
             DrawRectangleLines(buttonX, buttonY, buttonWidth, buttonHeight, DARKGREEN);
-            DrawText("Haltestelle hinzufuegen", buttonX + 10, buttonY + 5, 12, BLACK);
+            DrawText("Add stop", buttonX + 10, buttonY + 5, 12, BLACK);
 
             if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON) && isHovered && !clickProcessed) {
                 haltestelleMenuOffen = !haltestelleMenuOffen;
@@ -276,10 +276,10 @@ void NeueHaltestelleHinzufuegen(int zugId, float containerY, float containerHeig
                 DrawRectangle(menuX, adjustedMenuY, menuWidth, menuHeight, LIGHTGRAY);
                 DrawRectangleLines(menuX, adjustedMenuY, menuWidth, menuHeight, DARKGRAY);
 
-                DrawText("Bahnhoefe:", menuX + 8, adjustedMenuY + topPadding, 12, BLACK);
+                DrawText("stations:", menuX + 8, adjustedMenuY + topPadding, 12, BLACK);
 
                 if (banhofListe.empty()) {
-                    DrawText("Keine Bahnhoefe", menuX + 10, adjustedMenuY + topPadding + 20, 11, GRAY);
+                    DrawText("No train stations", menuX + 10, adjustedMenuY + topPadding + 20, 11, GRAY);
                 }
                 else {
                     for (size_t i = 0; i < banhofListe.size(); i++) {
