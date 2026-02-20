@@ -102,7 +102,8 @@ std::vector<SignalTeil*> SucheAlleMitNutzerId(std::string nutzerId) {
 
 void UpdateSignale() {
     for (auto& knoten : knotenliste) {
-        if (knoten.modus == true) {
+        //lesen
+        if (knoten.modus == false) {
             bool signalVorhanden = false;
             bool mindestensEinsTrue = false;
 
@@ -119,16 +120,15 @@ void UpdateSignale() {
 
         }
         else {
+            //ampel schreiben
+            for (auto& ampel : ampelListe) {
+                if (ampel.Name == knoten.Name) {
+                    knoten.Status = ampel.isGreen;
+                }
+            }
             for (auto& signal : SignalTeilListe) {
                 if (signal.nutzerId == knoten.Name) {
                     signal.wert = knoten.Status;
-                }
-            }
-            // Ampeln 
-            for (auto& ampel : ampelListe) {
-                if (ampel.Name == knoten.Name) {
-                    ampel.isGreen = knoten.Status;
-                    AmpelSignalSynchronisieren(ampel);
                 }
             }
         }
