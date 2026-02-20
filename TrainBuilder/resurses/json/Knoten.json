@@ -15,6 +15,14 @@
             "Status": true,
             "eindeutigeId": 5,
             "modus": false
+        },
+        {
+            "GridX": 19,
+            "GridY": -31,
+            "Name": "sigma",
+            "Status": true,
+            "eindeutigeId": 6,
+            "modus": true
         }
     ]
 }

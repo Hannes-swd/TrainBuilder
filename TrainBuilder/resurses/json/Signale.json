@@ -8,7 +8,13 @@
         },
         {
             "eindeutigeId": 2,
-            "nutzerId": "Ampel_2",
+            "nutzerId": "lol",
+            "typ": 0,
+            "wert": true
+        },
+        {
+            "eindeutigeId": 3,
+            "nutzerId": "Ampel_3",
             "typ": 0,
             "wert": true
         }

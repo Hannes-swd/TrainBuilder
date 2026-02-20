@@ -108,6 +108,11 @@ void UpdateSignale() {
                     signal.wert = knoten.Status;
                 }
             }
+            for (auto& ampel : ampelListe) {
+                if (ampel.Name == knoten.Name) {
+                    ampel.isGreen = knoten.Status;
+                }
+            }
         }
         else {
             for (auto& ampel : ampelListe) {

@@ -13,6 +13,13 @@
             "Rotation": 0,
             "Status": true,
             "eindeutigeId": 5
+        },
+        {
+            "GridX": 18,
+            "GridY": -31,
+            "Rotation": 1,
+            "Status": true,
+            "eindeutigeId": 6
         }
     ]
 }
