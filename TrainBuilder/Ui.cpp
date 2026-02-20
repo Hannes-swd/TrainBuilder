@@ -139,6 +139,9 @@ void zeichneUI() {
     else if (aktuellesTool == 6) {
         DrawRectangle(360.0f, 10.0f, 60.0f, 60.0f, DARKGRAY);
     }
+    else if (aktuellesTool == 7) {
+        DrawRectangle(430.0f, 10.0f, 60.0f, 60.0f, DARKGRAY);
+    }
 
     DrawTexture("zeichnen", 10.0f, 10.0f, 60.0f, 60.0f);
     DrawTexture("Löschen", 80.0f, 10.0f, 60.0f, 60.0f);
@@ -146,6 +149,7 @@ void zeichneUI() {
     DrawTexture("Banhof", 220.0f, 10.0f, 60.0f, 60.0f);
     DrawTexture("zugicon", 290.0f, 10.0f, 60.0f, 60.0f);
     DrawTexture("zahnrad", 360.0f, 10.0f, 60.0f, 60.0f);
+    DrawTexture("Drehen", 430.0f, 10.0f, 60.0f, 60.0f);
 
     /*-------------------------------------------------
         BAHNHOF MENÜ

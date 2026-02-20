@@ -383,4 +383,13 @@ void Menuebuttons() {
             aktuellesUntermenue = "technik";
         }
     }
+    //Drehen
+    Rectangle DrehenButton = { 430.0f, 10.0f, 60.0f, 60.0f };
+    if (CheckCollisionPointRec(mousePos, DrehenButton)) {
+        if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {
+            aktuellesTool = 7;
+            untermenueOffen = false;
+            aktuellesUntermenue = "";
+        }
+    }
 }
