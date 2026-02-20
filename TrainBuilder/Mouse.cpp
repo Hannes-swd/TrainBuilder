@@ -110,6 +110,10 @@ void ProcesMaus(Vector2 mausposition) {
         if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT))
             plaziereBanhof(mausposition);
     }
+    if (aktuellesTool == 7) {
+        if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT))
+            Drehtool(MouseGridX, MouseGridY);
+    }
     if (aktuellesTool == 6 && ausgewählterUntermenuePunkt == 1) {
         if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT))
             KnotenPlazieren(MouseGridX, MouseGridY);
@@ -121,7 +125,21 @@ void ProcesMaus(Vector2 mausposition) {
 
 
 }
+/*-------------------------------------------------
+    DREHTOOL
+-------------------------------------------------*/
+void Drehtool(int gridX, int gridY) {
+    //check ob leiter
+    for (auto& leiter : LeiterListe) {
+        if (leiter.GridX == gridX && leiter.GridY == gridY) {
+            if (leiter.Rotation != 3)
+                leiter.Rotation++;
+            else
+                leiter.Rotation = 0;
+        }
+    }
 
+}
 /*-------------------------------------------------
     AUSWAHLTOOL
 -------------------------------------------------*/

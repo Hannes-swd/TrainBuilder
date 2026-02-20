@@ -6,3 +6,4 @@ void Menuebuttons();
 
 void Loeschentool(Vector2 mausposition);
 void Auswahltool(int gridX, int gridY);
+void Drehtool(int gridX, int gridY);

@@ -52,8 +52,8 @@
         {
             "GridX": 26,
             "GridY": -30,
-            "Rotation": 0,
-            "Status": false,
+            "Rotation": 3,
+            "Status": true,
             "eindeutigeId": 15
         }
     ]
