@@ -1,6 +1,7 @@
 #include <map>
 #include <queue>
 #include <fstream>
+#include <iostream>
 #include <algorithm>
 #include "LoadTexture.h"
 #include "raylib.h"
@@ -99,4 +100,45 @@ bool IstLeiterVorhanden(int gridX, int gridY) {
 		}
 	}
 	return false;
+}
+void CheckInput() {
+	int CheckX = 0;
+	int CheckY = 0;
+
+	for (auto& Leiter : LeiterListe) {
+		Leiter.Status = false;
+	}
+
+	for (auto& Leiter : LeiterListe) {
+		bool knotenFound = false;
+
+		if (Leiter.Rotation == 0) {
+			CheckX = Leiter.GridX;
+			CheckY = Leiter.GridY + 1;
+		}
+		else if (Leiter.Rotation == 1) {
+			CheckX = Leiter.GridX - 1;
+			CheckY = Leiter.GridY;
+		}
+		else if (Leiter.Rotation == 2) {
+			CheckX = Leiter.GridX;
+			CheckY = Leiter.GridY - 1;
+		}
+		else if (Leiter.Rotation == 3) {
+			CheckX = Leiter.GridX + 1;
+			CheckY = Leiter.GridY;
+		}
+
+		for (const auto& knoten : knotenliste) {
+			if (knoten.GridX == CheckX && knoten.GridY == CheckY) {
+				if (knoten.Status) {
+					knotenFound = true;
+					
+				}
+				break;
+			}
+		}
+		
+		Leiter.Status = knotenFound;
+	}
 }

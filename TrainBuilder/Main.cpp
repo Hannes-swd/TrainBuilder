@@ -108,6 +108,7 @@ int main(void)
 
         //gleise verbinden
         verbindeSchienen();
+        CheckInput();
 
         /*-------------------------------------------------
             EINGABEN IM GRID
