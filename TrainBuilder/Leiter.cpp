@@ -67,17 +67,23 @@ void LeiterSpeichern() {
 }
 void LeiterZeichnen() {
 	for (const auto& Leiter : LeiterListe) {
-		if (Leiter.Status == false) {
-			DrawTexture("Leiter_Aus",
-				Leiter.GridX * GRID_SIZE,
-				Leiter.GridY * GRID_SIZE,
-				GRID_SIZE, GRID_SIZE, WHITE);
-		}
-		else {
-			DrawTexture("Leiter_An",
-				Leiter.GridX * GRID_SIZE,
-				Leiter.GridY * GRID_SIZE,
-				GRID_SIZE, GRID_SIZE, WHITE);
+		std::string textureName = Leiter.Status ? "Leiter_An" : "Leiter_Aus";
+
+		float x = Leiter.GridX * GRID_SIZE;
+		float y = Leiter.GridY * GRID_SIZE;
+
+		Texture2D tex = LoadTextureFromPath("resurses/Texturen/Technik/" + textureName + ".png");
+
+		if (tex.id != 0) {
+			Rectangle source = { 0, 0, (float)tex.width, (float)tex.height };
+
+			Rectangle dest = { x + GRID_SIZE / 2, y + GRID_SIZE / 2, GRID_SIZE, GRID_SIZE };
+
+			float rotation = Leiter.Rotation * 90.0f;
+
+			Vector2 origin = { GRID_SIZE / 2, GRID_SIZE / 2 };
+
+			DrawTexturePro(tex, source, dest, origin, rotation, WHITE);
 		}
 	}
 }
