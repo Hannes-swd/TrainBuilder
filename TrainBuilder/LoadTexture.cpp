@@ -51,9 +51,12 @@ void loadTextures() {
     /*-------------------------------------------------
         TECHNIK
     -------------------------------------------------*/
-
+    //knoten
     textures["knoten"] = LoadTexture("resurses/Texturen/Technik/knoten.png");
     textures["knoten_An"] = LoadTexture("resurses/Texturen/Technik/knoten_An.png");
+    //leiter
+    textures["Leiter_Aus"] = LoadTexture("resurses/Texturen/Technik/Leiter_Aus.png");
+    textures["Leiter_An"] = LoadTexture("resurses/Texturen/Technik/Leiter_An.png");
     
 }
 

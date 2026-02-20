@@ -111,3 +111,8 @@ std::vector<knoten> knotenliste;
 	Signale
 -------------------------------------------------*/
 std::vector<SignalTeil> SignalTeilListe;
+
+/*-------------------------------------------------
+	Leiter
+-------------------------------------------------*/
+std::vector<Leiterobjeckt> LeiterListe;

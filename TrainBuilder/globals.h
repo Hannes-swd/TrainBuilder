@@ -172,3 +172,14 @@ struct SignalTeil {
 	Signaltyp typ;
 };
 extern std::vector<SignalTeil> SignalTeilListe;
+
+/*-------------------------------------------------
+	Leiter
+-------------------------------------------------*/
+struct Leiterobjeckt {
+	int GridX;
+	int GridY;
+	int eindeutigeId;
+	bool Status;
+};
+std::vector<Leiterobjeckt> LeiterListe;

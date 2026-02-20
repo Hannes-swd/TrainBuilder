@@ -330,7 +330,7 @@ void ZeichneUnterpunkte() {
             if (ausgewählterUntermenuePunkt == 2) {
                 DrawRectangle(x, y, boxWidth, boxHeight, DARKGRAY);
             }
-            //bild
+            DrawTexture("Leiter_An", x, y, boxWidth, boxHeight, WHITE);
         }
 
     }

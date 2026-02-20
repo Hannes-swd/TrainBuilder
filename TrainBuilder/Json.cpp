@@ -19,7 +19,7 @@ void LadeJson() {
 	std::ifstream AktiveZuege("resurses/json/AktiveZuege.json");
     std::ifstream Ampeln("resurses/json/Ampeln.json");
     std::ifstream Knoten("resurses/json/Knoten.json");
-    
+    std::ifstream Leiter("resurses/json/Leiter.json");
     
 
     //OBECKTE UND LADEN
@@ -56,6 +56,11 @@ void LadeJson() {
     nlohmann::json KnotenDaten;
     if (Knoten.is_open()) {
         Knoten >> KnotenDaten;
+    }
+
+    nlohmann::json LeiterDaten;
+    if (Leiter.is_open()) {
+        Leiter >> LeiterDaten;
     }
 
     //ALLE LISTEN LÖSCHEN
