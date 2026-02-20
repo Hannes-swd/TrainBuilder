@@ -3,6 +3,7 @@
 #include "globals.h"
 #include <fstream>
 #include <iostream>
+#include "Ampel.h"
 
 using json = nlohmann::json;
 
@@ -98,22 +99,36 @@ std::vector<SignalTeil*> SucheAlleMitNutzerId(std::string nutzerId) {
     }
     return ergebnis;
 }
+
 void UpdateSignale() {
     for (auto& knoten : knotenliste) {
         if (knoten.modus == true) {
+            bool signalVorhanden = false;
             bool mindestensEinsTrue = false;
+
             for (const auto& signal : SignalTeilListe) {
-                if (signal.nutzerId == knoten.Name && signal.wert == true) {
-                    mindestensEinsTrue = true;
-                    break;
+                if (signal.nutzerId == knoten.Name) {
+                    signalVorhanden = true;
+                    if (signal.wert == true) {
+                        mindestensEinsTrue = true;
+                        break;
+                    }
                 }
             }
-            knoten.Status = mindestensEinsTrue;
+            knoten.Status = signalVorhanden && mindestensEinsTrue;
+
         }
         else {
             for (auto& signal : SignalTeilListe) {
                 if (signal.nutzerId == knoten.Name) {
                     signal.wert = knoten.Status;
+                }
+            }
+            // Ampeln 
+            for (auto& ampel : ampelListe) {
+                if (ampel.Name == knoten.Name) {
+                    ampel.isGreen = knoten.Status;
+                    AmpelSignalSynchronisieren(ampel);
                 }
             }
         }

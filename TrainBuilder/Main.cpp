@@ -57,7 +57,7 @@ int main(void)
         DeltaTime = GetFrameTime();
 
         mousePosition = GetScreenToWorld2D(GetMousePosition(), Playercam);
-        UpdateSignale();
+        
 
         //Höhe/Breite
         GenaueHoehe = GetScreenHeight();
@@ -93,6 +93,7 @@ int main(void)
         BeginMode2D(Playercam);
         DrawInfiniteGrid();
 
+        UpdateSignale();
         
         ZeichneGleise();
         AmpelZeichnen();

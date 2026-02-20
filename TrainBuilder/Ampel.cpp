@@ -47,7 +47,7 @@ void AmpelPlazieren(int gridX, int gridY) {
 	newAmpel.Name = "Ampel_" + std::to_string(newId);
 
 	
-	newAmpel.Name = "MeinKnoten";
+	
 	SignalTeilHinzufuegen(
 		newAmpel.AmpelId,
 		newAmpel.Name,
