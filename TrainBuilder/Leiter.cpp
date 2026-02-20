@@ -144,6 +144,15 @@ void CheckInput() {
 				break;
 			}
 		}
+		for (const auto& leiter : LeiterListe) {
+			if (leiter.GridX == CheckX && leiter.GridY == CheckY) {
+				if (leiter.Status) {
+					knotenFound = true;
+
+				}
+				break;
+			}
+		}
 		
 		Leiter.Status = knotenFound;
 	}
