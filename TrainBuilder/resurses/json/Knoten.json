@@ -2,27 +2,19 @@
     "Knoten": [
         {
             "GridX": 17,
-            "GridY": -29,
-            "Name": "Test",
+            "GridY": -26,
+            "Name": "2",
             "Status": true,
             "eindeutigeId": 1,
             "modus": true
         },
         {
             "GridX": 17,
-            "GridY": -32,
-            "Name": "lol",
+            "GridY": -29,
+            "Name": "1",
             "Status": true,
-            "eindeutigeId": 5,
+            "eindeutigeId": 2,
             "modus": false
-        },
-        {
-            "GridX": 19,
-            "GridY": -31,
-            "Name": "sigma",
-            "Status": true,
-            "eindeutigeId": 6,
-            "modus": true
         }
     ]
 }

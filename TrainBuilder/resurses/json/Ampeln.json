@@ -2,23 +2,16 @@
     "Ampeln": [
         {
             "AmpelId": 1,
-            "Name": "Test",
-            "gridX": 4,
-            "gridY": -29,
-            "isGreen": true
-        },
-        {
-            "AmpelId": 2,
-            "Name": "lol",
-            "gridX": 8,
+            "Name": "1",
+            "gridX": 14,
             "gridY": -29,
             "isGreen": false
         },
         {
-            "AmpelId": 3,
-            "Name": "sigma",
-            "gridX": 11,
-            "gridY": -27,
+            "AmpelId": 2,
+            "Name": "2",
+            "gridX": 14,
+            "gridY": -26,
             "isGreen": true
         }
     ]

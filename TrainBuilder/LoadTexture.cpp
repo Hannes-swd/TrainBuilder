@@ -57,6 +57,9 @@ void loadTextures() {
     //leiter
     textures["Leiter_Aus"] = LoadTexture("resurses/Texturen/Technik/Leiter_Aus.png");
     textures["Leiter_An"] = LoadTexture("resurses/Texturen/Technik/Leiter_An.png");
+    //inverter
+    textures["Inverter_Aus"] = LoadTexture("resurses/Texturen/Technik/Inverter_Aus.png");
+    textures["Inverter_AN"] = LoadTexture("resurses/Texturen/Technik/Inverter_AN.png");
     
 }
 

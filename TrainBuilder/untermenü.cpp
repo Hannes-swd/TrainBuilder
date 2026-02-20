@@ -85,6 +85,14 @@ void UntermenueKlick(Vector2 mausposition) {
             ausgewählterUntermenuePunkt = 2;
             return;
         }
+
+        float x3 = startX + boxWidth * 2 + padding * 2;
+        float y3 = startY;
+        if (mausposition.x >= x3 && mausposition.x <= x3 + boxWidth &&
+            mausposition.y >= y3 && mausposition.y <= y3 + boxHeight) {
+            ausgewählterUntermenuePunkt = 3;
+            return;
+        }
     }
 
 }
@@ -331,6 +339,22 @@ void ZeichneUnterpunkte() {
                 DrawRectangle(x, y, boxWidth, boxHeight, DARKGRAY);
             }
             DrawTexture("Leiter_An", x, y, boxWidth, boxHeight, WHITE);
+        }
+        {
+            float x = startX + boxWidth * 2 + padding * 2;
+            float y = startY;
+
+            bool isHovered = (mousePos.x >= x && mousePos.x <= x + boxWidth &&
+                mousePos.y >= y && mousePos.y <= y + boxHeight);
+
+            Color bgColor = isHovered ? GRAY : LIGHTGRAY;
+            DrawRectangle(x, y, boxWidth, boxHeight, bgColor);
+            DrawRectangleLines(x, y, boxWidth, boxHeight, DARKGRAY);
+
+            if (ausgewählterUntermenuePunkt == 3) {
+                DrawRectangle(x, y, boxWidth, boxHeight, DARKGRAY);
+            }
+            DrawTexture("Inverter_AN", x, y, boxWidth, boxHeight, WHITE);
         }
 
     }
