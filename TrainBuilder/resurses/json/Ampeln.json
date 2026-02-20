@@ -8,10 +8,10 @@
             "isGreen": true
         },
         {
-            "AmpelId": 3,
+            "AmpelId": 2,
             "Name": "lol",
-            "gridX": 0,
-            "gridY": -21,
+            "gridX": 8,
+            "gridY": -29,
             "isGreen": true
         }
     ]

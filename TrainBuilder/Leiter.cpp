@@ -13,6 +13,7 @@
 #include "json.hpp"
 #include "zug.h"
 #include "Leiter.h"
+#include "knoten.h"
 
 using json = nlohmann::json;
 
@@ -155,5 +156,31 @@ void CheckInput() {
 		}
 		
 		Leiter.Status = knotenFound;
+	}
+}
+void CheckOutput() {
+	for (auto& knoten : knotenliste) {
+		if (!knoten.modus) {
+			knoten.Status = false;
+		}
+	}
+
+	for (const auto& Leiter : LeiterListe) {
+		if (!Leiter.Status) continue;
+
+		int targetX = Leiter.GridX;
+		int targetY = Leiter.GridY;
+
+		if (Leiter.Rotation == 0)      targetY = Leiter.GridY - 1;
+		else if (Leiter.Rotation == 1) targetX = Leiter.GridX + 1;
+		else if (Leiter.Rotation == 2) targetY = Leiter.GridY + 1;
+		else if (Leiter.Rotation == 3) targetX = Leiter.GridX - 1;
+
+		for (auto& knoten : knotenliste) {
+			if (knoten.GridX == targetX && knoten.GridY == targetY) {
+				knoten.Status = true;
+				break;
+			}
+		}
 	}
 }

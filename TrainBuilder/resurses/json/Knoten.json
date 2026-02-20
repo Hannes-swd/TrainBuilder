@@ -9,28 +9,12 @@
             "modus": true
         },
         {
-            "GridX": 19,
-            "GridY": -30,
-            "Name": "Test",
+            "GridX": 17,
+            "GridY": -32,
+            "Name": "lol",
             "Status": true,
-            "eindeutigeId": 2,
-            "modus": true
-        },
-        {
-            "GridX": 23,
-            "GridY": -31,
-            "Name": "Test",
-            "Status": true,
-            "eindeutigeId": 3,
-            "modus": true
-        },
-        {
-            "GridX": 27,
-            "GridY": -30,
-            "Name": "Test",
-            "Status": true,
-            "eindeutigeId": 4,
-            "modus": true
+            "eindeutigeId": 5,
+            "modus": false
         }
     ]
 }

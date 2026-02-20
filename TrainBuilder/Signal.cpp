@@ -102,25 +102,14 @@ std::vector<SignalTeil*> SucheAlleMitNutzerId(std::string nutzerId) {
 
 void UpdateSignale() {
     for (auto& knoten : knotenliste) {
-        //lesen
         if (knoten.modus == false) {
-            bool signalVorhanden = false;
-            bool mindestensEinsTrue = false;
-
-            for (const auto& signal : SignalTeilListe) {
+            for (auto& signal : SignalTeilListe) {
                 if (signal.nutzerId == knoten.Name) {
-                    signalVorhanden = true;
-                    if (signal.wert == true) {
-                        mindestensEinsTrue = true;
-                        break;
-                    }
+                    signal.wert = knoten.Status;
                 }
             }
-            knoten.Status = signalVorhanden && mindestensEinsTrue;
-
         }
         else {
-            //ampel schreiben
             for (auto& ampel : ampelListe) {
                 if (ampel.Name == knoten.Name) {
                     knoten.Status = ampel.isGreen;

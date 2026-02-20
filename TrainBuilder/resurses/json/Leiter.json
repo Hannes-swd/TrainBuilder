@@ -8,53 +8,11 @@
             "eindeutigeId": 1
         },
         {
-            "GridX": 20,
-            "GridY": -30,
-            "Rotation": 1,
-            "Status": true,
-            "eindeutigeId": 2
-        },
-        {
-            "GridX": 23,
-            "GridY": -30,
-            "Rotation": 2,
-            "Status": true,
-            "eindeutigeId": 3
-        },
-        {
             "GridX": 17,
             "GridY": -31,
             "Rotation": 0,
             "Status": true,
             "eindeutigeId": 5
-        },
-        {
-            "GridX": 20,
-            "GridY": -31,
-            "Rotation": 0,
-            "Status": true,
-            "eindeutigeId": 11
-        },
-        {
-            "GridX": 20,
-            "GridY": -32,
-            "Rotation": 0,
-            "Status": true,
-            "eindeutigeId": 13
-        },
-        {
-            "GridX": 23,
-            "GridY": -32,
-            "Rotation": 0,
-            "Status": true,
-            "eindeutigeId": 14
-        },
-        {
-            "GridX": 26,
-            "GridY": -30,
-            "Rotation": 3,
-            "Status": true,
-            "eindeutigeId": 15
         }
     ]
 }

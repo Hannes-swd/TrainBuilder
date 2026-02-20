@@ -50,15 +50,15 @@ int main(void)
         -------------------------------------------------*/
         SetExitKey(KEY_NULL);
 
-        
-        
+
+
         /*-------------------------------------------------
             VARIABLEN UPDATEN
         -------------------------------------------------*/
         DeltaTime = GetFrameTime();
 
         mousePosition = GetScreenToWorld2D(GetMousePosition(), Playercam);
-        
+
 
         //Höhe/Breite
         GenaueHoehe = GetScreenHeight();
@@ -70,7 +70,7 @@ int main(void)
             screenWidth = GenaueBreite;
 
         //Spielerbewegen
-        if(kannBewegen) {
+        if (kannBewegen) {
             Spielermoovment();
         }
 
@@ -94,8 +94,12 @@ int main(void)
         BeginMode2D(Playercam);
         DrawInfiniteGrid();
 
+        //gleise verbinden
+        verbindeSchienen();
+        CheckInput();
+        CheckOutput();
         UpdateSignale();
-        
+
         ZeichneGleise();
         AmpelZeichnen();
         ZeichneZuege();
@@ -104,11 +108,6 @@ int main(void)
 
         KnotenZeichnen();
         LeiterZeichnen();
-
-
-        //gleise verbinden
-        verbindeSchienen();
-        CheckInput();
 
         /*-------------------------------------------------
             EINGABEN IM GRID
@@ -148,7 +147,7 @@ int main(void)
     SignalTeilSpeichern();
     unloadTextures();
     CloseWindow();
-    
+
 
     return 0;
 }
