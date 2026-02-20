@@ -292,6 +292,13 @@ void Loeschentool(Vector2 mausposition) {
             return;
         }
     }
+    // Leiter
+    else if (IstLeiterVorhanden(MouseGridX, MouseGridY)) {
+        if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {
+            LeiterLöschen(MouseGridX, MouseGridY);
+            return;
+        }
+    }
     // Gleise
     else {
         if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {

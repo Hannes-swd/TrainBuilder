@@ -80,3 +80,23 @@ void LeiterZeichnen() {
 		}
 	}
 }
+
+void LeiterLöschen(int gridX, int gridY) {
+	auto it = std::remove_if(LeiterListe.begin(), LeiterListe.end(),
+		[gridX, gridY](const Leiterobjeckt& l) {
+			return l.GridX == gridX && l.GridY == gridY;
+		});
+
+	if (it != LeiterListe.end()) {
+		LeiterListe.erase(it, LeiterListe.end());
+		LeiterSpeichern();
+	}
+}
+bool IstLeiterVorhanden(int gridX, int gridY) {
+	for (const auto& leiter : LeiterListe) {
+		if (leiter.GridX == gridX && leiter.GridY == gridY) {
+			return true;
+		}
+	}
+	return false;
+}

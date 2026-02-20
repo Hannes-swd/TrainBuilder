@@ -1,14 +1,14 @@
 {
     "Leiter": [
         {
-            "GridX": 21,
+            "GridX": 20,
             "GridY": -27,
             "Rotation": 0,
             "Status": false,
             "eindeutigeId": 1
         },
         {
-            "GridX": 23,
+            "GridX": 21,
             "GridY": -25,
             "Rotation": 0,
             "Status": false,
