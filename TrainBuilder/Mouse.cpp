@@ -14,6 +14,7 @@
 #include "Ampel.h"
 #include "knoten.h"
 #include "Leiter.h"
+#include "Inverter.h"
 
 
 
@@ -122,7 +123,10 @@ void ProcesMaus(Vector2 mausposition) {
         if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT))
             LeiterPlazieren(MouseGridX, MouseGridY);
     }
-
+    if (aktuellesTool == 6 && ausgewählterUntermenuePunkt == 3) {
+        if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT))
+            InverterPlazieren(MouseGridX, MouseGridY);
+    }
 
 }
 /*-------------------------------------------------

@@ -134,6 +134,7 @@
     <ClCompile Include="gleise.cpp" />
     <ClCompile Include="globals.cpp" />
     <ClCompile Include="grid.cpp" />
+    <ClCompile Include="Inverter.cpp" />
     <ClCompile Include="Json.cpp" />
     <ClCompile Include="knoten.cpp" />
     <ClCompile Include="Leiter.cpp" />
@@ -154,6 +155,7 @@
     <ClInclude Include="gleise.h" />
     <ClInclude Include="globals.h" />
     <ClInclude Include="grid.h" />
+    <ClInclude Include="Inverter.h" />
     <ClInclude Include="Json.h" />
     <ClInclude Include="knoten.h" />
     <ClInclude Include="Leiter.h" />

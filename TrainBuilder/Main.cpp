@@ -18,6 +18,7 @@
 #include "knoten.h"
 #include "Signal.h"
 #include "Leiter.h"
+#include "Inverter.h"
 
 int main(void)
 {
@@ -108,6 +109,7 @@ int main(void)
 
         KnotenZeichnen();
         LeiterZeichnen();
+        InvertorZeichnen();
 
         /*-------------------------------------------------
             EINGABEN IM GRID
@@ -144,6 +146,7 @@ int main(void)
     BanhofSpeichern();
     KnotenSpeichern();
     LeiterSpeichern();
+    InvertorSpeichern();
     SignalTeilSpeichern();
     unloadTextures();
     CloseWindow();

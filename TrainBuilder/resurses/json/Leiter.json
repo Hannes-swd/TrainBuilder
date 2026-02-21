@@ -13,6 +13,20 @@
             "Rotation": 0,
             "Status": true,
             "eindeutigeId": 2
+        },
+        {
+            "GridX": 20,
+            "GridY": -26,
+            "Rotation": 0,
+            "Status": false,
+            "eindeutigeId": 3
+        },
+        {
+            "GridX": 20,
+            "GridY": -28,
+            "Rotation": 0,
+            "Status": false,
+            "eindeutigeId": 4
         }
     ]
 }
