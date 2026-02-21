@@ -116,3 +116,8 @@ std::vector<SignalTeil> SignalTeilListe;
 	Leiter
 -------------------------------------------------*/
 std::vector<Leiterobjeckt> LeiterListe;
+
+/*-------------------------------------------------
+	Inverter
+-------------------------------------------------*/
+std::vector<InverterObjeckt> InverterListe;

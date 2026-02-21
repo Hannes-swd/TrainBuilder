@@ -184,3 +184,15 @@ struct Leiterobjeckt {
 	bool Status;
 };
 extern std::vector<Leiterobjeckt> LeiterListe;
+
+/*-------------------------------------------------
+	Inverter
+-------------------------------------------------*/
+struct InverterObjeckt {
+	int GridX;
+	int GridY;
+	int Rotation;
+	int eindeutigeId;
+	bool Status;
+};
+extern std::vector<InverterObjeckt> InverterListe;

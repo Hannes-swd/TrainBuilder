@@ -19,8 +19,9 @@ void LadeJson() {
 	std::ifstream AktiveZuege("resurses/json/AktiveZuege.json");
     std::ifstream Ampeln("resurses/json/Ampeln.json");
     std::ifstream Knoten("resurses/json/Knoten.json");
-    std::ifstream Leiter("resurses/json/Leiter.json");
-    
+    std::ifstream Leiter("resurses/json/Leiter.json"); 
+    std::ifstream Inverter("resurses/json/Inverter.json");
+
 
     //OBECKTE UND LADEN
     nlohmann::json NutzerDaten;
@@ -63,12 +64,18 @@ void LadeJson() {
         Leiter >> LeiterDaten;
     }
 
+    nlohmann::json InverterDaten;
+    if (Inverter.is_open()) {
+        Inverter >> InverterDaten;
+    }
+
     //ALLE LISTEN LÖSCHEN
     gleisListe.clear();
     banhofListe.clear();
     zugArtenListe.clear();
     ampelListe.clear();
     LeiterListe.clear();
+    InverterListe.clear();
     /*-------------------------------------------------
         Gleise
     -------------------------------------------------*/
@@ -189,6 +196,22 @@ void LadeJson() {
         }
     }
 
+    /*-------------------------------------------------
+        Inverter
+    -------------------------------------------------*/
+    if (InverterDaten.contains("Inverter")) {
+        for (const auto& obj : InverterDaten["Inverter"]) {
+            InverterObjeckt Inverter;
+            Inverter.GridX = obj["GridX"];
+            Inverter.GridY = obj["GridY"];
+            Inverter.Rotation = obj["Rotation"];
+            Inverter.eindeutigeId = obj["eindeutigeId"];
+            Inverter.Status = obj["Status"];
+
+            InverterListe.push_back(Inverter);
+        }
+    }
+
 
 	if (AktiveZuege.is_open()) AktiveZuege.close();
     if (Banhoefe.is_open()) Banhoefe.close();
@@ -196,6 +219,7 @@ void LadeJson() {
 	if (Ampeln.is_open()) Ampeln.close();
     if (Knoten.is_open()) Knoten.close();
     if (Leiter.is_open()) Leiter.close();
+    if (Inverter.is_open()) Inverter.close();
 
     //WERT LADEN
     if (NutzerDaten.contains("SpielerpositionX") && NutzerDaten.contains("SpielerpositionY")) {
