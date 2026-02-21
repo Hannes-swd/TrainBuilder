@@ -142,7 +142,15 @@ void Drehtool(int gridX, int gridY) {
                 leiter.Rotation = 0;
         }
     }
-
+    //check ob Inverter
+    for (auto& Inverter : InverterListe) {
+        if (Inverter.GridX == gridX && Inverter.GridY == gridY) {
+            if (Inverter.Rotation != 3)
+                Inverter.Rotation++;
+            else
+                Inverter.Rotation = 0;
+        }
+    }
 }
 /*-------------------------------------------------
     AUSWAHLTOOL
@@ -318,6 +326,13 @@ void Loeschentool(Vector2 mausposition) {
     else if (IstLeiterVorhanden(MouseGridX, MouseGridY)) {
         if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {
             LeiterLöschen(MouseGridX, MouseGridY);
+            return;
+        }
+    }
+    // Inverter
+    else if (IstInverterVorhanden(MouseGridX, MouseGridY)) {
+        if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {
+            InverterLöschen(MouseGridX, MouseGridY);
             return;
         }
     }

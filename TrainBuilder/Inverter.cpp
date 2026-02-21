@@ -88,3 +88,77 @@ void InvertorZeichnen() {
 		}
 	}
 }
+
+void InvertorCheckInput() {
+	int CheckX = 0;
+	int CheckY = 0;
+
+	for (auto& Leiter : LeiterListe) {
+		Leiter.Status = false;
+	}
+
+	for (auto& Leiter : LeiterListe) {
+		bool knotenFound = false;
+
+		if (Leiter.Rotation == 0) {
+			CheckX = Leiter.GridX;
+			CheckY = Leiter.GridY + 1;
+		}
+		else if (Leiter.Rotation == 1) {
+			CheckX = Leiter.GridX - 1;
+			CheckY = Leiter.GridY;
+		}
+		else if (Leiter.Rotation == 2) {
+			CheckX = Leiter.GridX;
+			CheckY = Leiter.GridY - 1;
+		}
+		else if (Leiter.Rotation == 3) {
+			CheckX = Leiter.GridX + 1;
+			CheckY = Leiter.GridY;
+		}
+
+		for (const auto& knoten : knotenliste) {
+			if (knoten.GridX == CheckX && knoten.GridY == CheckY) {
+				if (knoten.Status) {
+					knotenFound = true;
+
+				}
+				break;
+			}
+		}
+		for (const auto& leiter : LeiterListe) {
+			if (leiter.GridX == CheckX && leiter.GridY == CheckY) {
+				if (leiter.Status) {
+					knotenFound = true;
+
+				}
+				break;
+			}
+		}
+
+		Leiter.Status = knotenFound;
+	}
+}
+void InvertorCheckOutput() {
+
+}
+
+bool IstInverterVorhanden(int gridX, int gridY) {
+	for (const auto& Inverter : InverterListe) {
+		if (Inverter.GridX == gridX && Inverter.GridY == gridY) {
+			return true;
+		}
+	}
+	return false;
+}
+void InverterLöschen(int gridX, int gridY) {
+	auto it = std::remove_if(InverterListe.begin(), InverterListe.end(),
+		[gridX, gridY](const InverterObjeckt& l) {
+			return l.GridX == gridX && l.GridY == gridY;
+		});
+
+	if (it != InverterListe.end()) {
+		InverterListe.erase(it, InverterListe.end());
+		InvertorSpeichern();
+	}
+}

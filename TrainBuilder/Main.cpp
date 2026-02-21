@@ -99,6 +99,8 @@ int main(void)
         verbindeSchienen();
         CheckInput();
         CheckOutput();
+        InvertorCheckInput();
+        InvertorCheckOutput();
         UpdateSignale();
 
         ZeichneGleise();

@@ -15,6 +15,14 @@
             "Status": true,
             "eindeutigeId": 2,
             "modus": false
+        },
+        {
+            "GridX": 20,
+            "GridY": -25,
+            "Name": "2",
+            "Status": true,
+            "eindeutigeId": 3,
+            "modus": true
         }
     ]
 }
