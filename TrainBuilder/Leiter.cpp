@@ -109,61 +109,42 @@ bool IstLeiterVorhanden(int gridX, int gridY) {
 	return false;
 }
 void CheckInput() {
-	int CheckX = 0;
-	int CheckY = 0;
 
 	for (auto& Leiter : LeiterListe) {
-		Leiter.Status = false;
-	}
+		if (Leiter.Status) continue;
 
-	for (auto& Leiter : LeiterListe) {
+		int CheckX = Leiter.GridX;
+		int CheckY = Leiter.GridY;
+
+		if (Leiter.Rotation == 0)      CheckY = Leiter.GridY + 1;
+		else if (Leiter.Rotation == 1) CheckX = Leiter.GridX - 1;
+		else if (Leiter.Rotation == 2) CheckY = Leiter.GridY - 1;
+		else if (Leiter.Rotation == 3) CheckX = Leiter.GridX + 1;
+
 		bool knotenFound = false;
 
-		if (Leiter.Rotation == 0) {
-			CheckX = Leiter.GridX;
-			CheckY = Leiter.GridY + 1;
-		}
-		else if (Leiter.Rotation == 1) {
-			CheckX = Leiter.GridX - 1;
-			CheckY = Leiter.GridY;
-		}
-		else if (Leiter.Rotation == 2) {
-			CheckX = Leiter.GridX;
-			CheckY = Leiter.GridY - 1;
-		}
-		else if (Leiter.Rotation == 3) {
-			CheckX = Leiter.GridX + 1;
-			CheckY = Leiter.GridY;
-		}
-
 		for (const auto& knoten : knotenliste) {
-			if (knoten.GridX == CheckX && knoten.GridY == CheckY) {
-				if (knoten.Status) {
-					knotenFound = true;
-					
-				}
+			if (knoten.GridX == CheckX && knoten.GridY == CheckY && knoten.Status) {
+				knotenFound = true;
 				break;
 			}
 		}
-		for (const auto& leiter : LeiterListe) {
-			if (leiter.GridX == CheckX && leiter.GridY == CheckY) {
-				if (leiter.Status) {
-					knotenFound = true;
 
+		if (!knotenFound) {
+			for (const auto& leiter : LeiterListe) {
+				if (leiter.GridX == CheckX && leiter.GridY == CheckY && leiter.Status) {
+					knotenFound = true;
+					break;
 				}
-				break;
 			}
 		}
-		
-		Leiter.Status = knotenFound;
+
+		if (knotenFound) {
+			Leiter.Status = true;
+		}
 	}
 }
 void CheckOutput() {
-	for (auto& knoten : knotenliste) {
-		if (!knoten.modus) {
-			knoten.Status = false;
-		}
-	}
 
 	for (const auto& Leiter : LeiterListe) {
 		if (!Leiter.Status) continue;
@@ -177,7 +158,7 @@ void CheckOutput() {
 		else if (Leiter.Rotation == 3) targetX = Leiter.GridX - 1;
 
 		for (auto& knoten : knotenliste) {
-			if (knoten.GridX == targetX && knoten.GridY == targetY) {
+			if (knoten.GridX == targetX && knoten.GridY == targetY && !knoten.modus) {
 				knoten.Status = true;
 				break;
 			}

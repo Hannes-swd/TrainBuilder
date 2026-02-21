@@ -97,10 +97,67 @@ int main(void)
 
         //gleise verbinden
         verbindeSchienen();
-        CheckInput();
-        CheckOutput();
-        InvertorCheckInput();
-        InvertorCheckOutput();
+
+        for (auto& l : LeiterListe) {
+            l.Status = false;
+        }
+        for (auto& k : knotenliste) {
+            if (!k.modus) {
+                k.Status = false;
+            }
+        }
+
+        bool changed = true;
+        int maxDurchlaeufe = (int)(LeiterListe.size() + InverterListe.size() + knotenliste.size() + 1);
+        int durchlauf = 0;
+
+        while (changed && durchlauf < maxDurchlaeufe) {
+            changed = false;
+            durchlauf++;
+
+            std::vector<bool> leiterVorher;
+            for (const auto& l : LeiterListe)
+                leiterVorher.push_back(l.Status);
+
+            std::vector<bool> knotenVorher;
+            for (const auto& k : knotenliste)
+                knotenVorher.push_back(k.Status);
+
+            std::vector<bool> inverterVorher;
+            for (const auto& inv : InverterListe)
+                inverterVorher.push_back(inv.Status);
+
+            CheckInput();
+            CheckOutput();
+            InvertorCheckInput();
+            InvertorCheckOutput();
+
+            for (int i = 0; i < (int)LeiterListe.size(); i++) {
+                if (LeiterListe[i].Status != leiterVorher[i]) {
+                    changed = true;
+                    break;
+                }
+            }
+
+            if (!changed) {
+                for (int i = 0; i < (int)knotenliste.size(); i++) {
+                    if (knotenliste[i].Status != knotenVorher[i]) {
+                        changed = true;
+                        break;
+                    }
+                }
+            }
+
+            if (!changed) {
+                for (int i = 0; i < (int)InverterListe.size(); i++) {
+                    if (InverterListe[i].Status != inverterVorher[i]) {
+                        changed = true;
+                        break;
+                    }
+                }
+            }
+        }
+
         UpdateSignale();
 
         ZeichneGleise();

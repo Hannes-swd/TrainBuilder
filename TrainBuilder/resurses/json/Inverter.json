@@ -4,8 +4,22 @@
             "GridX": 20,
             "GridY": -27,
             "Rotation": 0,
-            "Status": true,
+            "Status": false,
             "eindeutigeId": 1
+        },
+        {
+            "GridX": 24,
+            "GridY": -27,
+            "Rotation": 1,
+            "Status": false,
+            "eindeutigeId": 2
+        },
+        {
+            "GridX": 23,
+            "GridY": -21,
+            "Rotation": 1,
+            "Status": false,
+            "eindeutigeId": 3
         }
     ]
 }
