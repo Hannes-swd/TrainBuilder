@@ -27,22 +27,22 @@ void InverterPlazieren(int gridX, int gridY) {
 			return;
 	}
 	InverterObjeckt newInverter;
-
 	newInverter.GridX = gridX;
 	newInverter.GridY = gridY;
 	newInverter.Rotation = 0;
-	newInverter.Status = false;
+	newInverter.Status = true;
 
 	int neueID = 1;
-	for (const auto& newInverter : InverterListe) {
-		if (newInverter.eindeutigeId >= neueID) {
-			neueID = newInverter.eindeutigeId + 1;
+	for (const auto& inv : InverterListe) {
+		if (inv.eindeutigeId >= neueID) {
+			neueID = inv.eindeutigeId + 1;
 		}
 	}
 	newInverter.eindeutigeId = neueID;
 	InverterListe.push_back(newInverter);
 	InvertorSpeichern();
 }
+
 void InvertorSpeichern() {
 	json jsonDaten;
 	json InvertorArray = json::array();
@@ -53,7 +53,6 @@ void InvertorSpeichern() {
 		InverterJson["Rotation"] = Inverter.Rotation;
 		InverterJson["eindeutigeId"] = Inverter.eindeutigeId;
 		InverterJson["Status"] = Inverter.Status;
-
 		InvertorArray.push_back(InverterJson);
 	}
 	jsonDaten["Inverter"] = InvertorArray;
@@ -61,14 +60,13 @@ void InvertorSpeichern() {
 	if (InverterDatei.is_open()) {
 		InverterDatei << jsonDaten.dump(4);
 		InverterDatei.close();
-
-	}
-	else {
 	}
 }
+
 void InvertorZeichnen() {
 	for (const auto& Inverter : InverterListe) {
-		std::string textureName = Inverter.Status ? "Inverter_AN" : "Inverter_Aus";
+		
+		std::string textureName = Inverter.Status ? "Inverter_Aus" : "Inverter_AN";
 
 		float x = Inverter.GridX * GRID_SIZE;
 		float y = Inverter.GridY * GRID_SIZE;
@@ -77,80 +75,82 @@ void InvertorZeichnen() {
 
 		if (tex.id != 0) {
 			Rectangle source = { 0, 0, (float)tex.width, (float)tex.height };
-
 			Rectangle dest = { x + GRID_SIZE / 2, y + GRID_SIZE / 2, GRID_SIZE, GRID_SIZE };
-
 			float rotation = Inverter.Rotation * 90.0f;
-
 			Vector2 origin = { GRID_SIZE / 2, GRID_SIZE / 2 };
-
 			DrawTexturePro(tex, source, dest, origin, rotation, WHITE);
 		}
 	}
 }
 
 void InvertorCheckInput() {
-	int CheckX = 0;
-	int CheckY = 0;
+	for (auto& Inverter : InverterListe) {
+		bool eingang = false;
 
-	for (auto& Leiter : LeiterListe) {
-		Leiter.Status = false;
-	}
+		int CheckX = Inverter.GridX;
+		int CheckY = Inverter.GridY;
 
-	for (auto& Leiter : LeiterListe) {
-		bool knotenFound = false;
+		if (Inverter.Rotation == 0)      CheckY = Inverter.GridY + 1;
+		else if (Inverter.Rotation == 1) CheckX = Inverter.GridX - 1;
+		else if (Inverter.Rotation == 2) CheckY = Inverter.GridY - 1;
+		else if (Inverter.Rotation == 3) CheckX = Inverter.GridX + 1;
 
-		if (Leiter.Rotation == 0) {
-			CheckX = Leiter.GridX;
-			CheckY = Leiter.GridY + 1;
-		}
-		else if (Leiter.Rotation == 1) {
-			CheckX = Leiter.GridX - 1;
-			CheckY = Leiter.GridY;
-		}
-		else if (Leiter.Rotation == 2) {
-			CheckX = Leiter.GridX;
-			CheckY = Leiter.GridY - 1;
-		}
-		else if (Leiter.Rotation == 3) {
-			CheckX = Leiter.GridX + 1;
-			CheckY = Leiter.GridY;
-		}
-
-		for (const auto& knoten : knotenliste) {
-			if (knoten.GridX == CheckX && knoten.GridY == CheckY) {
-				if (knoten.Status) {
-					knotenFound = true;
-
-				}
-				break;
-			}
-		}
-		for (const auto& leiter : LeiterListe) {
-			if (leiter.GridX == CheckX && leiter.GridY == CheckY) {
-				if (leiter.Status) {
-					knotenFound = true;
-
-				}
+		for (const auto& k : knotenliste) {
+			if (k.GridX == CheckX && k.GridY == CheckY && k.Status) {
+				eingang = true;
 				break;
 			}
 		}
 
-		Leiter.Status = knotenFound;
+		if (!eingang) {
+			for (const auto& l : LeiterListe) {
+				if (l.GridX == CheckX && l.GridY == CheckY && l.Status) {
+					eingang = true;
+					break;
+				}
+			}
+		}
+
+		Inverter.Status = !eingang;
 	}
 }
-void InvertorCheckOutput() {
 
+void InvertorCheckOutput() {
+	for (const auto& Inverter : InverterListe) {
+		if (!Inverter.Status) continue;
+
+		int targetX = Inverter.GridX;
+		int targetY = Inverter.GridY;
+
+		if (Inverter.Rotation == 0)      targetY = Inverter.GridY - 1;
+		else if (Inverter.Rotation == 1) targetX = Inverter.GridX + 1;
+		else if (Inverter.Rotation == 2) targetY = Inverter.GridY + 1;
+		else if (Inverter.Rotation == 3) targetX = Inverter.GridX - 1;
+
+		for (auto& k : knotenliste) {
+			if (k.GridX == targetX && k.GridY == targetY && !k.modus) {
+				k.Status = true;
+				break;
+			}
+		}
+
+		for (auto& l : LeiterListe) {
+			if (l.GridX == targetX && l.GridY == targetY) {
+				l.Status = true;
+				break;
+			}
+		}
+	}
 }
 
 bool IstInverterVorhanden(int gridX, int gridY) {
 	for (const auto& Inverter : InverterListe) {
-		if (Inverter.GridX == gridX && Inverter.GridY == gridY) {
+		if (Inverter.GridX == gridX && Inverter.GridY == gridY)
 			return true;
-		}
 	}
 	return false;
 }
+
 void InverterLöschen(int gridX, int gridY) {
 	auto it = std::remove_if(InverterListe.begin(), InverterListe.end(),
 		[gridX, gridY](const InverterObjeckt& l) {

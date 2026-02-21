@@ -127,4 +127,32 @@ void UpdateSignale() {
             }
         }
     }
+
+    for (const auto& Inverter : InverterListe) {
+        if (!Inverter.Status) continue;
+
+        int targetX = Inverter.GridX;
+        int targetY = Inverter.GridY;
+
+        if (Inverter.Rotation == 0)      targetY = Inverter.GridY - 1;
+        else if (Inverter.Rotation == 1) targetX = Inverter.GridX + 1;
+        else if (Inverter.Rotation == 2) targetY = Inverter.GridY + 1;
+        else if (Inverter.Rotation == 3) targetX = Inverter.GridX - 1;
+
+        for (auto& knoten : knotenliste) {
+            if (knoten.GridX == targetX && knoten.GridY == targetY && !knoten.modus) {
+                for (auto& signal : SignalTeilListe) {
+                    if (signal.nutzerId == knoten.Name) {
+                        signal.wert = true;
+                    }
+                }
+                for (auto& ampel : ampelListe) {
+                    if (ampel.Name == knoten.Name) {
+                        ampel.isGreen = true;
+                    }
+                }
+                break;
+            }
+        }
+    }
 }
