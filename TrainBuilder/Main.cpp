@@ -43,7 +43,7 @@ int main(void)
 
 
     SetTargetFPS(60);
-
+    SetMouseCursor(MOUSE_CURSOR_DEFAULT);
     while (!WindowShouldClose())
     {
         /*-------------------------------------------------

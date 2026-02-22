@@ -1,4 +1,4 @@
-#include <map>
+﻿#include <map>
 #include <queue>
 #include <fstream>
 #include <iostream>
@@ -9,7 +9,7 @@
 #include "Json.h"
 #include "textbox.h"
 #include "Banhof.h"
-#include "untermen�.h"
+#include "untermenü.h"
 #include "json.hpp"
 #include "zug.h"
 #include "Leiter.h"
@@ -65,7 +65,7 @@ void InvertorSpeichern() {
 
 void InvertorZeichnen() {
 	for (const auto& Inverter : InverterListe) {
-		
+
 		std::string textureName = Inverter.Status ? "Inverter_Aus" : "Inverter_AN";
 
 		float x = Inverter.GridX * GRID_SIZE;
@@ -90,11 +90,13 @@ void InvertorCheckInput() {
 		int CheckX = Inverter.GridX;
 		int CheckY = Inverter.GridY;
 
-		if (Inverter.Rotation == 0)      CheckY = Inverter.GridY + 1;
-		else if (Inverter.Rotation == 1) CheckX = Inverter.GridX - 1;
-		else if (Inverter.Rotation == 2) CheckY = Inverter.GridY - 1;
-		else if (Inverter.Rotation == 3) CheckX = Inverter.GridX + 1;
+		// Eingang ist VOR dem Inverter (entgegen der Pfeilrichtung)
+		if (Inverter.Rotation == 0)      CheckY = Inverter.GridY + 1; // Pfeil nach oben, Eingang von unten
+		else if (Inverter.Rotation == 1) CheckX = Inverter.GridX - 1; // Pfeil nach rechts, Eingang von links
+		else if (Inverter.Rotation == 2) CheckY = Inverter.GridY - 1; // Pfeil nach unten, Eingang von oben
+		else if (Inverter.Rotation == 3) CheckX = Inverter.GridX + 1; // Pfeil nach links, Eingang von rechts
 
+		// Prüfe Knoten
 		for (const auto& k : knotenliste) {
 			if (k.GridX == CheckX && k.GridY == CheckY && k.Status) {
 				eingang = true;
@@ -102,6 +104,7 @@ void InvertorCheckInput() {
 			}
 		}
 
+		// Prüfe Leiter
 		if (!eingang) {
 			for (const auto& l : LeiterListe) {
 				if (l.GridX == CheckX && l.GridY == CheckY && l.Status) {
@@ -111,7 +114,7 @@ void InvertorCheckInput() {
 			}
 		}
 
-		Inverter.Status = !eingang;
+		Inverter.Status = !eingang; // Inverter invertiert das Signal
 	}
 }
 
@@ -151,7 +154,7 @@ bool IstInverterVorhanden(int gridX, int gridY) {
 	return false;
 }
 
-void InverterL�schen(int gridX, int gridY) {
+void InverterLöschen(int gridX, int gridY) {
 	auto it = std::remove_if(InverterListe.begin(), InverterListe.end(),
 		[gridX, gridY](const InverterObjeckt& l) {
 			return l.GridX == gridX && l.GridY == gridY;

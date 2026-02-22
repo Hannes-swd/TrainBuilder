@@ -12,6 +12,13 @@
             "Name": "2",
             "gridX": 14,
             "gridY": -25,
+            "isGreen": false
+        },
+        {
+            "AmpelId": 3,
+            "Name": "3",
+            "gridX": 14,
+            "gridY": -22,
             "isGreen": true
         }
     ]

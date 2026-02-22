@@ -4,7 +4,7 @@
             "GridX": 17,
             "GridY": -26,
             "Name": "2",
-            "Status": true,
+            "Status": false,
             "eindeutigeId": 1,
             "modus": true
         },
@@ -12,7 +12,7 @@
             "GridX": 17,
             "GridY": -29,
             "Name": "1",
-            "Status": true,
+            "Status": false,
             "eindeutigeId": 2,
             "modus": false
         },
@@ -20,49 +20,17 @@
             "GridX": 20,
             "GridY": -25,
             "Name": "2",
-            "Status": true,
+            "Status": false,
             "eindeutigeId": 3,
             "modus": true
         },
         {
-            "GridX": 22,
-            "GridY": -27,
-            "Name": "2",
-            "Status": true,
-            "eindeutigeId": 5,
-            "modus": true
-        },
-        {
             "GridX": 20,
-            "GridY": -19,
-            "Name": "2",
-            "Status": true,
-            "eindeutigeId": 7,
-            "modus": true
-        },
-        {
-            "GridX": 20,
-            "GridY": -31,
-            "Name": "",
-            "Status": true,
-            "eindeutigeId": 8,
-            "modus": true
-        },
-        {
-            "GridX": 27,
             "GridY": -29,
-            "Name": "",
+            "Name": "3",
             "Status": true,
-            "eindeutigeId": 9,
-            "modus": true
-        },
-        {
-            "GridX": 26,
-            "GridY": -21,
-            "Name": "",
-            "Status": true,
-            "eindeutigeId": 10,
-            "modus": true
+            "eindeutigeId": 4,
+            "modus": false
         }
     ]
 }
