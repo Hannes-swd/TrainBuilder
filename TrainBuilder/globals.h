@@ -36,6 +36,11 @@ extern int aktuellesTool;
 
 extern bool untermenueOffen;
 /*-------------------------------------------------
+	Maus
+-------------------------------------------------*/
+extern std::string AktuelleMaus;
+extern std::string EndereMausZu;
+/*-------------------------------------------------
 	Scrolen
 -------------------------------------------------*/
 extern const float SCROLLBAR_BREITE;

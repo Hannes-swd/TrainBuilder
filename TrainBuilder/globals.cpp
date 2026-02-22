@@ -50,7 +50,11 @@ int aktuellesTool = 1;
 
 //untermenü
 bool untermenueOffen = true;
-
+/*-------------------------------------------------
+	Maus
+-------------------------------------------------*/
+std::string AktuelleMaus = "Standard";
+std::string EndereMausZu = "";
 /*-------------------------------------------------
 	Scrolen
 -------------------------------------------------*/

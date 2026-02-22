@@ -245,6 +245,7 @@ void LinksGeklickt(Vector2 mausposition) {
         if (!haterstenKlick) {
             ErsteKlickPosition = { (float)KlickGridX ,(float)KlickGridY };
             haterstenKlick = true;
+            EndereMausZu = "Fadenkreuz";
         }
         else if (haterstenKlick) {
             ZweiteKlickPosition = { (float)KlickGridX ,(float)KlickGridY };
@@ -261,6 +262,7 @@ void LinksGeklickt(Vector2 mausposition) {
             }
 
             haterstenKlick = false;
+            EndereMausZu = "Standard";
         }
     }
     //AMPEL
@@ -281,6 +283,7 @@ void Loeschentool(Vector2 mausposition) {
 
     // Bahnhöfe
     if (IstBanhofBereitsVorhanden(MouseGridX, MouseGridY)) {
+        EndereMausZu = "Hand";
         if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {
 
             std::string geloeschterBanhofName;
@@ -317,6 +320,7 @@ void Loeschentool(Vector2 mausposition) {
     }
     // Knoten
     else if (istKnotenVorhanden(MouseGridX, MouseGridY)) {
+        EndereMausZu = "Hand";
         if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {
             knotenlöschen(MouseGridX, MouseGridY);
             return;
@@ -324,6 +328,7 @@ void Loeschentool(Vector2 mausposition) {
     }
     // Leiter
     else if (IstLeiterVorhanden(MouseGridX, MouseGridY)) {
+        EndereMausZu = "Hand";
         if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {
             LeiterLöschen(MouseGridX, MouseGridY);
             return;
@@ -331,6 +336,7 @@ void Loeschentool(Vector2 mausposition) {
     }
     // Inverter
     else if (IstInverterVorhanden(MouseGridX, MouseGridY)) {
+        EndereMausZu = "Hand";
         if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {
             InverterLöschen(MouseGridX, MouseGridY);
             return;
@@ -338,6 +344,7 @@ void Loeschentool(Vector2 mausposition) {
     }
     // Gleise
     else {
+
         if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {
             Vector2 screenMousePos = GetMousePosition();
             int MouseGridX = (int)floor(mausposition.x / GRID_SIZE);
@@ -354,6 +361,7 @@ void Loeschentool(Vector2 mausposition) {
             }
         }
     }
+    EndereMausZu = "Standard";
 }
 /*-------------------------------------------------
     TOOLSWITCHEN

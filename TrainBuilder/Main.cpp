@@ -19,6 +19,7 @@
 #include "Signal.h"
 #include "Leiter.h"
 #include "Inverter.h"
+#include "mauszeiger.h"
 
 int main(void)
 {
@@ -81,6 +82,14 @@ int main(void)
 
         //zug updaten
         BewegeZuege();
+        /*-------------------------------------------------
+            Maus
+        -------------------------------------------------*/
+
+        if (AktuelleMaus != EndereMausZu) {
+            mauszeiger(EndereMausZu);
+            AktuelleMaus = EndereMausZu;
+        }
 
 
         /*-------------------------------------------------
@@ -184,6 +193,7 @@ int main(void)
 
         DrawText(TextFormat("Grid: [%d, %d]", (int)gridPosition.x, (int)gridPosition.y),
             10, 10, 20, BLACK);
+
 
         //ZEICHNET UI
         zeichneUI();

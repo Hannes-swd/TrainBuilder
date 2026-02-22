@@ -9,4 +9,7 @@ void mauszeiger(std::string mouszeiger) {
 		SetMouseCursor(MOUSE_CURSOR_ARROW);
 	if (mouszeiger == "Fadenkreuz")
 		SetMouseCursor(MOUSE_CURSOR_CROSSHAIR);
+	if (mouszeiger == "Hand")
+		SetMouseCursor(MOUSE_CURSOR_POINTING_HAND);
+	
 }

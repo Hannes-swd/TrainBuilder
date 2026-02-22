@@ -61,12 +61,6 @@
             "rotation": 0
         },
         {
-            "ObjecktId": 2,
-            "gridX": -1,
-            "gridY": -26,
-            "rotation": 270
-        },
-        {
             "ObjecktId": 1,
             "gridX": -2,
             "gridY": -26,
@@ -145,10 +139,10 @@
             "rotation": 90
         },
         {
-            "ObjecktId": 3,
+            "ObjecktId": 4,
             "gridX": 6,
             "gridY": -29,
-            "rotation": 90
+            "rotation": 0
         },
         {
             "ObjecktId": 1,
@@ -805,10 +799,10 @@
             "rotation": 90
         },
         {
-            "ObjecktId": 2,
+            "ObjecktId": 3,
             "gridX": 2,
             "gridY": -27,
-            "rotation": 270
+            "rotation": 180
         },
         {
             "ObjecktId": 1,
@@ -958,6 +952,54 @@
             "ObjecktId": 1,
             "gridX": 11,
             "gridY": -23,
+            "rotation": 0
+        },
+        {
+            "ObjecktId": 2,
+            "gridX": 2,
+            "gridY": -26,
+            "rotation": 90
+        },
+        {
+            "ObjecktId": 1,
+            "gridX": 3,
+            "gridY": -26,
+            "rotation": 90
+        },
+        {
+            "ObjecktId": 2,
+            "gridX": -1,
+            "gridY": -26,
+            "rotation": 270
+        },
+        {
+            "ObjecktId": 1,
+            "gridX": 4,
+            "gridY": -26,
+            "rotation": 90
+        },
+        {
+            "ObjecktId": 1,
+            "gridX": 5,
+            "gridY": -26,
+            "rotation": 90
+        },
+        {
+            "ObjecktId": 2,
+            "gridX": 6,
+            "gridY": -26,
+            "rotation": 270
+        },
+        {
+            "ObjecktId": 1,
+            "gridX": 6,
+            "gridY": -27,
+            "rotation": 0
+        },
+        {
+            "ObjecktId": 1,
+            "gridX": 6,
+            "gridY": -28,
             "rotation": 0
         }
     ]
