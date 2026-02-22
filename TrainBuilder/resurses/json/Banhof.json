@@ -50,13 +50,6 @@
             "rotation": 0
         },
         {
-            "BanhofId": 8,
-            "Name": "test",
-            "gridX": 1,
-            "gridY": -27,
-            "rotation": 0
-        },
-        {
             "BanhofId": 9,
             "Name": "Banhof_9",
             "gridX": -5,
@@ -64,17 +57,17 @@
             "rotation": 0
         },
         {
-            "BanhofId": 10,
-            "Name": "cool",
-            "gridX": -1,
-            "gridY": -28,
-            "rotation": 0
-        },
-        {
             "BanhofId": 11,
             "Name": "lolsigma",
             "gridX": 14,
             "gridY": -32,
+            "rotation": 0
+        },
+        {
+            "BanhofId": 10,
+            "Name": "gigachad",
+            "gridX": -11,
+            "gridY": -29,
             "rotation": 0
         }
     ]

@@ -98,9 +98,9 @@ void ProcesMaus(Vector2 mausposition) {
     }
 
     if (aktuellesTool == 2) {
-        if (IsMouseButtonDown(MOUSE_BUTTON_LEFT)) {
-            Loeschentool(mausposition);
-        }
+        
+        Loeschentool(mausposition);
+        
     }
 
     if (aktuellesTool == 3) {
@@ -112,7 +112,7 @@ void ProcesMaus(Vector2 mausposition) {
             plaziereBanhof(mausposition);
     }
     if (aktuellesTool == 7) {
-        if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT))
+        
             Drehtool(MouseGridX, MouseGridY);
     }
     if (aktuellesTool == 6 && ausgewählterUntermenuePunkt == 1) {
@@ -133,22 +133,29 @@ void ProcesMaus(Vector2 mausposition) {
     DREHTOOL
 -------------------------------------------------*/
 void Drehtool(int gridX, int gridY) {
+    EndereMausZu = "Standard";
     //check ob leiter
     for (auto& leiter : LeiterListe) {
         if (leiter.GridX == gridX && leiter.GridY == gridY) {
-            if (leiter.Rotation != 3)
-                leiter.Rotation++;
-            else
-                leiter.Rotation = 0;
+            EndereMausZu = "Hand";
+            if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {
+                if (leiter.Rotation != 3)
+                    leiter.Rotation++;
+                else
+                    leiter.Rotation = 0;
+            }
         }
     }
     //check ob Inverter
     for (auto& Inverter : InverterListe) {
         if (Inverter.GridX == gridX && Inverter.GridY == gridY) {
-            if (Inverter.Rotation != 3)
-                Inverter.Rotation++;
-            else
-                Inverter.Rotation = 0;
+            EndereMausZu = "Hand";
+            if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {
+                if (Inverter.Rotation != 3)
+                    Inverter.Rotation++;
+                else
+                    Inverter.Rotation = 0;
+            }
         }
     }
 }
@@ -157,6 +164,7 @@ void Drehtool(int gridX, int gridY) {
 -------------------------------------------------*/
 void Auswahltool(int gridX, int gridY)
 {
+    EndereMausZu = "Standard";
     bool bahnhofGeklickt = false;
     bool zugGeklickt = false;
     bool ampelGeklickt = false;
@@ -166,7 +174,7 @@ void Auswahltool(int gridX, int gridY)
     for (const auto& ban : banhofListe) {
         if (ban.GridX == gridX && ban.GridY == gridY) {
             DrawRectangle(gridX * GRID_SIZE, gridY * GRID_SIZE, (float)GRID_SIZE, (float)GRID_SIZE, Color{ 0, 255, 0, 150 });
-
+            EndereMausZu = "Hand";
             if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {
                 ausgewahlterBanhof = ban.BanhofId;
                 bahnhofGeklickt = true;
@@ -185,7 +193,7 @@ void Auswahltool(int gridX, int gridY)
         if (CheckCollisionPointRec(mouseWorldPos, zugBox)) {
             // Visualisierung des ausgewhlten Zuges
             DrawRectangleRec(zugBox, Color{ 0, 255, 0, 150 });
-
+            EndereMausZu = "Hand";
             if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {
                 ausgewahlterZug = z.zugId;
                 zugGeklickt = true;
@@ -197,7 +205,7 @@ void Auswahltool(int gridX, int gridY)
     for (const auto& ampel : ampelListe) {
         if (ampel.GridX == gridX && ampel.GridY == gridY) {
             DrawRectangle(gridX * GRID_SIZE, gridY * GRID_SIZE, (float)GRID_SIZE, (float)GRID_SIZE, Color{ 0, 255, 0, 150 });
-
+            EndereMausZu = "Hand";
             if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {
                 ausgewahlterAmpel = ampel.AmpelId;
                 ampelGeklickt = true;
@@ -207,7 +215,7 @@ void Auswahltool(int gridX, int gridY)
     for (const auto& knoten : knotenliste) {
         if (knoten.GridX == gridX && knoten.GridY == gridY) {
             DrawRectangle(gridX * GRID_SIZE, gridY * GRID_SIZE, (float)GRID_SIZE, (float)GRID_SIZE, Color{ 0, 255, 0, 150 });
-
+            EndereMausZu = "Hand";
             if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {
                 ausgewahlterKnoten = knoten.eindeutigeId;
                 knotenGeklickt = true;
