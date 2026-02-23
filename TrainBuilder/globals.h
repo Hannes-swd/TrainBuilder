@@ -76,6 +76,7 @@ struct BanhofObjeckt {
 	int GridX;
 	int GridY;
 	int Rotation;
+	std::string ID;
 	BanhofObjeckt() : Name(""), BanhofId(0), GridX(0), GridY(0), Rotation(0) {}
 };
 

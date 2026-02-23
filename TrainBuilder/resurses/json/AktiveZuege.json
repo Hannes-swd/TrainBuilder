@@ -2,163 +2,64 @@
     "AktiveZuege": [
         {
             "Fahrplan": [
-                "cool",
+                "sdbanhof",
                 "ostbanhof",
-                "test",
-                "mittecool"
+                "Banhof_3",
+                "sdbanhof"
             ],
             "biildpfad": "resurses/Texturen/Zuege/StandartZug.png",
             "farbe": "rot",
-            "geschwindichkeit": 10,
+            "geschwindichkeit": 4,
             "gueter": 0,
             "maxGueter": 0,
             "maxPassagiere": 0,
             "name": "Zug 1",
             "passagiere": 0,
-            "posX": -6.0,
-            "posY": -25.0,
-            "rotation": 90,
+            "posX": 6.172112464904785,
+            "posY": -19.0,
+            "rotation": 0,
             "zugId": 1,
             "zugtyp": "Erster"
         },
         {
             "Fahrplan": [
-                "test",
-                "nord nord",
-                "unten banhf",
-                "nordbanhof"
+                "sdbanhof",
+                "Banhof_3",
+                "ostbanhof",
+                "wesbanhof"
             ],
             "biildpfad": "resurses/Texturen/Zuege/StandartZug.png",
             "farbe": "gruen",
-            "geschwindichkeit": 5,
+            "geschwindichkeit": 10,
             "gueter": 0,
             "maxGueter": 0,
             "maxPassagiere": 0,
-            "name": "Zug 5",
+            "name": "Zug 2",
             "passagiere": 0,
             "posX": -10.0,
-            "posY": -20.33373260498047,
+            "posY": -27.0,
             "rotation": -90,
-            "zugId": 5,
+            "zugId": 2,
             "zugtyp": "zweiter"
         },
         {
             "Fahrplan": [
-                "cool",
-                "mittecool",
-                "ostbanhof"
+                "sdostbanhof",
+                "wesbanhof",
+                "Banhof_3"
             ],
             "biildpfad": "resurses/Texturen/Zuege/andererzug.png",
             "farbe": "blau",
-            "geschwindichkeit": 9,
+            "geschwindichkeit": 7,
             "gueter": 0,
             "maxGueter": 0,
             "maxPassagiere": 0,
-            "name": "test",
+            "name": "Zug 3",
             "passagiere": 0,
-            "posX": -6.0,
-            "posY": -23.400726318359375,
-            "rotation": -90,
-            "zugId": 2,
-            "zugtyp": "dreier"
-        },
-        {
-            "Fahrplan": [
-                "Banhof_9",
-                "test",
-                "mittecool",
-                "lolsigma"
-            ],
-            "biildpfad": "resurses/Texturen/Zuege/StandartZug.png",
-            "farbe": "rot",
-            "geschwindichkeit": 4,
-            "gueter": 0,
-            "maxGueter": 0,
-            "maxPassagiere": 0,
-            "name": "gigachad zug",
-            "passagiere": 0,
-            "posX": 13.500934600830078,
-            "posY": -34.0,
+            "posX": -8.940142631530762,
+            "posY": -28.0,
             "rotation": 0,
             "zugId": 3,
-            "zugtyp": "Erster"
-        },
-        {
-            "Fahrplan": [
-                "nord nord",
-                "westbanhof",
-                "unten banhf"
-            ],
-            "biildpfad": "resurses/Texturen/Zuege/andererzug.png",
-            "farbe": "blau",
-            "geschwindichkeit": 7,
-            "gueter": 0,
-            "maxGueter": 0,
-            "maxPassagiere": 0,
-            "name": "TestTrain",
-            "passagiere": 0,
-            "posX": -10.0,
-            "posY": -24.47444725036621,
-            "rotation": 90,
-            "zugId": 4,
-            "zugtyp": "dreier"
-        },
-        {
-            "Fahrplan": [
-                "test",
-                "ostbanhof",
-                "nord nord"
-            ],
-            "biildpfad": "resurses/Texturen/Zuege/StandartZug.png",
-            "farbe": "rot",
-            "geschwindichkeit": 4,
-            "gueter": 0,
-            "maxGueter": 0,
-            "maxPassagiere": 0,
-            "name": "Zug 6",
-            "passagiere": 0,
-            "posX": 0.0,
-            "posY": -30.39984130859375,
-            "rotation": 90,
-            "zugId": 6,
-            "zugtyp": "Erster"
-        },
-        {
-            "Fahrplan": [
-                "ostbanhof",
-                "cool"
-            ],
-            "biildpfad": "resurses/Texturen/Zuege/andererzug.png",
-            "farbe": "blau",
-            "geschwindichkeit": 7,
-            "gueter": 0,
-            "maxGueter": 0,
-            "maxPassagiere": 0,
-            "name": "Zug 7",
-            "passagiere": 0,
-            "posX": 11.0,
-            "posY": -25.0,
-            "rotation": 106,
-            "zugId": 7,
-            "zugtyp": "dreier"
-        },
-        {
-            "Fahrplan": [
-                "cool",
-                "mittecool"
-            ],
-            "biildpfad": "resurses/Texturen/Zuege/andererzug.png",
-            "farbe": "blau",
-            "geschwindichkeit": 7,
-            "gueter": 0,
-            "maxGueter": 0,
-            "maxPassagiere": 0,
-            "name": "Zug 8",
-            "passagiere": 0,
-            "posX": -6.0,
-            "posY": -25.0,
-            "rotation": -90,
-            "zugId": 8,
             "zugtyp": "dreier"
         }
     ]

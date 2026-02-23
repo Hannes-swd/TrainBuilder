@@ -17,10 +17,12 @@ static TextBox nahmeEingabe(0, 0, 200.0f, 30.0f, 32);
 static TextBox zugnameEingabe(0, 0, 200.0f, 30.0f, 32);
 static TextBox knotenEingabe(0, 0, 200.0f, 30.0f, 32);
 static TextBox AmpelEingabe(0, 0, 200.0f, 30.0f, 32);
+static TextBox BanhofEingabe(0, 0, 200.0f, 30.0f, 32);
 static int letzterAusgewahlterBanhof = 0;
 static int letzterAusgewahlterZug = 0;
 static int letzterAusgewahlterKnoten = 0;
 static int letzterAusgewahlteAmpel = 0;
+static int letzterAusgewahlteBanhof = 0;
 
 
 /*-------------------------------------------------
@@ -203,7 +205,34 @@ void zeichneUI() {
                 break;
             }
         }
+        //zeigt id feld an
+    
+        DrawText("ID:", (float)GenaueBreite - 240.0f, 270, 20, BLACK);
+        BanhofEingabe.SetPosition((float)GenaueBreite - 240.0f, 290.0f);
 
+        if (letzterAusgewahlteBanhof != ausgewahlterBanhof) {
+            for (const auto& banhof : banhofListe) {
+                if (banhof.BanhofId == ausgewahlterBanhof) {
+                    BanhofEingabe.SetText(banhof.ID);
+                    break;
+                }
+            }
+            letzterAusgewahlteBanhof = ausgewahlterBanhof;
+        }
+
+        BanhofEingabe.Update();
+        BanhofEingabe.Draw();
+
+        if (BanhofEingabe.IsActive()) {
+            kannBewegen = false;
+        }
+
+        for (auto& banhof : banhofListe) {
+            if (banhof.BanhofId == ausgewahlterAmpel) {
+                banhof.ID = BanhofEingabe.GetText();
+                break;
+            }
+        }
         EndScissorMode();
 
         float bahnhofContentHoehe = 4 * 30 + 100;

@@ -102,6 +102,7 @@ void LadeJson() {
             banhof.GridX = obj["gridX"];
             banhof.GridY = obj["gridY"];
             banhof.Rotation = obj["rotation"];
+            banhof.ID = obj["ID"];
             banhofListe.push_back(banhof);
         }
     }

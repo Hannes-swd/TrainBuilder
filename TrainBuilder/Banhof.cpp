@@ -26,6 +26,7 @@ void plaziereBanhof(Vector2 position) {
 	neuerBanhof.GridX = gridX;
 	neuerBanhof.GridY = gridY;
 	neuerBanhof.Rotation = 0;
+	neuerBanhof.ID = "Banhof_" + std::to_string(banhofListe.size() + 1);
 	banhofListe.push_back(neuerBanhof);
 
 	BanhofSpeichern();
@@ -43,6 +44,7 @@ void BanhofSpeichern() {
 		banhofJson["gridX"] = banhof.GridX;
 		banhofJson["gridY"] = banhof.GridY;
 		banhofJson["rotation"] = banhof.Rotation;
+		banhofJson["ID"] = banhof.ID;
 		banhofArray.push_back(banhofJson);
 	}
 	jsonDaten["BanhofObjeckte"] = banhofArray;

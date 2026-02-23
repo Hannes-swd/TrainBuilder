@@ -2,72 +2,50 @@
     "BanhofObjeckte": [
         {
             "BanhofId": 1,
-            "Name": "nordbanhof",
-            "gridX": -5,
-            "gridY": -29,
-            "rotation": 0
-        },
-        {
-            "BanhofId": 2,
-            "Name": "test",
-            "gridX": -3,
-            "gridY": -26,
-            "rotation": 0
-        },
-        {
-            "BanhofId": 3,
-            "Name": "ostbanhof",
-            "gridX": 11,
-            "gridY": -25,
-            "rotation": 0
-        },
-        {
-            "BanhofId": 4,
-            "Name": "unten banhf",
-            "gridX": 1,
+            "ID": "Banhof_1",
+            "Name": "sdbanhof",
+            "gridX": -7,
             "gridY": -19,
             "rotation": 0
         },
         {
-            "BanhofId": 5,
-            "Name": "westbanhof",
-            "gridX": -10,
-            "gridY": -23,
+            "BanhofId": 2,
+            "ID": "Banhof_2",
+            "Name": "sdostbanhof",
+            "gridX": 5,
+            "gridY": -21,
             "rotation": 0
         },
         {
-            "BanhofId": 6,
-            "Name": "nord nord",
-            "gridX": -3,
+            "BanhofId": 3,
+            "ID": "Banhof_3",
+            "Name": "Banhof_3",
+            "gridX": -2,
             "gridY": -32,
             "rotation": 0
         },
         {
-            "BanhofId": 7,
-            "Name": "mittecool",
-            "gridX": -6,
-            "gridY": -25,
-            "rotation": 0
-        },
-        {
-            "BanhofId": 9,
-            "Name": "Banhof_9",
-            "gridX": -5,
+            "BanhofId": 4,
+            "ID": "Banhof_4",
+            "Name": "nord ost banhof",
+            "gridX": 11,
             "gridY": -34,
             "rotation": 0
         },
         {
-            "BanhofId": 11,
-            "Name": "lolsigma",
-            "gridX": 14,
-            "gridY": -32,
+            "BanhofId": 5,
+            "ID": "Banhof_5",
+            "Name": "ostbanhof",
+            "gridX": 11,
+            "gridY": -24,
             "rotation": 0
         },
         {
-            "BanhofId": 10,
-            "Name": "gigachad",
-            "gridX": -11,
-            "gridY": -29,
+            "BanhofId": 6,
+            "ID": "Banhof_6",
+            "Name": "wesbanhof",
+            "gridX": -13,
+            "gridY": -27,
             "rotation": 0
         }
     ]
