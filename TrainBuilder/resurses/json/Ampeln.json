@@ -20,6 +20,20 @@
             "gridX": 14,
             "gridY": -22,
             "isGreen": false
+        },
+        {
+            "AmpelId": 4,
+            "Name": "6",
+            "gridX": 14,
+            "gridY": -30,
+            "isGreen": false
+        },
+        {
+            "AmpelId": 5,
+            "Name": "5",
+            "gridX": 14,
+            "gridY": -19,
+            "isGreen": false
         }
     ]
 }
