@@ -228,7 +228,7 @@ void zeichneUI() {
         }
 
         for (auto& banhof : banhofListe) {
-            if (banhof.BanhofId == ausgewahlterAmpel) {
+            if (banhof.BanhofId == ausgewahlterBanhof) {
                 banhof.ID = BanhofEingabe.GetText();
                 break;
             }

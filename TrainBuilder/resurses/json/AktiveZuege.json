@@ -15,9 +15,9 @@
             "maxPassagiere": 0,
             "name": "Zug 1",
             "passagiere": 0,
-            "posX": 6.172112464904785,
-            "posY": -19.0,
-            "rotation": 0,
+            "posX": 11.0,
+            "posY": -22.899995803833008,
+            "rotation": 90,
             "zugId": 1,
             "zugtyp": "Erster"
         },
@@ -36,9 +36,9 @@
             "maxPassagiere": 0,
             "name": "Zug 2",
             "passagiere": 0,
-            "posX": -10.0,
-            "posY": -27.0,
-            "rotation": -90,
+            "posX": -1.9148921966552734,
+            "posY": -19.0,
+            "rotation": 0,
             "zugId": 2,
             "zugtyp": "zweiter"
         },
@@ -56,11 +56,30 @@
             "maxPassagiere": 0,
             "name": "Zug 3",
             "passagiere": 0,
-            "posX": -8.940142631530762,
-            "posY": -28.0,
-            "rotation": 0,
+            "posX": -13.0,
+            "posY": -27.0,
+            "rotation": -90,
             "zugId": 3,
             "zugtyp": "dreier"
+        },
+        {
+            "Fahrplan": [
+                "Banhof_7",
+                "sdostbanhof"
+            ],
+            "biildpfad": "resurses/Texturen/Zuege/StandartZug.png",
+            "farbe": "rot",
+            "geschwindichkeit": 4,
+            "gueter": 0,
+            "maxGueter": 0,
+            "maxPassagiere": 0,
+            "name": "Zug 4",
+            "passagiere": 0,
+            "posX": 14.0,
+            "posY": -27.0,
+            "rotation": -90,
+            "zugId": 4,
+            "zugtyp": "Erster"
         }
     ]
 }

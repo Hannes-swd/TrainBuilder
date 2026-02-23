@@ -84,3 +84,25 @@ void ZeichneBanhof() {
 			WHITE);
 	}
 }
+bool IstZugImBanhof(const std::string& banhofId) {
+	BanhofObjeckt* targetBanhof = nullptr;
+	for (auto& banhof : banhofListe) {
+		if (banhof.ID == banhofId) { 
+			targetBanhof = &banhof;
+			break;
+		}
+	}
+
+	if (!targetBanhof) return false;
+
+	for (const auto& zug : aktiveZuege) {
+		int zugGridX = (int)std::round(zug.posX);
+		int zugGridY = (int)std::round(zug.posY);
+
+		if (zugGridX == targetBanhof->GridX && zugGridY == targetBanhof->GridY) {
+			return true;
+		}
+	}
+
+	return false;
+}

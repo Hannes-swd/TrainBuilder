@@ -1,3 +1,11 @@
 {
-    "Inverter": []
+    "Inverter": [
+        {
+            "GridX": 18,
+            "GridY": -29,
+            "Rotation": 0,
+            "Status": true,
+            "eindeutigeId": 1
+        }
+    ]
 }

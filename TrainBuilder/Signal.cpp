@@ -4,6 +4,7 @@
 #include <fstream>
 #include <iostream>
 #include "Ampel.h"
+#include "Banhof.h"
 
 using json = nlohmann::json;
 
@@ -102,7 +103,55 @@ std::vector<SignalTeil*> SucheAlleMitNutzerId(std::string nutzerId) {
 
 void UpdateSignale() {
     for (auto& knoten : knotenliste) {
-        if (knoten.modus == false) {
+        if (knoten.modus == true) { 
+            bool istBanhofId = false;
+
+            // Bahnhof ID gibt
+            for (const auto& banhof : banhofListe) {
+                if (banhof.ID == knoten.Name) {
+                    istBanhofId = true;
+                    break;
+                }
+            }
+
+            if (istBanhofId) {
+                // Bahnhof-Status  (ob ein Zug drin steht)
+                bool zugImBanhof = IstZugImBanhof(knoten.Name);
+
+                // Knoten-Status
+                knoten.Status = zugImBanhof;
+
+               
+                for (auto& signal : SignalTeilListe) {
+                    if (signal.nutzerId == knoten.Name) {
+                        signal.wert = knoten.Status;
+                    }
+                }
+
+                // Ampeln 
+                for (auto& ampel : ampelListe) {
+                    if (ampel.Name == knoten.Name) {
+                        ampel.isGreen = knoten.Status;
+                    }
+                }
+            }
+            else {
+                //  Leselogik Knoten
+                for (auto& ampel : ampelListe) {
+                    if (ampel.Name == knoten.Name) {
+                        knoten.Status = ampel.isGreen;
+                        break;
+                    }
+                }
+
+                for (auto& signal : SignalTeilListe) {
+                    if (signal.nutzerId == knoten.Name) {
+                        signal.wert = knoten.Status;
+                    }
+                }
+            }
+        }
+        else { // Schreibmodus
             for (auto& signal : SignalTeilListe) {
                 if (signal.nutzerId == knoten.Name) {
                     signal.wert = knoten.Status;
@@ -114,20 +163,9 @@ void UpdateSignale() {
                 }
             }
         }
-        else {
-            for (auto& ampel : ampelListe) {
-                if (ampel.Name == knoten.Name) {
-                    knoten.Status = ampel.isGreen;
-                }
-            }
-            for (auto& signal : SignalTeilListe) {
-                if (signal.nutzerId == knoten.Name) {
-                    signal.wert = knoten.Status;
-                }
-            }
-        }
     }
 
+    // UpdateSignale-Logik
     for (const auto& Inverter : InverterListe) {
         if (!Inverter.Status) continue;
 

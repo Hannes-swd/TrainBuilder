@@ -1,3 +1,18 @@
 {
-    "Ampeln": []
+    "Ampeln": [
+        {
+            "AmpelId": 1,
+            "Name": "67",
+            "gridX": 14,
+            "gridY": -31,
+            "isGreen": true
+        },
+        {
+            "AmpelId": 2,
+            "Name": "Ampel_2",
+            "gridX": 14,
+            "gridY": -23,
+            "isGreen": true
+        }
+    ]
 }
