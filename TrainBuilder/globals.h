@@ -218,6 +218,6 @@ struct MarkerObjeckt {
 	int GridX;
 	int GridY;
 	int eindeutigeId;
-	Markerfarben farbe;
+	std::string farbe;
 };
 extern std::vector<MarkerObjeckt> MarkerListe;

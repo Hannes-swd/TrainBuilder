@@ -21,7 +21,7 @@ void LadeJson() {
     std::ifstream Knoten("resurses/json/Knoten.json");
     std::ifstream Leiter("resurses/json/Leiter.json"); 
     std::ifstream Inverter("resurses/json/Inverter.json");
-
+    std::ifstream marker("resurses/json/marker.json");
 
     //OBECKTE UND LADEN
     nlohmann::json NutzerDaten;
@@ -69,6 +69,12 @@ void LadeJson() {
         Inverter >> InverterDaten;
     }
 
+    nlohmann::json markerDaten;
+    if (marker.is_open()) {
+        marker >> markerDaten;
+    }
+    
+    
     //ALLE LISTEN LÖSCHEN
     gleisListe.clear();
     banhofListe.clear();
@@ -76,6 +82,7 @@ void LadeJson() {
     ampelListe.clear();
     LeiterListe.clear();
     InverterListe.clear();
+    MarkerListe.clear();
     /*-------------------------------------------------
         Gleise
     -------------------------------------------------*/
@@ -214,6 +221,24 @@ void LadeJson() {
     }
 
 
+    /*-------------------------------------------------
+    Marker
+-------------------------------------------------*/
+    if (markerDaten.contains("marker")) {
+        for (const auto& obj : markerDaten["marker"]) {
+            MarkerObjeckt marker; 
+            marker.GridX = obj["GridX"];
+            marker.GridY = obj["GridY"];
+            marker.eindeutigeId = obj["eindeutigeId"];
+            marker.farbe = obj["farbe"];
+
+            MarkerListe.push_back(marker);
+        }
+    }
+
+
+
+
 	if (AktiveZuege.is_open()) AktiveZuege.close();
     if (Banhoefe.is_open()) Banhoefe.close();
     if (ZugArten.is_open()) ZugArten.close();
@@ -221,6 +246,8 @@ void LadeJson() {
     if (Knoten.is_open()) Knoten.close();
     if (Leiter.is_open()) Leiter.close();
     if (Inverter.is_open()) Inverter.close();
+    if (marker.is_open()) marker.close();
+
 
     //WERT LADEN
     if (NutzerDaten.contains("SpielerpositionX") && NutzerDaten.contains("SpielerpositionY")) {
