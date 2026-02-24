@@ -2,13 +2,19 @@
     "Signale": [
         {
             "eindeutigeId": 1,
-            "nutzerId": "Ampel_1",
+            "nutzerId": "67",
             "typ": 0,
             "wert": true
         },
         {
-            "eindeutigeId": 2,
-            "nutzerId": "Ampel_2",
+            "eindeutigeId": 3,
+            "nutzerId": "Ampel_3",
+            "typ": 0,
+            "wert": true
+        },
+        {
+            "eindeutigeId": 4,
+            "nutzerId": "Ampel_4",
             "typ": 0,
             "wert": true
         }

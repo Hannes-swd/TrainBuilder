@@ -15,18 +15,18 @@
             "maxPassagiere": 0,
             "name": "Zug 1",
             "passagiere": 0,
-            "posX": 11.0,
-            "posY": -22.899995803833008,
-            "rotation": 90,
+            "posX": -2.899665594100952,
+            "posY": -19.0,
+            "rotation": 0,
             "zugId": 1,
             "zugtyp": "Erster"
         },
         {
             "Fahrplan": [
                 "sdbanhof",
+                "wesbanhof",
                 "Banhof_3",
-                "ostbanhof",
-                "wesbanhof"
+                "ostbanhof"
             ],
             "biildpfad": "resurses/Texturen/Zuege/StandartZug.png",
             "farbe": "gruen",
@@ -36,9 +36,9 @@
             "maxPassagiere": 0,
             "name": "Zug 2",
             "passagiere": 0,
-            "posX": -1.9148921966552734,
-            "posY": -19.0,
-            "rotation": 0,
+            "posX": -13.0,
+            "posY": -27.0,
+            "rotation": -90,
             "zugId": 2,
             "zugtyp": "zweiter"
         },
@@ -76,8 +76,8 @@
             "name": "Zug 4",
             "passagiere": 0,
             "posX": 14.0,
-            "posY": -27.0,
-            "rotation": -90,
+            "posY": -23.899669647216797,
+            "rotation": 90,
             "zugId": 4,
             "zugtyp": "Erster"
         }

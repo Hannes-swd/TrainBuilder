@@ -6,6 +6,27 @@
             "Rotation": 0,
             "Status": false,
             "eindeutigeId": 1
+        },
+        {
+            "GridX": 19,
+            "GridY": -22,
+            "Rotation": 1,
+            "Status": false,
+            "eindeutigeId": 2
+        },
+        {
+            "GridX": 20,
+            "GridY": -22,
+            "Rotation": 1,
+            "Status": false,
+            "eindeutigeId": 3
+        },
+        {
+            "GridX": 22,
+            "GridY": -22,
+            "Rotation": 1,
+            "Status": true,
+            "eindeutigeId": 4
         }
     ]
 }

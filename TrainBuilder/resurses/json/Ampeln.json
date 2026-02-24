@@ -8,11 +8,18 @@
             "isGreen": true
         },
         {
-            "AmpelId": 2,
-            "Name": "Ampel_2",
-            "gridX": 14,
-            "gridY": -23,
-            "isGreen": true
+            "AmpelId": 3,
+            "Name": "ll",
+            "gridX": 7,
+            "gridY": -21,
+            "isGreen": false
+        },
+        {
+            "AmpelId": 4,
+            "Name": "ll",
+            "gridX": 2,
+            "gridY": -21,
+            "isGreen": false
         }
     ]
 }

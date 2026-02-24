@@ -125,3 +125,8 @@ std::vector<Leiterobjeckt> LeiterListe;
 	Inverter
 -------------------------------------------------*/
 std::vector<InverterObjeckt> InverterListe;
+
+/*-------------------------------------------------
+	Marker
+-------------------------------------------------*/
+std::vector<MarkerObjeckt> MarkerListe;
