@@ -8,13 +8,13 @@
         },
         {
             "eindeutigeId": 3,
-            "nutzerId": "Ampel_3",
+            "nutzerId": "ll",
             "typ": 0,
             "wert": true
         },
         {
             "eindeutigeId": 4,
-            "nutzerId": "Ampel_4",
+            "nutzerId": "ll",
             "typ": 0,
             "wert": true
         }

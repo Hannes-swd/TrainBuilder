@@ -222,8 +222,8 @@ void LadeJson() {
 
 
     /*-------------------------------------------------
-    Marker
--------------------------------------------------*/
+        Marker
+    -------------------------------------------------*/
     if (markerDaten.contains("marker")) {
         for (const auto& obj : markerDaten["marker"]) {
             MarkerObjeckt marker; 

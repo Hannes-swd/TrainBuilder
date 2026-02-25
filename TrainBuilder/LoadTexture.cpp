@@ -36,6 +36,7 @@ void loadTextures() {
     textures["zahnrad"] = LoadTexture("resurses/Texturen/Ui/zahnrad.png");
     textures["KnotenSymbol"] = LoadTexture("resurses/Texturen/Ui/KnotenSymbol.png");
     textures["Drehen"] = LoadTexture("resurses/Texturen/Ui/Drehen.png");
+    textures["marker"] = LoadTexture("resurses/Texturen/Ui/marker.png");
     
     
     /*-------------------------------------------------

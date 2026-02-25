@@ -447,4 +447,13 @@ void Menuebuttons() {
             aktuellesUntermenue = "technik";
         }
     }
+    //Marker
+    Rectangle markerButton = { 500.0f, 10.0f, 60.0f, 60.0f };
+    if (CheckCollisionPointRec(mousePos, markerButton)) {
+        if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {
+            aktuellesTool = 7;
+            untermenueOffen = false;
+            aktuellesUntermenue = "";
+        }
+    }
 }
