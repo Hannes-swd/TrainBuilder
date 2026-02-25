@@ -49,10 +49,26 @@ void MarkerSpeichern() {
 		MarkerJson["eindeutigeId"] = Marker.eindeutigeId;
 		MarkerArray.push_back(MarkerJson);
 	}
-	jsonDaten["Marker"] = MarkerArray;
+	jsonDaten["marker"] = MarkerArray;
 	std::ofstream MarkerDatei("resurses/json/Marker.json");
 	if (MarkerDatei.is_open()) {
 		MarkerDatei << jsonDaten.dump(4);
 		MarkerDatei.close();
+	}
+}
+
+void MarkerZeichnen() {
+	for (const auto& Marker : MarkerListe) {
+		float centerX = Marker.GridX * GRID_SIZE + GRID_SIZE / 2;
+		float centerY = Marker.GridY * GRID_SIZE + GRID_SIZE / 2;
+		float halfSize = GRID_SIZE / 4;
+
+		DrawRectangle(
+			centerX - halfSize,
+			centerY - halfSize,
+			GRID_SIZE / 2,
+			GRID_SIZE / 2,
+			GREEN
+		);
 	}
 }

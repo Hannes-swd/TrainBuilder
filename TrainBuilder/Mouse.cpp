@@ -15,6 +15,7 @@
 #include "knoten.h"
 #include "Leiter.h"
 #include "Inverter.h"
+#include "Marker.h"
 
 
 
@@ -126,6 +127,10 @@ void ProcesMaus(Vector2 mausposition) {
     if (aktuellesTool == 6 && ausgewählterUntermenuePunkt == 3) {
         if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT))
             InverterPlazieren(MouseGridX, MouseGridY);
+    }
+    if (aktuellesTool == 8) {
+        if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT))
+            MarkerPlazieren(MouseGridX, MouseGridY);
     }
 
 }
@@ -451,7 +456,7 @@ void Menuebuttons() {
     Rectangle markerButton = { 500.0f, 10.0f, 60.0f, 60.0f };
     if (CheckCollisionPointRec(mousePos, markerButton)) {
         if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {
-            aktuellesTool = 7;
+            aktuellesTool = 8;
             untermenueOffen = false;
             aktuellesUntermenue = "";
         }

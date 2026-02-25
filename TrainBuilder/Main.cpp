@@ -20,6 +20,7 @@
 #include "Leiter.h"
 #include "Inverter.h"
 #include "mauszeiger.h"
+#include "Marker.h"
 
 int main(void)
 {
@@ -180,6 +181,8 @@ int main(void)
         LeiterZeichnen();
         InvertorZeichnen();
 
+        MarkerZeichnen();
+
         /*-------------------------------------------------
             EINGABEN IM GRID
         -------------------------------------------------*/
@@ -218,6 +221,7 @@ int main(void)
     LeiterSpeichern();
     InvertorSpeichern();
     SignalTeilSpeichern();
+    MarkerSpeichern();
     unloadTextures();
     CloseWindow();
 

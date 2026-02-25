@@ -144,7 +144,7 @@ void zeichneUI() {
     else if (aktuellesTool == 6) {
         DrawRectangle(430.0f, 10.0f, 60.0f, 60.0f, DARKGRAY);
     }
-    else if (aktuellesTool == 7) {
+    else if (aktuellesTool == 8) {
         DrawRectangle(500.0f, 10.0f, 60.0f, 60.0f, DARKGRAY);
     }
 

@@ -1,5 +1,16 @@
 {
     "marker": [
-        
+        {
+            "GridX": 0,
+            "GridY": -34,
+            "eindeutigeId": 1,
+            "farbe": "Rot"
+        },
+        {
+            "GridX": 2,
+            "GridY": -36,
+            "eindeutigeId": 2,
+            "farbe": "Rot"
+        }
     ]
 }
