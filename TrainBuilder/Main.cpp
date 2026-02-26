@@ -201,6 +201,7 @@ int main(void)
 
         //ZEICHNET UI
         zeichneUI();
+        NichtImFeldZeichnen();
 
         if (untermenueOffen) {
             UntermenueZeichnen();

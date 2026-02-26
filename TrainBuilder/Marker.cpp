@@ -1,4 +1,4 @@
-#include <map>
+﻿#include <map>
 #include <queue>
 #include <fstream>
 #include <iostream>
@@ -9,7 +9,7 @@
 #include "Json.h"
 #include "textbox.h"
 #include "Banhof.h"
-#include "untermen�.h"
+#include "untermenü.h"
 #include "json.hpp"
 #include "Marker.h"
 
@@ -79,4 +79,99 @@ void MarkerZeichnen() {
 			farbe
 		);
 	}
+}
+bool MarkerInSichtfeld(int markerId) {
+    MarkerObjeckt* gesuchterMarker = nullptr;
+    for (auto& marker : MarkerListe) {
+        if (marker.eindeutigeId == markerId) {
+            gesuchterMarker = &marker;
+            break;
+        }
+    }
+
+    if (gesuchterMarker == nullptr) {
+        return false;
+    }
+
+    float viewportBreite = (float)GenaueBreite / Playercam.zoom;
+    float viewportHoehe = (float)GenaueHoehe / Playercam.zoom;
+
+    float linkeKante = Playercam.target.x - viewportBreite / 2;
+    float rechteKante = Playercam.target.x + viewportBreite / 2;
+    float obereKante = Playercam.target.y - viewportHoehe / 2;
+    float untereKante = Playercam.target.y + viewportHoehe / 2;
+
+    float markerWeltX = gesuchterMarker->GridX * GRID_SIZE + GRID_SIZE / 2;
+    float markerWeltY = gesuchterMarker->GridY * GRID_SIZE + GRID_SIZE / 2;
+
+    bool imSichtfeld = (markerWeltX >= linkeKante &&
+        markerWeltX <= rechteKante &&
+        markerWeltY >= obereKante &&
+        markerWeltY <= untereKante);
+
+    return imSichtfeld;
+}
+void NichtImFeldZeichnen() {
+    float obererRand = 80.0f;
+    float untererRand = (float)GenaueHoehe;
+    float linkerRand = 0.0f;
+    float rechterRand = (float)GenaueBreite;
+
+    float mitteX = GenaueBreite / 2.0f;
+    float mitteY = GenaueHoehe / 2.0f;
+
+    float kastenGroesse = 40.0f;
+    float randAbstand = kastenGroesse / 2 + 5.0f;
+
+    for (const auto& marker : MarkerListe) {
+        if (MarkerInSichtfeld(marker.eindeutigeId)) {
+            continue;
+        }
+
+        float markerWeltX = marker.GridX * GRID_SIZE + GRID_SIZE / 2;
+        float markerWeltY = marker.GridY * GRID_SIZE + GRID_SIZE / 2;
+
+        Vector2 markerBildschirm = GetWorldToScreen2D(
+            Vector2{ markerWeltX, markerWeltY },
+            Playercam
+        );
+
+        float dx = markerBildschirm.x - mitteX;
+        float dy = markerBildschirm.y - mitteY;
+
+        if (dx == 0 && dy == 0) continue;
+
+        float randX = mitteX;
+        float randY = mitteY;
+
+        float links = linkerRand + randAbstand;
+        float rechts = rechterRand - randAbstand;
+        float oben = obererRand + randAbstand;
+        float unten = untererRand - randAbstand;
+
+        float t = 1e9f;
+
+        if (dx > 0) t = std::min(t, (rechts - mitteX) / dx);
+        if (dx < 0) t = std::min(t, (links - mitteX) / dx);
+        if (dy > 0) t = std::min(t, (unten - mitteY) / dy);
+        if (dy < 0) t = std::min(t, (oben - mitteY) / dy);
+
+        randX = mitteX + t * dx;
+        randY = mitteY + t * dy;
+
+        randX = std::max(links, std::min(rechts, randX));
+        randY = std::max(oben, std::min(unten, randY));
+
+        DrawRectangle(
+            randX - kastenGroesse / 2, randY - kastenGroesse / 2,
+            kastenGroesse, kastenGroesse,
+            Color{ marker.farbe.r, marker.farbe.g, marker.farbe.b, 180 }
+        );
+
+        DrawRectangleLines(
+            randX - kastenGroesse / 2, randY - kastenGroesse / 2,
+            kastenGroesse, kastenGroesse,
+            WHITE
+        );
+    }
 }

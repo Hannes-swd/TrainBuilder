@@ -2,3 +2,5 @@
 void MarkerPlazieren(int gridX, int gridY);
 void MarkerSpeichern();
 void MarkerZeichnen();
+bool MarkerInSichtfeld(int markerId);
+void NichtImFeldZeichnen();
