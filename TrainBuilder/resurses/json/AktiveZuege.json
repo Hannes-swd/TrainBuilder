@@ -16,8 +16,8 @@
             "name": "Zug 1",
             "passagiere": 0,
             "posX": 11.0,
-            "posY": -24.0,
-            "rotation": -90,
+            "posY": -21.54485321044922,
+            "rotation": 90,
             "zugId": 1,
             "zugtyp": "Erster"
         },
@@ -36,8 +36,8 @@
             "maxPassagiere": 0,
             "name": "Zug 2",
             "passagiere": 0,
-            "posX": 1.6772619485855103,
-            "posY": -27.0,
+            "posX": -7.0,
+            "posY": -19.0,
             "rotation": 0,
             "zugId": 2,
             "zugtyp": "zweiter"
@@ -56,8 +56,8 @@
             "maxPassagiere": 0,
             "name": "Zug 3",
             "passagiere": 0,
-            "posX": -8.33698558807373,
-            "posY": -26.0,
+            "posX": 5.0,
+            "posY": -21.0,
             "rotation": 0,
             "zugId": 3,
             "zugtyp": "dreier"
@@ -75,9 +75,9 @@
             "maxPassagiere": 0,
             "name": "Zug 4",
             "passagiere": 0,
-            "posX": 5.0,
+            "posX": 6.0,
             "posY": -21.0,
-            "rotation": 180,
+            "rotation": 0,
             "zugId": 4,
             "zugtyp": "Erster"
         }

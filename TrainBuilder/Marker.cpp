@@ -13,6 +13,7 @@
 #include "json.hpp"
 #include "Marker.h"
 
+
 using json = nlohmann::json;
 
 void MarkerPlazieren(int gridX, int gridY) {
@@ -63,12 +64,15 @@ void MarkerZeichnen() {
 		float centerY = Marker.GridY * GRID_SIZE + GRID_SIZE / 2;
 		float halfSize = GRID_SIZE / 4;
 
+		//farbe
+		Color farbe = (Color)Marker.farbe;
+
 		DrawRectangle(
 			centerX - halfSize,
 			centerY - halfSize,
 			GRID_SIZE / 2,
 			GRID_SIZE / 2,
-			GREEN
+			farbe
 		);
 	}
 }
