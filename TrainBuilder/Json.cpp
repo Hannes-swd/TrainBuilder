@@ -230,7 +230,15 @@ void LadeJson() {
             marker.GridX = obj["GridX"];
             marker.GridY = obj["GridY"];
             marker.eindeutigeId = obj["eindeutigeId"];
-            marker.farbe = obj["farbe"];
+            if (obj.contains("farbe_r") && obj.contains("farbe_g") && obj.contains("farbe_b")) {
+                marker.farbe.r = obj["farbe_r"];
+                marker.farbe.g = obj["farbe_g"];
+                marker.farbe.b = obj["farbe_b"];
+                marker.farbe.a = 255;
+            }
+            else {
+                marker.farbe = RED;
+            }
 
             MarkerListe.push_back(marker);
         }

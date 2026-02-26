@@ -27,7 +27,7 @@ void MarkerPlazieren(int gridX, int gridY) {
 	MarkerObjeckt newMarker;
 	newMarker.GridX = gridX;
 	newMarker.GridY = gridY;
-	newMarker.farbe = "Rot";
+	newMarker.farbe = RED;
 	int neueID = 1;
 	for (const auto& inv : MarkerListe) {
 		if (inv.eindeutigeId >= neueID) {
@@ -46,8 +46,12 @@ void MarkerSpeichern() {
 		json MarkerJson;
 		MarkerJson["GridX"] = Marker.GridX;
 		MarkerJson["GridY"] = Marker.GridY;
-		MarkerJson["farbe"] = Marker.farbe;
 		MarkerJson["eindeutigeId"] = Marker.eindeutigeId;
+
+		MarkerJson["farbe_r"] = Marker.farbe.r;
+		MarkerJson["farbe_g"] = Marker.farbe.g;
+		MarkerJson["farbe_b"] = Marker.farbe.b;
+
 		MarkerArray.push_back(MarkerJson);
 	}
 	jsonDaten["marker"] = MarkerArray;
@@ -65,7 +69,7 @@ void MarkerZeichnen() {
 		float halfSize = GRID_SIZE / 4;
 
 		//farbe
-		Color farbe = (Color)Marker.farbe;
+		Color farbe = Marker.farbe;
 
 		DrawRectangle(
 			centerX - halfSize,

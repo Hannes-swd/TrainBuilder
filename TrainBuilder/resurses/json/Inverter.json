@@ -11,7 +11,7 @@
             "GridX": 21,
             "GridY": -22,
             "Rotation": 1,
-            "Status": false,
+            "Status": true,
             "eindeutigeId": 2
         }
     ]

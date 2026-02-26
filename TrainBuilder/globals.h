@@ -206,18 +206,11 @@ extern std::vector<InverterObjeckt> InverterListe;
 /*-------------------------------------------------
 	Marker
 -------------------------------------------------*/
-enum Markerfarben {
-	Rot,
-	Grün,
-	Gelb,
-	Orange,
-	Braun,
-	Violett
-};
+
 struct MarkerObjeckt {
 	int GridX;
 	int GridY;
 	int eindeutigeId;
-	std::string farbe;
+	Color farbe;
 };
 extern std::vector<MarkerObjeckt> MarkerListe;
