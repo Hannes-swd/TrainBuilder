@@ -175,3 +175,21 @@ void NichtImFeldZeichnen() {
         );
     }
 }
+void MarkerLöschen(int MouseGridX, int MouseGridY) {
+    auto it = std::remove_if(MarkerListe.begin(), MarkerListe.end(),
+        [MouseGridX, MouseGridY](const MarkerObjeckt& l) {
+            return l.GridX == MouseGridX && l.GridY == MouseGridY;
+        });
+
+    if (it != MarkerListe.end()) {
+        MarkerListe.erase(it, MarkerListe.end());
+        MarkerSpeichern();
+    }
+}
+bool IstMarkerVorhanden(int MouseGridX, int MouseGridY) {
+    for (const auto& Marker : MarkerListe) {
+        if (Marker.GridX == MouseGridX && Marker.GridY == MouseGridY)
+            return true;
+    }
+    return false;
+}

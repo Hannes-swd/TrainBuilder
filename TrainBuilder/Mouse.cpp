@@ -376,6 +376,14 @@ void Loeschentool(Vector2 mausposition) {
             return;
         }
     }
+    // Marker
+    else if (IstMarkerVorhanden(MouseGridX, MouseGridY)) {
+        EndereMausZu = "Hand";
+        if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {
+            MarkerLöschen(MouseGridX, MouseGridY);
+            return;
+        }
+    }
     // Gleise
     else {
 
