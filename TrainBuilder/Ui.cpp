@@ -12,6 +12,8 @@
 #include "Ampel.h"
 #include "knoten.h"
 #include "Signal.h"
+#include "Marker.h"
+#include "Colorpicker.h"
 
 static TextBox nahmeEingabe(0, 0, 200.0f, 30.0f, 32);
 static TextBox zugnameEingabe(0, 0, 200.0f, 30.0f, 32);
@@ -663,6 +665,50 @@ void zeichneUI() {
         DrawRectangle((float)GenaueBreite - 250.0f, 80.0f, 250.0f, (float)GenaueHoehe - 80.0f, LIGHTGRAY);
         DrawRectangleLines((GenaueBreite - 250), 80, 250, GenaueHoehe - 80, DARKGRAY);
         BeginScissorMode(GenaueBreite - 250, 80, 250, GenaueHoehe - 80);
+        Color Farbe;
+        for (auto& marker : MarkerListe) {
+            if (marker.eindeutigeId == ausgewahlterMarker) {
+                Farbe = marker.farbe;
+            }
+        }
+        Color aktuelleFarbe = ColorPicker(GenaueBreite - 250, 80, 250, 280);
+
+        //speichern knopf
+        float buttonX = GenaueBreite - 240.0f;
+        float buttonY = 370.0f;
+        float buttonWidth = 220.0f;
+        float buttonHeight = 35.0f;
+
+        DrawRectangle(buttonX, buttonY, buttonWidth, buttonHeight, Farbe);
+        DrawRectangleLines(buttonX, buttonY, buttonWidth, buttonHeight, WHITE);
+
+        const char* buttonText = "Farbe speichern";
+        float textWidth = MeasureText(buttonText, 18);
+        DrawText(buttonText,
+            buttonX + (buttonWidth - textWidth) / 2,
+            buttonY + (buttonHeight - 18) / 2,
+            18, WHITE);
+
+        if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
+            Vector2 mousePos = GetMousePosition();
+            if (mousePos.x >= GenaueBreite - 250.0f && mousePos.x <= GenaueBreite &&
+                mousePos.y >= 80.0f && mousePos.y <= GenaueHoehe) {
+
+                if (mousePos.x >= buttonX && mousePos.x <= buttonX + buttonWidth &&
+                    mousePos.y >= buttonY && mousePos.y <= buttonY + buttonHeight) {
+
+                    
+                    for (auto& marker : MarkerListe) {
+                        if (marker.eindeutigeId == ausgewahlterMarker) {
+                            marker.farbe = aktuelleFarbe;
+                            MarkerSpeichern();
+                            break;
+                        }
+                    }
+                }
+            }
+        }
+
 
         EndScissorMode();
     }
