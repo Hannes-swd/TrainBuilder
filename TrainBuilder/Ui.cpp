@@ -23,6 +23,7 @@ static int letzterAusgewahlterZug = 0;
 static int letzterAusgewahlterKnoten = 0;
 static int letzterAusgewahlteAmpel = 0;
 static int letzterAusgewahlteBanhof = 0;
+static int letzterAusgewahlteMarker = 0;
 
 
 /*-------------------------------------------------
@@ -658,7 +659,13 @@ void zeichneUI() {
                 scrollbarX, scrollbarY, scrollbarHoehe);
         }
     }
+    if (ausgewahlterMarker != 0) {
+        DrawRectangle((float)GenaueBreite - 250.0f, 80.0f, 250.0f, (float)GenaueHoehe - 80.0f, LIGHTGRAY);
+        DrawRectangleLines((GenaueBreite - 250), 80, 250, GenaueHoehe - 80, DARKGRAY);
+        BeginScissorMode(GenaueBreite - 250, 80, 250, GenaueHoehe - 80);
 
+        EndScissorMode();
+    }
     if (ausgewahlterZug != 0) {
         ZeichneDraggingItem(ausgewahlterZug, zugplanContainerY);
     }
