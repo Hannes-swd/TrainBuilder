@@ -174,6 +174,18 @@ void Drehtool(int gridX, int gridY) {
             }
         }
     }
+    //check ob Gate
+    for (auto& Gate : GateListe) {
+        if (Gate.GridX == gridX && Gate.GridY == gridY) {
+            EndereMausZu = "Hand";
+            if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {
+                if (Gate.Rotation != 3)
+                    Gate.Rotation++;
+                else
+                    Gate.Rotation = 0;
+            }
+        }
+    }
 }
 /*-------------------------------------------------
     AUSWAHLTOOL
