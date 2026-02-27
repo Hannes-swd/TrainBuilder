@@ -547,7 +547,7 @@
             "rotation": 0
         },
         {
-            "ObjecktId": 1,
+            "ObjecktId": 3,
             "gridX": 14,
             "gridY": -25,
             "rotation": 0
@@ -1000,6 +1000,42 @@
             "ObjecktId": 1,
             "gridX": 3,
             "gridY": -26,
+            "rotation": 90
+        },
+        {
+            "ObjecktId": 1,
+            "gridX": 18,
+            "gridY": -30,
+            "rotation": 0
+        },
+        {
+            "ObjecktId": 1,
+            "gridX": 18,
+            "gridY": -29,
+            "rotation": 0
+        },
+        {
+            "ObjecktId": 1,
+            "gridX": 18,
+            "gridY": -28,
+            "rotation": 0
+        },
+        {
+            "ObjecktId": 1,
+            "gridX": 18,
+            "gridY": -27,
+            "rotation": 0
+        },
+        {
+            "ObjecktId": 1,
+            "gridX": 15,
+            "gridY": -25,
+            "rotation": 90
+        },
+        {
+            "ObjecktId": 1,
+            "gridX": 16,
+            "gridY": -25,
             "rotation": 90
         }
     ]

@@ -6,6 +6,7 @@
 #include <fstream>
 #include "json.hpp"
 #include "LoadTexture.h"
+#include "PlatzierungCheck.h"
 
 void ZeichneGleise() {
     for (const auto& gleis : gleisListe) {
@@ -290,9 +291,7 @@ void ZeichnePriviou(Vector2 mausposition) {
 }
 
 void PlatziereEinzelneSchiene(int gridX, int gridY) {
-    if (IstGleisBereitsVorhanden(gridX, gridY)) {
-        return;
-    }
+    if (!KannPlatzieren(gridX, gridY, PlatzierTyp::Gleis)) return;
 
     GleisObjeckt neuesGleis;
     neuesGleis.ObjecktId = 1;

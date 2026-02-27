@@ -12,18 +12,14 @@
 #include "untermenü.h"
 #include "json.hpp"
 #include "Marker.h"
+#include "PlatzierungCheck.h"
 
 
 using json = nlohmann::json;
 
 void MarkerPlazieren(int gridX, int gridY) {
-	if (schautObSchiene(gridX, gridY)) {
-		return;
-	}
-	for (const auto& Marker : MarkerListe) {
-		if (Marker.GridX == gridX && Marker.GridY == gridY)
-			return;
-	}
+    if (!KannPlatzieren(gridX, gridY, PlatzierTyp::Marker)) return;
+
 	MarkerObjeckt newMarker;
 	newMarker.GridX = gridX;
 	newMarker.GridY = gridY;

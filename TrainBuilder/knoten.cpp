@@ -16,19 +16,15 @@
 #include "json.hpp"
 #include "zug.h"
 #include "knoten.h"
+#include "PlatzierungCheck.h"
+
 
 
 using json = nlohmann::json;
 
 void KnotenPlazieren(int gridX, int gridY) {
 	//kan nur auf blöcken ohne plazeren
-	if (schautObSchiene(gridX, gridY)) {
-		return;
-	}
-	for (const auto& knoten : knotenliste) {
-		if (knoten.GridX == gridX && knoten.GridY == gridY)
-			return;
-	}
+	if (!KannPlatzieren(gridX, gridY, PlatzierTyp::Knoten)) return;
 	knoten newKnoten;
 	newKnoten.GridX = gridX;
 	newKnoten.GridY = gridY;

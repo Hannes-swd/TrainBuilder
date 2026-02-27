@@ -145,6 +145,7 @@
     <ClCompile Include="mauszeiger.cpp" />
     <ClCompile Include="moofment.cpp" />
     <ClCompile Include="Mouse.cpp" />
+    <ClCompile Include="PlatzierungCheck.cpp" />
     <ClCompile Include="Signal.cpp" />
     <ClCompile Include="textbox.cpp" />
     <ClCompile Include="Ui.cpp" />
@@ -168,6 +169,7 @@
     <ClInclude Include="mauszeiger.h" />
     <ClInclude Include="moofment.h" />
     <ClInclude Include="Mouse.h" />
+    <ClInclude Include="PlatzierungCheck.h" />
     <ClInclude Include="Signal.h" />
     <ClInclude Include="textbox.h" />
     <ClInclude Include="Ui.h" />

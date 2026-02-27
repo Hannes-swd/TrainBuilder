@@ -81,6 +81,9 @@
     <ClCompile Include="Colorpicker.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
+    <ClCompile Include="PlatzierungCheck.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="globals.h">
@@ -144,6 +147,9 @@
       <Filter>Headerdateien</Filter>
     </ClInclude>
     <ClInclude Include="Colorpicker.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="PlatzierungCheck.h">
       <Filter>Headerdateien</Filter>
     </ClInclude>
   </ItemGroup>

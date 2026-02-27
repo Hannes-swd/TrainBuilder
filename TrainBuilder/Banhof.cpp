@@ -7,19 +7,14 @@
 #include "json.hpp"
 #include "LoadTexture.h"
 #include "Banhof.h"
+#include "PlatzierungCheck.h"
 
 void plaziereBanhof(Vector2 position) {
 	int gridX = (int)floor(position.x / GRID_SIZE);
 	int gridY = (int)floor(position.y / GRID_SIZE);
 	
-	if (IstBanhofBereitsVorhanden(gridX, gridY)) {
-		return;
-	}
-	
-	if (!schautObSchiene(gridX, gridY)) {
-		//bricht ab wen keine schiene da ist
-		return;
-	}
+	if (!KannPlatzieren(gridX, gridY, PlatzierTyp::Banhof)) return;
+
 	BanhofObjeckt neuerBanhof;
 	neuerBanhof.Name = "Banhof_" + std::to_string(banhofListe.size() + 1);
 	neuerBanhof.BanhofId = (int)banhofListe.size() + 1;

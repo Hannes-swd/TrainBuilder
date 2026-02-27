@@ -14,18 +14,15 @@
 #include "zug.h"
 #include "Leiter.h"
 #include "knoten.h"
+#include "PlatzierungCheck.h"
+
 
 using json = nlohmann::json;
 
 
 void LeiterPlazieren(int gridX, int gridY) {
-	if (schautObSchiene(gridX, gridY)) {
-		return;
-	}
-	for (const auto& Leiter : LeiterListe) {
-		if (Leiter.GridX == gridX && Leiter.GridY == gridY)
-			return;
-	}
+	if (!KannPlatzieren(gridX, gridY, PlatzierTyp::Leiter)) return;
+
 	Leiterobjeckt newLeiter;
 	
 	newLeiter.GridX = gridX;

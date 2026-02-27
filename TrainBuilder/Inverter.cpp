@@ -15,17 +15,14 @@
 #include "Leiter.h"
 #include "knoten.h"
 #include "Inverter.h"
+#include "PlatzierungCheck.h"
+
 
 using json = nlohmann::json;
 
 void InverterPlazieren(int gridX, int gridY) {
-	if (schautObSchiene(gridX, gridY)) {
-		return;
-	}
-	for (const auto& Inverter : InverterListe) {
-		if (Inverter.GridX == gridX && Inverter.GridY == gridY)
-			return;
-	}
+	if (!KannPlatzieren(gridX, gridY, PlatzierTyp::Inverter)) return;
+
 	InverterObjeckt newInverter;
 	newInverter.GridX = gridX;
 	newInverter.GridY = gridY;

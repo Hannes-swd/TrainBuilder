@@ -16,20 +16,12 @@
 #include "zug.h"
 #include "Ampel.h"
 #include "Signal.h"
+#include "PlatzierungCheck.h"
 
 using json = nlohmann::json;
 
 void AmpelPlazieren(int gridX, int gridY) {
-	if (!schautObSchiene(gridX, gridY)) {
-		return;
-	}
-
-	for (const auto& ampel : ampelListe) {
-		if (ampel.GridX == gridX && ampel.GridY == gridY) {
-			std::cout << "Ampel bereits vorhanden an Position [" << gridX << ", " << gridY << "]" << std::endl;
-			return;
-		}
-	}
+	if (!KannPlatzieren(gridX, gridY, PlatzierTyp::Ampel)) return;
 
 	ampel newAmpel;
 	newAmpel.GridX = gridX;

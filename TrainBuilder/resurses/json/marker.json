@@ -4,9 +4,17 @@
             "GridX": 0,
             "GridY": -35,
             "eindeutigeId": 1,
-            "farbe_b": 195,
-            "farbe_g": 0,
-            "farbe_r": 255
+            "farbe_b": 67,
+            "farbe_g": 255,
+            "farbe_r": 3
+        },
+        {
+            "GridX": 22,
+            "GridY": -29,
+            "eindeutigeId": 2,
+            "farbe_b": 55,
+            "farbe_g": 41,
+            "farbe_r": 230
         }
     ]
 }
