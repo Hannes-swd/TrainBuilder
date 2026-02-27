@@ -37,6 +37,7 @@ void loadTextures() {
     textures["KnotenSymbol"] = LoadTexture("resurses/Texturen/Ui/KnotenSymbol.png");
     textures["Drehen"] = LoadTexture("resurses/Texturen/Ui/Drehen.png");
     textures["marker"] = LoadTexture("resurses/Texturen/Ui/marker.png");
+    textures["GateSymbol"] = LoadTexture("resurses/Texturen/Ui/GateSymbol.png");
     
     
     /*-------------------------------------------------
@@ -61,7 +62,14 @@ void loadTextures() {
     //inverter
     textures["Inverter_Aus"] = LoadTexture("resurses/Texturen/Technik/Inverter_Aus.png");
     textures["Inverter_AN"] = LoadTexture("resurses/Texturen/Technik/Inverter_AN.png");
+    //Gate
+    textures["GateGrundstrucktur"] = LoadTexture("resurses/Texturen/Technik/Gate/GateGrundstructur.png");
+    textures["GateLinks"] = LoadTexture("resurses/Texturen/Technik/Gate/GateLinks.png");
+    textures["GateOutput"] = LoadTexture("resurses/Texturen/Technik/Gate/GateOutput.png");
+    textures["GateRechts"] = LoadTexture("resurses/Texturen/Technik/Gate/GateRechts.png");
+    textures["GateAND"] = LoadTexture("resurses/Texturen/Technik/Gate/AND.png");
     
+
 }
 
 

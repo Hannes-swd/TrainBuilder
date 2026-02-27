@@ -21,6 +21,7 @@
 #include "Inverter.h"
 #include "mauszeiger.h"
 #include "Marker.h"
+#include "Gate.h"
 
 int main(void)
 {
@@ -180,7 +181,7 @@ int main(void)
         KnotenZeichnen();
         LeiterZeichnen();
         InvertorZeichnen();
-
+        GateZeichnen();
         MarkerZeichnen();
 
         /*-------------------------------------------------
@@ -221,6 +222,7 @@ int main(void)
     KnotenSpeichern();
     LeiterSpeichern();
     InvertorSpeichern();
+    GateSpeichern();
     SignalTeilSpeichern();
     MarkerSpeichern();
     unloadTextures();

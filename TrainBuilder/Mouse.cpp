@@ -16,7 +16,7 @@
 #include "Leiter.h"
 #include "Inverter.h"
 #include "Marker.h"
-
+#include "Gate.h"
 
 
 void ProcesMaus(Vector2 mausposition) {
@@ -134,6 +134,10 @@ void ProcesMaus(Vector2 mausposition) {
     if (aktuellesTool == 6 && ausgewählterUntermenuePunkt == 3) {
         if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT))
             InverterPlazieren(MouseGridX, MouseGridY);
+    }
+    if (aktuellesTool == 6 && ausgewählterUntermenuePunkt == 4) {
+        if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT))
+            GatePlazieren(MouseGridX, MouseGridY);
     }
     if (aktuellesTool == 8) {
         if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT))

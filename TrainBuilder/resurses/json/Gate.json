@@ -1,5 +1,14 @@
-{ 
+{
     "Gate": [
-        
+        {
+            "GridX": -6,
+            "GridY": -39,
+            "Output": false,
+            "Rotation": 0,
+            "eindeutigeId": 1,
+            "input1": false,
+            "input2": false,
+            "modus": "AND"
+        }
     ]
 }
