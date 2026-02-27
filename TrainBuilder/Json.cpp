@@ -257,6 +257,9 @@ void LadeJson() {
             gate.Rotation = obj["Rotation"];
             gate.eindeutigeId = obj["eindeutigeId"];
             gate.modus = obj["modus"];
+            gate.input1 = obj["input1"];
+            gate.input2 = obj["input2"];
+            gate.Output = obj["Output"];
 
             GateListe.push_back(gate);
         }

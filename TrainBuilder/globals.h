@@ -226,5 +226,8 @@ struct GateObjeckt {
 	int Rotation;
 	int eindeutigeId;
 	std::string modus;
+	bool input1;
+	bool input2;
+	bool Output;
 };
 extern std::vector<GateObjeckt> GateListe;

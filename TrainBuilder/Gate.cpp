@@ -48,6 +48,9 @@ void GateSpeichern() {
 		gateJson["Rotation"] = gate.Rotation;
 		gateJson["eindeutigeId"] = gate.eindeutigeId;
 		gateJson["modus"] = gate.modus;
+		gateJson["input1"] = gate.input1;
+		gateJson["input2"] = gate.input2; 
+		gateJson["Output"] = gate.Output;
 
 		GateArray.push_back(gateJson);
 	}
