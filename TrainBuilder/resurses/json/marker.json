@@ -2,19 +2,11 @@
     "marker": [
         {
             "GridX": 0,
-            "GridY": -38,
-            "eindeutigeId": 2,
-            "farbe_b": 0,
+            "GridY": -35,
+            "eindeutigeId": 1,
+            "farbe_b": 195,
             "farbe_g": 0,
             "farbe_r": 255
-        },
-        {
-            "GridX": -7,
-            "GridY": -38,
-            "eindeutigeId": 3,
-            "farbe_b": 59,
-            "farbe_g": 255,
-            "farbe_r": 0
         }
     ]
 }

@@ -123,8 +123,6 @@ void LadeJson() {
 			zugart.id = obj["id"];
             zugart.name = obj["name"];
             zugart.geschwindichkeit = obj["geschwindichkeit"];
-			zugart.passagiere = obj["passagiere"];
-			zugart.gueter = obj["gueter"];
             zugart.biildpfad = obj["biildpfad"];
             zugart.farbe = obj["farbe"];
             zugart.zugtyp = obj["zugtyp"];
@@ -142,10 +140,6 @@ void LadeJson() {
             zug.posY = obj["posY"];
             zug.rotation = obj["rotation"];
             zug.name = obj["name"];
-            zug.passagiere = obj["passagiere"];
-            zug.maxPassagiere = obj["maxPassagiere"];
-            zug.maxGueter = obj["maxGueter"];
-            zug.gueter = obj["gueter"];
             zug.Fahrplan = obj["Fahrplan"].get<std::vector<std::string>>();
             zug.zugtyp = obj["zugtyp"];
             zug.farbe = obj["farbe"];

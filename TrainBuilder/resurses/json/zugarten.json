@@ -4,8 +4,6 @@
             "id": 1,
             "name": "StandartZug",
             "geschwindichkeit": 4,
-            "passagiere": 0,
-            "gueter": 0,
             "biildpfad": "resurses/Texturen/Zuege/StandartZug.png",
             "farbe": "rot",
             "zugtyp": "Erster"
@@ -14,8 +12,6 @@
             "id": 2,
             "name": "andere",
             "geschwindichkeit": 10,
-            "passagiere": 0,
-            "gueter": 0,
             "biildpfad": "resurses/Texturen/Zuege/StandartZug.png",
             "farbe": "gruen",
             "zugtyp": "zweiter"
@@ -24,8 +20,6 @@
             "id": 3,
             "name": "Nebenzug",
             "geschwindichkeit": 7,
-            "passagiere": 0,
-            "gueter": 0,
             "biildpfad": "resurses/Texturen/Zuege/andererzug.png",
             "farbe": "blau",
             "zugtyp": "dreier"

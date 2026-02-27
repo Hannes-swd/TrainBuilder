@@ -322,11 +322,11 @@ void zeichneUI() {
                 DrawText(TextFormat("speed: %d km/h", zug.geschwindichkeit), contentX, yPos, 20, BLACK);
                 yPos += lineHeight;
 
-                DrawText(TextFormat("passengers: %d", zug.passagiere), contentX, yPos, 20, BLACK);
+                /*DrawText(TextFormat("passengers: %d", zug.passagiere), contentX, yPos, 20, BLACK);
                 yPos += lineHeight;
 
                 DrawText(TextFormat("goods: %d", zug.gueter), contentX, yPos, 20, BLACK);
-                yPos += lineHeight;
+                yPos += lineHeight;*/
 
                 DrawText(TextFormat("train type: %s", zug.zugtyp.c_str()), contentX, yPos, 20, BLACK);
                 yPos += lineHeight;

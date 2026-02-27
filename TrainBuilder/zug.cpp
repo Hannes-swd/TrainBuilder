@@ -85,10 +85,6 @@ void zugPlazieren(int gridX, int gridY, int zugArtId) {
     neuerZug.rotation = 0;
 
     neuerZug.name = "Zug " + std::to_string(neuerZug.zugId);
-    neuerZug.maxPassagiere = gefundeneZugArt->passagiere;
-    neuerZug.maxGueter = gefundeneZugArt->gueter;
-    neuerZug.passagiere = gefundeneZugArt->passagiere;
-    neuerZug.gueter = gefundeneZugArt->gueter;
     neuerZug.zugtyp = gefundeneZugArt->zugtyp;
     neuerZug.farbe = gefundeneZugArt->farbe;
     neuerZug.biildpfad = gefundeneZugArt->biildpfad;
@@ -132,10 +128,6 @@ void AktiveZuegeSpeichern() {
         zugJson["posY"] = zug.posY;
         zugJson["rotation"] = zug.rotation;
         zugJson["name"] = zug.name;
-        zugJson["maxPassagiere"] = zug.maxPassagiere;
-        zugJson["maxGueter"] = zug.maxGueter;
-        zugJson["passagiere"] = zug.passagiere;
-        zugJson["gueter"] = zug.gueter;
         zugJson["Fahrplan"] = zug.Fahrplan;
         zugJson["zugtyp"] = zug.zugtyp;
         zugJson["farbe"] = zug.farbe;

@@ -4,19 +4,19 @@
             "eindeutigeId": 1,
             "nutzerId": "67",
             "typ": 0,
-            "wert": true
+            "wert": false
         },
         {
             "eindeutigeId": 3,
             "nutzerId": "ll",
             "typ": 0,
-            "wert": true
+            "wert": false
         },
         {
             "eindeutigeId": 4,
             "nutzerId": "ll",
             "typ": 0,
-            "wert": true
+            "wert": false
         }
     ]
 }
