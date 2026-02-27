@@ -70,34 +70,49 @@ void GateSpeichern() {
 	}
 }
 void GateZeichnen() {
-	for (const auto& Gate : GateListe) {
-		//grundstrucktur
-		DrawTexture("GateGrundstrucktur",
-			Gate.GridX * GRID_SIZE,
-			Gate.GridY * GRID_SIZE,
-			GRID_SIZE, GRID_SIZE, WHITE);
-		
-		//einzelne angeschaltet
-		if (Gate.input1)
-			DrawTexture("GateLinks",
-				Gate.GridX * GRID_SIZE,
-				Gate.GridY * GRID_SIZE,
-				GRID_SIZE, GRID_SIZE, WHITE);
-		if (Gate.input2)
-			DrawTexture("GateRechts",
-				Gate.GridX * GRID_SIZE,
-				Gate.GridY * GRID_SIZE,
-				GRID_SIZE, GRID_SIZE, WHITE);
-		if (Gate.Output)
-			DrawTexture("GateOutput",
-				Gate.GridX * GRID_SIZE,
-				Gate.GridY * GRID_SIZE,
-				GRID_SIZE, GRID_SIZE, WHITE);
-		//gate art anzeigen
-		if (Gate.modus == "AND")
-			DrawTexture("GateAND",
-				Gate.GridX * GRID_SIZE,
-				Gate.GridY * GRID_SIZE,
-				GRID_SIZE, GRID_SIZE, WHITE);
-	}
+    for (const auto& Gate : GateListe) {
+        float x = Gate.GridX * GRID_SIZE;
+        float y = Gate.GridY * GRID_SIZE;
+
+        float rotation = Gate.Rotation * 90.0f;
+        Vector2 origin = { GRID_SIZE / 2, GRID_SIZE / 2 };
+
+        DrawTexture("GateGrundstrucktur", x, y, GRID_SIZE, GRID_SIZE, WHITE);
+
+        if (Gate.input1) {
+            Texture2D tex = LoadTextureFromPath("resurses/Texturen/Technik/Gate/GateLinks.png");
+            if (tex.id != 0) {
+                Rectangle source = { 0, 0, (float)tex.width, (float)tex.height };
+                Rectangle dest = { x + GRID_SIZE / 2, y + GRID_SIZE / 2, GRID_SIZE, GRID_SIZE };
+                DrawTexturePro(tex, source, dest, origin, rotation, WHITE);
+            }
+        }
+
+        if (Gate.input2) {
+            Texture2D tex = LoadTextureFromPath("resurses/Texturen/Technik/Gate/GateRechts.png");
+            if (tex.id != 0) {
+                Rectangle source = { 0, 0, (float)tex.width, (float)tex.height };
+                Rectangle dest = { x + GRID_SIZE / 2, y + GRID_SIZE / 2, GRID_SIZE, GRID_SIZE };
+                DrawTexturePro(tex, source, dest, origin, rotation, WHITE);
+            }
+        }
+
+        if (Gate.Output) {
+            Texture2D tex = LoadTextureFromPath("resurses/Texturen/Technik/Gate/GateOutput.png");
+            if (tex.id != 0) {
+                Rectangle source = { 0, 0, (float)tex.width, (float)tex.height };
+                Rectangle dest = { x + GRID_SIZE / 2, y + GRID_SIZE / 2, GRID_SIZE, GRID_SIZE };
+                DrawTexturePro(tex, source, dest, origin, rotation, WHITE);
+            }
+        }
+
+        if (Gate.modus == "AND") {
+            Texture2D tex = LoadTextureFromPath("resurses/Texturen/Technik/Gate/AND.png");
+            if (tex.id != 0) {
+                Rectangle source = { 0, 0, (float)tex.width, (float)tex.height };
+                Rectangle dest = { x + GRID_SIZE / 2, y + GRID_SIZE / 2, GRID_SIZE, GRID_SIZE };
+                DrawTexturePro(tex, source, dest, origin, rotation, WHITE);
+            }
+        }
+    }
 }

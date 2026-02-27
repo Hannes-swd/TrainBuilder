@@ -6,7 +6,7 @@
             "Output": false,
             "Rotation": 0,
             "eindeutigeId": 1,
-            "input1": false,
+            "input1": true,
             "input2": false,
             "modus": "AND"
         }

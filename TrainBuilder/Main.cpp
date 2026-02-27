@@ -99,6 +99,8 @@ int main(void)
             ZEICHNEN
         -------------------------------------------------*/
         BeginDrawing();
+        //RAYWHITE
+        //grün
         ClearBackground(RAYWHITE);
 
         /*-------------------------------------------------
