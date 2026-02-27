@@ -56,11 +56,11 @@ bool KannPlatzieren(int gridX, int gridY, PlatzierTyp typ) {
         if (HatAmpel(gridX, gridY))  return false;
         return true;
 
-        // --- Knoten, Leiter, Inverter, Marker: nur auf leere Felder (kein Gleis, kein anderes Technik-Objekt) ---
     case PlatzierTyp::Knoten:
     case PlatzierTyp::Leiter:
     case PlatzierTyp::Inverter:
     case PlatzierTyp::Marker:
+    case PlatzierTyp::Gate:
         return IstFeldLeer(gridX, gridY);
 
     default:

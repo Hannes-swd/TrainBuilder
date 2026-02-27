@@ -254,6 +254,7 @@ void LadeJson() {
             GateObjeckt gate;
             gate.GridX = obj["GridX"];
             gate.GridY = obj["GridY"];
+            gate.Rotation = obj["Rotation"];
             gate.eindeutigeId = obj["eindeutigeId"];
             gate.modus = obj["modus"];
 

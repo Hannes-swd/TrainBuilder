@@ -223,7 +223,8 @@ extern std::vector<MarkerObjeckt> MarkerListe;
 struct GateObjeckt {
 	int GridX;
 	int GridY;
+	int Rotation;
 	int eindeutigeId;
 	std::string modus;
 };
-std::vector<GateObjeckt> GateListe;
+extern std::vector<GateObjeckt> GateListe;

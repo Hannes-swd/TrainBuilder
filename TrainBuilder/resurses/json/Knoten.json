@@ -20,7 +20,7 @@
             "GridX": 18,
             "GridY": -22,
             "Name": "6",
-            "Status": true,
+            "Status": false,
             "eindeutigeId": 3,
             "modus": true
         },
@@ -28,7 +28,7 @@
             "GridX": 23,
             "GridY": -22,
             "Name": "ll",
-            "Status": false,
+            "Status": true,
             "eindeutigeId": 4,
             "modus": false
         }
