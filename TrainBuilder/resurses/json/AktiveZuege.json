@@ -11,9 +11,9 @@
             "farbe": "rot",
             "geschwindichkeit": 4,
             "name": "Zug 1",
-            "posX": -7.0,
+            "posX": 1.607901692390442,
             "posY": -19.0,
-            "rotation": 150,
+            "rotation": 0,
             "zugId": 1,
             "zugtyp": "Erster"
         },
@@ -28,9 +28,9 @@
             "farbe": "gruen",
             "geschwindichkeit": 10,
             "name": "Zug 2",
-            "posX": -13.0,
-            "posY": -27.0,
-            "rotation": -90,
+            "posX": 11.0,
+            "posY": -24.0,
+            "rotation": 90,
             "zugId": 2,
             "zugtyp": "zweiter"
         },
@@ -52,16 +52,16 @@
         },
         {
             "Fahrplan": [
-                "Banhof_7",
-                "sdostbanhof"
+                "sdostbanhof",
+                "ostbanhof"
             ],
             "biildpfad": "resurses/Texturen/Zuege/StandartZug.png",
             "farbe": "rot",
             "geschwindichkeit": 4,
             "name": "Zug 4",
-            "posX": 11.365734100341797,
-            "posY": -19.0,
-            "rotation": 180,
+            "posX": 11.0,
+            "posY": -22.705379486083984,
+            "rotation": -90,
             "zugId": 4,
             "zugtyp": "Erster"
         }

@@ -1,13 +1,23 @@
 {
     "Gate": [
         {
-            "GridX": -6,
-            "GridY": -39,
+            "GridX": 20,
+            "GridY": -31,
             "Output": false,
             "Rotation": 0,
             "eindeutigeId": 1,
-            "input1": true,
+            "input1": false,
             "input2": false,
+            "modus": "AND"
+        },
+        {
+            "GridX": 27,
+            "GridY": -29,
+            "Output": false,
+            "Rotation": 1,
+            "eindeutigeId": 2,
+            "input1": false,
+            "input2": true,
             "modus": "AND"
         }
     ]

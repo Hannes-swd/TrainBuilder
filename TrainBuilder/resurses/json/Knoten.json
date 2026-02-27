@@ -4,7 +4,7 @@
             "GridX": 18,
             "GridY": -27,
             "Name": "gg",
-            "Status": false,
+            "Status": true,
             "eindeutigeId": 1,
             "modus": true
         },
@@ -12,7 +12,7 @@
             "GridX": 18,
             "GridY": -30,
             "Name": "67",
-            "Status": true,
+            "Status": false,
             "eindeutigeId": 2,
             "modus": false
         },
@@ -31,6 +31,30 @@
             "Status": false,
             "eindeutigeId": 4,
             "modus": false
+        },
+        {
+            "GridX": 22,
+            "GridY": -31,
+            "Name": "pp",
+            "Status": false,
+            "eindeutigeId": 5,
+            "modus": true
+        },
+        {
+            "GridX": 24,
+            "GridY": -31,
+            "Name": "pp",
+            "Status": false,
+            "eindeutigeId": 8,
+            "modus": true
+        },
+        {
+            "GridX": 24,
+            "GridY": -27,
+            "Name": "gg",
+            "Status": true,
+            "eindeutigeId": 9,
+            "modus": true
         }
     ]
 }

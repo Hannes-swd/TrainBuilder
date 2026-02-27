@@ -32,6 +32,7 @@ extern int ausgewahlterZug;
 extern int ausgewahlterAmpel;
 extern int ausgewahlterKnoten;
 extern int ausgewahlterMarker;
+extern int ausgewahlterGate;
 
 extern int aktuellesTool;
 

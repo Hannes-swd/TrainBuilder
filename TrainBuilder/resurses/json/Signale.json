@@ -4,7 +4,7 @@
             "eindeutigeId": 1,
             "nutzerId": "67",
             "typ": 0,
-            "wert": true
+            "wert": false
         },
         {
             "eindeutigeId": 3,
@@ -15,6 +15,18 @@
         {
             "eindeutigeId": 4,
             "nutzerId": "ll",
+            "typ": 0,
+            "wert": false
+        },
+        {
+            "eindeutigeId": 5,
+            "nutzerId": "gg",
+            "typ": 0,
+            "wert": true
+        },
+        {
+            "eindeutigeId": 6,
+            "nutzerId": "pp",
             "typ": 0,
             "wert": false
         }

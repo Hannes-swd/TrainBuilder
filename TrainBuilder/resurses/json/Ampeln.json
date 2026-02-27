@@ -5,21 +5,35 @@
             "Name": "67",
             "gridX": 14,
             "gridY": -31,
-            "isGreen": true
+            "isGreen": false
         },
         {
             "AmpelId": 3,
             "Name": "ll",
             "gridX": 7,
             "gridY": -21,
-            "isGreen": true
+            "isGreen": false
         },
         {
             "AmpelId": 4,
             "Name": "ll",
             "gridX": 2,
             "gridY": -21,
+            "isGreen": false
+        },
+        {
+            "AmpelId": 5,
+            "Name": "gg",
+            "gridX": 5,
+            "gridY": -26,
             "isGreen": true
+        },
+        {
+            "AmpelId": 6,
+            "Name": "pp",
+            "gridX": 6,
+            "gridY": -27,
+            "isGreen": false
         }
     ]
 }

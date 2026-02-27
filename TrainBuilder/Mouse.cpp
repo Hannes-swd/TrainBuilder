@@ -71,6 +71,14 @@ void ProcesMaus(Vector2 mausposition) {
         }
     }
 
+    if (ausgewahlterGate != 0) {
+        if (screenMousePos.x > GenaueBreite - 250.0f && screenMousePos.y > 80.0f) {
+            if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {
+                return;
+            }
+        }
+    }
+
 
     if (untermenueOffen) {
         if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {
@@ -198,6 +206,7 @@ void Auswahltool(int gridX, int gridY)
     bool ampelGeklickt = false;
     bool knotenGeklickt = false;
     bool markerGeklickt = false;
+    bool mgateGeklickt = false;
     Vector2 mouseWorldPos = GetScreenToWorld2D(GetMousePosition(), Playercam);
 
     for (const auto& ban : banhofListe) {
@@ -261,7 +270,16 @@ void Auswahltool(int gridX, int gridY)
             }
         }
     }
-
+    for (const auto& Gate : GateListe) {
+        if (Gate.GridX == gridX && Gate.GridY == gridY) {
+            DrawRectangle(gridX * GRID_SIZE, gridY * GRID_SIZE, (float)GRID_SIZE, (float)GRID_SIZE, Color{ 0, 255, 0, 150 });
+            EndereMausZu = "Hand";
+            if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {
+                ausgewahlterGate = Gate.eindeutigeId;
+                mgateGeklickt = true;
+            }
+        }
+    }
     // Fenster schliesen
     if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT) && !bahnhofGeklickt) {
         ausgewahlterBanhof = 0;
@@ -277,6 +295,9 @@ void Auswahltool(int gridX, int gridY)
     }
     if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT) && !markerGeklickt) {
         ausgewahlterMarker = 0;
+    }
+    if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT) && !mgateGeklickt) {
+        ausgewahlterGate = 0;
     }
 }
 /*-------------------------------------------------

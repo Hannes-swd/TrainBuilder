@@ -4,9 +4,9 @@
             "GridX": 0,
             "GridY": -35,
             "eindeutigeId": 1,
-            "farbe_b": 226,
-            "farbe_g": 243,
-            "farbe_r": 10
+            "farbe_b": 30,
+            "farbe_g": 30,
+            "farbe_r": 223
         }
     ]
 }

@@ -47,14 +47,6 @@
             "gridX": -13,
             "gridY": -27,
             "rotation": 0
-        },
-        {
-            "BanhofId": 7,
-            "ID": "gg",
-            "Name": "Banhof_7",
-            "gridX": 14,
-            "gridY": -27,
-            "rotation": 0
         }
     ]
 }

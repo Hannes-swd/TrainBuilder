@@ -39,7 +39,7 @@ int ausgewahlterZug = 0; //0 = keins
 int ausgewahlterAmpel = 0; //0 = keins
 int ausgewahlterKnoten = 0; //0 = keins
 int ausgewahlterMarker = 0; //0 = keins
-
+int ausgewahlterGate = 0; //0 = keins
 
 
 int aktuellesTool = 1; 
