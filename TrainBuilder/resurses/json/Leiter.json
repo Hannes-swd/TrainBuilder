@@ -11,21 +11,21 @@
             "GridX": 19,
             "GridY": -22,
             "Rotation": 1,
-            "Status": false,
+            "Status": true,
             "eindeutigeId": 2
         },
         {
             "GridX": 20,
             "GridY": -22,
             "Rotation": 1,
-            "Status": false,
+            "Status": true,
             "eindeutigeId": 3
         },
         {
             "GridX": 22,
             "GridY": -22,
             "Rotation": 1,
-            "Status": true,
+            "Status": false,
             "eindeutigeId": 4
         }
     ]

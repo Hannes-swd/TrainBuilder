@@ -133,3 +133,8 @@ std::vector<InverterObjeckt> InverterListe;
 	Marker
 -------------------------------------------------*/
 std::vector<MarkerObjeckt> MarkerListe;
+
+/*-------------------------------------------------
+	Gates
+-------------------------------------------------*/
+std::vector<GateObjeckt> GateListe;

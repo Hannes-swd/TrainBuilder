@@ -215,3 +215,15 @@ struct MarkerObjeckt {
 	Color farbe;
 };
 extern std::vector<MarkerObjeckt> MarkerListe;
+
+/*-------------------------------------------------
+	Gates
+-------------------------------------------------*/
+
+struct GateObjeckt {
+	int GridX;
+	int GridY;
+	int eindeutigeId;
+	std::string modus;
+};
+std::vector<GateObjeckt> GateListe;

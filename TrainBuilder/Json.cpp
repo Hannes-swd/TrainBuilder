@@ -8,6 +8,7 @@
 #include "LoadTexture.h"
 #include "Signal.h"
 
+
 using json = nlohmann::json;
 
 void LadeJson() {
@@ -22,6 +23,7 @@ void LadeJson() {
     std::ifstream Leiter("resurses/json/Leiter.json"); 
     std::ifstream Inverter("resurses/json/Inverter.json");
     std::ifstream marker("resurses/json/marker.json");
+    std::ifstream Gate("resurses/json/Gate.json");
 
     //OBECKTE UND LADEN
     nlohmann::json NutzerDaten;
@@ -73,6 +75,11 @@ void LadeJson() {
     if (marker.is_open()) {
         marker >> markerDaten;
     }
+
+    nlohmann::json gateDaten;
+    if (Gate.is_open()) {
+        Gate >> gateDaten;
+    }
     
     
     //ALLE LISTEN LÖSCHEN
@@ -83,6 +90,7 @@ void LadeJson() {
     LeiterListe.clear();
     InverterListe.clear();
     MarkerListe.clear();
+    GateListe.clear();
     /*-------------------------------------------------
         Gleise
     -------------------------------------------------*/
@@ -238,8 +246,20 @@ void LadeJson() {
         }
     }
 
+    /*-------------------------------------------------
+        Gate
+    -------------------------------------------------*/
+    if (gateDaten.contains("Gate")) {
+        for (const auto& obj : gateDaten["Gate"]) {
+            GateObjeckt gate;
+            gate.GridX = obj["GridX"];
+            gate.GridY = obj["GridY"];
+            gate.eindeutigeId = obj["eindeutigeId"];
+            gate.modus = obj["modus"];
 
-
+            GateListe.push_back(gate);
+        }
+    }
 
 	if (AktiveZuege.is_open()) AktiveZuege.close();
     if (Banhoefe.is_open()) Banhoefe.close();
@@ -249,6 +269,7 @@ void LadeJson() {
     if (Leiter.is_open()) Leiter.close();
     if (Inverter.is_open()) Inverter.close();
     if (marker.is_open()) marker.close();
+    if (Gate.is_open()) Gate.close();
 
 
     //WERT LADEN
