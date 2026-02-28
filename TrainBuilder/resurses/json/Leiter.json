@@ -11,21 +11,21 @@
             "GridX": 19,
             "GridY": -22,
             "Rotation": 1,
-            "Status": false,
+            "Status": true,
             "eindeutigeId": 2
         },
         {
             "GridX": 20,
             "GridY": -22,
             "Rotation": 1,
-            "Status": false,
+            "Status": true,
             "eindeutigeId": 3
         },
         {
             "GridX": 22,
             "GridY": -22,
             "Rotation": 1,
-            "Status": true,
+            "Status": false,
             "eindeutigeId": 4
         },
         {
@@ -46,42 +46,28 @@
             "GridX": 21,
             "GridY": -31,
             "Rotation": 3,
-            "Status": true,
+            "Status": false,
             "eindeutigeId": 7
-        },
-        {
-            "GridX": 27,
-            "GridY": -30,
-            "Rotation": 2,
-            "Status": true,
-            "eindeutigeId": 8
-        },
-        {
-            "GridX": 27,
-            "GridY": -28,
-            "Rotation": 0,
-            "Status": true,
-            "eindeutigeId": 9
         },
         {
             "GridX": 25,
             "GridY": -31,
             "Rotation": 1,
-            "Status": true,
+            "Status": false,
             "eindeutigeId": 14
         },
         {
             "GridX": 26,
             "GridY": -31,
             "Rotation": 1,
-            "Status": true,
+            "Status": false,
             "eindeutigeId": 15
         },
         {
             "GridX": 27,
             "GridY": -31,
             "Rotation": 1,
-            "Status": true,
+            "Status": false,
             "eindeutigeId": 16
         },
         {
@@ -106,25 +92,46 @@
             "eindeutigeId": 19
         },
         {
-            "GridX": 28,
-            "GridY": -29,
-            "Rotation": 1,
+            "GridX": 27,
+            "GridY": -30,
+            "Rotation": 2,
             "Status": false,
             "eindeutigeId": 20
         },
         {
-            "GridX": 30,
+            "GridX": 27,
+            "GridY": -28,
+            "Rotation": 0,
+            "Status": true,
+            "eindeutigeId": 21
+        },
+        {
+            "GridX": 28,
             "GridY": -29,
             "Rotation": 1,
-            "Status": false,
-            "eindeutigeId": 21
+            "Status": true,
+            "eindeutigeId": 22
         },
         {
             "GridX": 29,
             "GridY": -29,
             "Rotation": 1,
-            "Status": false,
-            "eindeutigeId": 22
+            "Status": true,
+            "eindeutigeId": 23
+        },
+        {
+            "GridX": 30,
+            "GridY": -29,
+            "Rotation": 1,
+            "Status": true,
+            "eindeutigeId": 24
+        },
+        {
+            "GridX": 31,
+            "GridY": -29,
+            "Rotation": 1,
+            "Status": true,
+            "eindeutigeId": 25
         }
     ]
 }

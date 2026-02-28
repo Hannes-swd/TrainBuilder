@@ -126,28 +126,45 @@ void GateZeichnen() {
 }
 void GateOutput() {
     for (auto& Gate : GateListe) {
+        if (Gate.modus == "AND") {
+            Gate.Output = (Gate.input1 && Gate.input2);
+        }
+        else if (Gate.modus == "XOR") {
+            Gate.Output = (Gate.input1 != Gate.input2);
+        }
+        else {
+            Gate.Output = false; 
+        }
+    }
+
+    for (const auto& Gate : GateListe) {
         int targetX = Gate.GridX;
         int targetY = Gate.GridY;
 
         if (Gate.Rotation == 0)      targetY = Gate.GridY - 1;
         else if (Gate.Rotation == 1) targetX = Gate.GridX + 1;
-        else if (Gate.Rotation == 2) targetY = Gate.GridY + 1;
+        else if (Gate.Rotation == 2) targetY = Gate.GridY + 1; 
         else if (Gate.Rotation == 3) targetX = Gate.GridX - 1;
 
-        //schaut bei modus unterschiedliche outputs
-        if (Gate.modus == "AND") {
-            if (Gate.input1 && Gate.input2)
-                Gate.Output = true;
-            else 
-                Gate.Output = false;
+        for (auto& knoten : knotenliste) {
+            if (knoten.GridX == targetX && knoten.GridY == targetY && !knoten.modus) {
+                knoten.Status = Gate.Output;
+                break;
+            }
         }
-        if (Gate.modus == "XOR") {
-            if (Gate.input1 && !Gate.input2)
-                Gate.Output = true;
-            else if (Gate.input2 && !Gate.input1)
-                Gate.Output = true;
-            else 
-                Gate.Output = false;
+
+        for (auto& leiter : LeiterListe) {
+            if (leiter.GridX == targetX && leiter.GridY == targetY) {
+                leiter.Status = Gate.Output;
+                break;
+            }
+        }
+
+        for (auto& inverter : InverterListe) {
+            if (inverter.GridX == targetX && inverter.GridY == targetY) {
+                inverter.Status = Gate.Output;
+                break;
+            }
         }
     }
 }
