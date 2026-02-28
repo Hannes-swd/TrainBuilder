@@ -1,4 +1,6 @@
 #include "WorldManager.h"
+#include <unordered_map>
+#include <fstream>
 #include "raylib.h"
 #include <string>
 #include <vector>
@@ -68,8 +70,21 @@ bool WeltauswahlUpdate() {
     static int   loescheIndex = -1;
     static float scrollOffset = 0.0f;
 
+    // Cache für Profilbilder
+    static std::unordered_map<std::string, Texture2D> textureCache;
+    static std::unordered_map<std::string, bool> textureExistiert;
+
     // Reset aller statischen Zustände wenn wir frisch ins Menü zurückkehren
     if (s_resetPending) {
+        // Cache leeren
+        for (auto& pair : textureCache) {
+            if (pair.second.id != 0) {
+                UnloadTexture(pair.second);
+            }
+        }
+        textureCache.clear();
+        textureExistiert.clear();
+
         weltenGeladen = false;
         zeigeDialog = false;
         fehlerText = "";
@@ -129,9 +144,46 @@ bool WeltauswahlUpdate() {
         DrawRectangleRounded(Rectangle{ lX, iy, iW2, iH }, 0.15f, 8, bg);
         Rahmen(Rectangle{ lX, iy, iW2, iH }, Color{ 80, 100, 140, 255 });
 
-        // Icon
-        DrawRectangle((int)lX + 10, (int)iy + 10, 40, 40, Color{ 70, 130, 180, 255 });
-        DrawText("W", (int)lX + 22, (int)iy + 18, 22, WHITE);
+        // Icon/Profilbild anzeigen
+        std::string bildPfad = welten[i].pfad + "/Profilbild.png";
+
+        // Prüfen ob das Bild existiert (nur einmal pro Welt)
+        if (textureExistiert.find(bildPfad) == textureExistiert.end()) {
+            std::ifstream bildTest(bildPfad.c_str());
+            textureExistiert[bildPfad] = bildTest.good();
+        }
+
+        if (textureExistiert[bildPfad]) {
+            // Texture aus Cache holen oder laden
+            if (textureCache.find(bildPfad) == textureCache.end()) {
+                Image img = LoadImage(bildPfad.c_str());
+                if (img.data != nullptr) {
+                    // Bild auf 40x40 skalieren für bessere Performance
+                    ImageResize(&img, 40, 40);
+                    Texture2D tex = LoadTextureFromImage(img);
+                    UnloadImage(img);
+                    if (tex.id != 0) {
+                        textureCache[bildPfad] = tex;
+                    }
+                }
+            }
+
+            // Texture zeichnen wenn vorhanden
+            if (textureCache.find(bildPfad) != textureCache.end() &&
+                textureCache[bildPfad].id != 0) {
+                DrawTexture(textureCache[bildPfad], (int)lX + 10, (int)iy + 10, WHITE);
+            }
+            else {
+                // Fallback wenn Textur doch nicht geladen werden konnte
+                DrawRectangle((int)lX + 10, (int)iy + 10, 40, 40, Color{ 70, 130, 180, 255 });
+                DrawText("W", (int)lX + 22, (int)iy + 18, 22, WHITE);
+            }
+        }
+        else {
+            // Fallback: Graues Rechteck mit "W" anzeigen wenn kein Bild vorhanden
+            DrawRectangle((int)lX + 10, (int)iy + 10, 40, 40, Color{ 70, 130, 180, 255 });
+            DrawText("W", (int)lX + 22, (int)iy + 18, 22, WHITE);
+        }
 
         DrawText(welten[i].name.c_str(), (int)lX + 60, (int)iy + 10, 20, WHITE);
         std::string dat = "Erstellt: " + welten[i].erstelltAm;
@@ -155,7 +207,7 @@ bool WeltauswahlUpdate() {
             else if (hover) {
                 LadeWelt(welten[i].pfad);
                 weltenGeladen = false;
-                EndScissorMode();  // WICHTIG: immer aufrufen bevor return
+                EndScissorMode();
                 return true;
             }
         }

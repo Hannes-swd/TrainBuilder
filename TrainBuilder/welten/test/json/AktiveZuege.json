@@ -9,9 +9,9 @@
             "farbe": "gruen",
             "geschwindichkeit": 10,
             "name": "Zug 1",
-            "posX": 2.0,
-            "posY": 3.0,
-            "rotation": 180,
+            "posX": 1.3333388566970825,
+            "posY": 0.0,
+            "rotation": 0,
             "zugId": 1,
             "zugtyp": "zweiter"
         }
