@@ -1,3 +1,88 @@
 {
-    "Objeckte": []
+    "Objeckte": [
+        {
+            "ObjecktId": 2,
+            "gridX": -1,
+            "gridY": 3,
+            "rotation": 90
+        },
+        {
+            "ObjecktId": 1,
+            "gridX": -1,
+            "gridY": 2,
+            "rotation": 0
+        },
+        {
+            "ObjecktId": 1,
+            "gridX": -1,
+            "gridY": 1,
+            "rotation": 0
+        },
+        {
+            "ObjecktId": 2,
+            "gridX": -1,
+            "gridY": 0,
+            "rotation": 0
+        },
+        {
+            "ObjecktId": 1,
+            "gridX": 0,
+            "gridY": 0,
+            "rotation": 90
+        },
+        {
+            "ObjecktId": 1,
+            "gridX": 1,
+            "gridY": 0,
+            "rotation": 90
+        },
+        {
+            "ObjecktId": 1,
+            "gridX": 2,
+            "gridY": 0,
+            "rotation": 90
+        },
+        {
+            "ObjecktId": 2,
+            "gridX": 3,
+            "gridY": 0,
+            "rotation": 180
+        },
+        {
+            "ObjecktId": 1,
+            "gridX": 3,
+            "gridY": 1,
+            "rotation": 0
+        },
+        {
+            "ObjecktId": 1,
+            "gridX": 3,
+            "gridY": 2,
+            "rotation": 0
+        },
+        {
+            "ObjecktId": 2,
+            "gridX": 3,
+            "gridY": 3,
+            "rotation": 270
+        },
+        {
+            "ObjecktId": 1,
+            "gridX": 2,
+            "gridY": 3,
+            "rotation": 90
+        },
+        {
+            "ObjecktId": 1,
+            "gridX": 1,
+            "gridY": 3,
+            "rotation": 90
+        },
+        {
+            "ObjecktId": 1,
+            "gridX": 0,
+            "gridY": 3,
+            "rotation": 90
+        }
+    ]
 }

@@ -1,3 +1,12 @@
 {
-    "marker": []
+    "marker": [
+        {
+            "GridX": 0,
+            "GridY": -2,
+            "eindeutigeId": 1,
+            "farbe_b": 139,
+            "farbe_g": 255,
+            "farbe_r": 2
+        }
+    ]
 }

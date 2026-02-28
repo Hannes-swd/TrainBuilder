@@ -54,16 +54,14 @@ void KnotenSpeichern() {
 		knotenJson["Name"] = knoten.Name;
 		knotenJson["Status"] = knoten.Status;
 		knotenJson["modus"] = knoten.modus;
-
 		knotenlArray.push_back(knotenJson);
 	}
 	jsonDaten["Knoten"] = knotenlArray;
-	std::cerr << "knoiten gespeichert";
-	std::ofstream Knotendatei("resurses/json/Knoten.json");
+
+	std::ofstream Knotendatei(GetFullPath("Knoten.json").c_str());
 	if (Knotendatei.is_open()) {
 		Knotendatei << jsonDaten.dump(4);
 		Knotendatei.close();
-
 	}
 	else {
 		std::cerr << "Fehler: Knoten.json konnte nicht geöffnet werden!" << std::endl;

@@ -276,8 +276,10 @@ int main(void)
     }
 
     // ---- Aufräumen ----
-    if (zustand == Spielzustand::Spiel)
+    if (zustand == Spielzustand::Spiel) {
         WeltDatenSpeichern();
+        std::cout << "Spieldaten gespeichert." << std::endl;
+    }
 
     unloadTextures();
     CloseWindow();

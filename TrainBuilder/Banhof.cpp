@@ -8,6 +8,7 @@
 #include "LoadTexture.h"
 #include "Banhof.h"
 #include "PlatzierungCheck.h"
+#include "Json.h"
 
 void plaziereBanhof(Vector2 position) {
 	int gridX = (int)floor(position.x / GRID_SIZE);
@@ -43,13 +44,12 @@ void BanhofSpeichern() {
 		banhofArray.push_back(banhofJson);
 	}
 	jsonDaten["BanhofObjeckte"] = banhofArray;
-	std::ofstream datei("resurses/json/Banhof.json");
+
+	// Jetzt mit Welt-spezifischem Pfad
+	std::ofstream datei(GetFullPath("Banhof.json").c_str());  // c_str() ist wichtig für ofstream!
 	if (datei.is_open()) {
 		datei << jsonDaten.dump(4);
 		datei.close();
-	}
-	else {
-		//feler
 	}
 }
 bool IstBanhofBereitsVorhanden(int gridX, int gridY) {

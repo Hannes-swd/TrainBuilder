@@ -1,4 +1,3 @@
-
 #include <string>
 #include <vector>
 #include <fstream>
@@ -64,6 +63,12 @@ std::vector<WeltInfo> LadeAlleWelten() {
                 strcmp(fileInfo.name, "..") != 0) {
 
                 std::string weltName = fileInfo.name;
+
+                // Vorlage/Template nicht auflisten
+                if (weltName == "vorlage" || weltName == "template" ||
+                    weltName == "Vorlage" || weltName == "Template")
+                    continue;
+
                 std::string weltPfad = "welten/" + weltName;
                 std::string infoDatei = weltPfad + "/welt.info";
 
@@ -171,17 +176,32 @@ bool LadeWelt(const std::string& weltPfad) {
     return true;
 }
 
-bool LöscheWelt(const std::string& weltPfad) {
-    std::cout << "ACHTUNG: Zum vollständigen Löschen einer Welt bitte manuell den Ordner löschen: " << weltPfad << std::endl;
-    std::cout << "Diese Funktion löscht nur die JSON-Dateien, nicht den Ordner selbst." << std::endl;
-
-    // Hier könnten Sie eine Warnung ausgeben oder eine einfache Lösung implementieren
-    // Für eine vollständige Implementierung wäre ein rekursives Löschen nötig
-
-    // Alternative: Nur eine Markierung setzen
-    return false;
+static bool LoescheVerzeichnisRekursiv(const std::string& pfad) {
+    struct _finddata_t fi;
+    intptr_t h = _findfirst((pfad + "/*").c_str(), &fi);
+    if (h != -1) {
+        do {
+            if (strcmp(fi.name, ".") == 0 || strcmp(fi.name, "..") == 0) continue;
+            std::string voll = pfad + "/" + fi.name;
+            if (fi.attrib & _A_SUBDIR) {
+                LoescheVerzeichnisRekursiv(voll);
+            }
+            else {
+                remove(voll.c_str());
+            }
+        } while (_findnext(h, &fi) == 0);
+        _findclose(h);
+    }
+    return _rmdir(pfad.c_str()) == 0;
 }
 
+bool LöscheWelt(const std::string& weltPfad) {
+    if (!VerzeichnisExistiert(weltPfad)) return false;
+    bool ok = LoescheVerzeichnisRekursiv(weltPfad);
+    if (ok) std::cout << "Welt geloescht: " << weltPfad << std::endl;
+    else    std::cerr << "Fehler beim Loeschen: " << weltPfad << std::endl;
+    return ok;
+}
 std::string GetAktuelleWeltPfad() {
     return aktuellerWeltPfad;
 }

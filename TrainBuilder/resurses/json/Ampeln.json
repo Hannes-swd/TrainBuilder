@@ -1,0 +1,11 @@
+{
+    "Ampeln": [
+        {
+            "AmpelId": 1,
+            "Name": "Ampel_1",
+            "gridX": -5,
+            "gridY": 1,
+            "isGreen": true
+        }
+    ]
+}

@@ -14,6 +14,7 @@
 #include "zug.h"
 #include "Leiter.h"
 #include "knoten.h"
+
 #include "PlatzierungCheck.h"
 
 
@@ -50,17 +51,14 @@ void LeiterSpeichern() {
 		LeiterJson["Rotation"] = Leiter.Rotation;
 		LeiterJson["eindeutigeId"] = Leiter.eindeutigeId;
 		LeiterJson["Status"] = Leiter.Status;
-
 		LeiterArray.push_back(LeiterJson);
 	}
 	jsonDaten["Leiter"] = LeiterArray;
-	std::ofstream Leiterdatei("resurses/json/Leiter.json");
+
+	std::ofstream Leiterdatei(GetFullPath("Leiter.json").c_str());
 	if (Leiterdatei.is_open()) {
 		Leiterdatei << jsonDaten.dump(4);
 		Leiterdatei.close();
-
-	}
-	else {
 	}
 }
 void LeiterZeichnen() {

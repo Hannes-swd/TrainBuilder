@@ -1,3 +1,22 @@
 {
-    "Objeckte": []
+    "Objeckte": [
+        {
+            "ObjecktId": 1,
+            "gridX": -3,
+            "gridY": 1,
+            "rotation": 0
+        },
+        {
+            "ObjecktId": 1,
+            "gridX": -3,
+            "gridY": 0,
+            "rotation": 0
+        },
+        {
+            "ObjecktId": 1,
+            "gridX": -3,
+            "gridY": -1,
+            "rotation": 0
+        }
+    ]
 }

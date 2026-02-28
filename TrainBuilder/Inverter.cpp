@@ -18,6 +18,7 @@
 #include "PlatzierungCheck.h"
 
 
+
 using json = nlohmann::json;
 
 void InverterPlazieren(int gridX, int gridY) {
@@ -53,7 +54,8 @@ void InvertorSpeichern() {
 		InvertorArray.push_back(InverterJson);
 	}
 	jsonDaten["Inverter"] = InvertorArray;
-	std::ofstream InverterDatei("resurses/json/Inverter.json");
+
+	std::ofstream InverterDatei(GetFullPath("Inverter.json").c_str());
 	if (InverterDatei.is_open()) {
 		InverterDatei << jsonDaten.dump(4);
 		InverterDatei.close();

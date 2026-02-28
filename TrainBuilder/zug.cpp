@@ -14,6 +14,7 @@
 #include "untermenü.h"
 #include "json.hpp"
 #include "zug.h"
+#include "Json.h"
 
 using json = nlohmann::json;
 
@@ -138,7 +139,7 @@ void AktiveZuegeSpeichern() {
 
     jsonDaten["AktiveZuege"] = zuegeArray;
 
-    std::ofstream datei("resurses/json/AktiveZuege.json");
+    std::ofstream datei(GetFullPath("AktiveZuege.json").c_str());
     if (datei.is_open()) {
         datei << jsonDaten.dump(4);
         datei.close();

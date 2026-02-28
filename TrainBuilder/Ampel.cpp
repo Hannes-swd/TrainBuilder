@@ -17,6 +17,7 @@
 #include "Ampel.h"
 #include "Signal.h"
 #include "PlatzierungCheck.h"
+#include "Json.h"
 
 using json = nlohmann::json;
 
@@ -74,11 +75,11 @@ void AmpelSpeichern() {
 		ampelJson["gridY"] = ampel.GridY;
 		ampelJson["isGreen"] = ampel.isGreen;
 		ampelJson["Name"] = ampel.Name;
-
 		ampelArray.push_back(ampelJson);
 	}
 	jsonDaten["Ampeln"] = ampelArray;
-	std::ofstream datei("resurses/json/Ampeln.json");
+
+	std::ofstream datei(GetFullPath("Ampeln.json").c_str());
 	if (datei.is_open()) {
 		datei << jsonDaten.dump(4);
 		datei.close();

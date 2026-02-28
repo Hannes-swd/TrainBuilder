@@ -1,3 +1,20 @@
 {
-    "BanhofObjeckte": []
+    "BanhofObjeckte": [
+        {
+            "BanhofId": 1,
+            "ID": "Banhof_1",
+            "Name": "test",
+            "gridX": 0,
+            "gridY": 0,
+            "rotation": 0
+        },
+        {
+            "BanhofId": 2,
+            "ID": "Banhof_2",
+            "Name": "Banhof_2",
+            "gridX": 2,
+            "gridY": 3,
+            "rotation": 0
+        }
+    ]
 }

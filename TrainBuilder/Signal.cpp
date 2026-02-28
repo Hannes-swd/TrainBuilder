@@ -5,6 +5,8 @@
 #include <iostream>
 #include "Ampel.h"
 #include "Banhof.h"
+#include "Json.h"
+
 
 using json = nlohmann::json;
 
@@ -36,7 +38,6 @@ void SignalTeileLaden() {
 
     std::cout << "Signale geladen: " << SignalTeilListe.size() << std::endl;
 }
-
 void SignalTeilSpeichern() {
     json jsonDaten;
     json signalArray = json::array();
@@ -47,13 +48,12 @@ void SignalTeilSpeichern() {
         signalJson["nutzerId"] = signal.nutzerId;
         signalJson["wert"] = signal.wert;
         signalJson["typ"] = (int)signal.typ;
-
         signalArray.push_back(signalJson);
     }
 
     jsonDaten["Signale"] = signalArray;
 
-    std::ofstream datei("resurses/json/Signale.json");
+    std::ofstream datei(GetFullPath("Signale.json").c_str());
     if (datei.is_open()) {
         datei << jsonDaten.dump(4);
         datei.close();

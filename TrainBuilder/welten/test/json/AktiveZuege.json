@@ -1,3 +1,19 @@
 {
-    "AktiveZuege": []
+    "AktiveZuege": [
+        {
+            "Fahrplan": [
+                "test",
+                "Banhof_2"
+            ],
+            "biildpfad": "resurses/Texturen/Zuege/StandartZug.png",
+            "farbe": "gruen",
+            "geschwindichkeit": 10,
+            "name": "Zug 1",
+            "posX": 2.0,
+            "posY": 3.0,
+            "rotation": 180,
+            "zugId": 1,
+            "zugtyp": "zweiter"
+        }
+    ]
 }

@@ -31,6 +31,10 @@ static std::string JP(const std::string& dateiname) {
     return weltJsonPfad + "\\" + dateiname;
 }
 
+std::string GetFullPath(const std::string& filename) {
+    return GetJsonPfad() + "\\" + filename;
+}
+
 // -----------------------------------------------------------------------
 // LadeJson
 // -----------------------------------------------------------------------

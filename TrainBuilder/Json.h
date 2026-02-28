@@ -10,3 +10,6 @@ std::string GetJsonPfad();
 
 void LadeJson();
 void SpeicherJson();
+
+std::string GetJsonPfad();
+std::string GetFullPath(const std::string& filename);

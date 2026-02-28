@@ -36,26 +36,25 @@ void MarkerPlazieren(int gridX, int gridY) {
 }
 
 void MarkerSpeichern() {
-	json jsonDaten;
-	json MarkerArray = json::array();
-	for (const auto& Marker : MarkerListe) {
-		json MarkerJson;
-		MarkerJson["GridX"] = Marker.GridX;
-		MarkerJson["GridY"] = Marker.GridY;
-		MarkerJson["eindeutigeId"] = Marker.eindeutigeId;
+    json jsonDaten;
+    json MarkerArray = json::array();
+    for (const auto& Marker : MarkerListe) {
+        json MarkerJson;
+        MarkerJson["GridX"] = Marker.GridX;
+        MarkerJson["GridY"] = Marker.GridY;
+        MarkerJson["eindeutigeId"] = Marker.eindeutigeId;
+        MarkerJson["farbe_r"] = Marker.farbe.r;
+        MarkerJson["farbe_g"] = Marker.farbe.g;
+        MarkerJson["farbe_b"] = Marker.farbe.b;
+        MarkerArray.push_back(MarkerJson);
+    }
+    jsonDaten["marker"] = MarkerArray;
 
-		MarkerJson["farbe_r"] = Marker.farbe.r;
-		MarkerJson["farbe_g"] = Marker.farbe.g;
-		MarkerJson["farbe_b"] = Marker.farbe.b;
-
-		MarkerArray.push_back(MarkerJson);
-	}
-	jsonDaten["marker"] = MarkerArray;
-	std::ofstream MarkerDatei("resurses/json/Marker.json");
-	if (MarkerDatei.is_open()) {
-		MarkerDatei << jsonDaten.dump(4);
-		MarkerDatei.close();
-	}
+    std::ofstream MarkerDatei(GetFullPath("marker.json").c_str());
+    if (MarkerDatei.is_open()) {
+        MarkerDatei << jsonDaten.dump(4);
+        MarkerDatei.close();
+    }
 }
 
 void MarkerZeichnen() {
