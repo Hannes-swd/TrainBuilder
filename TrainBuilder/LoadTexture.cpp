@@ -37,9 +37,8 @@ void loadTextures() {
     textures["KnotenSymbol"] = LoadTexture("resurses/Texturen/Ui/KnotenSymbol.png");
     textures["Drehen"] = LoadTexture("resurses/Texturen/Ui/Drehen.png");
     textures["marker"] = LoadTexture("resurses/Texturen/Ui/marker.png");
-    textures["GateSymbol"] = LoadTexture("resurses/Texturen/Ui/GateSymbol.png");
-    
-    
+    textures["GateSymbol"] = LoadTexture("resurses/Texturen/Ui/GateSymbol.png"); 
+    textures["Optionen"] = LoadTexture("resurses/Texturen/Ui/Optionen.png");
     /*-------------------------------------------------
         BANHOF
     -------------------------------------------------*/

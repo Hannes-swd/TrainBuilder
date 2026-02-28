@@ -1,0 +1,10 @@
+{
+    "Signale": [
+        {
+            "eindeutigeId": 1,
+            "nutzerId": "Ampel_1",
+            "typ": 0,
+            "wert": true
+        }
+    ]
+}

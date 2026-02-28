@@ -22,7 +22,7 @@
 #include "mauszeiger.h"
 #include "Marker.h"
 #include "Gate.h"
-#include "WorldManager.h"  // NEU: Weltauswahl
+#include "WorldManager.h" 
 
 /*
 * IDEEN
@@ -30,7 +30,6 @@
 * - Erklerung für technik
 * - ZUG-FAHRPLAN ender BLOCK
 * - schalter
-* - welten system      <-- FERTIG
 * - blueprint
 * - displays
 * - tutorial
@@ -103,12 +102,11 @@ int main(void)
     InitWindow(screenWidth, screenHeight, "TrainBuilder");
     SetTargetFPS(60);
 
-    // Texturen einmalig laden (werden für Menü & Spiel gebraucht)
     loadTextures();
 
     Spielzustand zustand = Spielzustand::Weltauswahl;
 
-    // Kamera-Grundeinstellungen
+    // Kamera
     Playercam.offset = Vector2{ (float)screenWidth / 2, (float)screenHeight / 2 };
     Playercam.rotation = 0.0f;
     Playercam.zoom = 1.0f;
@@ -129,7 +127,7 @@ int main(void)
         {
             BeginDrawing();
 
-            bool weltGewaehlt = WeltauswahlUpdate(); // zeichnet das Menü
+            bool weltGewaehlt = WeltauswahlUpdate();
 
             EndDrawing();
 
@@ -159,19 +157,18 @@ int main(void)
                 std::cout << "Welt geladen: " << GetAktuelleWeltPfad() << std::endl;
             }
 
-            continue; // nicht in den Spielteil
+            continue;
         }
 
         // ================================================================
         //  SPIEL-MODUS
         // ================================================================
 
-        // ESC -> zurück zur Weltauswahl
         if (IsKeyPressed(KEY_ESCAPE))
         {
             WeltDatenSpeichern();
             SpielzustandZuruecksetzen();
-            ResetWeltauswahl();   // Weltliste beim nächsten Menübesuch neu laden
+            ResetWeltauswahl();
             zustand = Spielzustand::Weltauswahl;
             continue;
         }
@@ -261,8 +258,6 @@ int main(void)
             weltName = weltName.substr(letzterSlash + 1);
         DrawText(("Welt: " + weltName).c_str(), GenaueBreite - 200, 10, 16, DARKGRAY);
 
-        // ESC-Hinweis
-        DrawText("[ESC] Zurück zur Weltauswahl", 10, GenaueHoehe - 25, 14, Color{ 120, 120, 120, 200 });
 
         zeichneUI();
         NichtImFeldZeichnen();

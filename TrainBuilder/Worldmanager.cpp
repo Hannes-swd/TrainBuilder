@@ -1,9 +1,13 @@
 #include "WorldManager.h"
 #include <unordered_map>
 #include <fstream>
-#include "raylib.h"
+#include <cmath>
 #include <string>
+
+#include "raylib.h"
+#include <iostream>
 #include <vector>
+#include "LoadTexture.h"
 
 // -----------------------------------------------------------------------
 // Einfaches Texteingabe-Feld
@@ -130,12 +134,12 @@ bool WeltauswahlUpdate() {
     if (scrollOffset > maxScroll)   scrollOffset = maxScroll;
 
     BeginScissorMode((int)lX - 5, (int)lY, (int)lW + 10, (int)lH);
-
+    //weltauflistung
     for (int i = 0; i < (int)welten.size(); i++) {
         float iy = lY + (float)i * (iH + iA) - scrollOffset;
         if (iy + iH < lY || iy > lY + lH) continue;
 
-        float iW2 = lW - 80.0f;
+        float iW2 = lW;
         bool hover = (maus.x >= lX && maus.x <= lX + iW2 &&
             maus.y >= iy && maus.y <= iy + iH);
 
@@ -189,28 +193,47 @@ bool WeltauswahlUpdate() {
         std::string dat = "Erstellt: " + welten[i].erstelltAm;
         DrawText(dat.c_str(), (int)lX + 60, (int)iy + 35, 13, Color{ 150, 160, 180, 255 });
 
-        // Loeschen-Button
-        float dX = lX + lW - 75.0f;
-        float dY = iy + 10;
-        float dW2 = 60.0f, dH2 = iH - 20.0f;
+
+        /*
         bool dHov = (maus.x >= dX && maus.x <= dX + dW2 &&
             maus.y >= dY && maus.y <= dY + dH2);
         DrawRectangleRounded(Rectangle{ dX, dY, dW2, dH2 }, 0.3f, 8,
             dHov ? Color{ 180, 40, 40, 255 } : Color{ 130, 30, 30, 255 });
         DrawText("X", (int)(dX + dW2 / 2 - MeasureText("X", 16) / 2),
-            (int)(dY + dH2 / 2 - 8), 16, WHITE);
+            (int)(dY + dH2 / 2 - 8), 16, WHITE);*/
 
-        if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON) && loescheIndex == -1 && !zeigeDialog) {
-            if (dHov) {
-                loescheIndex = i;
+        //optionen button
+        float optSize = 24.0f;
+        float optX = lX + lW - optSize - 5.0f;
+        float optY = iy + 5.0f;
+
+        Vector2 maus = GetMousePosition();
+        bool optHover = (maus.x >= optX && maus.x <= optX + optSize &&
+            maus.y >= optY && maus.y <= optY + optSize);
+
+        
+
+        if (optHover) {
+            DrawRectangle(optX, optY, optSize, optSize, Color{ 200, 200, 200, 255 });
+            if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
+                std::cout << "Optionen für: " << welten[i].name << std::endl;
+                // Hier Optionen öffnen
             }
-            else if (hover) {
+            
+        }
+        else if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON) && loescheIndex == -1 && !zeigeDialog) {
+            /*if (dHov) {
+                loescheIndex = i;
+            }*/
+            if (hover) {
                 LadeWelt(welten[i].pfad);
                 weltenGeladen = false;
                 EndScissorMode();
                 return true;
             }
         }
+        DrawTexture("Optionen", optX, optY, optSize, optSize, optHover ? WHITE : Color{ 200, 200, 200, 255 });
+
     }
 
     EndScissorMode();
@@ -359,12 +382,12 @@ bool WeltauswahlUpdate() {
             (int)(nY + 10), 14, WHITE);
 
         if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
-            if (jaHov) {
+            /*if (jaHov) {
                 LöscheWelt(welten[loescheIndex].pfad);
                 welten = LadeAlleWelten();
                 loescheIndex = -1;
-            }
-            else if (nHov) {
+            }*/
+            if (nHov) {
                 loescheIndex = -1;
             }
         }
