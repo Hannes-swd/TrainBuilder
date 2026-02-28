@@ -22,116 +22,188 @@
 #include "mauszeiger.h"
 #include "Marker.h"
 #include "Gate.h"
+#include "WorldManager.h"  // NEU: Weltauswahl
+
 /*
 * IDEEN
-* 
+*
 * - Erklerung für technik
 * - ZUG-FAHRPLAN ender BLOCK
 * - schalter
-* - welten system
+* - welten system      <-- FERTIG
 * - blueprint
 * - displays
 * - tutorial
 * - welten speichern endern exportieren
 */
 
+// -----------------------------------------------------------------------
+// Spielzustand
+// -----------------------------------------------------------------------
+enum class Spielzustand {
+    Weltauswahl,
+    Spiel
+};
+
+// -----------------------------------------------------------------------
+// Alle weltspezifischen Daten speichern
+// -----------------------------------------------------------------------
+static void WeltDatenSpeichern() {
+    SpeicherJson();
+    AktiveZuegeSpeichern();
+    GleiseSpeichern();
+    BanhofSpeichern();
+    KnotenSpeichern();
+    LeiterSpeichern();
+    InvertorSpeichern();
+    GateSpeichern();
+    SignalTeilSpeichern();
+    MarkerSpeichern();
+}
+
+// -----------------------------------------------------------------------
+// Spielzustand zurücksetzen (für Rückkehr ins Menü)
+// -----------------------------------------------------------------------
+static void SpielzustandZuruecksetzen() {
+    gleisListe.clear();
+    banhofListe.clear();
+    aktiveZuege.clear();
+    ampelListe.clear();
+    knotenliste.clear();
+    SignalTeilListe.clear();
+    LeiterListe.clear();
+    InverterListe.clear();
+    MarkerListe.clear();
+    GateListe.clear();
+    Spielerposition = { 0, 0 };
+
+    // UI-Zustand zurücksetzen – verhindert, dass Untermenü/Tools
+    // aus der alten Sitzung in der neuen Welt noch sichtbar sind
+    untermenueOffen = false;
+    aktuellesUntermenue = "";
+    ausgewählterUntermenuePunkt = 0;
+    aktuellesTool = 0;
+    kannBewegen = true;
+
+    // Mauszeiger zurücksetzen
+    AktuelleMaus = "";
+    EndereMausZu = "";
+    SetMouseCursor(MOUSE_CURSOR_DEFAULT);
+}
+
+// -----------------------------------------------------------------------
+// Main
+// -----------------------------------------------------------------------
 int main(void)
 {
-    //STANDART EINSTELLUNGEN
     int screenWidth = 800;
     int screenHeight = 450;
 
     SetConfigFlags(FLAG_WINDOW_RESIZABLE);
     InitWindow(screenWidth, screenHeight, "TrainBuilder");
+    SetTargetFPS(60);
 
-    //KAMMERA
-    Playercam.target = Spielerposition;
+    // Texturen einmalig laden (werden für Menü & Spiel gebraucht)
+    loadTextures();
+
+    Spielzustand zustand = Spielzustand::Weltauswahl;
+
+    // Kamera-Grundeinstellungen
     Playercam.offset = Vector2{ (float)screenWidth / 2, (float)screenHeight / 2 };
     Playercam.rotation = 0.0f;
     Playercam.zoom = 1.0f;
-    /*-------------------------------------------------
-        ALLES LADEN
-    -------------------------------------------------*/
-    LadeJson();
-    loadTextures();
-    SignalTeileLaden();
 
-
-    SetTargetFPS(60);
-    SetMouseCursor(MOUSE_CURSOR_DEFAULT);
     while (!WindowShouldClose())
     {
-        /*-------------------------------------------------
-            GRUNDEINSTELLUNGEN
-        -------------------------------------------------*/
         SetExitKey(KEY_NULL);
 
-
-
-        /*-------------------------------------------------
-            VARIABLEN UPDATEN
-        -------------------------------------------------*/
-        DeltaTime = GetFrameTime();
-
-        mousePosition = GetScreenToWorld2D(GetMousePosition(), Playercam);
-
-
-        //Höhe/Breite
         GenaueHoehe = GetScreenHeight();
         GenaueBreite = GetScreenWidth();
+        if (GenaueHoehe != screenHeight) screenHeight = GenaueHoehe;
+        if (GenaueBreite != screenWidth)  screenWidth = GenaueBreite;
 
-        if (GenaueHoehe != screenHeight)
-            screenHeight = GenaueHoehe;
-        if (GenaueBreite != screenWidth)
-            screenWidth = GenaueBreite;
+        // ================================================================
+        //  WELTAUSWAHL-MODUS
+        // ================================================================
+        if (zustand == Spielzustand::Weltauswahl)
+        {
+            BeginDrawing();
 
-        //Spielerbewegen
-        if (kannBewegen) {
-            Spielermoovment();
+            bool weltGewaehlt = WeltauswahlUpdate(); // zeichnet das Menü
+
+            EndDrawing();
+
+            if (weltGewaehlt) {
+                // Bildschirmdimensionen aktualisieren
+                GenaueHoehe = GetScreenHeight();
+                GenaueBreite = GetScreenWidth();
+
+                // Weltpfad setzen
+                SetzeWeltPfad(GetAktuelleWeltPfad());
+
+                // Spielzustand zurücksetzen und Daten laden
+                SpielzustandZuruecksetzen();
+                LadeJson();
+                SignalTeileLaden();
+
+                // Kamera vollständig zurücksetzen
+                Spielerposition = { 0, 0 };
+                Playercam.target = Spielerposition;
+                Playercam.offset = Vector2{ (float)GenaueBreite / 2, (float)GenaueHoehe / 2 };
+                Playercam.rotation = 0.0f;
+                Playercam.zoom = 1.0f;
+
+                // Zustand ändern
+                zustand = Spielzustand::Spiel;
+
+                std::cout << "Welt geladen: " << GetAktuelleWeltPfad() << std::endl;
+            }
+
+            continue; // nicht in den Spielteil
         }
 
-        //koordinaten im grid
+        // ================================================================
+        //  SPIEL-MODUS
+        // ================================================================
+
+        // ESC -> zurück zur Weltauswahl
+        if (IsKeyPressed(KEY_ESCAPE))
+        {
+            WeltDatenSpeichern();
+            SpielzustandZuruecksetzen();
+            ResetWeltauswahl();   // Weltliste beim nächsten Menübesuch neu laden
+            zustand = Spielzustand::Weltauswahl;
+            continue;
+        }
+
+        DeltaTime = GetFrameTime();
+        mousePosition = GetScreenToWorld2D(GetMousePosition(), Playercam);
+
+        if (kannBewegen)
+            Spielermoovment();
+
         gridPosition.x = (int)floor(mousePosition.x / GRID_SIZE);
         gridPosition.y = (int)floor(mousePosition.y / GRID_SIZE);
 
-        //zug updaten
         BewegeZuege();
         UpdateSignale();
-        /*-------------------------------------------------
-            Maus
-        -------------------------------------------------*/
 
         if (AktuelleMaus != EndereMausZu) {
             mauszeiger(EndereMausZu);
             AktuelleMaus = EndereMausZu;
         }
 
-
-        /*-------------------------------------------------
-            ZEICHNEN
-        -------------------------------------------------*/
+        // ---- Zeichnen ----
         BeginDrawing();
-        //RAYWHITE
-        //grün
         ClearBackground(RAYWHITE);
 
-        /*-------------------------------------------------
-            ALLES IM GRID MOOVMENT
-        -------------------------------------------------*/
         BeginMode2D(Playercam);
         DrawInfiniteGrid();
 
-        //gleise verbinden
         verbindeSchienen();
 
-        for (auto& l : LeiterListe) {
-            l.Status = false;
-        }
-        for (auto& k : knotenliste) {
-            if (!k.modus) {
-                k.Status = false;
-            }
-        }
+        for (auto& l : LeiterListe)   l.Status = false;
+        for (auto& k : knotenliste)   if (!k.modus) k.Status = false;
 
         bool changed = true;
         int maxDurchlaeufe = (int)(LeiterListe.size() + InverterListe.size() + knotenliste.size() + 1);
@@ -141,47 +213,25 @@ int main(void)
             changed = false;
             durchlauf++;
 
-            std::vector<bool> leiterVorher;
-            for (const auto& l : LeiterListe)
-                leiterVorher.push_back(l.Status);
+            std::vector<bool> leiterVorher, knotenVorher, inverterVorher;
+            for (const auto& l : LeiterListe)   leiterVorher.push_back(l.Status);
+            for (const auto& k : knotenliste)   knotenVorher.push_back(k.Status);
+            for (const auto& inv : InverterListe) inverterVorher.push_back(inv.Status);
 
-            std::vector<bool> knotenVorher;
-            for (const auto& k : knotenliste)
-                knotenVorher.push_back(k.Status);
-
-            std::vector<bool> inverterVorher;
-            for (const auto& inv : InverterListe)
-                inverterVorher.push_back(inv.Status);
             GateOutput();
             CheckInput();
             CheckOutput();
             InvertorCheckInput();
             InvertorCheckOutput();
 
-            for (int i = 0; i < (int)LeiterListe.size(); i++) {
-                if (LeiterListe[i].Status != leiterVorher[i]) {
-                    changed = true;
-                    break;
-                }
-            }
-
-            if (!changed) {
-                for (int i = 0; i < (int)knotenliste.size(); i++) {
-                    if (knotenliste[i].Status != knotenVorher[i]) {
-                        changed = true;
-                        break;
-                    }
-                }
-            }
-
-            if (!changed) {
-                for (int i = 0; i < (int)InverterListe.size(); i++) {
-                    if (InverterListe[i].Status != inverterVorher[i]) {
-                        changed = true;
-                        break;
-                    }
-                }
-            }
+            for (int i = 0; i < (int)LeiterListe.size(); i++)
+                if (LeiterListe[i].Status != leiterVorher[i]) { changed = true; break; }
+            if (!changed)
+                for (int i = 0; i < (int)knotenliste.size(); i++)
+                    if (knotenliste[i].Status != knotenVorher[i]) { changed = true; break; }
+            if (!changed)
+                for (int i = 0; i < (int)InverterListe.size(); i++)
+                    if (InverterListe[i].Status != inverterVorher[i]) { changed = true; break; }
         }
 
         UpdateSignale();
@@ -189,32 +239,31 @@ int main(void)
         ZeichneGleise();
         AmpelZeichnen();
         ZeichneZuege();
-
         ZeichneBanhof();
-
         KnotenZeichnen();
         LeiterZeichnen();
         InvertorZeichnen();
         GateZeichnen();
         MarkerZeichnen();
 
-        /*-------------------------------------------------
-            EINGABEN IM GRID
-        -------------------------------------------------*/
-
         ProcesMaus(mousePosition);
 
-
         EndMode2D();
-        /*-------------------------------------------------
-            ALLES AUSERHALB VOM GRID MOOVMENT
-        -------------------------------------------------*/
 
+        // HUD
         DrawText(TextFormat("Grid: [%d, %d]", (int)gridPosition.x, (int)gridPosition.y),
             10, 10, 20, BLACK);
 
+        // Welt-Name anzeigen
+        std::string weltName = GetAktuelleWeltPfad();
+        size_t letzterSlash = weltName.find_last_of("/\\");
+        if (letzterSlash != std::string::npos)
+            weltName = weltName.substr(letzterSlash + 1);
+        DrawText(("Welt: " + weltName).c_str(), GenaueBreite - 200, 10, 16, DARKGRAY);
 
-        //ZEICHNET UI
+        // ESC-Hinweis
+        DrawText("[ESC] Zurück zur Weltauswahl", 10, GenaueHoehe - 25, 14, Color{ 120, 120, 120, 200 });
+
         zeichneUI();
         NichtImFeldZeichnen();
 
@@ -226,22 +275,11 @@ int main(void)
         EndDrawing();
     }
 
-    /*-------------------------------------------------
-            BEENDEN
-    -------------------------------------------------*/
-    SpeicherJson();
-    AktiveZuegeSpeichern();
-    GleiseSpeichern();
-    BanhofSpeichern();
-    KnotenSpeichern();
-    LeiterSpeichern();
-    InvertorSpeichern();
-    GateSpeichern();
-    SignalTeilSpeichern();
-    MarkerSpeichern();
+    // ---- Aufräumen ----
+    if (zustand == Spielzustand::Spiel)
+        WeltDatenSpeichern();
+
     unloadTextures();
     CloseWindow();
-
-
     return 0;
 }

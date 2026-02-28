@@ -151,6 +151,8 @@
     <ClCompile Include="textbox.cpp" />
     <ClCompile Include="Ui.cpp" />
     <ClCompile Include="untermenü.cpp" />
+    <ClCompile Include="Weltfilesystem.cpp" />
+    <ClCompile Include="Worldmanager.cpp" />
     <ClCompile Include="zug.cpp" />
     <ClCompile Include="ZugPlan.cpp" />
   </ItemGroup>
@@ -176,6 +178,8 @@
     <ClInclude Include="textbox.h" />
     <ClInclude Include="Ui.h" />
     <ClInclude Include="untermenü.h" />
+    <ClInclude Include="Weltfilesystem.h" />
+    <ClInclude Include="Worldmanager.h" />
     <ClInclude Include="zug.h" />
     <ClInclude Include="ZugPlan.h" />
   </ItemGroup>

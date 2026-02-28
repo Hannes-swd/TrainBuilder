@@ -7,82 +7,80 @@
 #include "json.hpp"
 #include "LoadTexture.h"
 #include "Signal.h"
-
+#include "Json.h"
 
 using json = nlohmann::json;
 
-void LadeJson() {
-    //ALLE DATEIEN
-    std::ifstream Nutzer("resurses/json/User.json");
-    std::ifstream Gleise("resurses/json/Gleise.json");
-    std::ifstream Banhoefe("resurses/json/Banhof.json");
-    std::ifstream ZugArten("resurses/json/zugarten.json");
-	std::ifstream AktiveZuege("resurses/json/AktiveZuege.json");
-    std::ifstream Ampeln("resurses/json/Ampeln.json");
-    std::ifstream Knoten("resurses/json/Knoten.json");
-    std::ifstream Leiter("resurses/json/Leiter.json"); 
-    std::ifstream Inverter("resurses/json/Inverter.json");
-    std::ifstream marker("resurses/json/marker.json");
-    std::ifstream Gate("resurses/json/Gate.json");
+// -----------------------------------------------------------------------
+// Weltpfad-Verwaltung
+// -----------------------------------------------------------------------
+static std::string weltJsonPfad = "resurses/json"; // Standardpfad (Rückwärtskompatibilität)
 
-    //OBECKTE UND LADEN
+void SetzeWeltPfad(const std::string& pfad) {
+    // pfad ist z.B. "welten\MeineWelt"
+    weltJsonPfad = pfad + "\\json";
+    std::cout << "JSON-Pfad gesetzt: " << weltJsonPfad << std::endl;
+}
+
+std::string GetJsonPfad() {
+    return weltJsonPfad;
+}
+
+// Hilfsfunktion: vollständigen Dateipfad bauen
+static std::string JP(const std::string& dateiname) {
+    return weltJsonPfad + "\\" + dateiname;
+}
+
+// -----------------------------------------------------------------------
+// LadeJson
+// -----------------------------------------------------------------------
+void LadeJson() {
+    std::ifstream Nutzer(JP("User.json"));
+    std::ifstream Gleise(JP("Gleise.json"));
+    std::ifstream Banhoefe(JP("Banhof.json"));
+    std::ifstream ZugArten("resurses/json/zugarten.json"); // Zugarten sind global, nicht weltspezifisch
+    std::ifstream AktiveZuege(JP("AktiveZuege.json"));
+    std::ifstream Ampeln(JP("Ampeln.json"));
+    std::ifstream Knoten(JP("Knoten.json"));
+    std::ifstream Leiter(JP("Leiter.json"));
+    std::ifstream Inverter(JP("Inverter.json"));
+    std::ifstream marker(JP("marker.json"));
+    std::ifstream Gate(JP("Gate.json"));
+
     nlohmann::json NutzerDaten;
-    if (Nutzer.is_open()) {
-        Nutzer >> NutzerDaten;
-    }
+    if (Nutzer.is_open()) Nutzer >> NutzerDaten;
 
     nlohmann::json GleiseDaten;
-    if (Gleise.is_open()) {
-        Gleise >> GleiseDaten;
-    }
+    if (Gleise.is_open()) Gleise >> GleiseDaten;
 
     nlohmann::json BanhofDaten;
-    if (Banhoefe.is_open()) {
-        Banhoefe >> BanhofDaten;
-    }
+    if (Banhoefe.is_open()) Banhoefe >> BanhofDaten;
 
     nlohmann::json ZugArtenDaten;
-    if (ZugArten.is_open()) {
-        ZugArten >> ZugArtenDaten;
-    }
+    if (ZugArten.is_open()) ZugArten >> ZugArtenDaten;
 
-	nlohmann::json AktiveZuegeDaten;
-	if (AktiveZuege.is_open()) {
-		AktiveZuege >> AktiveZuegeDaten;
-	}
+    nlohmann::json AktiveZuegeDaten;
+    if (AktiveZuege.is_open()) AktiveZuege >> AktiveZuegeDaten;
 
-	nlohmann::json AmpelnDaten;
-	if (Ampeln.is_open()) {
-		Ampeln >> AmpelnDaten;
-	}
+    nlohmann::json AmpelnDaten;
+    if (Ampeln.is_open()) Ampeln >> AmpelnDaten;
 
     nlohmann::json KnotenDaten;
-    if (Knoten.is_open()) {
-        Knoten >> KnotenDaten;
-    }
+    if (Knoten.is_open()) Knoten >> KnotenDaten;
 
     nlohmann::json LeiterDaten;
-    if (Leiter.is_open()) {
-        Leiter >> LeiterDaten;
-    }
+    if (Leiter.is_open()) Leiter >> LeiterDaten;
 
     nlohmann::json InverterDaten;
-    if (Inverter.is_open()) {
-        Inverter >> InverterDaten;
-    }
+    if (Inverter.is_open()) Inverter >> InverterDaten;
 
     nlohmann::json markerDaten;
-    if (marker.is_open()) {
-        marker >> markerDaten;
-    }
+    if (marker.is_open()) marker >> markerDaten;
 
     nlohmann::json gateDaten;
-    if (Gate.is_open()) {
-        Gate >> gateDaten;
-    }
-    
-    
-    //ALLE LISTEN LÖSCHEN
+    if (Gate.is_open()) Gate >> gateDaten;
+
+    // Listen leeren
     gleisListe.clear();
     banhofListe.clear();
     zugArtenListe.clear();
@@ -91,9 +89,8 @@ void LadeJson() {
     InverterListe.clear();
     MarkerListe.clear();
     GateListe.clear();
-    /*-------------------------------------------------
-        Gleise
-    -------------------------------------------------*/
+
+    // Gleise
     if (GleiseDaten.contains("Objeckte")) {
         for (const auto& obj : GleiseDaten["Objeckte"]) {
             GleisObjeckt gleis;
@@ -105,10 +102,7 @@ void LadeJson() {
         }
     }
 
-    if (Gleise.is_open()) Gleise.close();
-    /*-------------------------------------------------
-        Banhofe
-    -------------------------------------------------*/
+    // Bahnhöfe
     if (BanhofDaten.contains("BanhofObjeckte")) {
         for (const auto& obj : BanhofDaten["BanhofObjeckte"]) {
             BanhofObjeckt banhof;
@@ -121,14 +115,13 @@ void LadeJson() {
             banhofListe.push_back(banhof);
         }
     }
-    /*-------------------------------------------------
-        Zugarten
-    -------------------------------------------------*/
+
+    // Zugarten (global)
     if (ZugArtenDaten.contains("zuege") || ZugArtenDaten.contains(u8"züge")) {
         const auto& zuegeArray = ZugArtenDaten.contains("zuege") ? ZugArtenDaten["zuege"] : ZugArtenDaten[u8"züge"];
         for (const auto& obj : zuegeArray) {
             ZugArt zugart;
-			zugart.id = obj["id"];
+            zugart.id = obj["id"];
             zugart.name = obj["name"];
             zugart.geschwindichkeit = obj["geschwindichkeit"];
             zugart.biildpfad = obj["biildpfad"];
@@ -137,9 +130,8 @@ void LadeJson() {
             zugArtenListe.push_back(zugart);
         }
     }
-    /*-------------------------------------------------
-		Aktive Züge
-    -------------------------------------------------*/
+
+    // Aktive Züge
     if (AktiveZuegeDaten.contains("AktiveZuege")) {
         for (const auto& obj : AktiveZuegeDaten["AktiveZuege"]) {
             Zug zug;
@@ -156,9 +148,8 @@ void LadeJson() {
             aktiveZuege.push_back(zug);
         }
     }
-    /*-------------------------------------------------
-        Ampeln
-    -------------------------------------------------*/
+
+    // Ampeln
     if (AmpelnDaten.contains("Ampeln")) {
         for (const auto& obj : AmpelnDaten["Ampeln"]) {
             ampel ampel;
@@ -168,15 +159,12 @@ void LadeJson() {
             ampel.isGreen = obj["isGreen"];
             ampel.Name = obj["Name"];
             ampelListe.push_back(ampel);
-
-            if (!ampel.Name.empty()) {
+            if (!ampel.Name.empty())
                 SignalTeilHinzufuegen(ampel.AmpelId, ampel.Name, ampel.isGreen, Ampel);
-            }
         }
     }
-    /*-------------------------------------------------
-        Knoten
-    -------------------------------------------------*/
+
+    // Knoten
     if (KnotenDaten.contains("Knoten")) {
         for (const auto& obj : KnotenDaten["Knoten"]) {
             knoten Knoten;
@@ -185,14 +173,12 @@ void LadeJson() {
             Knoten.eindeutigeId = obj["eindeutigeId"];
             Knoten.Status = obj["Status"];
             Knoten.Name = obj["Name"];
-            //modus: Lesen = true / schreiben = false
             Knoten.modus = obj["modus"];
             knotenliste.push_back(Knoten);
         }
     }
-    /*-------------------------------------------------
-        Leiter
-    -------------------------------------------------*/
+
+    // Leiter
     if (LeiterDaten.contains("Leiter")) {
         for (const auto& obj : LeiterDaten["Leiter"]) {
             Leiterobjeckt Leiter;
@@ -201,14 +187,11 @@ void LadeJson() {
             Leiter.Rotation = obj["Rotation"];
             Leiter.eindeutigeId = obj["eindeutigeId"];
             Leiter.Status = obj["Status"];
-
             LeiterListe.push_back(Leiter);
         }
     }
 
-    /*-------------------------------------------------
-        Inverter
-    -------------------------------------------------*/
+    // Inverter
     if (InverterDaten.contains("Inverter")) {
         for (const auto& obj : InverterDaten["Inverter"]) {
             InverterObjeckt Inverter;
@@ -217,22 +200,18 @@ void LadeJson() {
             Inverter.Rotation = obj["Rotation"];
             Inverter.eindeutigeId = obj["eindeutigeId"];
             Inverter.Status = obj["Status"];
-
             InverterListe.push_back(Inverter);
         }
     }
 
-
-    /*-------------------------------------------------
-        Marker
-    -------------------------------------------------*/
+    // Marker
     if (markerDaten.contains("marker")) {
         for (const auto& obj : markerDaten["marker"]) {
-            MarkerObjeckt marker; 
+            MarkerObjeckt marker;
             marker.GridX = obj["GridX"];
             marker.GridY = obj["GridY"];
             marker.eindeutigeId = obj["eindeutigeId"];
-            if (obj.contains("farbe_r") && obj.contains("farbe_g") && obj.contains("farbe_b")) {
+            if (obj.contains("farbe_r")) {
                 marker.farbe.r = obj["farbe_r"];
                 marker.farbe.g = obj["farbe_g"];
                 marker.farbe.b = obj["farbe_b"];
@@ -241,14 +220,11 @@ void LadeJson() {
             else {
                 marker.farbe = RED;
             }
-
             MarkerListe.push_back(marker);
         }
     }
 
-    /*-------------------------------------------------
-        Gate
-    -------------------------------------------------*/
+    // Gate
     if (gateDaten.contains("Gate")) {
         for (const auto& obj : gateDaten["Gate"]) {
             GateObjeckt gate;
@@ -260,37 +236,27 @@ void LadeJson() {
             gate.input1 = obj["input1"];
             gate.input2 = obj["input2"];
             gate.Output = obj["Output"];
-
             GateListe.push_back(gate);
         }
     }
 
-	if (AktiveZuege.is_open()) AktiveZuege.close();
-    if (Banhoefe.is_open()) Banhoefe.close();
-    if (ZugArten.is_open()) ZugArten.close();
-	if (Ampeln.is_open()) Ampeln.close();
-    if (Knoten.is_open()) Knoten.close();
-    if (Leiter.is_open()) Leiter.close();
-    if (Inverter.is_open()) Inverter.close();
-    if (marker.is_open()) marker.close();
-    if (Gate.is_open()) Gate.close();
-
-
-    //WERT LADEN
+    // Spielerposition
     if (NutzerDaten.contains("SpielerpositionX") && NutzerDaten.contains("SpielerpositionY")) {
         Spielerposition = { NutzerDaten["SpielerpositionX"], NutzerDaten["SpielerpositionY"] };
     }
+
+    std::cout << "Welt geladen von: " << weltJsonPfad << std::endl;
 }
 
+// -----------------------------------------------------------------------
+// SpeicherJson
+// -----------------------------------------------------------------------
 void SpeicherJson() {
-    //Daten speichern
     nlohmann::json NutzerDaten;
-
     NutzerDaten["SpielerpositionX"] = (int)Spielerposition.x;
     NutzerDaten["SpielerpositionY"] = (int)Spielerposition.y;
 
-    //Datei speichern
-    std::ofstream datei("resurses/json/User.json");
+    std::ofstream datei(JP("User.json"));
     if (datei.is_open()) {
         datei << NutzerDaten.dump(4);
         datei.close();
