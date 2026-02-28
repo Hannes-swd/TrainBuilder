@@ -162,6 +162,46 @@ bool ErstelleNeueWelt(const std::string& weltName) {
         }
     }
 
+    std::string quellBild = "welten/vorlage/Profielbild.png";
+    std::string zielBild = weltPfad + "/Profilbild.png"; 
+
+    // Prüfen ob Quelldatei existiert
+    std::ifstream test(quellBild, std::ios::binary);
+    if (test.is_open()) {
+        test.close();
+
+        // Datei kopieren
+        std::ifstream src(quellBild, std::ios::binary);
+        std::ofstream dst(zielBild, std::ios::binary);
+
+        if (src.is_open() && dst.is_open()) {
+            dst << src.rdbuf();
+            std::cout << "Profilbild aus Vorlage kopiert nach: " << zielBild << std::endl;
+        }
+        else {
+            std::cerr << "Warnung: Konnte Profilbild nicht kopieren!" << std::endl;
+        }
+    }
+    else {
+        // Alternativ im Template-Ordner suchen (falls englische Bezeichnung)
+        std::string alternativBild = "welten/template/Profilbild.png";
+        std::ifstream test2(alternativBild, std::ios::binary);
+        if (test2.is_open()) {
+            test2.close();
+
+            std::ifstream src2(alternativBild, std::ios::binary);
+            std::ofstream dst2(zielBild, std::ios::binary);
+
+            if (src2.is_open() && dst2.is_open()) {
+                dst2 << src2.rdbuf();
+                std::cout << "Profilbild aus Template kopiert nach: " << zielBild << std::endl;
+            }
+        }
+        else {
+            std::cout << "Hinweis: Keine Profilbild.png im Vorlagen-Ordner gefunden." << std::endl;
+        }
+    }
+
     std::cout << "Welt '" << weltName << "' erfolgreich erstellt!" << std::endl;
     return true;
 }
