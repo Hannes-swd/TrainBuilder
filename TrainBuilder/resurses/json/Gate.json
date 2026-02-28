@@ -7,7 +7,7 @@
             "Rotation": 0,
             "eindeutigeId": 1,
             "input1": false,
-            "input2": false,
+            "input2": true,
             "modus": "AND"
         },
         {
@@ -16,7 +16,7 @@
             "Output": false,
             "Rotation": 1,
             "eindeutigeId": 2,
-            "input1": false,
+            "input1": true,
             "input2": true,
             "modus": "XOR"
         }

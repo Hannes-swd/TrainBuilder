@@ -152,7 +152,7 @@ int main(void)
             std::vector<bool> inverterVorher;
             for (const auto& inv : InverterListe)
                 inverterVorher.push_back(inv.Status);
-
+            GateOutput();
             CheckInput();
             CheckOutput();
             InvertorCheckInput();

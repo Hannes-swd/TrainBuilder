@@ -124,3 +124,30 @@ void GateZeichnen() {
         }
     }
 }
+void GateOutput() {
+    for (auto& Gate : GateListe) {
+        int targetX = Gate.GridX;
+        int targetY = Gate.GridY;
+
+        if (Gate.Rotation == 0)      targetY = Gate.GridY - 1;
+        else if (Gate.Rotation == 1) targetX = Gate.GridX + 1;
+        else if (Gate.Rotation == 2) targetY = Gate.GridY + 1;
+        else if (Gate.Rotation == 3) targetX = Gate.GridX - 1;
+
+        //schaut bei modus unterschiedliche outputs
+        if (Gate.modus == "AND") {
+            if (Gate.input1 && Gate.input2)
+                Gate.Output = true;
+            else 
+                Gate.Output = false;
+        }
+        if (Gate.modus == "XOR") {
+            if (Gate.input1 && !Gate.input2)
+                Gate.Output = true;
+            else if (Gate.input2 && !Gate.input1)
+                Gate.Output = true;
+            else 
+                Gate.Output = false;
+        }
+    }
+}

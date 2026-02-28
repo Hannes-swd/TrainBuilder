@@ -11,8 +11,8 @@
             "farbe": "rot",
             "geschwindichkeit": 4,
             "name": "Zug 1",
-            "posX": 9.0,
-            "posY": -21.0,
+            "posX": -7.0,
+            "posY": -19.0,
             "rotation": 180,
             "zugId": 1,
             "zugtyp": "Erster"
@@ -28,9 +28,9 @@
             "farbe": "gruen",
             "geschwindichkeit": 10,
             "name": "Zug 2",
-            "posX": 11.0,
-            "posY": -24.0,
-            "rotation": 90,
+            "posX": -13.0,
+            "posY": -27.0,
+            "rotation": -90,
             "zugId": 2,
             "zugtyp": "zweiter"
         },
@@ -44,9 +44,9 @@
             "farbe": "blau",
             "geschwindichkeit": 7,
             "name": "Zug 3",
-            "posX": -13.0,
-            "posY": -26.58871078491211,
-            "rotation": 90,
+            "posX": -10.61577320098877,
+            "posY": -26.0,
+            "rotation": 0,
             "zugId": 3,
             "zugtyp": "dreier"
         },
@@ -59,9 +59,9 @@
             "farbe": "rot",
             "geschwindichkeit": 4,
             "name": "Zug 4",
-            "posX": 5.0,
+            "posX": 6.6005096435546875,
             "posY": -21.0,
-            "rotation": 180,
+            "rotation": 0,
             "zugId": 4,
             "zugtyp": "Erster"
         }

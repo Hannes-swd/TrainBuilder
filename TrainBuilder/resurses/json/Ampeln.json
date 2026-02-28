@@ -33,7 +33,7 @@
             "Name": "pp",
             "gridX": 6,
             "gridY": -27,
-            "isGreen": false
+            "isGreen": true
         }
     ]
 }
