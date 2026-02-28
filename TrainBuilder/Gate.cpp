@@ -114,5 +114,13 @@ void GateZeichnen() {
                 DrawTexturePro(tex, source, dest, origin, rotation, WHITE);
             }
         }
+        if (Gate.modus == "XOR") {
+            Texture2D tex = LoadTextureFromPath("resurses/Texturen/Technik/Gate/XOR.png");
+            if (tex.id != 0) {
+                Rectangle source = { 0, 0, (float)tex.width, (float)tex.height };
+                Rectangle dest = { x + GRID_SIZE / 2, y + GRID_SIZE / 2, GRID_SIZE, GRID_SIZE };
+                DrawTexturePro(tex, source, dest, origin, rotation, WHITE);
+            }
+        }
     }
 }

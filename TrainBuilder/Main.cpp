@@ -22,6 +22,18 @@
 #include "mauszeiger.h"
 #include "Marker.h"
 #include "Gate.h"
+/*
+* IDEEN
+* 
+* - Erklerung für technik
+* - ZUG-FAHRPLAN ender BLOCK
+* - schalter
+* - welten system
+* - blueprint
+* - displays
+* - tutorial
+* - welten speichern endern exportieren
+*/
 
 int main(void)
 {
