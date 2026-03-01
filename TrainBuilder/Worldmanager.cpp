@@ -223,9 +223,9 @@ bool WeltauswahlUpdate() {
         maus.y >= bY && maus.y <= bY + bH);
 
     DrawRectangleRounded(Rectangle{ bX, bY, bW, bH }, 0.3f, 8,
-        bHov ? Color{ 60, 160, 60, 255 } : Color{ 40, 120, 40, 255 });
-    RahmenRund(Rectangle{ bX, bY, bW, bH }, Color{ 80, 200, 80, 255 });
-    const char* bT = "+ New World";
+        bHov ? DARKBLUE : VIOLET);
+    RahmenRund(Rectangle{ bX, bY, bW, bH }, DARKBLUE);
+    const char* bT = "New World";
     DrawText(bT, (int)(bX + bW / 2 - MeasureText(bT, 20) / 2),
         (int)(bY + bH / 2 - 10), 20, WHITE);
 
