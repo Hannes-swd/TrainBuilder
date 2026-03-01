@@ -168,3 +168,23 @@ void GateOutput() {
         }
     }
 }
+
+void GateLöschen(int gridX, int gridY) {
+    auto it = std::remove_if(GateListe.begin(), GateListe.end(),
+        [gridX, gridY](const GateObjeckt& l) {
+            return l.GridX == gridX && l.GridY == gridY;
+        });
+
+    if (it != GateListe.end()) {
+        GateListe.erase(it, GateListe.end());
+        GateSpeichern();
+    }
+}
+bool IstGateVorhanden(int gridX, int gridY) {
+    for (const auto& gate : GateListe) {
+        if (gate.GridX == gridX && gate.GridY == gridY) {
+            return true;
+        }
+    }
+    return false;
+}
