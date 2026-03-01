@@ -432,9 +432,9 @@ void zeichneWeldOptionen() {
         return;
     }
 
-    // ================================================================
-    // Löschen
-    // ================================================================
+// ================================================================
+// Löschen
+// ================================================================
     if (zeigeLoeschen) {
         DrawRectangle(0, 0, W, H, Color{ 0, 0, 0, 160 });
 
@@ -468,13 +468,14 @@ void zeichneWeldOptionen() {
             (int)(nX + nW / 2 - MeasureText("Cancel", 14) / 2),
             (int)(nY + 10), 14, WHITE);
 
-        if (jaHov) {
+        if (jaHov && IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
             std::string pfad = "welten/" + loescheWeltName;
             LoescheWelt(pfad);
             zeigeLoeschen = false;
             offeneOptionen = "";
             s_resetPending = true;
         }
+
         if (IsKeyPressed(KEY_ESCAPE)) zeigeLoeschen = false;
 
         return;
