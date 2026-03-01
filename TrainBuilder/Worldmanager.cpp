@@ -116,7 +116,7 @@ bool WeltauswahlUpdate() {
     // ---- Titel ----
     const char* titel = "TrainBuilder";
     DrawText(titel, W / 2 - MeasureText(titel, 48) / 2, 40, 48, Color{ 220, 180, 60, 255 });
-    const char* sub = "Weltauswahl";
+    const char* sub = "world selection";
     DrawText(sub, W / 2 - MeasureText(sub, 22) / 2, 100, 22, Color{ 180, 180, 200, 255 });
 
     // ---- Weltenliste ----
@@ -176,7 +176,7 @@ bool WeltauswahlUpdate() {
         }
 
         DrawText(welten[i].name.c_str(), (int)lX + 60, (int)iy + 10, 20, WHITE);
-        std::string dat = "Erstellt: " + welten[i].erstelltAm;
+        std::string dat = "Created: " + welten[i].erstelltAm;
         DrawText(dat.c_str(), (int)lX + 60, (int)iy + 35, 13, Color{ 150, 160, 180, 255 });
 
         float optSize = 24.0f;
@@ -204,14 +204,14 @@ bool WeltauswahlUpdate() {
             }
         }
 
-        DrawTexture("Optionen", optX, optY, optSize, optSize,
+        DrawTexture("options", optX, optY, optSize, optSize,
             optHover ? WHITE : Color{ 200, 200, 200, 255 });
     }
 
     EndScissorMode();
 
     if (welten.empty()) {
-        const char* t = "Keine Welten vorhanden - erstelle eine neue Welt!";
+        const char* t = "No worlds available - create a new world!";
         DrawText(t, W / 2 - MeasureText(t, 15) / 2, H / 2, 15, Color{ 140, 140, 160, 255 });
     }
 
@@ -225,7 +225,7 @@ bool WeltauswahlUpdate() {
     DrawRectangleRounded(Rectangle{ bX, bY, bW, bH }, 0.3f, 8,
         bHov ? Color{ 60, 160, 60, 255 } : Color{ 40, 120, 40, 255 });
     RahmenRund(Rectangle{ bX, bY, bW, bH }, Color{ 80, 200, 80, 255 });
-    const char* bT = "+ Neue Welt";
+    const char* bT = "+ New World";
     DrawText(bT, (int)(bX + bW / 2 - MeasureText(bT, 20) / 2),
         (int)(bY + bH / 2 - 10), 20, WHITE);
 
@@ -254,8 +254,8 @@ bool WeltauswahlUpdate() {
         DrawRectangleRounded(Rectangle{ dX3, dY3, dW3, dH3 }, 0.1f, 8, Color{ 40, 45, 60, 255 });
         Rahmen(Rectangle{ dX3, dY3, dW3, dH3 }, Color{ 100, 120, 160, 255 });
 
-        DrawText("Neue Welt erstellen", (int)(dX3 + 20), (int)(dY3 + 18), 22, WHITE);
-        DrawText("Weltname:", (int)(dX3 + 20), (int)(dY3 + 60), 16, Color{ 180, 180, 200, 255 });
+        DrawText("Create new world", (int)(dX3 + 20), (int)(dY3 + 18), 22, WHITE);
+        DrawText("world name:", (int)(dX3 + 20), (int)(dY3 + 60), 16, Color{ 180, 180, 200, 255 });
 
         float inX = dX3 + 20, inY = dY3 + 82, inW2 = dW3 - 40, inH2 = 36;
         DrawRectangleRounded(Rectangle{ inX, inY, inW2, inH2 }, 0.2f, 8, Color{ 25, 28, 40, 255 });
@@ -276,7 +276,7 @@ bool WeltauswahlUpdate() {
         auto versuch = [&]() {
             std::string n = nameInput.Get();
             if (n.empty()) {
-                fehlerText = "Bitte einen Namen eingeben!";
+                fehlerText = "Please enter a name!";
                 fehlerTimer = 3.0f;
                 return;
             }
@@ -285,7 +285,7 @@ bool WeltauswahlUpdate() {
                 zeigeDialog = false;
             }
             else {
-                fehlerText = "Diese Welt existiert bereits!";
+                fehlerText = "This world already exists!";
                 fehlerTimer = 3.0f;
             }
             };
@@ -298,8 +298,8 @@ bool WeltauswahlUpdate() {
             maus.y >= okY && maus.y <= okY + okH2);
         DrawRectangleRounded(Rectangle{ okX, okY, okW, okH2 }, 0.3f, 8,
             okHov ? Color{ 60,160,60,255 } : Color{ 40,120,40,255 });
-        DrawText("Erstellen",
-            (int)(okX + okW / 2 - MeasureText("Erstellen", 16) / 2),
+        DrawText("Create",
+            (int)(okX + okW / 2 - MeasureText("Create", 16) / 2),
             (int)(okY + 9), 16, WHITE);
 
         float abX = dX3 + dW3 - 120, abY = okY, abW = 100.0f;
@@ -307,8 +307,8 @@ bool WeltauswahlUpdate() {
             maus.y >= abY && maus.y <= abY + okH2);
         DrawRectangleRounded(Rectangle{ abX, abY, abW, okH2 }, 0.3f, 8,
             abHov ? Color{ 160,50,50,255 } : Color{ 120,35,35,255 });
-        DrawText("Abbrechen",
-            (int)(abX + abW / 2 - MeasureText("Abbrechen", 14) / 2),
+        DrawText("Cancel",
+            (int)(abX + abW / 2 - MeasureText("Cancel", 14) / 2),
             (int)(abY + 10), 14, WHITE);
 
         if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
@@ -358,8 +358,8 @@ void zeichneWeldOptionen() {
         DrawRectangleRounded(Rectangle{ dX, dY, dW, dH }, 0.1f, 8, Color{ 35, 40, 55, 255 });
         DrawRectangleRoundedLines(Rectangle{ dX, dY, dW, dH }, 0.1f, 8, Color{ 100, 150, 255, 255 });
 
-        DrawText("Welt umbenennen", (int)(dX + 20), (int)(dY + 18), 22, WHITE);
-        DrawText("Neuer Name:", (int)(dX + 20), (int)(dY + 62), 16, Color{ 180, 180, 200, 255 });
+        DrawText("Rename world", (int)(dX + 20), (int)(dY + 18), 22, WHITE);
+        DrawText("New name:", (int)(dX + 20), (int)(dY + 62), 16, Color{ 180, 180, 200, 255 });
 
         // Eingabefeld
         float inX = dX + 20, inY = dY + 85, inW = dW - 40, inH = 36;
@@ -389,8 +389,8 @@ void zeichneWeldOptionen() {
             mausPos.y >= okY && mausPos.y <= okY + okH);
         DrawRectangleRounded(Rectangle{ okX, okY, okW, okH }, 0.3f, 8,
             okHov ? Color{ 60,160,60,255 } : Color{ 40,120,40,255 });
-        DrawText("Umbenennen",
-            (int)(okX + okW / 2 - MeasureText("Umbenennen", 14) / 2),
+        DrawText("rename",
+            (int)(okX + okW / 2 - MeasureText("rename", 14) / 2),
             (int)(okY + 10), 14, WHITE);
 
         float abX = dX + dW - 110, abY = okY, abW = 100.0f;
@@ -398,14 +398,14 @@ void zeichneWeldOptionen() {
             mausPos.y >= abY && mausPos.y <= abY + okH);
         DrawRectangleRounded(Rectangle{ abX, abY, abW, okH }, 0.3f, 8,
             abHov ? Color{ 160,50,50,255 } : Color{ 120,35,35,255 });
-        DrawText("Abbrechen",
-            (int)(abX + abW / 2 - MeasureText("Abbrechen", 14) / 2),
+        DrawText("Cancel",
+            (int)(abX + abW / 2 - MeasureText("Cancel", 14) / 2),
             (int)(abY + 10), 14, WHITE);
 
         auto versuchUmbenennen = [&]() {
             std::string neuerName = umbenInput.Get();
             if (neuerName.empty()) {
-                umbenenFehler = "Bitte einen Namen eingeben!";
+                umbenenFehler = "Please enter a name!";
                 umbenenFehlerTimer = 3.0f;
                 return;
             }
@@ -416,7 +416,7 @@ void zeichneWeldOptionen() {
                 s_resetPending = true;
             }
             else {
-                umbenenFehler = "Name existiert bereits!";
+                umbenenFehler = "Name already exists!";
                 umbenenFehlerTimer = 3.0f;
             }
             };
@@ -445,18 +445,18 @@ void zeichneWeldOptionen() {
         DrawRectangleRounded(Rectangle{ dX4, dY4, dW4, dH4 }, 0.1f, 8, Color{ 40, 20, 20, 255 });
         DrawRectangleRoundedLines(Rectangle{ dX4, dY4, dW4, dH4 }, 0.1f, 8, Color{ 200, 60, 60, 255 });
 
-        DrawText("Welt loeschen?", (int)(dX4 + 20), (int)(dY4 + 18), 22, RED);
-        std::string frage = "\"" + loescheWeltName + "\" wirklich loeschen?";
+        DrawText("Delete world?", (int)(dX4 + 20), (int)(dY4 + 18), 22, RED);
+        std::string frage = "\"" + loescheWeltName + "\" Are you sure you want to delete this?";
         DrawText(frage.c_str(), (int)(dX4 + 20), (int)(dY4 + 55), 15, Color{ 220, 200, 200, 255 });
-        DrawText("Nicht rueckgaengig!", (int)(dX4 + 20), (int)(dY4 + 78), 12, Color{ 180, 120, 120, 255 });
+        DrawText("Non-refundable!", (int)(dX4 + 20), (int)(dY4 + 78), 12, Color{ 180, 120, 120, 255 });
 
         float jaX = dX4 + dW4 - 230, jaY = dY4 + dH4 - 50, jaW = 110.0f, jaH = 36.0f;
         bool  jaHov = (mausPos.x >= jaX && mausPos.x <= jaX + jaW &&
             mausPos.y >= jaY && mausPos.y <= jaY + jaH);
         DrawRectangleRounded(Rectangle{ jaX, jaY, jaW, jaH }, 0.3f, 8,
             jaHov ? Color{ 200,40,40,255 } : Color{ 140,25,25,255 });
-        DrawText("Ja, loeschen",
-            (int)(jaX + jaW / 2 - MeasureText("Ja, loeschen", 13) / 2),
+        DrawText("Yes, delete",
+            (int)(jaX + jaW / 2 - MeasureText("Yes, delete", 13) / 2),
             (int)(jaY + 11), 13, WHITE);
 
         float nX = dX4 + dW4 - 110, nY = jaY, nW = 100.0f;
@@ -464,8 +464,8 @@ void zeichneWeldOptionen() {
             mausPos.y >= nY && mausPos.y <= nY + jaH);
         DrawRectangleRounded(Rectangle{ nX, nY, nW, jaH }, 0.3f, 8,
             nHov ? Color{ 60,90,60,255 } : Color{ 40,65,40,255 });
-        DrawText("Abbrechen",
-            (int)(nX + nW / 2 - MeasureText("Abbrechen", 14) / 2),
+        DrawText("Cancel",
+            (int)(nX + nW / 2 - MeasureText("Cancel", 14) / 2),
             (int)(nY + 10), 14, WHITE);
 
         if (jaHov) {
@@ -518,7 +518,7 @@ void zeichneWeldOptionen() {
         bool hov1 = CheckCollisionPointRec(mausPos, opt1);
         DrawRectangleRounded(opt1, 0.3f, 8,
             hov1 ? Color{ 180, 40, 40, 255 } : Color{ 110, 28, 28, 255 });
-        DrawText("Welt loeschen",
+        DrawText("Delete world",
             panelX + 38, startY + 14, 18,
             hov1 ? WHITE : Color{ 255, 170, 170, 255 });
 
@@ -527,7 +527,7 @@ void zeichneWeldOptionen() {
         bool hov2 = CheckCollisionPointRec(mausPos, opt2);
         DrawRectangleRounded(opt2, 0.3f, 8,
             hov2 ? Color{ 60, 110, 210, 255 } : Color{ 38, 72, 140, 255 });
-        DrawText("Name aendern",
+        DrawText("Change name",
             panelX + 38, startY + 82, 18,
             hov2 ? WHITE : Color{ 170, 200, 255, 255 });
 
@@ -536,7 +536,7 @@ void zeichneWeldOptionen() {
         bool hov3 = CheckCollisionPointRec(mausPos, opt3);
         DrawRectangleRounded(opt3, 0.3f, 8,
             hov3 ? Color{ 80, 80, 100, 255 } : Color{ 52, 52, 68, 255 });
-        DrawText("Abbrechen",
+        DrawText("Cancel",
             panelX + 38, startY + 150, 18,
             hov3 ? WHITE : Color{ 180, 180, 200, 255 });
 

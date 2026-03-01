@@ -18,7 +18,7 @@ extern int ausgewählterUntermenuePunkt;
 	KARAKTER
 -------------------------------------------------*/
 extern Vector2 Spielerposition;
-extern float DeltaTime;
+extern float DeltaTime; 
 extern Camera2D Playercam;
 extern float playerSpeed;
 
