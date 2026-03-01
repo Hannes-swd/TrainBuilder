@@ -129,6 +129,7 @@ int main(void)
 
             bool weltGewaehlt = WeltauswahlUpdate();
 
+            zeichneWeldOptionen();
             EndDrawing();
 
             if (weltGewaehlt) {
@@ -155,7 +156,9 @@ int main(void)
                 zustand = Spielzustand::Spiel;
 
                 std::cout << "Welt geladen: " << GetAktuelleWeltPfad() << std::endl;
+                
             }
+            
 
             continue;
         }
@@ -245,6 +248,8 @@ int main(void)
 
         ProcesMaus(mousePosition);
 
+        
+
         EndMode2D();
 
         // HUD
@@ -257,6 +262,8 @@ int main(void)
         if (letzterSlash != std::string::npos)
             weltName = weltName.substr(letzterSlash + 1);
         DrawText(("Welt: " + weltName).c_str(), GenaueBreite - 200, 10, 16, DARKGRAY);
+
+        
 
 
         zeichneUI();

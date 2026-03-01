@@ -8,27 +8,22 @@
 #include "LoadTexture.h"
 #include "Signal.h"
 #include "Json.h"
+#include "Weltfilesystem.h"
 
 using json = nlohmann::json;
 
 // -----------------------------------------------------------------------
 // Weltpfad-Verwaltung
+// SetzeWeltPfad ist in Weltfilesystem.cpp definiert - nicht hier!
 // -----------------------------------------------------------------------
-static std::string weltJsonPfad = "resurses/json"; // Standardpfad (Rückwärtskompatibilität)
-
-void SetzeWeltPfad(const std::string& pfad) {
-    // pfad ist z.B. "welten\MeineWelt"
-    weltJsonPfad = pfad + "\\json";
-    std::cout << "JSON-Pfad gesetzt: " << weltJsonPfad << std::endl;
-}
 
 std::string GetJsonPfad() {
-    return weltJsonPfad;
+    return GetAktuelleWeltPfad() + "\\json";
 }
 
 // Hilfsfunktion: vollständigen Dateipfad bauen
 static std::string JP(const std::string& dateiname) {
-    return weltJsonPfad + "\\" + dateiname;
+    return GetJsonPfad() + "\\" + dateiname;
 }
 
 std::string GetFullPath(const std::string& filename) {
@@ -249,7 +244,7 @@ void LadeJson() {
         Spielerposition = { NutzerDaten["SpielerpositionX"], NutzerDaten["SpielerpositionY"] };
     }
 
-    std::cout << "Welt geladen von: " << weltJsonPfad << std::endl;
+    std::cout << "Welt geladen von: " << GetJsonPfad() << std::endl;
 }
 
 // -----------------------------------------------------------------------
