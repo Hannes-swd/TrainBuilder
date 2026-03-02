@@ -25,7 +25,7 @@ void LeiterPlazieren(int gridX, int gridY) {
 	if (!KannPlatzieren(gridX, gridY, PlatzierTyp::Leiter)) return;
 
 	Leiterobjeckt newLeiter;
-	
+
 	newLeiter.GridX = gridX;
 	newLeiter.GridY = gridY;
 	newLeiter.Rotation = 0;
@@ -141,6 +141,11 @@ void CheckInput() {
 }
 void CheckOutput() {
 	std::map<int, bool> leiterAktiv;
+
+	for (auto& Navi : NaviListe) {
+		Navi.Status = false;
+	}
+
 	for (const auto& Leiter : LeiterListe) {
 		if (Leiter.Status) {
 			int targetX = Leiter.GridX;
@@ -155,6 +160,13 @@ void CheckOutput() {
 				if (knoten.GridX == targetX && knoten.GridY == targetY && !knoten.modus) {
 					knoten.Status = true;
 					leiterAktiv[knoten.eindeutigeId] = true;
+					break;
+				}
+			}
+
+			for (auto& Navi : NaviListe) {
+				if (Navi.GridX == targetX && Navi.GridY == targetY) {
+					Navi.Status = true;
 					break;
 				}
 			}

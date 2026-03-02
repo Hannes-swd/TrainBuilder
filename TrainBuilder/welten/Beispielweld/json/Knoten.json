@@ -55,6 +55,14 @@
             "Status": false,
             "eindeutigeId": 7,
             "modus": false
+        },
+        {
+            "GridX": 19,
+            "GridY": 4,
+            "Name": "99",
+            "Status": false,
+            "eindeutigeId": 8,
+            "modus": true
         }
     ]
 }

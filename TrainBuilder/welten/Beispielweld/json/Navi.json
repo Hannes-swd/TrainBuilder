@@ -2,8 +2,8 @@
     "Navi": [
         {
             "GridX": 19,
-            "GridY": -1,
-            "Status": true,
+            "GridY": 1,
+            "Status": false,
             "eindeutigeId": 1
         }
     ]

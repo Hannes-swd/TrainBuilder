@@ -41,6 +41,13 @@
             "gridX": -3,
             "gridY": 1,
             "isGreen": true
+        },
+        {
+            "AmpelId": 7,
+            "Name": "99",
+            "gridX": 15,
+            "gridY": 2,
+            "isGreen": false
         }
     ]
 }

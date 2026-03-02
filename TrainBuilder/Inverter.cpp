@@ -89,11 +89,10 @@ void InvertorCheckInput() {
 		int CheckX = Inverter.GridX;
 		int CheckY = Inverter.GridY;
 
-		// Eingang ist VOR dem Inverter (entgegen der Pfeilrichtung)
-		if (Inverter.Rotation == 0)      CheckY = Inverter.GridY + 1; // Pfeil nach oben, Eingang von unten
-		else if (Inverter.Rotation == 1) CheckX = Inverter.GridX - 1; // Pfeil nach rechts, Eingang von links
-		else if (Inverter.Rotation == 2) CheckY = Inverter.GridY - 1; // Pfeil nach unten, Eingang von oben
-		else if (Inverter.Rotation == 3) CheckX = Inverter.GridX + 1; // Pfeil nach links, Eingang von rechts
+		if (Inverter.Rotation == 0)      CheckY = Inverter.GridY + 1; 
+		else if (Inverter.Rotation == 1) CheckX = Inverter.GridX - 1; 
+		else if (Inverter.Rotation == 2) CheckY = Inverter.GridY - 1; 
+		else if (Inverter.Rotation == 3) CheckX = Inverter.GridX + 1;
 
 		// Prüfe Knoten
 		for (const auto& k : knotenliste) {
@@ -113,7 +112,7 @@ void InvertorCheckInput() {
 			}
 		}
 
-		Inverter.Status = !eingang; // Inverter invertiert das Signal
+		Inverter.Status = !eingang; 
 	}
 }
 

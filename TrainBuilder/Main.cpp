@@ -22,6 +22,7 @@
 #include "mauszeiger.h"
 #include "Marker.h"
 #include "Gate.h"
+#include "Leiter.h"
 #include "WorldManager.h" 
 #include "Navi.h"
 
