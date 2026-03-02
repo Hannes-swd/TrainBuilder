@@ -1,0 +1,14 @@
+{
+    "Gate": [
+        {
+            "GridX": 16,
+            "GridY": -4,
+            "Output": true,
+            "Rotation": 1,
+            "eindeutigeId": 1,
+            "input1": true,
+            "input2": true,
+            "modus": "AND"
+        }
+    ]
+}

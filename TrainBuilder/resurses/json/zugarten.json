@@ -2,7 +2,7 @@
     "züge": [
         {
             "id": 1,
-            "name": "StandartZug",
+            "name": "Test Train",
             "geschwindichkeit": 4,
             "biildpfad": "resurses/Texturen/Zuege/StandartZug.png",
             "farbe": "rot",
@@ -10,7 +10,7 @@
         },
         {
             "id": 2,
-            "name": "andere",
+            "name": "speed trein",
             "geschwindichkeit": 10,
             "biildpfad": "resurses/Texturen/Zuege/StandartZug.png",
             "farbe": "gruen",
@@ -18,7 +18,7 @@
         },
         {
             "id": 3,
-            "name": "Nebenzug",
+            "name": "normal train",
             "geschwindichkeit": 7,
             "biildpfad": "resurses/Texturen/Zuege/andererzug.png",
             "farbe": "blau",

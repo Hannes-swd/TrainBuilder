@@ -1,0 +1,46 @@
+{
+    "Ampeln": [
+        {
+            "AmpelId": 1,
+            "Name": "A2",
+            "gridX": -1,
+            "gridY": 0,
+            "isGreen": false
+        },
+        {
+            "AmpelId": 2,
+            "Name": "Ampel_2",
+            "gridX": -2,
+            "gridY": 10,
+            "isGreen": true
+        },
+        {
+            "AmpelId": 3,
+            "Name": "A3",
+            "gridX": 2,
+            "gridY": 6,
+            "isGreen": true
+        },
+        {
+            "AmpelId": 4,
+            "Name": "A4",
+            "gridX": 8,
+            "gridY": 1,
+            "isGreen": false
+        },
+        {
+            "AmpelId": 5,
+            "Name": "A5",
+            "gridX": -4,
+            "gridY": -6,
+            "isGreen": true
+        },
+        {
+            "AmpelId": 6,
+            "Name": "A3",
+            "gridX": -3,
+            "gridY": 1,
+            "isGreen": true
+        }
+    ]
+}

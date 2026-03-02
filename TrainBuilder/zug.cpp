@@ -90,6 +90,7 @@ void zugPlazieren(int gridX, int gridY, int zugArtId) {
     neuerZug.farbe = gefundeneZugArt->farbe;
     neuerZug.biildpfad = gefundeneZugArt->biildpfad;
     neuerZug.geschwindichkeit = gefundeneZugArt->geschwindichkeit;
+    neuerZug.ID = neuerZug.zugId;
 
     neuerZug.Fahrplan = {};
 
@@ -102,11 +103,9 @@ void zugPlazieren(int gridX, int gridY, int zugArtId) {
     zugWaitTime[neuerZug.zugId] = 0.0f;
     zugWaitTimer[neuerZug.zugId] = 0.0f;
 
+
     AktiveZuegeSpeichern();
 
-    std::cout << "Zug platziert: " << neuerZug.name
-        << " an Position [" << gridX << ", " << gridY << "]"
-        << " mit eindeutiger ID: " << neuerZug.zugId << std::endl;
 }
 
 bool IstZugBereitsVorhanden(int gridX, int gridY) {
@@ -128,6 +127,7 @@ void AktiveZuegeSpeichern() {
         zugJson["posX"] = zug.posX;
         zugJson["posY"] = zug.posY;
         zugJson["rotation"] = zug.rotation;
+        zugJson["ID"] = zug.ID;
         zugJson["name"] = zug.name;
         zugJson["Fahrplan"] = zug.Fahrplan;
         zugJson["zugtyp"] = zug.zugtyp;

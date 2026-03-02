@@ -1,0 +1,60 @@
+{
+    "Knoten": [
+        {
+            "GridX": 10,
+            "GridY": -1,
+            "Name": "3",
+            "Status": true,
+            "eindeutigeId": 1,
+            "modus": true
+        },
+        {
+            "GridX": 10,
+            "GridY": -5,
+            "Name": "A3",
+            "Status": false,
+            "eindeutigeId": 2,
+            "modus": false
+        },
+        {
+            "GridX": 12,
+            "GridY": -2,
+            "Name": "A3",
+            "Status": false,
+            "eindeutigeId": 3,
+            "modus": true
+        },
+        {
+            "GridX": 13,
+            "GridY": -6,
+            "Name": "A5",
+            "Status": true,
+            "eindeutigeId": 4,
+            "modus": true
+        },
+        {
+            "GridX": 19,
+            "GridY": -4,
+            "Name": "A2",
+            "Status": true,
+            "eindeutigeId": 5,
+            "modus": false
+        },
+        {
+            "GridX": 17,
+            "GridY": -2,
+            "Name": "A4",
+            "Status": true,
+            "eindeutigeId": 6,
+            "modus": false
+        },
+        {
+            "GridX": 12,
+            "GridY": 0,
+            "Name": "A2",
+            "Status": true,
+            "eindeutigeId": 7,
+            "modus": false
+        }
+    ]
+}

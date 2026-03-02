@@ -1,0 +1,20 @@
+{
+    "marker": [
+        {
+            "GridX": -2,
+            "GridY": -12,
+            "eindeutigeId": 1,
+            "farbe_b": 83,
+            "farbe_g": 255,
+            "farbe_r": 0
+        },
+        {
+            "GridX": -6,
+            "GridY": 16,
+            "eindeutigeId": 2,
+            "farbe_b": 55,
+            "farbe_g": 41,
+            "farbe_r": 230
+        }
+    ]
+}

@@ -1,5 +1,4 @@
-﻿#include <ctime>
-#include <cmath>
+﻿#include <cmath>
 #include "LoadTexture.h"
 #include "raylib.h"
 #include "globals.h"
@@ -215,7 +214,7 @@ void zeichneUI() {
             }
         }
         //zeigt id feld an
-    
+
         DrawText("ID:", (float)GenaueBreite - 240.0f, 270, 20, BLACK);
         BanhofEingabe.SetPosition((float)GenaueBreite - 240.0f, 290.0f);
 
@@ -270,8 +269,8 @@ void zeichneUI() {
     }
 
     /*-------------------------------------------------
-        ZUG MENÜ
-    -------------------------------------------------*/
+    ZUG MENÜ
+-------------------------------------------------*/
     if (ausgewahlterZug != 0) {
         DrawRectangle((float)GenaueBreite - 250.0f, 80.0f, 250.0f, (float)GenaueHoehe - 80.0f, LIGHTGRAY);
         DrawRectangleLines((GenaueBreite - 250), 80, 250, GenaueHoehe - 80, DARKGRAY);
@@ -324,15 +323,51 @@ void zeichneUI() {
                 DrawText(TextFormat("speed: %d km/h", zug.geschwindichkeit), contentX, yPos, 20, BLACK);
                 yPos += lineHeight;
 
-                /*DrawText(TextFormat("passengers: %d", zug.passagiere), contentX, yPos, 20, BLACK);
-                yPos += lineHeight;
-
-                DrawText(TextFormat("goods: %d", zug.gueter), contentX, yPos, 20, BLACK);
-                yPos += lineHeight;*/
-
                 DrawText(TextFormat("train type: %s", zug.zugtyp.c_str()), contentX, yPos, 20, BLACK);
                 yPos += lineHeight;
 
+                break;
+            }
+        }
+
+        /*-------------------------------------------------
+            ZUG ID 
+        -------------------------------------------------*/
+        DrawText("ID:", (float)GenaueBreite - 240.0f, 320.0f - zugScrollOffset, 20, BLACK);
+
+        // ID Eingabefeld
+        static TextBox zugIdEingabe(0, 0, 200.0f, 30.0f, 32);
+        static int letzterAusgewahlterZugFuerId = 0;
+
+        zugIdEingabe.SetPosition((float)GenaueBreite - 240.0f, 340.0f - zugScrollOffset);
+
+        if (letzterAusgewahlterZugFuerId != ausgewahlterZug) {
+            for (const auto& zug : aktiveZuege) {
+                if (zug.zugId == ausgewahlterZug) {
+                    zugIdEingabe.SetText(std::to_string(zug.ID));
+                    break;
+                }
+            }
+            letzterAusgewahlterZugFuerId = ausgewahlterZug;
+        }
+
+        zugIdEingabe.Update();
+        zugIdEingabe.Draw();
+
+        if (zugIdEingabe.IsActive()) {
+            kannBewegen = false;
+        }
+
+        for (auto& zug : aktiveZuege) {
+            if (zug.zugId == ausgewahlterZug) {
+                std::string idText = zugIdEingabe.GetText();
+                if (!idText.empty()) {
+                    try {
+                        zug.ID = std::stoi(idText);
+                    }
+                    catch (const std::exception&) {
+                    }
+                }
                 break;
             }
         }
@@ -699,7 +734,7 @@ void zeichneUI() {
                 if (mousePos.x >= buttonX && mousePos.x <= buttonX + buttonWidth &&
                     mousePos.y >= buttonY && mousePos.y <= buttonY + buttonHeight) {
 
-                    
+
                     for (auto& marker : MarkerListe) {
                         if (marker.eindeutigeId == ausgewahlterMarker) {
                             marker.farbe = aktuelleFarbe;
@@ -715,7 +750,7 @@ void zeichneUI() {
         EndScissorMode();
     }
     if (ausgewahlterGate != 0) {
-        
+
 
         DrawRectangle((float)GenaueBreite - 250.0f, 80.0f, 250.0f, (float)GenaueHoehe - 80.0f, LIGHTGRAY);
         DrawRectangleLines((GenaueBreite - 250), 80, 250, GenaueHoehe - 80, DARKGRAY);
@@ -730,8 +765,8 @@ void zeichneUI() {
                 else if (Gate.modus == "XOR")
                     DrawText("XOR GATE", GenaueBreite - 240.0f, 200.0f, 20, BLACK);
             }
-         }
-    
+        }
+
 
         //modus Button
         float buttonX = GenaueBreite - 240.0f;
@@ -763,7 +798,7 @@ void zeichneUI() {
                             //wechselt modus
                             //UND + XOR Gatter
                             Gate.modus = (Gate.modus == "AND") ? "XOR" : "AND";
-                            
+
 
                             GateSpeichern();
                             break;

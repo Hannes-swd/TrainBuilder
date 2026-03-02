@@ -1,0 +1,112 @@
+{
+    "AktiveZuege": [
+        {
+            "Fahrplan": [
+                "9",
+                "3",
+                "7",
+                "2"
+            ],
+            "ID": 1,
+            "biildpfad": "resurses/Texturen/Zuege/StandartZug.png",
+            "farbe": "rot",
+            "geschwindichkeit": 4,
+            "name": "Zug 1",
+            "posX": 0.0,
+            "posY": -3.5059828758239746,
+            "rotation": -90,
+            "zugId": 1,
+            "zugtyp": "Erster"
+        },
+        {
+            "Fahrplan": [
+                "6",
+                "3",
+                "7",
+                "4"
+            ],
+            "ID": 2,
+            "biildpfad": "resurses/Texturen/Zuege/StandartZug.png",
+            "farbe": "rot",
+            "geschwindichkeit": 4,
+            "name": "Zug 2",
+            "posX": -3.0,
+            "posY": 6.0,
+            "rotation": 90,
+            "zugId": 2,
+            "zugtyp": "Erster"
+        },
+        {
+            "Fahrplan": [
+                "5",
+                "6",
+                "9",
+                "3"
+            ],
+            "ID": 3,
+            "biildpfad": "resurses/Texturen/Zuege/StandartZug.png",
+            "farbe": "gruen",
+            "geschwindichkeit": 10,
+            "name": "Zug 3",
+            "posX": -6.0,
+            "posY": 1.0,
+            "rotation": 180,
+            "zugId": 3,
+            "zugtyp": "zweiter"
+        },
+        {
+            "Fahrplan": [
+                "7",
+                "7",
+                "5"
+            ],
+            "ID": 4,
+            "biildpfad": "resurses/Texturen/Zuege/StandartZug.png",
+            "farbe": "gruen",
+            "geschwindichkeit": 10,
+            "name": "Zug 4",
+            "posX": 8.0,
+            "posY": 4.0,
+            "rotation": -90,
+            "zugId": 4,
+            "zugtyp": "zweiter"
+        },
+        {
+            "Fahrplan": [
+                "5",
+                "6",
+                "2",
+                "4"
+            ],
+            "ID": 5,
+            "biildpfad": "resurses/Texturen/Zuege/andererzug.png",
+            "farbe": "blau",
+            "geschwindichkeit": 7,
+            "name": "Zug 5",
+            "posX": -7.0,
+            "posY": -6.0,
+            "rotation": 180,
+            "zugId": 5,
+            "zugtyp": "dreier"
+        },
+        {
+            "Fahrplan": [
+                "1",
+                "4",
+                "6",
+                "9",
+                "8"
+            ],
+            "ID": 6,
+            "biildpfad": "resurses/Texturen/Zuege/andererzug.png",
+            "farbe": "blau",
+            "geschwindichkeit": 7,
+            "name": "Zug 6",
+            "posX": 10.252943992614746,
+            "posY": 9.0,
+            "rotation": 180,
+            "zugId": 6,
+            "zugtyp": "dreier"
+        }
+    ]
+}

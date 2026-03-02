@@ -1,0 +1,76 @@
+{
+    "BanhofObjeckte": [
+        {
+            "BanhofId": 1,
+            "ID": "2",
+            "Name": "2",
+            "gridX": -7,
+            "gridY": -6,
+            "rotation": 0
+        },
+        {
+            "BanhofId": 2,
+            "ID": "3",
+            "Name": "3",
+            "gridX": -6,
+            "gridY": 1,
+            "rotation": 0
+        },
+        {
+            "BanhofId": 3,
+            "ID": "8",
+            "Name": "8",
+            "gridX": -9,
+            "gridY": 7,
+            "rotation": 0
+        },
+        {
+            "BanhofId": 4,
+            "ID": "7",
+            "Name": "7",
+            "gridX": -3,
+            "gridY": 6,
+            "rotation": 0
+        },
+        {
+            "BanhofId": 5,
+            "ID": "4",
+            "Name": "4",
+            "gridX": 3,
+            "gridY": 2,
+            "rotation": 0
+        },
+        {
+            "BanhofId": 6,
+            "ID": "1",
+            "Name": "1",
+            "gridX": 3,
+            "gridY": -9,
+            "rotation": 0
+        },
+        {
+            "BanhofId": 7,
+            "ID": "5",
+            "Name": "5",
+            "gridX": 8,
+            "gridY": 4,
+            "rotation": 0
+        },
+        {
+            "BanhofId": 8,
+            "ID": "9",
+            "Name": "9",
+            "gridX": 8,
+            "gridY": 9,
+            "rotation": 0
+        },
+        {
+            "BanhofId": 9,
+            "ID": "6",
+            "Name": "6",
+            "gridX": 15,
+            "gridY": 4,
+            "rotation": 0
+        }
+    ]
+}
