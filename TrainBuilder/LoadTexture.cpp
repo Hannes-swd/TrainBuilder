@@ -68,6 +68,9 @@ void loadTextures() {
     textures["GateRechts"] = LoadTexture("resurses/Texturen/Technik/Gate/GateRechts.png");
     textures["GateAND"] = LoadTexture("resurses/Texturen/Technik/Gate/AND.png");
     textures["GateXOR"] = LoadTexture("resurses/Texturen/Technik/Gate/XOR.png");
+    //Navi
+    textures["Navi_An"] = LoadTexture("resurses/Texturen/Technik/Navi_Aus.png");
+    textures["Navi_Aus"] = LoadTexture("resurses/Texturen/Technik/Navi_An.png");
 
 }
 

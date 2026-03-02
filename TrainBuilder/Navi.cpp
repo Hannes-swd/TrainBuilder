@@ -55,3 +55,20 @@ void NaviSpeichern() {
         NaviDatei.close();
     }
 }
+void NaviZeichnen() {
+    for (const auto& Navi : NaviListe) {
+        float pixelX = (float)(Navi.GridX * GRID_SIZE);
+        float pixelY = (float)(Navi.GridY * GRID_SIZE);
+
+        if (Navi.Status)
+            DrawTexture("Navi_An",
+                pixelX, pixelY,
+                GRID_SIZE, GRID_SIZE,
+                WHITE);
+        else
+            DrawTexture("Navi_Aus",
+                pixelX, pixelY,
+                GRID_SIZE, GRID_SIZE,
+                WHITE);
+    }
+}
