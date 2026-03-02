@@ -232,3 +232,14 @@ struct GateObjeckt {
 	bool Output;
 };
 extern std::vector<GateObjeckt> GateListe;
+
+/*-------------------------------------------------
+	Navi
+-------------------------------------------------*/
+struct NaviObjeckt {
+	int GridX;
+	int GridY;
+	int eindeutigeId;
+	bool Status;
+};
+extern std::vector< NaviObjeckt> NaviListe;

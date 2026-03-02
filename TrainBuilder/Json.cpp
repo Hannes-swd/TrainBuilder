@@ -45,6 +45,7 @@ void LadeJson() {
     std::ifstream Inverter(JP("Inverter.json"));
     std::ifstream marker(JP("marker.json"));
     std::ifstream Gate(JP("Gate.json"));
+    std::ifstream Navi(JP("Navi.json"));
 
     nlohmann::json NutzerDaten;
     if (Nutzer.is_open()) Nutzer >> NutzerDaten;
@@ -79,6 +80,9 @@ void LadeJson() {
     nlohmann::json gateDaten;
     if (Gate.is_open()) Gate >> gateDaten;
 
+    nlohmann::json naviDaten;
+    if (Navi.is_open()) Navi >> naviDaten;
+
     // Listen leeren
     gleisListe.clear();
     banhofListe.clear();
@@ -88,6 +92,7 @@ void LadeJson() {
     InverterListe.clear();
     MarkerListe.clear();
     GateListe.clear();
+    NaviListe.clear();
 
     // Gleise
     if (GleiseDaten.contains("Objeckte")) {
@@ -237,6 +242,17 @@ void LadeJson() {
             gate.input2 = obj["input2"];
             gate.Output = obj["Output"];
             GateListe.push_back(gate);
+        }
+    }
+    //navi
+    if (naviDaten.contains("Navi")) {
+        for (const auto& obj : naviDaten["Navi"]) {
+            NaviObjeckt Navi;
+            Navi.GridX = obj["GridX"];
+            Navi.GridY = obj["GridY"];
+            Navi.eindeutigeId = obj["eindeutigeId"];
+
+            NaviListe.push_back(Navi);
         }
     }
 

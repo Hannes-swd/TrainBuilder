@@ -138,3 +138,7 @@ std::vector<MarkerObjeckt> MarkerListe;
 	Gates
 -------------------------------------------------*/
 std::vector<GateObjeckt> GateListe;
+/*-------------------------------------------------
+	Navi
+-------------------------------------------------*/
+std::vector< NaviObjeckt> NaviListe;
