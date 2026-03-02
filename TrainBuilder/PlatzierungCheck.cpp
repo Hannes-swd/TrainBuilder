@@ -61,6 +61,7 @@ bool KannPlatzieren(int gridX, int gridY, PlatzierTyp typ) {
     case PlatzierTyp::Inverter:
     case PlatzierTyp::Marker:
     case PlatzierTyp::Gate:
+    case PlatzierTyp::Navi:
         return IstFeldLeer(gridX, gridY);
 
     default:

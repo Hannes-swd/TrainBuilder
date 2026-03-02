@@ -8,7 +8,8 @@ enum class PlatzierTyp {
     Leiter,
     Inverter,
     Marker,
-    Gate
+    Gate,
+    Navi
 };
 
 bool KannPlatzieren(int gridX, int gridY, PlatzierTyp typ);

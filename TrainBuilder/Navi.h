@@ -1,2 +1,3 @@
 #pragma once
-void NaviPlazieren();
+void NaviPlazieren(int gridX, int gridY);
+void NaviSpeichern();
