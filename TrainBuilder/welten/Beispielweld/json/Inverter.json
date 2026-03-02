@@ -4,14 +4,14 @@
             "GridX": 10,
             "GridY": -3,
             "Rotation": 0,
-            "Status": false,
+            "Status": true,
             "eindeutigeId": 1
         },
         {
             "GridX": 14,
             "GridY": -2,
             "Rotation": 1,
-            "Status": true,
+            "Status": false,
             "eindeutigeId": 2
         }
     ]

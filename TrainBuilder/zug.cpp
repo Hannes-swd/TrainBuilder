@@ -84,13 +84,12 @@ void zugPlazieren(int gridX, int gridY, int zugArtId) {
     neuerZug.posX = gridX;
     neuerZug.posY = gridY;
     neuerZug.rotation = 0;
-
     neuerZug.name = "Zug " + std::to_string(neuerZug.zugId);
     neuerZug.zugtyp = gefundeneZugArt->zugtyp;
     neuerZug.farbe = gefundeneZugArt->farbe;
     neuerZug.biildpfad = gefundeneZugArt->biildpfad;
     neuerZug.geschwindichkeit = gefundeneZugArt->geschwindichkeit;
-    neuerZug.ID = neuerZug.zugId;
+    neuerZug.ID = "Zug_" + std::to_string(neuerZug.zugId);
 
     neuerZug.Fahrplan = {};
 
@@ -103,6 +102,9 @@ void zugPlazieren(int gridX, int gridY, int zugArtId) {
     zugWaitTime[neuerZug.zugId] = 0.0f;
     zugWaitTimer[neuerZug.zugId] = 0.0f;
 
+     
+
+    
 
     AktiveZuegeSpeichern();
 

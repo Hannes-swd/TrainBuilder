@@ -344,7 +344,7 @@ void zeichneUI() {
         if (letzterAusgewahlterZugFuerId != ausgewahlterZug) {
             for (const auto& zug : aktiveZuege) {
                 if (zug.zugId == ausgewahlterZug) {
-                    zugIdEingabe.SetText(std::to_string(zug.ID));
+                    zugIdEingabe.SetText(zug.ID);
                     break;
                 }
             }
@@ -362,11 +362,7 @@ void zeichneUI() {
             if (zug.zugId == ausgewahlterZug) {
                 std::string idText = zugIdEingabe.GetText();
                 if (!idText.empty()) {
-                    try {
-                        zug.ID = std::stoi(idText);
-                    }
-                    catch (const std::exception&) {
-                    }
+                    zug.ID = idText;
                 }
                 break;
             }
@@ -462,7 +458,7 @@ void zeichneUI() {
                 scrollbarX, scrollbarY, scrollbarHoehe);
         }
 
-        if (!zugnameEingabe.IsActive() && IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
+        if (!zugnameEingabe.IsActive() && !zugIdEingabe.IsActive() && IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
             AktiveZuegeSpeichern();
         }
     }

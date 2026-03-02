@@ -3,11 +3,11 @@
         {
             "GridX": 16,
             "GridY": -4,
-            "Output": true,
+            "Output": false,
             "Rotation": 1,
             "eindeutigeId": 1,
             "input1": true,
-            "input2": true,
+            "input2": false,
             "modus": "AND"
         }
     ]

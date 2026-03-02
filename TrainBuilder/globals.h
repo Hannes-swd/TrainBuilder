@@ -110,7 +110,7 @@ struct Zug {
 	float posX;
 	float posY;
 	int rotation;
-	int ID;
+	std::string ID;
 	//zug infos
 	std::string name;
 	int maxPassagiere;
