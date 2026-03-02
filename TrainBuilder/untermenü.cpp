@@ -100,6 +100,13 @@ void UntermenueKlick(Vector2 mausposition) {
             ausgewählterUntermenuePunkt = 4;
             return;
         }
+        float x5 = startX + boxWidth * 4 + padding * 4;
+        float y5 = startY;
+        if (mausposition.x >= x5 && mausposition.x <= x5 + boxWidth &&
+            mausposition.y >= y5 && mausposition.y <= y5 + boxHeight) {
+            ausgewählterUntermenuePunkt = 5;
+            return;
+        }
     }
 
 }
@@ -364,6 +371,22 @@ void ZeichneUnterpunkte() {
                 DrawRectangle(x, y, boxWidth, boxHeight, DARKGRAY);
             }
             DrawTexture("GateSymbol", x, y, boxWidth, boxHeight, WHITE);
+        }
+        {
+            float x = startX + boxWidth * 4 + padding * 4;
+            float y = startY;
+
+            bool isHovered = (mousePos.x >= x && mousePos.x <= x + boxWidth &&
+                mousePos.y >= y && mousePos.y <= y + boxHeight);
+
+            Color bgColor = isHovered ? GRAY : LIGHTGRAY;
+            DrawRectangle(x, y, boxWidth, boxHeight, bgColor);
+            DrawRectangleLines(x, y, boxWidth, boxHeight, DARKGRAY);
+
+            if (ausgewählterUntermenuePunkt == 5) {
+                DrawRectangle(x, y, boxWidth, boxHeight, DARKGRAY);
+            }
+            DrawTexture("Navi_An", x, y, boxWidth, boxHeight, WHITE);
         }
     }
 

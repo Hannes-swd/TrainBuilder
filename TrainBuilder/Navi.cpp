@@ -60,7 +60,7 @@ void NaviZeichnen() {
         float pixelX = (float)(Navi.GridX * GRID_SIZE);
         float pixelY = (float)(Navi.GridY * GRID_SIZE);
 
-        if (Navi.Status)
+        if (!Navi.Status)
             DrawTexture("Navi_An",
                 pixelX, pixelY,
                 GRID_SIZE, GRID_SIZE,

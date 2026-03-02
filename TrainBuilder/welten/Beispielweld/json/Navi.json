@@ -1,3 +1,10 @@
 {
-    "Navi": []
+    "Navi": [
+        {
+            "GridX": 19,
+            "GridY": -1,
+            "Status": true,
+            "eindeutigeId": 1
+        }
+    ]
 }

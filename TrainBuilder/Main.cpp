@@ -23,6 +23,7 @@
 #include "Marker.h"
 #include "Gate.h"
 #include "WorldManager.h" 
+#include "Navi.h"
 
 /*
 * IDEEN
@@ -245,6 +246,7 @@ int main(void)
         InvertorZeichnen();
         GateZeichnen();
         MarkerZeichnen();
+        NaviZeichnen();
 
         ProcesMaus(mousePosition);
 
