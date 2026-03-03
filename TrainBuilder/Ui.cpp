@@ -15,6 +15,7 @@
 #include "Colorpicker.h"
 #include "Gate.h"
 #include "Navi.h"
+#include "NaviPlan.h"
 
 static TextBox nahmeEingabe(0, 0, 200.0f, 30.0f, 32);
 static TextBox zugnameEingabe(0, 0, 200.0f, 30.0f, 32);
@@ -845,7 +846,7 @@ void zeichneUI() {
             }
         }
 
-
+        ZeichneNaviplan(ausgewahlterNavi, NaviplanScrollOffset, NaviplanScrolling, NaviplanContainerY);
         EndScissorMode();
     }
     if (ausgewahlterZug != 0) {

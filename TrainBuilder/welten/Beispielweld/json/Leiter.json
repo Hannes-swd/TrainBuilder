@@ -4,42 +4,42 @@
             "GridX": 10,
             "GridY": -2,
             "Rotation": 0,
-            "Status": false,
+            "Status": true,
             "eindeutigeId": 1
         },
         {
             "GridX": 10,
             "GridY": -4,
             "Rotation": 0,
-            "Status": true,
+            "Status": false,
             "eindeutigeId": 2
         },
         {
             "GridX": 13,
             "GridY": -2,
             "Rotation": 1,
-            "Status": true,
+            "Status": false,
             "eindeutigeId": 3
         },
         {
             "GridX": 15,
             "GridY": -2,
             "Rotation": 1,
-            "Status": false,
+            "Status": true,
             "eindeutigeId": 4
         },
         {
             "GridX": 16,
             "GridY": -2,
             "Rotation": 1,
-            "Status": false,
+            "Status": true,
             "eindeutigeId": 5
         },
         {
             "GridX": 16,
             "GridY": -3,
             "Rotation": 0,
-            "Status": false,
+            "Status": true,
             "eindeutigeId": 6
         },
         {
@@ -53,14 +53,14 @@
             "GridX": 17,
             "GridY": -4,
             "Rotation": 1,
-            "Status": false,
+            "Status": true,
             "eindeutigeId": 10
         },
         {
             "GridX": 18,
             "GridY": -4,
             "Rotation": 1,
-            "Status": false,
+            "Status": true,
             "eindeutigeId": 11
         },
         {
@@ -88,14 +88,14 @@
             "GridX": 10,
             "GridY": 0,
             "Rotation": 2,
-            "Status": false,
+            "Status": true,
             "eindeutigeId": 15
         },
         {
             "GridX": 11,
             "GridY": 0,
             "Rotation": 1,
-            "Status": false,
+            "Status": true,
             "eindeutigeId": 16
         },
         {

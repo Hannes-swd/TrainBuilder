@@ -3,7 +3,25 @@
         {
             "GridX": 19,
             "GridY": 1,
-            "ID": "tesdsdsa",
+            "Haltestellen": [
+                {
+                    "banhofId": 7,
+                    "modus": 0
+                },
+                {
+                    "banhofId": 4,
+                    "modus": 0
+                },
+                {
+                    "banhofId": 3,
+                    "modus": 0
+                },
+                {
+                    "banhofId": 5,
+                    "modus": 0
+                }
+            ],
+            "ID": "Navi_1",
             "Status": true,
             "eindeutigeId": 1
         }

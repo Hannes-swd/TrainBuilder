@@ -253,6 +253,19 @@ void LadeJson() {
             Navi.eindeutigeId = obj["eindeutigeId"];
             Navi.Status = obj["Status"];
             Navi.ID = obj["ID"];
+
+            // Haltestellen laden
+            if (obj.contains("Haltestellen")) {
+                for (const auto& hsObj : obj["Haltestellen"]) {
+                    NaviHaltestelle hs;
+                    hs.banhofId = hsObj["banhofId"];
+                    hs.modus = (hsObj["modus"] == 0)
+                        ? NaviHaltestelle::HINZUFUEGEN
+                        : NaviHaltestelle::ENTFERNEN;
+                    Navi.Haltestellen.push_back(hs);
+                }
+            }
+
             NaviListe.push_back(Navi);
         }
     }

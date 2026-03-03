@@ -143,3 +143,7 @@ std::vector<GateObjeckt> GateListe;
 	Navi
 -------------------------------------------------*/
 std::vector< NaviObjeckt> NaviListe;
+
+float NaviplanScrollOffset = 0.0f;
+bool  NaviplanScrolling = false;
+float NaviplanContainerY = 200.0f;

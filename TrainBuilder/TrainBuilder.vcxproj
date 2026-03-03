@@ -147,6 +147,7 @@
     <ClCompile Include="moofment.cpp" />
     <ClCompile Include="Mouse.cpp" />
     <ClCompile Include="Navi.cpp" />
+    <ClCompile Include="NaviPlan.cpp" />
     <ClCompile Include="PlatzierungCheck.cpp" />
     <ClCompile Include="Signal.cpp" />
     <ClCompile Include="textbox.cpp" />
@@ -175,6 +176,7 @@
     <ClInclude Include="moofment.h" />
     <ClInclude Include="Mouse.h" />
     <ClInclude Include="Navi.h" />
+    <ClInclude Include="NaviPlan.h" />
     <ClInclude Include="PlatzierungCheck.h" />
     <ClInclude Include="Signal.h" />
     <ClInclude Include="textbox.h" />

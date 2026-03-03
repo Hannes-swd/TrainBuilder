@@ -237,11 +237,23 @@ extern std::vector<GateObjeckt> GateListe;
 /*-------------------------------------------------
 	Navi
 -------------------------------------------------*/
-struct NaviObjeckt {
-	int GridX;
-	int GridY;
-	int eindeutigeId;
-	bool Status;
-	std::string ID;
+struct NaviHaltestelle {
+	enum Modus { HINZUFUEGEN, ENTFERNEN };
+	int   banhofId = 0;
+	Modus modus = HINZUFUEGEN;
 };
-extern std::vector< NaviObjeckt> NaviListe;
+
+struct NaviObjeckt {
+	int GridX = 0;
+	int GridY = 0;
+	int eindeutigeId = 0;
+	bool Status = false;
+	std::string ID;
+	std::vector<NaviHaltestelle> Haltestellen;
+};
+
+extern std::vector<NaviObjeckt> NaviListe;
+
+extern float NaviplanScrollOffset;
+extern bool  NaviplanScrolling;
+extern float NaviplanContainerY;

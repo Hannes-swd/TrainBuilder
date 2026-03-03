@@ -116,7 +116,7 @@ bool ErstelleNeueWelt(const std::string& weltName) {
         "AktiveZuege.json", "Ampeln.json", "Banhof.json",
         "Gate.json", "Gleise.json", "Inverter.json",
         "Knoten.json", "Leiter.json", "marker.json",
-        "Signale.json", "User.json"
+        "Signale.json", "User.json", "Navi.json"
     };
 
     for (const auto& datei : jsonDateien) {
@@ -138,6 +138,7 @@ bool ErstelleNeueWelt(const std::string& weltName) {
                 else if (objektName == "Leiter")      objektName = "Leiter";
                 else if (objektName == "marker")      objektName = "marker";
                 else if (objektName == "Signale")     objektName = "Signale";
+                else if (objektName == "Navi")        objektName = "Navi";
                 file << "{\n    \"" << objektName << "\": []\n}";
             }
             file.close();

@@ -4,7 +4,7 @@
             "GridX": 10,
             "GridY": -1,
             "Name": "3",
-            "Status": false,
+            "Status": true,
             "eindeutigeId": 1,
             "modus": true
         },
@@ -12,7 +12,7 @@
             "GridX": 10,
             "GridY": -5,
             "Name": "A3",
-            "Status": true,
+            "Status": false,
             "eindeutigeId": 2,
             "modus": false
         },
@@ -20,7 +20,7 @@
             "GridX": 12,
             "GridY": -2,
             "Name": "A3",
-            "Status": true,
+            "Status": false,
             "eindeutigeId": 3,
             "modus": true
         },
@@ -36,7 +36,7 @@
             "GridX": 19,
             "GridY": -4,
             "Name": "A2",
-            "Status": false,
+            "Status": true,
             "eindeutigeId": 5,
             "modus": false
         },
@@ -44,7 +44,7 @@
             "GridX": 17,
             "GridY": -2,
             "Name": "A4",
-            "Status": false,
+            "Status": true,
             "eindeutigeId": 6,
             "modus": false
         },
@@ -52,7 +52,7 @@
             "GridX": 12,
             "GridY": 0,
             "Name": "A2",
-            "Status": false,
+            "Status": true,
             "eindeutigeId": 7,
             "modus": false
         },

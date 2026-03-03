@@ -47,6 +47,16 @@ void NaviSpeichern() {
         NaviJson["eindeutigeId"] = Navi.eindeutigeId;
         NaviJson["Status"] = Navi.Status;
         NaviJson["ID"] = Navi.ID;
+
+        json haltestellenArray = json::array();
+        for (const auto& hs : Navi.Haltestellen) {
+            json hsJson;
+            hsJson["banhofId"] = hs.banhofId;
+            hsJson["modus"] = (hs.modus == NaviHaltestelle::HINZUFUEGEN) ? 0 : 1;
+            haltestellenArray.push_back(hsJson);
+        }
+        NaviJson["Haltestellen"] = haltestellenArray;
+
         NaviArray.push_back(NaviJson);
     }
     jsonDaten["Navi"] = NaviArray;
@@ -56,7 +66,6 @@ void NaviSpeichern() {
         NaviDatei << jsonDaten.dump(4);
         NaviDatei.close();
     }
-    std::cout << "specihert";
 }
 void NaviZeichnen() {
     for (const auto& Navi : NaviListe) {
