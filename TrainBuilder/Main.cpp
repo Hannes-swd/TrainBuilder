@@ -30,7 +30,6 @@
 * IDEEN
 *
 * - Erklerung für technik
-* - ZUG-FAHRPLAN ender BLOCK ---
 * - schalter
 * - blueprint
 * - displays

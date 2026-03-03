@@ -144,3 +144,22 @@ void NaviSynchronisieren() {
         AktiveZuegeSpeichern();
     }
 }
+void NaviLöschen(int gridX, int gridY) {
+    auto it = std::remove_if(NaviListe.begin(), NaviListe.end(),
+        [gridX, gridY](const NaviObjeckt& l) {
+            return l.GridX == gridX && l.GridY == gridY;
+        });
+
+    if (it != NaviListe.end()) {
+        NaviListe.erase(it, NaviListe.end());
+        NaviSpeichern();
+    }
+}
+bool IstNaviVorhanden(int gridX, int gridY) {
+    for (const auto& Navi : NaviListe) {
+        if (Navi.GridX == gridX && Navi.GridY == gridY) {
+            return true;
+        }
+    }
+    return false;
+}

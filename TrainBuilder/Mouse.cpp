@@ -455,6 +455,14 @@ void Loeschentool(Vector2 mausposition) {
             return;
         }
     }
+    // Navi
+    else if (IstNaviVorhanden(MouseGridX, MouseGridY)) {
+        EndereMausZu = "Hand";
+        if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {
+            NaviLöschen(MouseGridX, MouseGridY);
+            return;
+        }
+    }
     // Gleise
     else {
 
