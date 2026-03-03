@@ -33,6 +33,7 @@ extern int ausgewahlterAmpel;
 extern int ausgewahlterKnoten;
 extern int ausgewahlterMarker;
 extern int ausgewahlterGate;
+extern int ausgewahlterNavi;
 
 extern int aktuellesTool;
 
@@ -241,5 +242,6 @@ struct NaviObjeckt {
 	int GridY;
 	int eindeutigeId;
 	bool Status;
+	std::string ID;
 };
 extern std::vector< NaviObjeckt> NaviListe;

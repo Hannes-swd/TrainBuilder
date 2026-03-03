@@ -40,6 +40,7 @@ int ausgewahlterAmpel = 0; //0 = keins
 int ausgewahlterKnoten = 0; //0 = keins
 int ausgewahlterMarker = 0; //0 = keins
 int ausgewahlterGate = 0; //0 = keins
+int ausgewahlterNavi = 0; //0 = keins
 
 
 int aktuellesTool = 1; 

@@ -60,7 +60,7 @@
             "GridX": 19,
             "GridY": 4,
             "Name": "99",
-            "Status": false,
+            "Status": true,
             "eindeutigeId": 8,
             "modus": true
         }

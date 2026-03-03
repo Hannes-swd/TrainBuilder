@@ -14,12 +14,14 @@
 #include "Marker.h"
 #include "Colorpicker.h"
 #include "Gate.h"
+#include "Navi.h"
 
 static TextBox nahmeEingabe(0, 0, 200.0f, 30.0f, 32);
 static TextBox zugnameEingabe(0, 0, 200.0f, 30.0f, 32);
 static TextBox knotenEingabe(0, 0, 200.0f, 30.0f, 32);
 static TextBox AmpelEingabe(0, 0, 200.0f, 30.0f, 32);
 static TextBox BanhofEingabe(0, 0, 200.0f, 30.0f, 32);
+static TextBox NaviEingabe(0, 0, 200.0f, 30.0f, 32);
 static int letzterAusgewahlterBanhof = 0;
 static int letzterAusgewahlterZug = 0;
 static int letzterAusgewahlterKnoten = 0;
@@ -27,6 +29,7 @@ static int letzterAusgewahlteAmpel = 0;
 static int letzterAusgewahlteBanhof = 0;
 static int letzterAusgewahlteMarker = 0;
 static int letzterAusgewahlteGate = 0;
+static int letzterAusgewahlteNavi = 0;
 
 
 /*-------------------------------------------------
@@ -36,6 +39,7 @@ static float bahnhofScrollOffset = 0.0f;
 static float zugScrollOffset = 0.0f;
 static float knotenOffset = 0.0f;
 static float ampelOffset = 0.0f;
+static float naviOffset = 0.0f;
 
 static bool bahnhofScrolling = false;
 static bool zugScrolling = false;
@@ -269,8 +273,8 @@ void zeichneUI() {
     }
 
     /*-------------------------------------------------
-    ZUG MENÜ
--------------------------------------------------*/
+        ZUG MENÜ
+    -------------------------------------------------*/
     if (ausgewahlterZug != 0) {
         DrawRectangle((float)GenaueBreite - 250.0f, 80.0f, 250.0f, (float)GenaueHoehe - 80.0f, LIGHTGRAY);
         DrawRectangleLines((GenaueBreite - 250), 80, 250, GenaueHoehe - 80, DARKGRAY);
@@ -803,6 +807,45 @@ void zeichneUI() {
                 }
             }
         }
+        EndScissorMode();
+    }
+    if (ausgewahlterNavi != 0) {
+        DrawRectangle((float)GenaueBreite - 250.0f, 80.0f, 250.0f, (float)GenaueHoehe - 80.0f, LIGHTGRAY);
+        DrawRectangleLines((GenaueBreite - 250), 80, 250, GenaueHoehe - 80, DARKGRAY);
+        BeginScissorMode(GenaueBreite - 250, 80, 250, GenaueHoehe - 80);
+
+
+        // ID eingabe
+        DrawText("ID:", (float)GenaueBreite - 240.0f, 100, 20, BLACK);
+        NaviEingabe.SetPosition((float)GenaueBreite - 240.0f, 130.0f - naviOffset);
+
+        if (letzterAusgewahlteNavi != ausgewahlterNavi) {
+            for (const auto& navi : NaviListe) {
+                if (navi.eindeutigeId == ausgewahlterNavi) {
+                    NaviEingabe.SetText(navi.ID);
+                    break;
+                }
+            }
+            letzterAusgewahlteNavi = ausgewahlterNavi;
+            naviOffset = 0.0f;
+        }
+        NaviEingabe.Update();
+        NaviEingabe.Draw();
+
+        if (NaviEingabe.IsActive()) {
+            kannBewegen = false;
+            
+        }
+
+        for (auto& Navi : NaviListe) {
+            if (Navi.eindeutigeId == ausgewahlterNavi) {
+                Navi.ID = NaviEingabe.GetText();
+                
+                break;
+            }
+        }
+
+
         EndScissorMode();
     }
     if (ausgewahlterZug != 0) {

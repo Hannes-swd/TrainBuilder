@@ -47,7 +47,7 @@
             "Name": "99",
             "gridX": 15,
             "gridY": 2,
-            "isGreen": false
+            "isGreen": true
         }
     ]
 }

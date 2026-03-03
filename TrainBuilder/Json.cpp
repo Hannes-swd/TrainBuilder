@@ -252,6 +252,7 @@ void LadeJson() {
             Navi.GridY = obj["GridY"];
             Navi.eindeutigeId = obj["eindeutigeId"];
             Navi.Status = obj["Status"];
+            Navi.ID = obj["ID"];
             NaviListe.push_back(Navi);
         }
     }

@@ -3,7 +3,8 @@
         {
             "GridX": 19,
             "GridY": 1,
-            "Status": false,
+            "ID": "tesdsdsa",
+            "Status": true,
             "eindeutigeId": 1
         }
     ]

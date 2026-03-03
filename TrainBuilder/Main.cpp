@@ -60,6 +60,7 @@ static void WeltDatenSpeichern() {
     GateSpeichern();
     SignalTeilSpeichern();
     MarkerSpeichern();
+    NaviSpeichern();
 }
 
 // -----------------------------------------------------------------------

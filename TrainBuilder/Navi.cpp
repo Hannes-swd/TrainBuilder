@@ -26,6 +26,7 @@ void NaviPlazieren(int gridX, int gridY) {
 	newNavi.GridX = gridX;
 	newNavi.GridY = gridY;
     newNavi.Status = false;
+    newNavi.ID = "Navi_" + std::to_string(NaviListe.size() + 1);
 	int neueID = 1;
 	for (const auto& inv : NaviListe) {
 		if (inv.eindeutigeId >= neueID) {
@@ -45,6 +46,7 @@ void NaviSpeichern() {
         NaviJson["GridY"] = Navi.GridY;
         NaviJson["eindeutigeId"] = Navi.eindeutigeId;
         NaviJson["Status"] = Navi.Status;
+        NaviJson["ID"] = Navi.ID;
         NaviArray.push_back(NaviJson);
     }
     jsonDaten["Navi"] = NaviArray;
@@ -54,6 +56,7 @@ void NaviSpeichern() {
         NaviDatei << jsonDaten.dump(4);
         NaviDatei.close();
     }
+    std::cout << "specihert";
 }
 void NaviZeichnen() {
     for (const auto& Navi : NaviListe) {
