@@ -279,6 +279,29 @@ void ZeichneUnterpunkte() {
             }
 
             DrawTexture("zeichnen", x, y, gleisPanelWidth, gleisPanelHeight);
+
+            // Tooltip für Gleise
+            if (isHovered) {
+                float tooltipX = 10.0f;
+                float tooltipY = untermenueEndeY + 10.0f;
+                float tooltipWidth = 220.0f;
+                float tooltipHeight = 100.0f;
+
+                DrawRectangle(tooltipX, tooltipY, tooltipWidth, tooltipHeight, Color{ 240, 240, 240, 230 });
+                DrawRectangleLines(tooltipX, tooltipY, tooltipWidth, tooltipHeight, DARKGRAY);
+
+                float textY = tooltipY + 10;
+                float textX = tooltipX + 10;
+
+                DrawText("tracks", textX + 70, textY, 16, BLACK);
+                textY += 25;
+                DrawLine(textX, textY - 5, textX + tooltipWidth - 20, textY - 5, DARKGRAY);
+                textY += 5;
+
+                DrawText("Enables drawing", textX, textY, 12, DARKGRAY);
+                textY += 18;
+                DrawText("from railroad tracks", textX, textY, 12, DARKGRAY);
+            }
         }
 
         // ampel
@@ -296,7 +319,30 @@ void ZeichneUnterpunkte() {
             if (ausgewählterUntermenuePunkt == 2) {
                 DrawRectangle(x, y, gleisPanelWidth, gleisPanelHeight, DARKGRAY);
             }
-			DrawTexture("Ampel_Rot", x, y, gleisPanelWidth, gleisPanelHeight, WHITE);
+            DrawTexture("Ampel_Rot", x, y, gleisPanelWidth, gleisPanelHeight, WHITE);
+
+            // Tooltip für Ampel
+            if (isHovered) {
+                float tooltipX = 10.0f;
+                float tooltipY = untermenueEndeY + 10.0f;
+                float tooltipWidth = 220.0f;
+                float tooltipHeight = 100.0f;
+
+                DrawRectangle(tooltipX, tooltipY, tooltipWidth, tooltipHeight, Color{ 240, 240, 240, 230 });
+                DrawRectangleLines(tooltipX, tooltipY, tooltipWidth, tooltipHeight, DARKGRAY);
+
+                float textY = tooltipY + 10;
+                float textX = tooltipX + 10;
+
+                DrawText("traffic light", textX + 70, textY, 16, BLACK);
+                textY += 25;
+                DrawLine(textX, textY - 5, textX + tooltipWidth - 20, textY - 5, DARKGRAY);
+                textY += 5;
+
+                DrawText("Signals to trains", textX, textY, 12, DARKGRAY);
+                textY += 18;
+                DrawText("Halt oder Weiterfahrt", textX, textY, 12, DARKGRAY);
+            }
         }
     }
     else if (aktuellesUntermenue == "technik") {
@@ -306,6 +352,7 @@ void ZeichneUnterpunkte() {
         float startX = padding;
         float startY = 90.0f;
 
+        // Knoten
         {
             float x = startX;
             float y = startY;
@@ -322,8 +369,36 @@ void ZeichneUnterpunkte() {
             }
 
             DrawTexture("KnotenSymbol", x, y, boxWidth, boxHeight, WHITE);
-            
+
+            // Tooltip für Knoten
+            if (isHovered) {
+                float tooltipX = 10.0f;
+                float tooltipY = untermenueEndeY + 10.0f;
+                float tooltipWidth = 250.0f;
+                float tooltipHeight = 130.0f;
+
+                DrawRectangle(tooltipX, tooltipY, tooltipWidth, tooltipHeight, Color{ 240, 240, 240, 230 });
+                DrawRectangleLines(tooltipX, tooltipY, tooltipWidth, tooltipHeight, DARKGRAY);
+
+                float textY = tooltipY + 10;
+                float textX = tooltipX + 10;
+
+                DrawText("Connector ", textX + 85, textY, 16, BLACK);
+                textY += 25;
+                DrawLine(textX, textY - 5, textX + tooltipWidth - 20, textY - 5, DARKGRAY);
+                textY += 5;
+
+                DrawText("Read/write mode for", textX, textY, 12, DARKGRAY);
+                textY += 18;
+                DrawText("signals", textX, textY, 12, DARKGRAY);
+                textY += 18;
+                DrawText("Can switch between", textX, textY, 12, DARKGRAY);
+                textY += 18;
+                DrawText("read/write", textX, textY, 12, DARKGRAY);
+            }
         }
+
+        // Leiter
         {
             float x = startX + boxWidth + padding;
             float y = startY;
@@ -339,7 +414,35 @@ void ZeichneUnterpunkte() {
                 DrawRectangle(x, y, boxWidth, boxHeight, DARKGRAY);
             }
             DrawTexture("Leiter_An", x, y, boxWidth, boxHeight, WHITE);
+
+            // Tooltip für Leiter
+            if (isHovered) {
+                float tooltipX = 10.0f;
+                float tooltipY = untermenueEndeY + 10.0f;
+                float tooltipWidth = 250.0f;
+                float tooltipHeight = 130.0f;
+
+                DrawRectangle(tooltipX, tooltipY, tooltipWidth, tooltipHeight, Color{ 240, 240, 240, 230 });
+                DrawRectangleLines(tooltipX, tooltipY, tooltipWidth, tooltipHeight, DARKGRAY);
+
+                float textY = tooltipY + 10;
+                float textX = tooltipX + 10;
+
+                DrawText("Wire ", textX + 90, textY, 16, BLACK);
+                textY += 25;
+                DrawLine(textX, textY - 5, textX + tooltipWidth - 20, textY - 5, DARKGRAY);
+                textY += 5;
+
+                DrawText("Transmits digital signals", textX, textY, 12, DARKGRAY);
+                textY += 18;
+                DrawText("from A to B", textX, textY, 12, DARKGRAY);
+                textY += 18;
+                DrawText("Can be switched on and off", textX, textY, 12, DARKGRAY);
+                
+            }
         }
+
+        // Inverter
         {
             float x = startX + boxWidth * 2 + padding * 2;
             float y = startY;
@@ -355,7 +458,35 @@ void ZeichneUnterpunkte() {
                 DrawRectangle(x, y, boxWidth, boxHeight, DARKGRAY);
             }
             DrawTexture("Inverter_AN", x, y, boxWidth, boxHeight, WHITE);
+
+            // Tooltip für Inverter
+            if (isHovered) {
+                float tooltipX = 10.0f;
+                float tooltipY = untermenueEndeY + 10.0f;
+                float tooltipWidth = 250.0f;
+                float tooltipHeight = 130.0f;
+
+                DrawRectangle(tooltipX, tooltipY, tooltipWidth, tooltipHeight, Color{ 240, 240, 240, 230 });
+                DrawRectangleLines(tooltipX, tooltipY, tooltipWidth, tooltipHeight, DARKGRAY);
+
+                float textY = tooltipY + 10;
+                float textX = tooltipX + 10;
+
+                DrawText("inverter", textX + 85, textY, 16, BLACK);
+                textY += 25;
+                DrawLine(textX, textY - 5, textX + tooltipWidth - 20, textY - 5, DARKGRAY);
+                textY += 5;
+
+                DrawText("Inverts digital signals", textX, textY, 12, DARKGRAY);
+                textY += 18;
+                DrawText("1 becomes 0, 0 becomes 1", textX, textY, 12, DARKGRAY);
+                textY += 18;
+                DrawText("Can be switched on and off", textX, textY, 12, DARKGRAY);
+                
+            }
         }
+
+        // Gate
         {
             float x = startX + boxWidth * 3 + padding * 3;
             float y = startY;
@@ -371,7 +502,36 @@ void ZeichneUnterpunkte() {
                 DrawRectangle(x, y, boxWidth, boxHeight, DARKGRAY);
             }
             DrawTexture("GateSymbol", x, y, boxWidth, boxHeight, WHITE);
+
+            // Tooltip für Gate
+            if (isHovered) {
+                float tooltipX = 10.0f;
+                float tooltipY = untermenueEndeY + 10.0f;
+                float tooltipWidth = 250.0f;
+                float tooltipHeight = 130.0f;
+
+                DrawRectangle(tooltipX, tooltipY, tooltipWidth, tooltipHeight, Color{ 240, 240, 240, 230 });
+                DrawRectangleLines(tooltipX, tooltipY, tooltipWidth, tooltipHeight, DARKGRAY);
+
+                float textY = tooltipY + 10;
+                float textX = tooltipX + 10;
+
+                DrawText("Gate", textX + 90, textY, 16, BLACK);
+                textY += 25;
+                DrawLine(textX, textY - 5, textX + tooltipWidth - 20, textY - 5, DARKGRAY);
+                textY += 5;
+
+                DrawText("logic gate (AND/XOR)", textX, textY, 12, DARKGRAY);
+                textY += 18;
+                DrawText("Combines digital signals", textX, textY, 12, DARKGRAY);
+                textY += 18;
+                DrawText("AND: Both inputs = 1", textX, textY, 12, DARKGRAY);
+                textY += 18;
+                DrawText("XOR: Inputs different", textX, textY, 12, DARKGRAY);
+            }
         }
+
+        // Navi
         {
             float x = startX + boxWidth * 4 + padding * 4;
             float y = startY;
@@ -387,7 +547,33 @@ void ZeichneUnterpunkte() {
                 DrawRectangle(x, y, boxWidth, boxHeight, DARKGRAY);
             }
             DrawTexture("Navi_An", x, y, boxWidth, boxHeight, WHITE);
+
+            // Tooltip für Navi
+            if (isHovered) {
+                float tooltipX = 10.0f;
+                float tooltipY = untermenueEndeY + 10.0f;
+                float tooltipWidth = 250.0f;
+                float tooltipHeight = 130.0f;
+
+                DrawRectangle(tooltipX, tooltipY, tooltipWidth, tooltipHeight, Color{ 240, 240, 240, 230 });
+                DrawRectangleLines(tooltipX, tooltipY, tooltipWidth, tooltipHeight, DARKGRAY);
+
+                float textY = tooltipY + 10;
+                float textX = tooltipX + 10;
+
+                DrawText("Navigation", textX + 70, textY, 16, BLACK);
+                textY += 25;
+                DrawLine(textX, textY - 5, textX + tooltipWidth - 20, textY - 5, DARKGRAY);
+                textY += 5;
+
+                DrawText("Controls train movements", textX, textY, 12, DARKGRAY);
+                textY += 18;
+                DrawText("Can define waypoints", textX, textY, 12, DARKGRAY);
+                textY += 18;
+                DrawText("and routes ", textX, textY, 12, DARKGRAY);
+                textY += 18;
+                DrawText("for trains", textX, textY, 12, DARKGRAY);
+            }
         }
     }
-
 }

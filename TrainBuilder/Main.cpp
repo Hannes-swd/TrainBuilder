@@ -29,7 +29,6 @@
 /*
 * IDEEN
 *
-* - Erklerung für technik
 * - schalter
 * - blueprint
 * - displays
