@@ -1,0 +1,20 @@
+{
+    "Knoten": [
+        {
+            "GridX": 0,
+            "GridY": 7,
+            "Name": "A2",
+            "Status": false,
+            "eindeutigeId": 1,
+            "modus": true
+        },
+        {
+            "GridX": 0,
+            "GridY": 4,
+            "Name": "A1",
+            "Status": false,
+            "eindeutigeId": 2,
+            "modus": true
+        }
+    ]
+}

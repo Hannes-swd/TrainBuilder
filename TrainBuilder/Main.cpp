@@ -189,6 +189,7 @@ int main(void)
         gridPosition.y = (int)floor(mousePosition.y / GRID_SIZE);
 
         BewegeZuege();
+        NaviSynchronisieren();
         UpdateSignale();
 
         if (AktuelleMaus != EndereMausZu) {

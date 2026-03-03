@@ -20,23 +20,24 @@ using json = nlohmann::json;
 
 
 void NaviPlazieren(int gridX, int gridY) {
-	if (!KannPlatzieren(gridX, gridY, PlatzierTyp::Navi)) return;
+    if (!KannPlatzieren(gridX, gridY, PlatzierTyp::Navi)) return;
 
-	NaviObjeckt newNavi;
-	newNavi.GridX = gridX;
-	newNavi.GridY = gridY;
+    NaviObjeckt newNavi;
+    newNavi.GridX = gridX;
+    newNavi.GridY = gridY;
     newNavi.Status = false;
     newNavi.ID = "Navi_" + std::to_string(NaviListe.size() + 1);
-	int neueID = 1;
-	for (const auto& inv : NaviListe) {
-		if (inv.eindeutigeId >= neueID) {
-			neueID = inv.eindeutigeId + 1;
-		}
-	}
-	newNavi.eindeutigeId = neueID;
-	NaviListe.push_back(newNavi);
-	NaviSpeichern();
+    int neueID = 1;
+    for (const auto& inv : NaviListe) {
+        if (inv.eindeutigeId >= neueID) {
+            neueID = inv.eindeutigeId + 1;
+        }
+    }
+    newNavi.eindeutigeId = neueID;
+    NaviListe.push_back(newNavi);
+    NaviSpeichern();
 }
+
 void NaviSpeichern() {
     json jsonDaten;
     json NaviArray = json::array();
@@ -67,6 +68,7 @@ void NaviSpeichern() {
         NaviDatei.close();
     }
 }
+
 void NaviZeichnen() {
     for (const auto& Navi : NaviListe) {
         float pixelX = (float)(Navi.GridX * GRID_SIZE);
@@ -82,5 +84,63 @@ void NaviZeichnen() {
                 pixelX, pixelY,
                 GRID_SIZE, GRID_SIZE,
                 WHITE);
+    }
+}
+
+void NaviSynchronisieren() {
+    bool zugGeaendert = false;
+
+    for (const auto& navi : NaviListe) {
+        if (!navi.Status) continue;
+
+        for (auto& zug : aktiveZuege) {
+            if (zug.ID != navi.ID) continue;
+
+            for (const auto& hs : navi.Haltestellen) {
+                std::string banhofName = "";
+                for (const auto& banhof : banhofListe) {
+                    if (banhof.BanhofId == hs.banhofId) {
+                        banhofName = banhof.Name;
+                        break;
+                    }
+                }
+
+                if (banhofName.empty()) continue;
+
+                bool bereitsVorhanden = false;
+                for (const auto& eintrag : zug.Fahrplan) {
+                    if (eintrag == banhofName) {
+                        bereitsVorhanden = true;
+                        break;
+                    }
+                }
+
+                if (hs.modus == NaviHaltestelle::HINZUFUEGEN) {
+                    if (!bereitsVorhanden) {
+                        zug.Fahrplan.push_back(banhofName);
+                        zugGeaendert = true;
+                        std::cout << "Navi [" << navi.ID << "]: Bahnhof '"
+                            << banhofName << "' zu Zug '"
+                            << zug.name << "' hinzugefügt." << std::endl;
+                    }
+                }
+                else if (hs.modus == NaviHaltestelle::ENTFERNEN) {
+                    if (bereitsVorhanden) {
+                        zug.Fahrplan.erase(
+                            std::remove(zug.Fahrplan.begin(), zug.Fahrplan.end(), banhofName),
+                            zug.Fahrplan.end()
+                        );
+                        zugGeaendert = true;
+                        std::cout << "Navi [" << navi.ID << "]: Bahnhof '"
+                            << banhofName << "' aus Zug '"
+                            << zug.name << "' entfernt." << std::endl;
+                    }
+                }
+            }
+        }
+    }
+
+    if (zugGeaendert) {
+        AktiveZuegeSpeichern();
     }
 }
